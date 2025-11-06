@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useStore } from 'react-redux'
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { initialGlobalState } from './store/module';
 import { checkStorage } from './components/MyStorage';
 import VpnPage from './pages/VpnPage';
@@ -39,6 +40,11 @@ function App() {
     checkStorage();
     window.showNotification = true;
     checkNotificationPermission();
+    
+    // 隐藏启动屏幕
+    SplashScreen.hide().catch(err => {
+      console.log('SplashScreen hide error:', err);
+    });
   }, [])
   const wrapComponent = (Component: JSX.Element) => {
     return (
