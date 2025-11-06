@@ -9,6 +9,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import SVerifyPage from './pages/SVerifyPage';
 import RestorePage from './pages/RestorePage';
+import pageIllustration from '/page-illustration.svg';
+import blurredShape from '/blurred-shape.svg';
 
 // 待办事项：
 // 密码长度验证，vpn账号名显示
@@ -48,7 +50,7 @@ function App() {
           <img alt="Page illustration"
             loading="lazy" width="846" height="594"
             decoding="async" data-nimg="1" className="max-w-none"
-            src="/page-illustration.svg" />
+            src={pageIllustration} />
         </div>
         <div
           className="pointer-events-none"
@@ -57,7 +59,7 @@ function App() {
           <img alt="Page illustration"
             loading="lazy" width="846" height="594"
             decoding="async" data-nimg="1" className="max-w-none"
-            src="/blurred-shape.svg" />
+            src={blurredShape} />
         </div>
         {Component}
       </div>
