@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide vertical scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+select {
+  appearance: none; /* remove default arrow */
+  padding-right: 1.5em; /* add space for the custom arrow */
+  background: url('../assets/arrow-down.svg') no-repeat right 0.5em center/1em auto;
+  background-size: 1.2em; /* adjust arrow size */
+}
+
+.ant-drawer-title{
+  text-align: right !important;
+  font-size: 18px !important;
+}
+
+/* 避免浏览器自动填充泛白 */
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  -webkit-text-fill-color: #ededed !important; /* 设置文本颜色 */
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* 设置背景颜色 */
+  background-color: transparent;
+  background-image: none;
+  transition: background-color 50000s ease-in-out 0s; /* 延长背景色透明效果的过渡时间 */
+}
+input{
+  background-color: transparent; 
+}
+
+.btn,
+.btn-sm {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all;
+}
+
+.btn {
+  @apply px-4 py-[11px];
+}
+
+.btn-sm {
+  @apply px-3 py-[7px];
+}
+
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select,
+.form-checkbox,
+.form-radio {
+  @apply border border-gray-700 bg-gray-900/50 focus:border-gray-600 focus:ring-0 focus:ring-offset-0;
+}
+
+.form-input,
+.form-textarea,
+.form-multiselect,
+.form-select {
+  @apply rounded-lg px-4 py-2.5 text-sm text-gray-200;
+}
+
+.form-input,
+.form-textarea {
+  @apply placeholder-gray-600;
+}
+
+.ant-drawer-title{
+  color: #ededed !important;
+}
+.ant-drawer-close{
+  color: #ededed !important;
+}
+.ant-drawer-header{
+  padding-top: 36px !important;
+  background-color: #030712;
+}
+.ant-drawer-body{
+  padding: 20px !important;
+  background-color: #030712;
+  color: #ededed;
+}
