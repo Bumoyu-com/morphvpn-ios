@@ -1,6 +1,6 @@
 {
-  "appId": "com.example.app",
-  "appName": "testcao",
+  "appId": "com.morphvpn.app",
+  "appName": "morph_vpn",
   "webDir": "dist",
   "plugins": {
     "SplashScreen": {

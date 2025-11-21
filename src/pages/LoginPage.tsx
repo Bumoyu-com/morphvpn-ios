@@ -8,6 +8,7 @@ import { passwordVerify } from '../components/BaseRequest';
 import Input from '../components/base/Input';
 import LocaleSelector from '../components/settingGroup/LocaleSelector'
 import { getData } from '../components/MyStorage';
+import { VPNComponent } from '../components/TestVpn';
 
 interface LoginPageProps { }
 const LoginPage: React.FC<LoginPageProps> = ({ }) => {
@@ -153,6 +154,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ }) => {
                         >
                             {onSubmiting ? i18n.t('account.logining') as string : i18n.t('account.ok') as string}
                         </Button>
+                        <VPNComponent />
                     </div>
                 </div>
 
