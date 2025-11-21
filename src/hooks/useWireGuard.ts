@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { message } from 'antd';
-import WireGuard, { WireGuardStatus } from '../plugins/wireguard';
+import { WireGuard, WireGuardStatus } from '@morphvpn/capacitor-wireguard';
 
 export interface UseWireGuardReturn {
   status: WireGuardStatus;

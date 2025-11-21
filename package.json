@@ -13,13 +13,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@capacitor/camera": "latest",
     "@capacitor/core": "latest",
     "@capacitor/ios": "^7.4.4",
     "@capacitor/splash-screen": "latest",
-    "@ant-design/icons": "^5.5.2",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
+    "@morphvpn/capacitor-wireguard": "file:packages/wireguard-plugin/morphvpn-capacitor-wireguard-1.0.0.tgz",
     "@reduxjs/toolkit": "^1.9.3",
     "@thumbmarkjs/thumbmarkjs": "^1.2.0",
     "@types/crypto-js": "^4.1.1",

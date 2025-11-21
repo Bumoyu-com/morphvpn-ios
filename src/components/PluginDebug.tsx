@@ -27,7 +27,7 @@ export function PluginDebug() {
             
             // 检查 WireGuard 插件
             try {
-                const { default: WireGuard } = await import('../plugins/wireguard');
+                const { WireGuard } = await import('@morphvpn/capacitor-wireguard');
                 info.push('WireGuard 模块已加载');
                 
                 // 尝试调用插件
