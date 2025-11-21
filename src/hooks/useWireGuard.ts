@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { message } from 'antd';
 import WireGuard, { WireGuardStatus } from '../plugins/wireguard';
 
 export interface UseWireGuardReturn {
@@ -48,8 +49,8 @@ export function useWireGuard(): UseWireGuardReturn {
     try {
       const currentStatus = await WireGuard.getStatus();
       setStatus(currentStatus);
-    } catch (err) {
-      console.error('Failed to fetch VPN status:', err);
+    } catch (err: any) {
+      message.error(`获取 VPN 状态失败: ${err.message || '未知错误'}`);
     }
   }, []);
 
