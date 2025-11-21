@@ -1,5 +1,7 @@
 import { Button, message } from 'antd';
+import { Capacitor } from '@capacitor/core';
 import { useWireGuard } from '../hooks/useWireGuard';
+import { PluginDebug } from './PluginDebug';
 
 export function VPNComponent() {
     const myConfig = `[Interface]
@@ -15,9 +17,17 @@ PersistentKeepalive = 0
 Endpoint = 65.20.89.15:51820`;
 
     const { status, isConnected, connect, disconnect } = useWireGuard();
+    const platform = Capacitor.getPlatform();
 
     const handleConnect = async () => {
         try {
+            message.info(`当前平台: ${platform}`, 2);
+            
+            if (platform === 'web') {
+                message.warning('WireGuard 不支持 Web 平台，请在 iOS 设备上测试', 3);
+                return;
+            }
+            
             message.loading('正在连接 WireGuard VPN...', 0);
             await connect(myConfig, 'TestVPN');
             message.destroy();
@@ -44,7 +54,7 @@ Endpoint = 65.20.89.15:51820`;
 
     return (
         <div>
-            <p>Status: {status.status}</p>
+            <p style={{ color: 'white', fontSize: '12px' }}>平台: {platform} | 状态: {status.status}</p>
             {isConnected ? (
                 <Button
                     type="text"
@@ -64,6 +74,7 @@ Endpoint = 65.20.89.15:51820`;
                     Test WireGuard
                 </Button>
             )}
+            <PluginDebug />
         </div>
     );
 }

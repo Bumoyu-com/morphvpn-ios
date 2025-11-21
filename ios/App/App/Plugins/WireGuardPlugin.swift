@@ -13,11 +13,15 @@ public class WireGuardPlugin: CAPPlugin {
     private var statusObserver: NSObjectProtocol?
     
     override public func load() {
+        print("✅ WireGuardPlugin: Plugin loaded successfully")
+        
         // 加载VPN配置
         loadVPNManager()
         
         // 监听VPN状态变化
         setupStatusObserver()
+        
+        print("✅ WireGuardPlugin: Initialization complete")
     }
     
     deinit {
@@ -32,17 +36,24 @@ public class WireGuardPlugin: CAPPlugin {
      * 连接WireGuard VPN
      */
     @objc func connect(_ call: CAPPluginCall) {
+        print("🔵 WireGuardPlugin: connect() called")
+        
         guard let config = call.getString("config"),
               let tunnelName = call.getString("tunnelName") else {
+            print("❌ WireGuardPlugin: Missing parameters")
             call.reject("Missing required parameters: config and tunnelName")
             return
         }
         
+        print("🔵 WireGuardPlugin: Config received, tunnel name: \(tunnelName)")
+        
         // 保存配置并连接
         saveAndConnect(config: config, tunnelName: tunnelName) { success, error in
             if success {
+                print("✅ WireGuardPlugin: Connection successful")
                 call.resolve(["success": true])
             } else {
+                print("❌ WireGuardPlugin: Connection failed - \(error ?? "unknown error")")
                 call.reject(error ?? "Failed to connect")
             }
         }
@@ -65,7 +76,10 @@ public class WireGuardPlugin: CAPPlugin {
      * 获取当前连接状态
      */
     @objc func getStatus(_ call: CAPPluginCall) {
+        print("🔵 WireGuardPlugin: getStatus() called")
+        
         guard let manager = vpnManager else {
+            print("⚠️ WireGuardPlugin: VPN manager is nil, returning disconnected")
             call.resolve([
                 "status": "disconnected"
             ])
@@ -74,6 +88,8 @@ public class WireGuardPlugin: CAPPlugin {
         
         let status = getConnectionStatus(manager.connection.status)
         var result: [String: Any] = ["status": status]
+        
+        print("🔵 WireGuardPlugin: Current status - \(status)")
         
         // 尝试获取统计信息（需要Network Extension支持）
         if let session = manager.connection as? NETunnelProviderSession {

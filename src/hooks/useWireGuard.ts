@@ -50,7 +50,11 @@ export function useWireGuard(): UseWireGuardReturn {
       const currentStatus = await WireGuard.getStatus();
       setStatus(currentStatus);
     } catch (err: any) {
-      message.error(`获取 VPN 状态失败: ${err.message || '未知错误'}`);
+      // 只在非 web 平台显示错误
+      const { Capacitor } = await import('@capacitor/core');
+      if (Capacitor.getPlatform() !== 'web') {
+        message.error(`获取 VPN 状态失败: ${err.message || '未知错误'}`);
+      }
     }
   }, []);
 
