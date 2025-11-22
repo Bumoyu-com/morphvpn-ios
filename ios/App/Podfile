@@ -21,15 +21,6 @@ target 'App' do
   # Add your Pods here
 end
 
-# WireGuard Extension Target
-target 'WireGuardExtension' do
-  platform :ios, '14.0'
-  use_frameworks!
-  
-  # WireGuardKit from official WireGuard repository
-  pod 'WireGuardKit', :podspec => 'https://raw.githubusercontent.com/zx2c4/wireguard-apple/master/WireGuardKit.podspec'
-end
-
 post_install do |installer|
   assertDeploymentTarget(installer)
 end

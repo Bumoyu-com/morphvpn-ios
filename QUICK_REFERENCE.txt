@@ -5,17 +5,21 @@
 📦 安装插件
     bash INSTALL_PLUGIN.sh
 
-📦 安装 WireGuardKit
-    bash INSTALL_WIREGUARDKIT.sh
-    (首次安装需要几分钟)
-
-🔧 在 Xcode 中配置
+📦 集成 WireGuardKit (使用 Swift Package Manager)
     1. npx cap open ios
-    2. 替换 WireGuardExtension/PacketTunnelProvider.swift
+    2. 项目 → Package Dependencies → "+"
+    3. URL: https://github.com/WireGuard/wireguard-apple
+    4. 添加到: WireGuardExtension 和 App
+    5. 创建 WireGuardGoBridgeiOS target (External Build System)
+    6. 配置依赖关系
+
+🔧 配置步骤
+    1. 替换 WireGuardExtension/PacketTunnelProvider.swift
        使用 PacketTunnelProvider_WireGuardKit.swift 的内容
-    3. 在两个 target 中添加 App Groups: group.com.morphvpn.app
+    2. 在两个 target 中添加 App Groups: group.com.morphvpn.app
+    3. 禁用 Bitcode (iOS only)
     4. Clean Build Folder (⇧⌘K)
-    5. Run (⌘R)
+    5. Run (⌘R) 到真实设备
 
 ✅ 验证
     - Xcode 控制台: "✅ WireGuard: Tunnel started successfully"
@@ -23,12 +27,14 @@
     - 访问 https://ifconfig.me 显示 VPN IP
 
 📚 文档
-    - README_SETUP.md - 设置指南
-    - WIREGUARDKIT_INTEGRATION.md - 详细集成步骤
+    - CORRECT_WAY.md - 正确的集成方式 ⭐
+    - SPM_INTEGRATION_GUIDE.md - 详细的 SPM 集成步骤 ⭐
+    - README_SETUP.md - 快速设置指南
 
-🔧 故障排查
-    - pod install 失败: bash INSTALL_WIREGUARDKIT.sh
-    - 编译错误: 确保打开 .xcworkspace
-    - 连接失败: 查看 Xcode 控制台日志
+⚠️ 重要
+    - 不要使用 CocoaPods (不支持)
+    - 必须使用 Swift Package Manager
+    - 必须创建 WireGuardGoBridge target
+    - 必须在真实设备上测试
 
 ================================================================================
