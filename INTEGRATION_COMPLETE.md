@@ -54,16 +54,17 @@ end
 ### 步骤 1: 安装 CocoaPods 依赖
 
 ```bash
-cd ios/App
-pod install
-cd ../..
+bash INSTALL_WIREGUARDKIT.sh
 ```
 
 **预期输出**：
 ```
-Installing WireGuardKit (1.x.x)
-Pod installation complete!
+Cloning https://github.com/passepartoutvpn/wireguard-apple.git
+Installing WireGuardKit (1.1.3)
+✅ 安装完成！
 ```
+
+**注意**：首次安装需要几分钟，因为要从 GitHub 克隆 WireGuardKit。
 
 ### 步骤 2: 在 Xcode 中配置
 
@@ -164,12 +165,14 @@ adapter?.start(tunnelConfiguration: tunnelConfiguration) { error in
 
 ### Q: pod install 失败
 
+**错误**：`CocoaPods could not find compatible versions for pod "WireGuardKit"`
+
+**解决**：
 ```bash
-cd ios/App
-pod repo update
-pod install
-cd ../..
+bash INSTALL_WIREGUARDKIT.sh
 ```
+
+这会清理旧的 Pods 并从 GitHub 重新安装 WireGuardKit。
 
 ### Q: 编译错误 "No such module 'WireGuardKit'"
 

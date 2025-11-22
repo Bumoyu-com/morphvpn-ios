@@ -13,15 +13,27 @@
 在项目根目录运行：
 
 ```bash
+bash INSTALL_WIREGUARDKIT.sh
+```
+
+或者手动安装：
+
+```bash
 cd ios/App
+rm -rf Pods Podfile.lock
+pod repo update
 pod install
 cd ../..
 ```
 
 **预期输出**：
 ```
-Installing WireGuardKit (1.x.x)
+Cloning spec repo `trunk` from https://github.com/CocoaPods/Specs.git
+Cloning https://github.com/passepartoutvpn/wireguard-apple.git
+Installing WireGuardKit (1.1.3)
 ```
+
+**注意**：首次安装可能需要几分钟，因为需要从 GitHub 克隆 WireGuardKit。
 
 ### 步骤 2: 在 Xcode 中替换 PacketTunnelProvider
 
@@ -128,14 +140,27 @@ Installing WireGuardKit (1.x.x)
 
 ### 问题 1: pod install 失败
 
-**错误**：`Unable to find a specification for WireGuardKit`
+**错误**：`CocoaPods could not find compatible versions for pod "WireGuardKit"`
+
+**原因**：WireGuardKit 不在 CocoaPods 官方仓库，需要从 GitHub 引用。
 
 **解决**：
 ```bash
+bash INSTALL_WIREGUARDKIT.sh
+```
+
+或者手动：
+```bash
 cd ios/App
+rm -rf Pods Podfile.lock
 pod repo update
 pod install
 cd ../..
+```
+
+**注意**：Podfile 已配置为从 GitHub 获取 WireGuardKit：
+```ruby
+pod 'WireGuardKit', :git => 'https://github.com/passepartoutvpn/wireguard-apple.git', :tag => '1.1.3'
 ```
 
 ### 问题 2: 编译错误 - "No such module 'WireGuardKit'"

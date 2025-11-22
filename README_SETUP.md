@@ -11,10 +11,10 @@ bash INSTALL_PLUGIN.sh
 ### 2. 安装 WireGuardKit
 
 ```bash
-cd ios/App
-pod install
-cd ../..
+bash INSTALL_WIREGUARDKIT.sh
 ```
+
+**注意**：首次安装需要几分钟，因为要从 GitHub 克隆 WireGuardKit。
 
 ### 3. 在 Xcode 中配置
 
@@ -62,11 +62,10 @@ npx cap open ios
 ### pod install 失败
 
 ```bash
-cd ios/App
-pod repo update
-pod install
-cd ../..
+bash INSTALL_WIREGUARDKIT.sh
 ```
+
+这会清理旧的 Pods 并重新安装。
 
 ### 编译错误
 

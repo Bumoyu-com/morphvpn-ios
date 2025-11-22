@@ -6,9 +6,8 @@
     bash INSTALL_PLUGIN.sh
 
 📦 安装 WireGuardKit
-    cd ios/App
-    pod install
-    cd ../..
+    bash INSTALL_WIREGUARDKIT.sh
+    (首次安装需要几分钟)
 
 🔧 在 Xcode 中配置
     1. npx cap open ios
@@ -28,7 +27,7 @@
     - WIREGUARDKIT_INTEGRATION.md - 详细集成步骤
 
 🔧 故障排查
-    - pod install 失败: pod repo update
+    - pod install 失败: bash INSTALL_WIREGUARDKIT.sh
     - 编译错误: 确保打开 .xcworkspace
     - 连接失败: 查看 Xcode 控制台日志
 
