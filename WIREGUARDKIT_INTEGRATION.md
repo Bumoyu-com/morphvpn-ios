@@ -28,12 +28,13 @@ cd ../..
 
 **预期输出**：
 ```
-Cloning spec repo `trunk` from https://github.com/CocoaPods/Specs.git
-Cloning https://github.com/passepartoutvpn/wireguard-apple.git
-Installing WireGuardKit (1.1.3)
+Analyzing dependencies
+Fetching podspec for `WireGuardKit`
+Downloading WireGuardKit
+Installing WireGuardKit
 ```
 
-**注意**：首次安装可能需要几分钟，因为需要从 GitHub 克隆 WireGuardKit。
+**注意**：首次安装可能需要几分钟，因为需要下载和编译 WireGuardKit。
 
 ### 步骤 2: 在 Xcode 中替换 PacketTunnelProvider
 

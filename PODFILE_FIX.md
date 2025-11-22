@@ -36,7 +36,7 @@ pod 'WireGuardKit', '~> 1.0'  # ❌ 在 CocoaPods 仓库中找不到
 
 **现在（正确）**：
 ```ruby
-pod 'WireGuardKit', :git => 'https://github.com/passepartoutvpn/wireguard-apple.git', :tag => '1.1.3'  # ✅ 从 GitHub 获取
+pod 'WireGuardKit', :podspec => 'https://raw.githubusercontent.com/zx2c4/wireguard-apple/master/WireGuardKit.podspec'  # ✅ 从官方仓库获取
 ```
 
 ## 🚀 现在请执行
@@ -67,14 +67,14 @@ cd ../..
 ```
 Analyzing dependencies
 Downloading dependencies
-Cloning spec repo `trunk` from https://github.com/CocoaPods/Specs.git
-Cloning https://github.com/passepartoutvpn/wireguard-apple.git
-Installing WireGuardKit (1.1.3)
+Fetching podspec for `WireGuardKit` from `https://raw.githubusercontent.com/zx2c4/wireguard-apple/master/WireGuardKit.podspec`
+Downloading WireGuardKit
+Installing WireGuardKit
 Generating Pods project
 Integrating client project
 
 [!] Please close any current Xcode sessions and use `App.xcworkspace` for this project from now on.
-Pod installation complete! There are X dependencies from the Podfile and Y total pods installed.
+Pod installation complete!
 ```
 
 ## ⏱️ 安装时间

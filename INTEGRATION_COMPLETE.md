@@ -59,12 +59,13 @@ bash INSTALL_WIREGUARDKIT.sh
 
 **预期输出**：
 ```
-Cloning https://github.com/passepartoutvpn/wireguard-apple.git
-Installing WireGuardKit (1.1.3)
+Fetching podspec for `WireGuardKit`
+Downloading WireGuardKit
+Installing WireGuardKit
 ✅ 安装完成！
 ```
 
-**注意**：首次安装需要几分钟，因为要从 GitHub 克隆 WireGuardKit。
+**注意**：首次安装需要几分钟，因为要下载和编译 WireGuardKit。
 
 ### 步骤 2: 在 Xcode 中配置
 
