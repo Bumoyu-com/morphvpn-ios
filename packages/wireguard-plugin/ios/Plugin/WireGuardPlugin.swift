@@ -216,7 +216,10 @@ public class WireGuardPlugin: CAPPlugin {
         // 创建VPN配置
         let providerProtocol = NETunnelProviderProtocol()
         
-        // Network Extension的Bundle ID（需要先在Xcode中创建对应的Network Extension target）
+        // Network Extension的Bundle ID
+        // 重要：必须先在Xcode中创建对应的Network Extension target
+        // 如果看到 "Update Required" 错误，说明这个 Extension 不存在
+        // 参考：CREATE_NETWORK_EXTENSION.md
         providerProtocol.providerBundleIdentifier = "com.morphvpn.app.WireGuardExtension"
         providerProtocol.serverAddress = "WireGuard"
         
