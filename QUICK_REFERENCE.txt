@@ -1,0 +1,35 @@
+================================================================================
+                    MorphVPN iOS - 快速参考
+================================================================================
+
+📦 安装插件
+    bash INSTALL_PLUGIN.sh
+
+📦 安装 WireGuardKit
+    cd ios/App
+    pod install
+    cd ../..
+
+🔧 在 Xcode 中配置
+    1. npx cap open ios
+    2. 替换 WireGuardExtension/PacketTunnelProvider.swift
+       使用 PacketTunnelProvider_WireGuardKit.swift 的内容
+    3. 在两个 target 中添加 App Groups: group.com.morphvpn.app
+    4. Clean Build Folder (⇧⌘K)
+    5. Run (⌘R)
+
+✅ 验证
+    - Xcode 控制台: "✅ WireGuard: Tunnel started successfully"
+    - iPhone 设置: VPN 状态 "Connected"
+    - 访问 https://ifconfig.me 显示 VPN IP
+
+📚 文档
+    - README_SETUP.md - 设置指南
+    - WIREGUARDKIT_INTEGRATION.md - 详细集成步骤
+
+🔧 故障排查
+    - pod install 失败: pod repo update
+    - 编译错误: 确保打开 .xcworkspace
+    - 连接失败: 查看 Xcode 控制台日志
+
+================================================================================
