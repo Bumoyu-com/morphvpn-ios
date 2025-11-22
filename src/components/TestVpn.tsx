@@ -5,16 +5,16 @@ import { PluginDebug } from './PluginDebug';
 
 export function VPNComponent() {
     const myConfig = `[Interface]
-PrivateKey = 4FAuk91EWMmYbHOJKPT0GVHopvhGpOyXWJk5/go701c=
+PrivateKey = 6Bnj/3xasaqwL4tMtFbXEE7tI/M9etp+QZGwJBaogUk=
 Address = 10.8.0.2/24
 DNS = 1.1.1.1
 
 [Peer]
-PublicKey = ldJcapNtklnbdrrosd8MtineLSXH8wGj5b0y+vLY2AQ=
-PresharedKey = DgQRTsw743qlUJcWPcB5TgSdNfMimKXBVkolLOITg1A=
+PublicKey = fagogj8bAeIH1tg6a6HNjFVE+iUtuvosAbQz7O7uXlI=
+PresharedKey = EsbhBXvlypu0cV/5z2fww8i4q6TJngeE0yBKBt+lyoc=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
-Endpoint = 65.20.89.15:51820`;
+Endpoint = 82.156.116.163:51820`;
 
     const { status, isConnected, connect, disconnect } = useWireGuard();
     const platform = Capacitor.getPlatform();

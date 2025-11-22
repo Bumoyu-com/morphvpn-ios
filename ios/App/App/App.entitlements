@@ -9,6 +9,7 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.morphvpn.app</string>
+		<string>$(AppIdentifierPrefix)group.com.morphvpn.app</string>
 	</array>
 </dict>
 </plist>
