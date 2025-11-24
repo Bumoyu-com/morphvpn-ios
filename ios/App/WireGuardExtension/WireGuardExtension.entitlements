@@ -6,9 +6,13 @@
 	<array>
 		<string>packet-tunnel-provider</string>
 	</array>
+	<key>com.apple.developer.networking.vpn.api</key>
+	<array>
+		<string>allow-vpn</string>
+	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.morphvpn.app.wireguard</string>
+		<string>group.com.morphvpn.app</string>
 	</array>
 </dict>
 </plist>

@@ -5,16 +5,17 @@ import { PluginDebug } from './PluginDebug';
 
 export function VPNComponent() {
     const myConfig = `[Interface]
-PrivateKey = 4FAuk91EWMmYbHOJKPT0GVHopvhGpOyXWJk5/go701c=
+PrivateKey = CCZOUqP86rtu9Nn86NAstjdhf9A4FH5JDpBNvVBibV8=
 Address = 10.8.0.2/24
 DNS = 1.1.1.1
 
 [Peer]
-PublicKey = ldJcapNtklnbdrrosd8MtineLSXH8wGj5b0y+vLY2AQ=
-PresharedKey = DgQRTsw743qlUJcWPcB5TgSdNfMimKXBVkolLOITg1A=
+PublicKey = MHFCzcQ9ywEeTelvtgHPTYCpjIG8/mMWoD2k2BFfIT4=
+PresharedKey = cEKYHxmOzBSoCPjr8Q7kiHife6pUyWH9S2M9NUC2vrw=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
-Endpoint = 65.20.89.15:51820`;
+Endpoint = 43.138.0.94:51820
+`;
 
     const { status, isConnected, connect, disconnect } = useWireGuard();
     const platform = Capacitor.getPlatform();
@@ -54,8 +55,8 @@ Endpoint = 65.20.89.15:51820`;
 
     return (
         <div>
-            <p style={{ color: 'white', fontSize: '12px' }}>平台: {platform} | 状态: {status.status}</p>
-            {isConnected ? (
+            <p style={{ color: 'white', fontSize: '12px' }}>平台1: {platform} | 状态1: {status.status}</p>
+            {status.status==='connected' ? (
                 <Button
                     type="text"
                     onClick={handleDisconnect}
