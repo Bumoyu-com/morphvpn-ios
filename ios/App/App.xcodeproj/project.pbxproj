@@ -17,7 +17,7 @@
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 		BB33B7632ED430000051A26D /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB33B7622ED430000051A26D /* NetworkExtension.framework */; };
 		BB33B76B2ED430000051A26D /* WireGuardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BB33B7612ED430000051A26D /* WireGuardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BB33B7782ED4312D0051A26D /* WireGuardKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB33B7772ED4312D0051A26D /* WireGuardKit */; };
+		BB41E2F32ED43D30002F2F57 /* WireGuardKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB41E2F22ED43D30002F2F57 /* WireGuardKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB33B7782ED4312D0051A26D /* WireGuardKit in Frameworks */,
+				BB41E2F32ED43D30002F2F57 /* WireGuardKit in Frameworks */,
 				BB33B7632ED430000051A26D /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +166,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = "${SRCROOT}/../../packages/wireguard-apple/Sources/WireGuardKitGo";
+			buildWorkingDirectory = "${BUILD_DIR%Build/*}SourcePackages/checkouts/wireguard-apple/Sources/WireGuardKitGo";
 			dependencies = (
 			);
 			name = WireGuardGoBridgeiOS;
@@ -218,6 +218,8 @@
 			name = WireGuardExtension;
 			packageProductDependencies = (
 				BB33B7772ED4312D0051A26D /* WireGuardKit */,
+				BB33B78A2ED43BBD0051A26D /* WireGuardKit */,
+				BB41E2F22ED43D30002F2F57 /* WireGuardKit */,
 			);
 			productName = WireGuardExtension;
 			productReference = BB33B7612ED430000051A26D /* WireGuardExtension.appex */;
@@ -254,7 +256,7 @@
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
 			packageReferences = (
-				BB33B7762ED4312D0051A26D /* XCLocalSwiftPackageReference "../../packages/wireguard-apple" */,
+				BB41E2F12ED43D30002F2F57 /* XCRemoteSwiftPackageReference "wireguard-apple" */,
 			);
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
@@ -717,16 +719,29 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		BB33B7762ED4312D0051A26D /* XCLocalSwiftPackageReference "../../packages/wireguard-apple" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../packages/wireguard-apple";
+/* Begin XCRemoteSwiftPackageReference section */
+		BB41E2F12ED43D30002F2F57 /* XCRemoteSwiftPackageReference "wireguard-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://git.zx2c4.com/wireguard-apple";
+			requirement = {
+				kind = exactVersion;
+				version = "1.0.15-26";
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		BB33B7772ED4312D0051A26D /* WireGuardKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = WireGuardKit;
+		};
+		BB33B78A2ED43BBD0051A26D /* WireGuardKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WireGuardKit;
+		};
+		BB41E2F22ED43D30002F2F57 /* WireGuardKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB41E2F12ED43D30002F2F57 /* XCRemoteSwiftPackageReference "wireguard-apple" */;
 			productName = WireGuardKit;
 		};
 /* End XCSwiftPackageProductDependency section */
