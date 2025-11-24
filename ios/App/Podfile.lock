@@ -6,12 +6,15 @@ PODS:
   - CapacitorCordova (7.4.4)
   - CapacitorSplashScreen (7.0.3):
     - Capacitor
+  - MorphvpnCapacitorWireguard (1.0.0):
+    - Capacitor
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
+  - "MorphvpnCapacitorWireguard (from `../../node_modules/@morphvpn/capacitor-wireguard`)"
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -22,13 +25,16 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorSplashScreen:
     :path: "../../node_modules/@capacitor/splash-screen"
+  MorphvpnCapacitorWireguard:
+    :path: "../../node_modules/@morphvpn/capacitor-wireguard"
 
 SPEC CHECKSUMS:
   Capacitor: 358dd1c3fdd71d969547b17e159fd8a7736cb45f
   CapacitorCamera: f9e54db0a18bb218a8dc360907d63aaefe9209ff
   CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
   CapacitorSplashScreen: e388b8e0ed0e982a9d3a40417f478e7a018a8763
+  MorphvpnCapacitorWireguard: 5479c74a178f7f9ed43baccb79c3cd760acb312c
 
-PODFILE CHECKSUM: 70ca6ab5587eab7c793b6628e4feeaaaeede6cee
+PODFILE CHECKSUM: f87fd10c1a99c763f510e76511556dbba475cf0e
 
 COCOAPODS: 1.16.2
