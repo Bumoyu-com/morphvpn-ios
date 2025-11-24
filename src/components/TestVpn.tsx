@@ -4,6 +4,7 @@ import { useWireGuard } from '../hooks/useWireGuard';
 import { PluginDebug } from './PluginDebug';
 
 export function VPNComponent() {
+    // WireGuard 配置 - 请替换为你的实际配置
     const myConfig = `[Interface]
 PrivateKey = CCZOUqP86rtu9Nn86NAstjdhf9A4FH5JDpBNvVBibV8=
 Address = 10.8.0.2/24
@@ -13,7 +14,7 @@ DNS = 1.1.1.1
 PublicKey = MHFCzcQ9ywEeTelvtgHPTYCpjIG8/mMWoD2k2BFfIT4=
 PresharedKey = cEKYHxmOzBSoCPjr8Q7kiHife6pUyWH9S2M9NUC2vrw=
 AllowedIPs = 0.0.0.0/0, ::/0
-PersistentKeepalive = 0
+PersistentKeepalive = 25
 Endpoint = 43.138.0.94:51820
 `;
 
@@ -22,6 +23,10 @@ Endpoint = 43.138.0.94:51820
 
     const handleConnect = async () => {
         try {
+            console.log('🔵 VPNComponent: handleConnect called');
+            console.log('🔵 Platform:', platform);
+            console.log('🔵 Config length:', myConfig.length);
+            
             message.info(`当前平台: ${platform}`, 2);
             
             if (platform === 'web') {
@@ -30,10 +35,13 @@ Endpoint = 43.138.0.94:51820
             }
             
             message.loading('正在连接 WireGuard VPN...', 0);
-            await connect(myConfig, 'TestVPN');
+            console.log('🔵 Calling connect...');
+            await connect(myConfig, 'MorphVPN');
+            console.log('✅ Connect succeeded');
             message.destroy();
             message.success('WireGuard VPN 连接成功');
         } catch (error: any) {
+            console.error('❌ Connect failed:', error);
             message.destroy();
             message.error(`连接失败: ${error.message || '未知错误'}`);
         }
@@ -55,8 +63,8 @@ Endpoint = 43.138.0.94:51820
 
     return (
         <div>
-            <p style={{ color: 'white', fontSize: '12px' }}>平台1: {platform} | 状态1: {status.status}</p>
-            {status.status==='connected' ? (
+            <p style={{ color: 'white', fontSize: '12px' }}>平台: {platform} | 状态: {status.status}</p>
+            {isConnected ? (
                 <Button
                     type="text"
                     onClick={handleDisconnect}

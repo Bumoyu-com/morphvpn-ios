@@ -37,15 +37,20 @@ public class WireGuardPlugin: CAPPlugin {
      */
     @objc func connect(_ call: CAPPluginCall) {
         print("🔵 WireGuardPlugin: connect() called")
+        print("🔵 WireGuardPlugin: Call options: \(call.options)")
         
         guard let config = call.getString("config"),
               let tunnelName = call.getString("tunnelName") else {
             print("❌ WireGuardPlugin: Missing parameters")
+            print("❌ WireGuardPlugin: Available keys: \(call.options.keys)")
             call.reject("Missing required parameters: config and tunnelName")
             return
         }
         
-        print("🔵 WireGuardPlugin: Config received, tunnel name: \(tunnelName)")
+        print("🔵 WireGuardPlugin: Config received")
+        print("🔵 WireGuardPlugin: Tunnel name: \(tunnelName)")
+        print("🔵 WireGuardPlugin: Config length: \(config.count) bytes")
+        print("🔵 WireGuardPlugin: Config preview: \(config.prefix(100))...")
         
         // 保存配置并连接
         saveAndConnect(config: config, tunnelName: tunnelName) { success, error in
@@ -213,6 +218,9 @@ public class WireGuardPlugin: CAPPlugin {
     }
     
     private func saveConfiguration(config: String, tunnelName: String, completion: @escaping (Bool, String?) -> Void) {
+        print("🔵 WireGuardPlugin: saveConfiguration called")
+        print("🔵 WireGuardPlugin: Tunnel name: \(tunnelName)")
+        
         // 创建VPN配置
         let providerProtocol = NETunnelProviderProtocol()
         
@@ -220,10 +228,14 @@ public class WireGuardPlugin: CAPPlugin {
         providerProtocol.providerBundleIdentifier = "com.morphvpn.app.WireGuardExtension"
         providerProtocol.serverAddress = "WireGuard"
         
+        print("🔵 WireGuardPlugin: Provider bundle ID: \(providerProtocol.providerBundleIdentifier ?? "nil")")
+        
         // 将WireGuard配置保存到providerConfiguration
         providerProtocol.providerConfiguration = [
             "wg_config": config
         ]
+        
+        print("🔵 WireGuardPlugin: Provider configuration set with wg_config key")
         
         // 加载或创建VPN Manager
         NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in
@@ -240,19 +252,26 @@ public class WireGuardPlugin: CAPPlugin {
             manager.isEnabled = true
             
             // 保存配置
+            print("🔵 WireGuardPlugin: Saving VPN configuration to preferences...")
             manager.saveToPreferences { error in
                 if let error = error {
+                    print("❌ WireGuardPlugin: Failed to save: \(error.localizedDescription)")
                     completion(false, "Failed to save VPN configuration: \(error.localizedDescription)")
                     return
                 }
                 
+                print("✅ WireGuardPlugin: Configuration saved successfully")
+                
                 // 重新加载以确保配置生效
+                print("🔵 WireGuardPlugin: Reloading configuration...")
                 manager.loadFromPreferences { error in
                     if let error = error {
+                        print("❌ WireGuardPlugin: Failed to reload: \(error.localizedDescription)")
                         completion(false, "Failed to reload VPN configuration: \(error.localizedDescription)")
                         return
                     }
                     
+                    print("✅ WireGuardPlugin: Configuration reloaded successfully")
                     self?.vpnManager = manager
                     completion(true, nil)
                 }
@@ -261,15 +280,23 @@ public class WireGuardPlugin: CAPPlugin {
     }
     
     private func startVPN(completion: @escaping (Bool, String?) -> Void) {
+        print("🔵 WireGuardPlugin: startVPN called")
+        
         guard let manager = vpnManager else {
+            print("❌ WireGuardPlugin: VPN manager is nil")
             completion(false, "VPN manager not initialized")
             return
         }
         
+        print("🔵 WireGuardPlugin: VPN manager status: \(getConnectionStatus(manager.connection.status))")
+        print("🔵 WireGuardPlugin: Starting VPN tunnel...")
+        
         do {
             try manager.connection.startVPNTunnel()
+            print("✅ WireGuardPlugin: startVPNTunnel() called successfully")
             completion(true, nil)
         } catch {
+            print("❌ WireGuardPlugin: Failed to start VPN tunnel: \(error.localizedDescription)")
             completion(false, "Failed to start VPN: \(error.localizedDescription)")
         }
     }
