@@ -49,7 +49,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         do {
             tunnelConfiguration = try TunnelConfiguration(fromWgQuickConfig: configString)
             logger.info("✅ Successfully parsed WireGuard configuration")
-            logger.debug("Interface: \(tunnelConfiguration.interface.addresses.map { $0.description }.joined(separator: ", "))")
+            logger.debug("Interface: \(tunnelConfiguration.interface.addresses.map { $0.stringRepresentation }.joined(separator: ", "))")
             logger.debug("Peers: \(tunnelConfiguration.peers.count)")
         } catch {
             logger.error("❌ Failed to parse WireGuard config: \(error.localizedDescription)")
