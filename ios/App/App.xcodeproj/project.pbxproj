@@ -166,7 +166,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = "${BUILD_DIR%Build/*}SourcePackages/checkouts/wireguard-apple/Sources/WireGuardKitGo";
+			buildWorkingDirectory = "${SRCROOT}/../../packages/wireguard-apple/Sources/WireGuardKitGo";
 			dependencies = (
 			);
 			name = WireGuardGoBridgeiOS;
@@ -707,16 +707,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		BB3BD1932ED2FA91003A054E /* XCLocalSwiftPackageReference "../../../../Downloads/wireguard-apple-1.0.15-26" */ = {
+		BB3BD1932ED2FA91003A054E /* XCLocalSwiftPackageReference "../../packages/wireguard-apple" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../../Downloads/wireguard-apple-1.0.15-26";
+			relativePath = "../../packages/wireguard-apple";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		BB3BD1992ED3E96E003A054E /* WireGuardKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB3BD1932ED2FA91003A054E /* XCLocalSwiftPackageReference "../../../../Downloads/wireguard-apple-1.0.15-26" */;
+			package = BB3BD1932ED2FA91003A054E /* XCLocalSwiftPackageReference "../../packages/wireguard-apple" */;
 			productName = WireGuardKit;
 		};
 /* End XCSwiftPackageProductDependency section */
