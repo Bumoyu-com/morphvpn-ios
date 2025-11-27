@@ -180,6 +180,16 @@ public class WireGuardPlugin: CAPPlugin {
             guard let connection = notification.object as? NEVPNConnection else { return }
             let status = self?.getConnectionStatus(connection.status) ?? "unknown"
             
+            print("📡 WireGuardPlugin: VPN status changed to: \(status)")
+            
+            // 如果连接失败，尝试获取错误信息
+            if status == "disconnected" || status == "disconnecting" {
+                if let session = connection as? NETunnelProviderSession {
+                    print("🔍 WireGuardPlugin: Checking for connection errors...")
+                    // 注意：lastDisconnectError 可能为 nil
+                }
+            }
+            
             // 通知JavaScript层状态变化
             self?.notifyListeners("statusChanged", data: ["status": status])
         }
@@ -289,14 +299,34 @@ public class WireGuardPlugin: CAPPlugin {
         }
         
         print("🔵 WireGuardPlugin: VPN manager status: \(getConnectionStatus(manager.connection.status))")
+        print("🔵 WireGuardPlugin: VPN manager enabled: \(manager.isEnabled)")
+        print("🔵 WireGuardPlugin: Protocol configuration: \(manager.protocolConfiguration?.description ?? "nil")")
+        
+        if let proto = manager.protocolConfiguration as? NETunnelProviderProtocol {
+            print("🔵 WireGuardPlugin: Provider bundle ID: \(proto.providerBundleIdentifier ?? "nil")")
+            print("🔵 WireGuardPlugin: Server address: \(proto.serverAddress ?? "nil")")
+        }
+        
         print("🔵 WireGuardPlugin: Starting VPN tunnel...")
         
         do {
             try manager.connection.startVPNTunnel()
             print("✅ WireGuardPlugin: startVPNTunnel() called successfully")
+            
+            // 等待一小段时间后检查状态
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                if let status = self?.getConnectionStatus(manager.connection.status) {
+                    print("📊 WireGuardPlugin: Status after 2s: \(status)")
+                    if status == "disconnected" {
+                        print("⚠️ WireGuardPlugin: Connection failed - returned to disconnected state")
+                    }
+                }
+            }
+            
             completion(true, nil)
         } catch {
             print("❌ WireGuardPlugin: Failed to start VPN tunnel: \(error.localizedDescription)")
+            print("❌ WireGuardPlugin: Error details: \(error)")
             completion(false, "Failed to start VPN: \(error.localizedDescription)")
         }
     }
