@@ -78,7 +78,7 @@ Endpoint = 154.8.229.164:51820
 
     return (
         <div>
-            <p style={{ color: 'white', fontSize: '12px' }}>平台: {platform} | 状态: {status.status}</p>
+            <p style={{ color: 'white', fontSize: '12px' }}>平台1: {platform} | 状态: {status.status}</p>
             {isConnected ? (
                 <Button
                     type="text"
