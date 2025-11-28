@@ -26,6 +26,20 @@ Endpoint = 154.8.229.164:51820
             console.log('🔵 VPNComponent: handleConnect called');
             console.log('🔵 Platform:', platform);
             console.log('🔵 Config length:', myConfig.length);
+            console.log('🔵 Config first 100 chars:', myConfig.substring(0, 100));
+            console.log('🔵 Config starts with:', myConfig.substring(0, 20));
+            
+            // 验证配置格式
+            if (!myConfig.includes('[Interface]')) {
+                console.error('❌ Config missing [Interface] section');
+                message.error('配置格式错误：缺少 [Interface] 部分');
+                return;
+            }
+            if (!myConfig.includes('[Peer]')) {
+                console.error('❌ Config missing [Peer] section');
+                message.error('配置格式错误：缺少 [Peer] 部分');
+                return;
+            }
             
             message.info(`当前平台: ${platform}`, 2);
             
@@ -35,13 +49,14 @@ Endpoint = 154.8.229.164:51820
             }
             
             message.loading('正在连接 WireGuard VPN...', 0);
-            console.log('🔵 Calling connect...');
+            console.log('🔵 Calling connect with config...');
             await connect(myConfig, 'MorphVPN');
             console.log('✅ Connect succeeded');
             message.destroy();
             message.success('WireGuard VPN 连接成功');
         } catch (error: any) {
             console.error('❌ Connect failed:', error);
+            console.error('❌ Error details:', JSON.stringify(error));
             message.destroy();
             message.error(`连接失败: ${error.message || '未知错误'}`);
         }

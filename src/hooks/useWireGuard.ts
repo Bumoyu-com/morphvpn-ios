@@ -82,15 +82,27 @@ export function useWireGuard(): UseWireGuardReturn {
 
   // 连接VPN
   const connect = useCallback(async (config: string, tunnelName: string) => {
+    console.log('🔵 useWireGuard: connect() called');
+    console.log('🔵 useWireGuard: tunnelName:', tunnelName);
+    console.log('🔵 useWireGuard: config length:', config.length);
+    console.log('🔵 useWireGuard: config preview:', config.substring(0, 50));
+    
     setIsConnecting(true);
     setError(null);
     
     try {
+      console.log('🔵 useWireGuard: Calling WireGuard.connect...');
       const result = await WireGuard.connect({ config, tunnelName });
+      console.log('🔵 useWireGuard: Result:', result);
+      
       if (!result.success) {
+        console.error('❌ useWireGuard: Connect returned success=false');
         throw new Error(result.message || 'Failed to connect');
       }
+      console.log('✅ useWireGuard: Connect successful');
     } catch (err: any) {
+      console.error('❌ useWireGuard: Connect error:', err);
+      console.error('❌ useWireGuard: Error message:', err.message);
       setError(err.message || 'Connection failed');
       setIsConnecting(false);
       throw err;
