@@ -5,17 +5,17 @@ import { PluginDebug } from './PluginDebug';
 
 export function VPNComponent() {
     // WireGuard 配置 - 请替换为你的实际配置
-    const myConfig = `[[Interface]
-PrivateKey = CNn6mRkPAAOujl0kSdm/YJmZXHNymyGFcl38j9L8G1U=
+    const myConfig = `[Interface]
+PrivateKey = IO9xZFb/qXXd/WEtUZl+9CHHYBef9BgPnm+RQMnGmVg=
 Address = 10.8.0.2/24
 DNS = 1.1.1.1
 
 [Peer]
-PublicKey = AtTmwsbPKiOJuQVyI+uqXLqGNiBER2PMtQTBk7hQ0mg=
-PresharedKey = DsfyIG7P6k4Q4yR9e8xp8dKuQAJaRF38hK0yzUQMrnI=
+PublicKey = 4oFUG+Nl2hIQx0b3j1IM203+vc0ygkz3IqwtboJoki4=
+PresharedKey = QEPMjyc2oLDxICl2ebOQOlCrQMGFN/ccRH2KmY3fSUg=
 AllowedIPs = 0.0.0.0/0, ::/0
-PersistentKeepalive = 0
-Endpoint = 154.8.229.164:51820
+PersistentKeepalive = 25
+Endpoint = 49.233.198.81:51820
 `;
 
     const { status, isConnected, connect, disconnect } = useWireGuard();

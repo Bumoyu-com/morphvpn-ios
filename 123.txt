@@ -1,38 +1,58 @@
 ✅ WireGuardPlugin: Plugin loaded successfully
 ✅ WireGuardPlugin: Initialization complete
 ⚡️  Loading app at capacitor://localhost...
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...
 ⚡️  WebView loaded
 ⚡️  [log] - storage web
-⚡️  To Native ->  WireGuard getStatus 32178601
-⚡️  To Native ->  WireGuard addListener 32178602
+⚡️  To Native ->  WireGuard getStatus 34171465
+⚡️  To Native ->  WireGuard addListener 34171466
+⚡️  To Native ->  SplashScreen hide 34171467
 🔵 WireGuardPlugin: getStatus() called
 🔵 WireGuardPlugin: Current status - disconnected
-⚡️  To Native ->  SplashScreen hide 32178603
-⚡️  To Native ->  WireGuard getStatus 32178604
+⚡️  To Native ->  WireGuard getStatus 34171468
 ⚡️  TO JS {"status":"disconnected","bytesUploaded":0,"bytesDownloaded":0}
 ⚡️  TO JS undefined
 🔵 WireGuardPlugin: getStatus() called
 🔵 WireGuardPlugin: Current status - disconnected
-⚡️  TO JS {"bytesDownloaded":0,"bytesUploaded":0,"status":"disconnected"}
+⚡️  TO JS {"bytesDownloaded":0,"status":"disconnected","bytesUploaded":0}
 ⚡️  [log] - 缓存加载失败
+⚡️  To Native ->  WireGuard getStatus 34171469
+🔵 WireGuardPlugin: getStatus() called
+🔵 WireGuardPlugin: Current status - disconnected
+⚡️  TO JS {"status":"disconnected","bytesDownloaded":0,"bytesUploaded":0}
 ⚡️  [log] - 🔵 VPNComponent: handleConnect called
 ⚡️  [log] - 🔵 Platform: ios
 ⚡️  [log] - 🔵 Config length: 316
-⚡️  [log] - 🔵 Calling connect...
-⚡️  To Native ->  WireGuard connect 32178605
+⚡️  [log] - 🔵 Config first 100 chars: [Interface]
+PrivateKey = IO9xZFb/qXXd/WEtUZl+9CHHYBef9BgPnm+RQMnGmVg=
+Address = 10.8.0.2/24
+DNS = 1.
+⚡️  [log] - 🔵 Config starts with: [Interface]
+PrivateK
+⚡️  [log] - 🔵 Calling connect with config...
+⚡️  [log] - 🔵 useWireGuard: connect() called
+⚡️  [log] - 🔵 useWireGuard: tunnelName: MorphVPN
+⚡️  [log] - 🔵 useWireGuard: config length: 316
+⚡️  [log] - 🔵 useWireGuard: config preview: [Interface]
+PrivateKey = IO9xZFb/qXXd/WEtUZl+9CHHY
+⚡️  [log] - 🔵 useWireGuard: Calling WireGuard.connect...
+⚡️  To Native ->  WireGuard connect 34171470
 🔵 WireGuardPlugin: connect() called
-🔵 WireGuardPlugin: Call options: Optional([AnyHashable("config"): "[[Interface]\nPrivateKey = CNn6mRkPAAOujl0kSdm/YJmZXHNymyGFcl38j9L8G1U=\nAddress = 10.8.0.2/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = AtTmwsbPKiOJuQVyI+uqXLqGNiBER2PMtQTBk7hQ0mg=\nPresharedKey = DsfyIG7P6k4Q4yR9e8xp8dKuQAJaRF38hK0yzUQMrnI=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 154.8.229.164:51820\n", AnyHashable("tunnelName"): "MorphVPN"])
+🔵 WireGuardPlugin: Call options: Optional([AnyHashable("config"): "[Interface]\nPrivateKey = IO9xZFb/qXXd/WEtUZl+9CHHYBef9BgPnm+RQMnGmVg=\nAddress = 10.8.0.2/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = 4oFUG+Nl2hIQx0b3j1IM203+vc0ygkz3IqwtboJoki4=\nPresharedKey = QEPMjyc2oLDxICl2ebOQOlCrQMGFN/ccRH2KmY3fSUg=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 25\nEndpoint = 49.233.198.81:51820\n", AnyHashable("tunnelName"): "MorphVPN"])
 🔵 WireGuardPlugin: Config received
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
 🔵 WireGuardPlugin: Config length: 316 bytes
-🔵 WireGuardPlugin: Config preview: [[Interface]
-PrivateKey = CNn6mRkPAAOujl0kSdm/YJmZXHNymyGFcl38j9L8G1U=
+🔵 WireGuardPlugin: Config preview: [Interface]
+PrivateKey = IO9xZFb/qXXd/WEtUZl+9CHHYBef9BgPnm+RQMnGmVg=
 Address = 10.8.0.2/24
-DNS = 1...
+DNS = 1....
 🔵 WireGuardPlugin: saveConfiguration called
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
 🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
 🔵 WireGuardPlugin: Provider configuration set with wg_config key
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...
 ⚡️  TO JS {"status":"disconnected"}
 🔵 WireGuardPlugin: Saving VPN configuration to preferences...
 ✅ WireGuardPlugin: Configuration saved successfully
@@ -40,24 +60,61 @@ DNS = 1...
 ✅ WireGuardPlugin: Configuration reloaded successfully
 🔵 WireGuardPlugin: startVPN called
 🔵 WireGuardPlugin: VPN manager status: disconnected
+🔵 WireGuardPlugin: VPN manager enabled: true
+🔵 WireGuardPlugin: Protocol configuration: 
+    type = plugin
+    identifier = F3F3A97F-43FF-4939-90E2-917EE60131CF
+    serverAddress = WireGuard
+    identityDataImported = NO
+    disconnectOnSleep = NO
+    disconnectOnIdle = NO
+    disconnectOnIdleTimeout = 0
+    disconnectOnWake = NO
+    disconnectOnWakeTimeout = 0
+    includeAllNetworks = NO
+    excludeLocalNetworks = YES
+    excludeCellularServices = YES
+    excludeAPNs = YES
+    enforceRoutes = NO
+    pluginType = com.morphvpn.app
+    authenticationMethod = 0
+    reassertTimeout = 0
+    providerConfiguration = {
+        wg_config = [Interface]
+PrivateKey = IO9xZFb/qXXd/WEtUZl+9CHHYBef9BgPnm+RQMnGmVg=
+Address = 10.8.0.2/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = 4oFUG+Nl2hIQx0b3j1IM203+vc0ygkz3IqwtboJoki4=
+PresharedKey = QEPMjyc2oLDxICl2ebOQOlCrQMGFN/ccRH2KmY3fSUg=
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 25
+Endpoint = 49.233.198.81:51820
+,
+    }
+    providerBundleIdentifier = com.morphvpn.app.WireGuardExtension
+🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
+🔵 WireGuardPlugin: Server address: WireGuard
 🔵 WireGuardPlugin: Starting VPN tunnel...
 ✅ WireGuardPlugin: startVPNTunnel() called successfully
 ✅ WireGuardPlugin: Connection successful
 ⚡️  TO JS {"success":true}
+⚡️  [log] - 🔵 useWireGuard: Result: {"success":true}
+⚡️  [log] - ✅ useWireGuard: Connect successful
 ⚡️  [log] - ✅ Connect succeeded
+📡 WireGuardPlugin: VPN status changed to: connecting
 ⚡️  TO JS {"status":"connecting"}
+📡 WireGuardPlugin: VPN status changed to: connecting
 ⚡️  TO JS {"status":"connecting"}
-⚡️  To Native ->  WireGuard getStatus 32178606
+⚡️  To Native ->  WireGuard getStatus 34171471
 🔵 WireGuardPlugin: getStatus() called
 🔵 WireGuardPlugin: Current status - connecting
-⚡️  TO JS {"bytesDownloaded":0,"bytesUploaded":0,"status":"connecting"}
+⚡️  TO JS {"status":"connecting","bytesUploaded":0,"bytesDownloaded":0}
+📊 WireGuardPlugin: Status after 2s: connecting
+📡 WireGuardPlugin: VPN status changed to: disconnecting
+🔍 WireGuardPlugin: Checking for connection errors...
 ⚡️  TO JS {"status":"disconnecting"}
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...
 ⚡️  TO JS {"status":"disconnected"}
-⚡️  TO JS {"status":"disconnected"}
-⚡️  To Native ->  WireGuard getStatus 32178607
-🔵 WireGuardPlugin: getStatus() called
-🔵 WireGuardPlugin: Current status - disconnected
-⚡️  TO JS {"bytesDownloaded":0,"bytesUploaded":0,"status":"disconnected"}
-⚡️  To Native ->  WireGuard getStatus 32178608
-🔵 WireGuardPlugin: getStatus() called
-🔵 WireGuardPlugin: Current status - disconnected

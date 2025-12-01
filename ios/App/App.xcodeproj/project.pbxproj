@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -64,7 +64,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BB41E31B2ED4452B002F2F57 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		BB41E31B2ED4452B002F2F57 /* Exceptions for "WireGuardExtension" folder in "WireGuardExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -74,8 +74,21 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		BB33B7642ED430000051A26D /* WireGuardExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WireGuardExtension; sourceTree = "<group>"; };
-		BB41E3132ED4452B002F2F57 /* WireGuardExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BB41E31B2ED4452B002F2F57 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = WireGuardExtension; sourceTree = "<group>"; };
+		BB33B7642ED430000051A26D /* WireGuardExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = WireGuardExtension;
+			sourceTree = "<group>";
+		};
+		BB41E3132ED4452B002F2F57 /* WireGuardExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BB41E31B2ED4452B002F2F57 /* Exceptions for "WireGuardExtension" folder in "WireGuardExtension" target */,
+			);
+			path = WireGuardExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +235,6 @@
 				};
 			};
 			buildConfigurationList = 504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */;
-			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -233,6 +245,7 @@
 			packageReferences = (
 				BB41E31F2ED4460D002F2F57 /* XCRemoteSwiftPackageReference "wireguard-apple" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -290,10 +303,10 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
+			outputFileListPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
