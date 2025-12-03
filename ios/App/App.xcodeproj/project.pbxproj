@@ -15,10 +15,11 @@
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
-		BB41E3122ED4452B002F2F57 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB33B7622ED430000051A26D /* NetworkExtension.framework */; };
+		A402FFC02EDD8D450090F84A /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB33B7622ED430000051A26D /* NetworkExtension.framework */; };
+		A402FFC12EDD8D450090F84A /* NetworkExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB33B7622ED430000051A26D /* NetworkExtension.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A44182F82EDED23B008DDD1D /* WireGuardKit in Frameworks */ = {isa = PBXBuildFile; productRef = A44182F72EDED23B008DDD1D /* WireGuardKit */; };
+		A44183272EDEE62E008DDD1D /* libwg-go.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB41E3282ED44920002F2F57 /* libwg-go.a */; };
 		BB41E31A2ED4452B002F2F57 /* WireGuardExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BB41E3112ED4452B002F2F57 /* WireGuardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BB41E3212ED4460D002F2F57 /* WireGuardKit in Frameworks */ = {isa = PBXBuildFile; productRef = BB41E3202ED4460D002F2F57 /* WireGuardKit */; };
-		BB41E3292ED44941002F2F57 /* libwg-go.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB41E3282ED44920002F2F57 /* libwg-go.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A402FFC22EDD8D450090F84A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A402FFC12EDD8D450090F84A /* NetworkExtension.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BB33B76C2ED430000051A26D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -55,6 +67,8 @@
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		A44182F52EDECF81008DDD1D /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libwg-go.a"; path = "../../packages/Wireguardkit/libwg-go.a"; sourceTree = "<group>"; };
+		A44183162EDEE3BB008DDD1D /* libwg-go.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libwg-go.a"; path = "../../../wireguard-apple/Sources/WireGuardKitGo/out/libwg-go.a"; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		BB33B7622ED430000051A26D /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -104,9 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB41E3212ED4460D002F2F57 /* WireGuardKit in Frameworks */,
-				BB41E3122ED4452B002F2F57 /* NetworkExtension.framework in Frameworks */,
-				BB41E3292ED44941002F2F57 /* libwg-go.a in Frameworks */,
+				A44183272EDEE62E008DDD1D /* libwg-go.a in Frameworks */,
+				A402FFC02EDD8D450090F84A /* NetworkExtension.framework in Frameworks */,
+				A44182F82EDED23B008DDD1D /* WireGuardKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				BB41E3282ED44920002F2F57 /* libwg-go.a */,
+				A44182F52EDECF81008DDD1D /* libwg-go.a */,
+				A44183162EDEE3BB008DDD1D /* libwg-go.a */,
 				AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */,
 				BB33B7622ED430000051A26D /* NetworkExtension.framework */,
 			);
@@ -199,6 +215,7 @@
 				BB41E30D2ED4452B002F2F57 /* Sources */,
 				BB41E30E2ED4452B002F2F57 /* Frameworks */,
 				BB41E30F2ED4452B002F2F57 /* Resources */,
+				A402FFC22EDD8D450090F84A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -209,7 +226,7 @@
 			);
 			name = WireGuardExtension;
 			packageProductDependencies = (
-				BB41E3202ED4460D002F2F57 /* WireGuardKit */,
+				A44182F72EDED23B008DDD1D /* WireGuardKit */,
 			);
 			productName = WireGuardExtension;
 			productReference = BB41E3112ED4452B002F2F57 /* WireGuardExtension.appex */;
@@ -566,7 +583,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.morphvpn.app.WireGuardExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -610,7 +627,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.morphvpn.app.WireGuardExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -664,7 +681,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BB41E3202ED4460D002F2F57 /* WireGuardKit */ = {
+		A44182F72EDED23B008DDD1D /* WireGuardKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BB41E31F2ED4460D002F2F57 /* XCRemoteSwiftPackageReference "wireguard-apple" */;
 			productName = WireGuardKit;
