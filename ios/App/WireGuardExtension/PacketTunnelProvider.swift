@@ -93,20 +93,19 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             do {
                 morphClient = try MorphUDPClient(
                     encryptionKey: encryptionKey,
-                    serverHost: serverHost,
-                    serverPort: serverPort,
-                    layerCount: layerCount,
+                    obfuscationLayer: layerCount,
                     paddingLength: paddingLength
                 )
                 
                 morphClient?.onStateChange = { [weak self] state in
-                    NSLog("🔐 MorphProtocol 状态: \(state)")
-                    self?.logger.info("MorphProtocol 状态: \(state)")
+                    let stateStr = String(describing: state)
+                    NSLog("🔐 MorphProtocol 状态: \(stateStr)")
+                    self?.logger.info("MorphProtocol 状态: \(stateStr)")
                 }
                 
                 morphClient?.onError = { [weak self] error in
-                    NSLog("❌ MorphProtocol 错误: \(error)")
-                    self?.logger.error("MorphProtocol 错误: \(error)")
+                    NSLog("❌ MorphProtocol 错误: \(error.localizedDescription)")
+                    self?.logger.error("MorphProtocol 错误: \(error.localizedDescription)")
                 }
                 
                 morphClient?.onReceive = { [weak self] data in
@@ -114,7 +113,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                     self?.logger.debug("MorphProtocol 接收: \(data.count) 字节")
                 }
                 
-                morphClient?.start()
+                morphClient?.connect(host: serverHost, port: UInt16(serverPort))
                 NSLog("✅ MorphProtocol 启动成功")
                 logger.info("✅ MorphProtocol 启动成功")
             } catch {
@@ -184,7 +183,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         if let morphClient = morphClient {
             NSLog("🛑 停止 MorphProtocol")
             logger.info("停止 MorphProtocol")
-            morphClient.stop()
+            morphClient.disconnect()
             self.morphClient = nil
         }
         
