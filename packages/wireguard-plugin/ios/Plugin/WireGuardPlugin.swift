@@ -52,8 +52,31 @@ public class WireGuardPlugin: CAPPlugin {
         print("🔵 WireGuardPlugin: Config length: \(config.count) bytes")
         print("🔵 WireGuardPlugin: Config preview: \(config.prefix(100))...")
         
+        // 解析 MorphProtocol 选项
+        let useMorphProtocol = call.getBool("useMorphProtocol") ?? false
+        let morphEncryptionKey = call.getString("morphEncryptionKey") ?? ""
+        let morphServerHost = call.getString("morphServerHost") ?? ""
+        let morphServerPort = call.getInt("morphServerPort") ?? 0
+        let morphLayerCount = call.getInt("morphLayerCount") ?? 3
+        let morphPaddingLength = call.getInt("morphPaddingLength") ?? 8
+        
+        if useMorphProtocol {
+            print("🔐 WireGuardPlugin: MorphProtocol 已启用")
+            print("🔐 WireGuardPlugin: 服务器: \(morphServerHost):\(morphServerPort)")
+            print("🔐 WireGuardPlugin: 混淆层数: \(morphLayerCount), 填充: \(morphPaddingLength)")
+        }
+        
         // 保存配置并连接
-        saveAndConnect(config: config, tunnelName: tunnelName) { success, error in
+        saveAndConnect(
+            config: config, 
+            tunnelName: tunnelName,
+            useMorphProtocol: useMorphProtocol,
+            morphEncryptionKey: morphEncryptionKey,
+            morphServerHost: morphServerHost,
+            morphServerPort: morphServerPort,
+            morphLayerCount: morphLayerCount,
+            morphPaddingLength: morphPaddingLength
+        ) { success, error in
             if success {
                 print("✅ WireGuardPlugin: Connection successful")
                 call.resolve(["success": true])
@@ -214,9 +237,28 @@ public class WireGuardPlugin: CAPPlugin {
         }
     }
     
-    private func saveAndConnect(config: String, tunnelName: String, completion: @escaping (Bool, String?) -> Void) {
+    private func saveAndConnect(
+        config: String, 
+        tunnelName: String,
+        useMorphProtocol: Bool = false,
+        morphEncryptionKey: String = "",
+        morphServerHost: String = "",
+        morphServerPort: Int = 0,
+        morphLayerCount: Int = 3,
+        morphPaddingLength: Int = 8,
+        completion: @escaping (Bool, String?) -> Void
+    ) {
         // 首先保存配置
-        saveConfiguration(config: config, tunnelName: tunnelName) { [weak self] success, error in
+        saveConfiguration(
+            config: config, 
+            tunnelName: tunnelName,
+            useMorphProtocol: useMorphProtocol,
+            morphEncryptionKey: morphEncryptionKey,
+            morphServerHost: morphServerHost,
+            morphServerPort: morphServerPort,
+            morphLayerCount: morphLayerCount,
+            morphPaddingLength: morphPaddingLength
+        ) { [weak self] success, error in
             guard success else {
                 completion(false, error)
                 return
@@ -227,7 +269,17 @@ public class WireGuardPlugin: CAPPlugin {
         }
     }
     
-    private func saveConfiguration(config: String, tunnelName: String, completion: @escaping (Bool, String?) -> Void) {
+    private func saveConfiguration(
+        config: String, 
+        tunnelName: String,
+        useMorphProtocol: Bool = false,
+        morphEncryptionKey: String = "",
+        morphServerHost: String = "",
+        morphServerPort: Int = 0,
+        morphLayerCount: Int = 3,
+        morphPaddingLength: Int = 8,
+        completion: @escaping (Bool, String?) -> Void
+    ) {
         print("🔵 WireGuardPlugin: saveConfiguration called")
         print("🔵 WireGuardPlugin: Tunnel name: \(tunnelName)")
         
@@ -241,9 +293,24 @@ public class WireGuardPlugin: CAPPlugin {
         print("🔵 WireGuardPlugin: Provider bundle ID: \(providerProtocol.providerBundleIdentifier ?? "nil")")
         
         // 将WireGuard配置保存到providerConfiguration
-        providerProtocol.providerConfiguration = [
+        var providerConfig: [String: Any] = [
             "wg_config": config
         ]
+        
+        // 添加 MorphProtocol 配置
+        if useMorphProtocol {
+            providerConfig["useMorphProtocol"] = true
+            providerConfig["morphEncryptionKey"] = morphEncryptionKey
+            providerConfig["morphServerHost"] = morphServerHost
+            providerConfig["morphServerPort"] = morphServerPort
+            providerConfig["morphLayerCount"] = morphLayerCount
+            providerConfig["morphPaddingLength"] = morphPaddingLength
+            
+            print("🔐 WireGuardPlugin: MorphProtocol 配置已添加")
+            print("🔐 WireGuardPlugin: 服务器: \(morphServerHost):\(morphServerPort)")
+        }
+        
+        providerProtocol.providerConfiguration = providerConfig
         
         print("🔵 WireGuardPlugin: Provider configuration set with wg_config key")
         

@@ -5,6 +5,7 @@ import os.log
 class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private var adapter: WireGuardAdapter?
+    private var morphClient: MorphUDPClient?
     private lazy var logger = Logger(subsystem: "com.morphvpn.app.WireGuardExtension", category: "PacketTunnel")
     
     override init() {
@@ -69,6 +70,63 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         logger.info("✅ Got WireGuard config, length: \(configString.count) bytes")
         logger.debug("Config preview: \(configString.prefix(100))...")
         
+        // 检查是否启用 MorphProtocol
+        if let useMorph = providerConfiguration["useMorphProtocol"] as? Bool, useMorph {
+            NSLog("🔐 MorphProtocol 已启用")
+            logger.info("🔐 MorphProtocol enabled")
+            
+            let encryptionKey = providerConfiguration["morphEncryptionKey"] as? String ?? ""
+            let serverHost = providerConfiguration["morphServerHost"] as? String ?? ""
+            let serverPort = providerConfiguration["morphServerPort"] as? Int ?? 0
+            let layerCount = providerConfiguration["morphLayerCount"] as? Int ?? 3
+            let paddingLength = providerConfiguration["morphPaddingLength"] as? Int ?? 8
+            
+            NSLog("🔐 MorphProtocol 配置:")
+            NSLog("   服务器: \(serverHost):\(serverPort)")
+            NSLog("   混淆层数: \(layerCount)")
+            NSLog("   填充长度: \(paddingLength)")
+            NSLog("   密钥长度: \(encryptionKey.count) 字符")
+            
+            logger.info("MorphProtocol 服务器: \(serverHost):\(serverPort)")
+            logger.debug("混淆层数: \(layerCount), 填充长度: \(paddingLength)")
+            
+            do {
+                morphClient = try MorphUDPClient(
+                    encryptionKey: encryptionKey,
+                    serverHost: serverHost,
+                    serverPort: serverPort,
+                    layerCount: layerCount,
+                    paddingLength: paddingLength
+                )
+                
+                morphClient?.onStateChange = { [weak self] state in
+                    NSLog("🔐 MorphProtocol 状态: \(state)")
+                    self?.logger.info("MorphProtocol 状态: \(state)")
+                }
+                
+                morphClient?.onError = { [weak self] error in
+                    NSLog("❌ MorphProtocol 错误: \(error)")
+                    self?.logger.error("MorphProtocol 错误: \(error)")
+                }
+                
+                morphClient?.onReceive = { [weak self] data in
+                    NSLog("📥 MorphProtocol 接收数据: \(data.count) 字节")
+                    self?.logger.debug("MorphProtocol 接收: \(data.count) 字节")
+                }
+                
+                morphClient?.start()
+                NSLog("✅ MorphProtocol 启动成功")
+                logger.info("✅ MorphProtocol 启动成功")
+            } catch {
+                NSLog("❌ 初始化 MorphProtocol 失败: \(error.localizedDescription)")
+                logger.error("❌ 初始化 MorphProtocol 失败: \(error.localizedDescription)")
+                // 继续使用标准 WireGuard，不中断连接
+            }
+        } else {
+            NSLog("ℹ️ MorphProtocol 未启用，使用标准 WireGuard")
+            logger.info("MorphProtocol 未启用")
+        }
+        
         // 解析配置
         NSLog("🔧 Parsing WireGuard configuration...")
         let tunnelConfiguration: TunnelConfiguration
@@ -121,6 +179,14 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                            completionHandler: @escaping () -> Void) {
         NSLog("🛑 Stopping WireGuard tunnel, reason: \(reason.rawValue)")
         logger.info("🛑 Stopping WireGuard tunnel, reason: \(reason.rawValue)")
+        
+        // 停止 MorphProtocol（如果正在运行）
+        if let morphClient = morphClient {
+            NSLog("🛑 停止 MorphProtocol")
+            logger.info("停止 MorphProtocol")
+            morphClient.stop()
+            self.morphClient = nil
+        }
         
         adapter?.stop { [weak self] error in
             if let error = error {
