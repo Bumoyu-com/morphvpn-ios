@@ -23,42 +23,34 @@ Endpoint = 81.70.251.128:51820
 
     const handleConnect = async () => {
         try {
-            console.log('🔵 VPNComponent: handleConnect called');
-            console.log('🔵 Platform:', platform);
-            console.log('🔵 Config length:', myConfig.length);
-            console.log('🔵 Config first 100 chars:', myConfig.substring(0, 100));
-            console.log('🔵 Config starts with:', myConfig.substring(0, 20));
-            
-            // 验证配置格式
-            if (!myConfig.includes('[Interface]')) {
-                console.error('❌ Config missing [Interface] section');
-                message.error('配置格式错误：缺少 [Interface] 部分');
-                return;
-            }
-            if (!myConfig.includes('[Peer]')) {
-                console.error('❌ Config missing [Peer] section');
-                message.error('配置格式错误：缺少 [Peer] 部分');
-                return;
-            }
-            
+            // 连接配置
+            const connectOptions = {
+                config: myConfig,
+                tunnelName: 'MorphVPN',
+                // 启用 MorphProtocol
+                useMorphProtocol: true,
+                morphEncryptionKey: 'XuNgTBIiWFXHSeunT/xPi6DEp98vjw6XBoGogtIJbE8=:4jww75fhLvms4akS',
+                morphServerHost: 'morph.example.com',
+                morphServerPort: 51821,
+                morphLayerCount: 3,
+                morphPaddingLength: 8
+            };
+
             message.info(`当前平台: ${platform}`, 2);
-            
+
             if (platform === 'web') {
                 message.warning('WireGuard 不支持 Web 平台，请在 iOS 设备上测试', 3);
                 return;
             }
-            
+
             message.loading('正在连接 WireGuard VPN...', 0);
             console.log('🔵 Calling connect with config...');
-            await connect(myConfig, 'MorphVPN');
-            console.log('✅ Connect succeeded');
+            await connect(connectOptions.config, connectOptions.tunnelName);
             message.destroy();
-            message.success('WireGuard VPN 连接成功');
+            message.success('VPN 连接成功（已启用流量混淆）');
         } catch (error: any) {
             console.error('❌ Connect failed:', error);
-            console.error('❌ Error details:', JSON.stringify(error));
-            message.destroy();
-            message.error(`连接失败: ${error.message || '未知错误'}`);
+            message.error(`连接失败: ${error.message}`);
         }
     };
 
