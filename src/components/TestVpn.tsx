@@ -2,6 +2,7 @@ import { Button, message } from 'antd';
 import { Capacitor } from '@capacitor/core';
 import { useWireGuard } from '../hooks/useWireGuard';
 import { PluginDebug } from './PluginDebug';
+import { validateConnectOptions, getConfigSummary } from '../utils/vpnConfigValidator';
 
 export function VPNComponent() {
     // WireGuard 配置 - 请替换为你的实际配置
@@ -43,13 +44,31 @@ Endpoint = 81.70.251.128:51820
                 return;
             }
 
+            // 验证配置
+            console.log('🔍 Validating configuration...');
+            const validationResult = validateConnectOptions(connectOptions);
+            if (!validationResult.valid) {
+                console.error('❌ Configuration validation failed:', validationResult.error);
+                message.error(`配置验证失败: ${validationResult.error}`);
+                return;
+            }
+            console.log('✅ Configuration validation passed');
+
+            // 打印配置摘要
+            const summary = getConfigSummary(connectOptions);
+            console.log('📋 Configuration summary:\n' + summary);
+
             message.loading('正在连接 WireGuard VPN...', 0);
-            console.log('🔵 Calling connect with config...');
-            await connect(connectOptions.config, connectOptions.tunnelName);
+            console.log('🔵 Calling connect with full options...');
+            
+            // 传递完整的配置对象
+            await connect(connectOptions);
+            
             message.destroy();
             message.success('VPN 连接成功（已启用流量混淆）');
         } catch (error: any) {
             console.error('❌ Connect failed:', error);
+            message.destroy();
             message.error(`连接失败: ${error.message}`);
         }
     };

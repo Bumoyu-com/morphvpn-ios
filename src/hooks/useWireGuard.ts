@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import { message } from 'antd';
-import { WireGuard, WireGuardStatus } from '@morphvpn/capacitor-wireguard';
+import { WireGuard, WireGuardStatus, WireGuardConnectOptions } from '@morphvpn/capacitor-wireguard';
 
 export interface UseWireGuardReturn {
   status: WireGuardStatus;
   isConnecting: boolean;
   isConnected: boolean;
-  connect: (config: string, tunnelName: string) => Promise<void>;
+  connect: (options: WireGuardConnectOptions) => Promise<void>;
   disconnect: () => Promise<void>;
-  saveConfig: (config: string, tunnelName: string) => Promise<void>;
+  saveConfig: (options: WireGuardConnectOptions) => Promise<void>;
   deleteConfig: (tunnelName: string) => Promise<void>;
   listTunnels: () => Promise<string[]>;
   error: string | null;
@@ -81,18 +81,26 @@ export function useWireGuard(): UseWireGuardReturn {
   }, [fetchStatus]);
 
   // 连接VPN
-  const connect = useCallback(async (config: string, tunnelName: string) => {
+  const connect = useCallback(async (options: WireGuardConnectOptions) => {
     console.log('🔵 useWireGuard: connect() called');
-    console.log('🔵 useWireGuard: tunnelName:', tunnelName);
-    console.log('🔵 useWireGuard: config length:', config.length);
-    console.log('🔵 useWireGuard: config preview:', config.substring(0, 50));
+    console.log('🔵 useWireGuard: tunnelName:', options.tunnelName);
+    console.log('🔵 useWireGuard: config length:', options.config.length);
+    console.log('🔵 useWireGuard: config preview:', options.config.substring(0, 50));
+    console.log('🔵 useWireGuard: useMorphProtocol:', options.useMorphProtocol);
+    
+    if (options.useMorphProtocol) {
+      console.log('🔐 useWireGuard: MorphProtocol enabled');
+      console.log('🔐 useWireGuard: Server:', options.morphServerHost + ':' + options.morphServerPort);
+      console.log('🔐 useWireGuard: Layers:', options.morphLayerCount);
+      console.log('🔐 useWireGuard: Padding:', options.morphPaddingLength);
+    }
     
     setIsConnecting(true);
     setError(null);
     
     try {
       console.log('🔵 useWireGuard: Calling WireGuard.connect...');
-      const result = await WireGuard.connect({ config, tunnelName });
+      const result = await WireGuard.connect(options);
       console.log('🔵 useWireGuard: Result:', result);
       
       if (!result.success) {
@@ -122,11 +130,11 @@ export function useWireGuard(): UseWireGuardReturn {
   }, []);
 
   // 保存配置
-  const saveConfig = useCallback(async (config: string, tunnelName: string) => {
+  const saveConfig = useCallback(async (options: WireGuardConnectOptions) => {
     setError(null);
     
     try {
-      const result = await WireGuard.saveConfig({ config, tunnelName });
+      const result = await WireGuard.saveConfig(options);
       if (!result.success) {
         throw new Error('Failed to save config');
       }
