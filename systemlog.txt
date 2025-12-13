@@ -1,29 +1,29 @@
-默认	17:14:26.397030+0800	WireGuardExtension	Hello, I'm launching as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	17:14:26.427144+0800	WireGuardExtension	Initializing connection
-默认	17:14:26.427200+0800	WireGuardExtension	Removing all cached process handles
-默认	17:14:26.427450+0800	WireGuardExtension	Sending handshake request attempt #1 to server
-默认	17:14:26.427516+0800	WireGuardExtension	Creating connection to com.apple.runningboard
-默认	17:14:26.430021+0800	WireGuardExtension	Handshake succeeded
-默认	17:14:26.430088+0800	WireGuardExtension	Identity resolved as xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:1972:1972])>
-默认	17:14:26.430522+0800	WireGuardExtension	Bootstrapping; Bootstrap complete. Ready for handshake from host.
-默认	17:14:26.434803+0800	WireGuardExtension	[u 823F07AE-1027-466D-9510-344A0AC842B4] [(null)((null))] Prepare received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	17:14:26.437393+0800	WireGuardExtension	[u 4E573213-3B49-4663-95BC-BED43FB3F5CE] [<private>(<private>)] Set sole personality.
-默认	17:14:26.441581+0800	WireGuardExtension	[u 4E573213-3B49-4663-95BC-BED43FB3F5CE] [<private>(<private>)] Begin using received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	17:14:26.451721+0800	WireGuardExtension	+[NSExtensionContext _allowedItemPayloadClasses] not implemented. Setting the allowed payload classes to <private>
-默认	17:14:26.453310+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
-默认	17:14:26.453572+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
-默认	17:14:26.455759+0800	WireGuardExtension	nw_path_evaluator_start [5B50FE73-CB96-4394-B574-8BD43E70F7FB <NULL> generic, attribution: developer]
+默认	14:59:12.606213+0800	WireGuardExtension	Hello, I'm launching as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	14:59:12.622431+0800	WireGuardExtension	Initializing connection
+默认	14:59:12.622678+0800	WireGuardExtension	Removing all cached process handles
+默认	14:59:12.622982+0800	WireGuardExtension	Sending handshake request attempt #1 to server
+默认	14:59:12.623045+0800	WireGuardExtension	Creating connection to com.apple.runningboard
+默认	14:59:12.625477+0800	WireGuardExtension	Handshake succeeded
+默认	14:59:12.625533+0800	WireGuardExtension	Identity resolved as xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:1972:1972])>
+默认	14:59:12.626207+0800	WireGuardExtension	Bootstrapping; Bootstrap complete. Ready for handshake from host.
+默认	14:59:12.631297+0800	WireGuardExtension	[u 825C8EA4-C231-4643-BC20-E39A2C961442] [(null)((null))] Prepare received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	14:59:12.636234+0800	WireGuardExtension	[u 2E5A3C18-6034-45C3-AC61-AEE2C4B1E057] [<private>(<private>)] Set sole personality.
+默认	14:59:12.640573+0800	WireGuardExtension	[u 2E5A3C18-6034-45C3-AC61-AEE2C4B1E057] [<private>(<private>)] Begin using received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	14:59:12.650546+0800	WireGuardExtension	+[NSExtensionContext _allowedItemPayloadClasses] not implemented. Setting the allowed payload classes to <private>
+默认	14:59:12.652910+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
+默认	14:59:12.654473+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
+默认	14:59:12.656913+0800	WireGuardExtension	nw_path_evaluator_start [0146E56E-4538-473C-97D8-3A69BE4CBA6B <NULL> generic, attribution: developer]
 	path: satisfied (Path is satisfied), interface: en0[802.11], ipv4, dns
-默认	17:14:26.456842+0800	WireGuardExtension	🎯 PacketTunnelProvider: init() called
-默认	17:14:26.469445+0800	WireGuardExtension	Using interface name utun5
-默认	17:14:26.469599+0800	WireGuardExtension	Created a new NEVirtualInterface "utun5" from socket
-默认	17:14:26.473784+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling startTunnelWithOptions with options 0x0
-默认	17:14:26.474081+0800	WireGuardExtension	🚀 PacketTunnelProvider: startTunnel() called
-默认	17:14:26.474502+0800	WireGuardExtension	📋 No options provided
-默认	17:14:26.474998+0800	WireGuardExtension	📦 Getting protocol configuration...
-默认	17:14:26.475210+0800	WireGuardExtension	✅ Got protocol configuration
-默认	17:14:26.475353+0800	WireGuardExtension	✅ Got WireGuard config, length: 315 bytes
-默认	17:14:26.475480+0800	WireGuardExtension	📄 Config content:
+默认	14:59:12.657444+0800	WireGuardExtension	🎯 PacketTunnelProvider: init() called
+默认	14:59:12.670264+0800	WireGuardExtension	Using interface name utun6
+默认	14:59:12.670497+0800	WireGuardExtension	Created a new NEVirtualInterface "utun6" from socket
+默认	14:59:12.676328+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling startTunnelWithOptions with options 0x0
+默认	14:59:12.676387+0800	WireGuardExtension	🚀 PacketTunnelProvider: startTunnel() called
+默认	14:59:12.683192+0800	WireGuardExtension	📋 No options provided
+默认	14:59:12.683335+0800	WireGuardExtension	📦 Getting protocol configuration...
+默认	14:59:12.683408+0800	WireGuardExtension	✅ Got protocol configuration
+默认	14:59:12.683554+0800	WireGuardExtension	✅ Got WireGuard config, length: 315 bytes
+默认	14:59:12.683625+0800	WireGuardExtension	📄 Config content:
 [Interface]
 PrivateKey = 0DiA6lqJWUcqouJeuh17wNaJB9bIyNuj+pH2zVgoJWk=
 Address = 10.8.0.2/24
@@ -35,18 +35,18 @@ PresharedKey = jwvV/AuQpnk0QT5xeDGS143NqNP275zw2yvY0moVsE0=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
 Endpoint = 81.70.251.128:51820
-默认	17:14:26.476030+0800	WireGuardExtension	ℹ️ MorphProtocol 未启用，使用标准 WireGuard
-默认	17:14:26.476311+0800	WireGuardExtension	🔧 Parsing WireGuard configuration...
-默认	17:14:26.487838+0800	WireGuardExtension	✅ Successfully parsed WireGuard configuration
-默认	17:14:26.487920+0800	WireGuardExtension	📍 Interface addresses: 10.8.0.2/24
-默认	17:14:26.487974+0800	WireGuardExtension	👥 Peers count: 1
-默认	17:14:26.488564+0800	WireGuardExtension	🔨 Creating WireGuard adapter...
-默认	17:14:26.488989+0800	WireGuardExtension	✅ WireGuard adapter created
-默认	17:14:26.489121+0800	WireGuardExtension	🚀 Starting WireGuard adapter...
-默认	17:14:26.490518+0800	WireGuardExtension	nw_path_evaluator_start [72388AB2-8F50-4647-ADC0-8874547B6EE3 <NULL> generic, multipath service: 1, attribution: developer]
+默认	14:59:12.688128+0800	WireGuardExtension	ℹ️ MorphProtocol 未启用，使用标准 WireGuard
+默认	14:59:12.689470+0800	WireGuardExtension	🔧 Parsing WireGuard configuration...
+默认	14:59:12.690800+0800	WireGuardExtension	✅ Successfully parsed WireGuard configuration
+默认	14:59:12.692553+0800	WireGuardExtension	📍 Interface addresses: 10.8.0.2/24
+默认	14:59:12.692652+0800	WireGuardExtension	👥 Peers count: 1
+默认	14:59:12.693085+0800	WireGuardExtension	🔨 Creating WireGuard adapter...
+默认	14:59:12.693316+0800	WireGuardExtension	✅ WireGuard adapter created
+默认	14:59:12.693429+0800	WireGuardExtension	🚀 Starting WireGuard adapter...
+默认	14:59:12.693974+0800	WireGuardExtension	nw_path_evaluator_start [7F71C499-8168-49BD-80DC-11E16AA24391 <NULL> generic, multipath service: 1, attribution: developer]
 	path: satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns
-错误	17:14:26.491442+0800	WireGuardExtension	Missing IPv6 address
-默认	17:14:26.492185+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: provider set tunnel configuration to 
+错误	14:59:12.694287+0800	WireGuardExtension	Missing IPv6 address
+默认	14:59:12.694425+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: provider set tunnel configuration to 
     tunnelRemoteAddress = <9-char-str>
     DNSSettings = {
         protocol = cleartext
@@ -92,102 +92,135 @@ Endpoint = 81.70.251.128:51820
         )
     }
     MTU = 1280
-默认	17:14:26.699259+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
-默认	17:14:26.705110+0800	WireGuardExtension	WireGuard[verbose]: Attaching to interface
-默认	17:14:26.708307+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 3 - started
-默认	17:14:26.708364+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Updating private key
-默认	17:14:26.708506+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 2 - started
-默认	17:14:26.708748+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 2 - started
-默认	17:14:26.708795+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 2 - started
-默认	17:14:26.708848+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 3 - started
-默认	17:14:26.708904+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Removing all peers
-默认	17:14:26.709011+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 1 - started
-默认	17:14:26.709219+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 1 - started
-默认	17:14:26.709274+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 5 - started
-默认	17:14:26.709434+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 6 - started
-默认	17:14:26.709481+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 3 - started
-默认	17:14:26.709877+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 5 - started
-默认	17:14:26.710000+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 4 - started
-默认	17:14:26.710200+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 4 - started
-默认	17:14:26.710256+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 6 - started
-默认	17:14:26.710309+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 5 - started
-默认	17:14:26.710534+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 4 - started
-默认	17:14:26.710897+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 6 - started
-默认	17:14:26.711045+0800	WireGuardExtension	WireGuard[verbose]: Routine: TUN reader - started
-默认	17:14:26.711333+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 1 - started
-默认	17:14:26.711890+0800	WireGuardExtension	WireGuard[verbose]: Routine: event worker - started
-默认	17:14:26.712841+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Created
-默认	17:14:26.713706+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating preshared key
-默认	17:14:26.713824+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
-默认	17:14:26.713978+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating persistent keepalive interval
-默认	17:14:26.714411+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Removing all allowedips
-默认	17:14:26.714607+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
-默认	17:14:26.714724+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
-默认	17:14:26.715462+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
-默认	17:14:26.716701+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
-默认	17:14:26.716963+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
-默认	17:14:26.717195+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Starting
-默认	17:14:26.717678+0800	WireGuardExtension	WireGuard[verbose]: Interface state was Down, requested Up, now Up
-默认	17:14:26.718630+0800	WireGuardExtension	WireGuard[verbose]: Device started
-默认	17:14:26.718933+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential receiver - started
-默认	17:14:26.719072+0800	WireGuardExtension	✅ WireGuard tunnel started successfully!
-默认	17:14:26.719970+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential sender - started
-默认	17:14:26.722212+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0]
-默认	17:14:26.723217+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
-默认	17:14:26.723337+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
-默认	17:14:26.723447+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
-默认	17:14:26.723500+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
-默认	17:14:26.723866+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
-默认	17:14:26.723912+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
-默认	17:14:26.723968+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
-默认	17:14:26.761398+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0, utun5]
-默认	17:14:26.761598+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
-默认	17:14:26.761710+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
-默认	17:14:26.773669+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
-默认	17:14:26.775729+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
-默认	17:14:26.776249+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
-默认	17:14:26.777429+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
-默认	17:14:26.777978+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
-默认	17:14:26.827817+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
-默认	17:14:29.397907+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0, utun5]
-默认	17:14:29.398622+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
-默认	17:14:29.401833+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
-默认	17:14:29.417088+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
-默认	17:14:29.417360+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
-默认	17:14:29.417902+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
-默认	17:14:29.420824+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
-默认	17:14:29.421135+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
-默认	17:14:31.956458+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Handshake did not complete after 5 seconds, retrying (try 2)
-默认	17:14:31.957709+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
-默认	17:14:37.249517+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Handshake did not complete after 5 seconds, retrying (try 2)
-默认	17:14:37.250662+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
-默认	17:14:42.485783+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
-默认	14:33:22.459007+0800	WireGuardExtension	Hello, I'm launching as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	14:33:22.494239+0800	WireGuardExtension	Initializing connection
-默认	14:33:22.494395+0800	WireGuardExtension	Removing all cached process handles
-默认	14:33:22.494508+0800	WireGuardExtension	Sending handshake request attempt #1 to server
-默认	14:33:22.494663+0800	WireGuardExtension	Creating connection to com.apple.runningboard
-默认	14:33:22.496707+0800	WireGuardExtension	Handshake succeeded
-默认	14:33:22.496751+0800	WireGuardExtension	Identity resolved as xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:1972:1972])>
-默认	14:33:22.498162+0800	WireGuardExtension	Bootstrapping; Bootstrap complete. Ready for handshake from host.
-默认	14:33:22.502176+0800	WireGuardExtension	[u 1AB48105-C61D-4974-80BA-46DC5D75B2B4] [(null)((null))] Prepare received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	14:33:22.504169+0800	WireGuardExtension	[u 505E3093-5135-4096-9329-7541B2AF5B52] [<private>(<private>)] Set sole personality.
-默认	14:33:22.507977+0800	WireGuardExtension	[u 505E3093-5135-4096-9329-7541B2AF5B52] [<private>(<private>)] Begin using received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	14:33:22.516422+0800	WireGuardExtension	+[NSExtensionContext _allowedItemPayloadClasses] not implemented. Setting the allowed payload classes to <private>
-默认	14:33:22.524348+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
-默认	14:33:22.526460+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
-默认	14:33:22.528378+0800	WireGuardExtension	nw_path_evaluator_start [58A738D9-3478-462F-8856-F2B90F5E30BA <NULL> generic, attribution: developer]
+默认	14:59:13.119007+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	14:59:13.119143+0800	WireGuardExtension	WireGuard[verbose]: Attaching to interface
+默认	14:59:13.119298+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Updating private key
+默认	14:59:13.119442+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Removing all peers
+默认	14:59:13.119604+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Created
+默认	14:59:13.120187+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating preshared key
+默认	14:59:13.120992+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	14:59:13.121633+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating persistent keepalive interval
+默认	14:59:13.124449+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Removing all allowedips
+默认	14:59:13.124829+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
+默认	14:59:13.126434+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
+默认	14:59:13.126775+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
+默认	14:59:13.126979+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Starting
+默认	14:59:13.127260+0800	WireGuardExtension	WireGuard[verbose]: Interface state was Down, requested Up, now Up
+默认	14:59:13.127980+0800	WireGuardExtension	WireGuard[verbose]: Device started
+默认	14:59:13.130484+0800	WireGuardExtension	✅ WireGuard tunnel started successfully!
+默认	14:59:13.131839+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0]
+默认	14:59:13.132469+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	14:59:13.133368+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	14:59:13.155730+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0, utun6]
+默认	14:59:13.156471+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	14:59:13.156857+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	14:59:13.157125+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
+默认	14:59:13.157180+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
+默认	14:59:13.157232+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 6 - started
+默认	14:59:13.157275+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 6 - started
+默认	14:59:13.157321+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 3 - started
+默认	14:59:13.157376+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 5 - started
+默认	14:59:13.157428+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 5 - started
+默认	14:59:13.157483+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 1 - started
+默认	14:59:13.157588+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 1 - started
+默认	14:59:13.157640+0800	WireGuardExtension	WireGuard[verbose]: Routine: TUN reader - started
+默认	14:59:13.157695+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 1 - started
+默认	14:59:13.157747+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 6 - started
+默认	14:59:13.157799+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 4 - started
+默认	14:59:13.157850+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 4 - started
+默认	14:59:13.158490+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
+默认	14:59:13.158659+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 3 - started
+默认	14:59:13.158714+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 2 - started
+默认	14:59:13.158766+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 5 - started
+默认	14:59:13.158930+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 4 - started
+默认	14:59:13.159400+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 2 - started
+默认	14:59:13.161392+0800	WireGuardExtension	WireGuard[verbose]: Routine: event worker - started
+默认	14:59:13.162424+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential sender - started
+默认	14:59:13.162584+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential receiver - started
+默认	14:59:13.162744+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
+默认	14:59:13.162905+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 2 - started
+默认	14:59:13.163052+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 3 - started
+默认	14:59:13.163625+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
+默认	14:59:13.163850+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
+默认	14:59:13.164577+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
+默认	14:59:13.164983+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
+默认	14:59:13.165169+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
+默认	14:59:13.165280+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
+默认	14:59:13.165554+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
+默认	14:59:13.165607+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
+默认	14:59:13.165796+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
+默认	14:59:18.341542+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Handshake did not complete after 5 seconds, retrying (try 2)
+默认	14:59:18.341722+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
+默认	14:59:19.971267+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0]
+默认	14:59:19.973975+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	14:59:19.974090+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	14:59:19.991461+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
+默认	14:59:19.991697+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
+默认	14:59:19.991930+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
+默认	14:59:20.003282+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
+默认	14:59:20.003457+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
+默认	14:59:20.410317+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling stopTunnelWithReason because: Stop command received
+默认	14:59:20.411340+0800	WireGuardExtension	🛑 Stopping WireGuard tunnel, reason: 1
+默认	14:59:20.411725+0800	WireGuardExtension	WireGuard[verbose]: Device closing
+默认	14:59:20.411967+0800	WireGuardExtension	WireGuard[verbose]: Routine: TUN reader - stopped
+默认	14:59:20.412190+0800	WireGuardExtension	WireGuard[verbose]: Routine: event worker - stopped
+默认	14:59:20.412302+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
+默认	14:59:20.413007+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
+默认	14:59:20.414824+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Stopping
+默认	14:59:20.415038+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential receiver - stopped
+默认	14:59:20.415095+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential sender - stopped
+默认	14:59:20.415419+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 1 - stopped
+默认	14:59:20.415473+0800	WireGuardExtension	WireGuard[verbose]: Device closed
+默认	14:59:20.415529+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 3 - stopped
+默认	14:59:20.415611+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 3 - stopped
+默认	14:59:20.415673+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 5 - stopped
+默认	14:59:20.415774+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 1 - stopped
+默认	14:59:20.416259+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 6 - stopped
+默认	14:59:20.416311+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 5 - stopped
+默认	14:59:20.416399+0800	WireGuardExtension	✅ WireGuard tunnel stopped successfully
+默认	14:59:20.416543+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 4 - stopped
+默认	14:59:20.416918+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 2 - stopped
+默认	14:59:20.417257+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 2 - stopped
+默认	14:59:20.417372+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 6 - stopped
+默认	14:59:20.417696+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 4 - stopped
+默认	14:59:20.417859+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 1 - stopped
+默认	14:59:20.417916+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 6 - stopped
+默认	14:59:20.418015+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 3 - stopped
+默认	14:59:20.418076+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 4 - stopped
+默认	14:59:20.418193+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 5 - stopped
+默认	14:59:20.419200+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: IPC detached
+默认	14:59:20.419656+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 2 - stopped
+默认	14:59:20.421369+0800	WireGuardExtension	Tearing down utun6
+默认	14:59:20.422324+0800	WireGuardExtension	Tearing down utun6
+错误	14:59:20.422389+0800	WireGuardExtension	SIOCGIFMTU failed: Device not configured
+错误	14:59:20.422445+0800	WireGuardExtension	NEVirtualInterfaceAdjustReadBufferSize: interface_get_mtu failed (6), defaulting to max mtu
+默认	14:59:20.491013+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Deallocating
+默认	15:10:36.788824+0800	WireGuardExtension	Hello, I'm launching as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	15:10:36.797491+0800	WireGuardExtension	Initializing connection
+默认	15:10:36.798960+0800	WireGuardExtension	Removing all cached process handles
+默认	15:10:36.799015+0800	WireGuardExtension	Sending handshake request attempt #1 to server
+默认	15:10:36.799127+0800	WireGuardExtension	Creating connection to com.apple.runningboard
+默认	15:10:36.800661+0800	WireGuardExtension	Handshake succeeded
+默认	15:10:36.800714+0800	WireGuardExtension	Identity resolved as xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:1972:1972])>
+默认	15:10:36.800878+0800	WireGuardExtension	Bootstrapping; Bootstrap complete. Ready for handshake from host.
+默认	15:10:36.803695+0800	WireGuardExtension	[u 4496FC3F-F95E-433B-8698-1C999E81DB99] [(null)((null))] Prepare received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	15:10:36.804883+0800	WireGuardExtension	[u 7522186E-B945-4CFB-B962-16FF8DD935A2] [<private>(<private>)] Set sole personality.
+默认	15:10:36.810560+0800	WireGuardExtension	[u 7522186E-B945-4CFB-B962-16FF8DD935A2] [<private>(<private>)] Begin using received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	15:10:36.817389+0800	WireGuardExtension	+[NSExtensionContext _allowedItemPayloadClasses] not implemented. Setting the allowed payload classes to <private>
+默认	15:10:36.819020+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
+默认	15:10:36.827478+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
+默认	15:10:36.872842+0800	WireGuardExtension	nw_path_evaluator_start [F2665ADF-DAA6-4A40-AEF0-9983CCAC6B1E <NULL> generic, attribution: developer]
 	path: satisfied (Path is satisfied), interface: en0[802.11], ipv4, dns
-默认	14:33:22.528590+0800	WireGuardExtension	🎯 PacketTunnelProvider: init() called
-默认	14:33:22.547452+0800	WireGuardExtension	Using interface name utun6
-默认	14:33:22.547682+0800	WireGuardExtension	Created a new NEVirtualInterface "utun6" from socket
-默认	14:33:22.547950+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling startTunnelWithOptions with options 0x0
-默认	14:33:22.548397+0800	WireGuardExtension	🚀 PacketTunnelProvider: startTunnel() called
-默认	14:33:22.549556+0800	WireGuardExtension	📋 No options provided
-默认	14:33:22.549993+0800	WireGuardExtension	📦 Getting protocol configuration...
-默认	14:33:22.550108+0800	WireGuardExtension	✅ Got protocol configuration
-默认	14:33:22.550731+0800	WireGuardExtension	✅ Got WireGuard config, length: 315 bytes
-默认	14:33:22.550955+0800	WireGuardExtension	📄 Config content:
+默认	15:10:36.872972+0800	WireGuardExtension	🎯 PacketTunnelProvider: init() called
+默认	15:10:36.909310+0800	WireGuardExtension	Using interface name utun6
+默认	15:10:36.909657+0800	WireGuardExtension	Created a new NEVirtualInterface "utun6" from socket
+默认	15:10:36.916220+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling startTunnelWithOptions with options 0x0
+默认	15:10:36.916332+0800	WireGuardExtension	🚀 PacketTunnelProvider: startTunnel() called
+默认	15:10:36.943192+0800	WireGuardExtension	📋 No options provided
+默认	15:10:36.943561+0800	WireGuardExtension	📦 Getting protocol configuration...
+默认	15:10:36.943619+0800	WireGuardExtension	✅ Got protocol configuration
+默认	15:10:36.943733+0800	WireGuardExtension	✅ Got WireGuard config, length: 315 bytes
+默认	15:10:36.943789+0800	WireGuardExtension	📄 Config content:
 [Interface]
 PrivateKey = 0DiA6lqJWUcqouJeuh17wNaJB9bIyNuj+pH2zVgoJWk=
 Address = 10.8.0.2/24
@@ -199,18 +232,37 @@ PresharedKey = jwvV/AuQpnk0QT5xeDGS143NqNP275zw2yvY0moVsE0=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
 Endpoint = 81.70.251.128:51820
-默认	14:33:22.559115+0800	WireGuardExtension	ℹ️ MorphProtocol 未启用，使用标准 WireGuard
-默认	14:33:22.584283+0800	WireGuardExtension	🔧 Parsing WireGuard configuration...
-默认	14:33:22.585351+0800	WireGuardExtension	✅ Successfully parsed WireGuard configuration
-默认	14:33:22.585844+0800	WireGuardExtension	📍 Interface addresses: 10.8.0.2/24
-默认	14:33:22.586718+0800	WireGuardExtension	👥 Peers count: 1
-默认	14:33:22.587176+0800	WireGuardExtension	🔨 Creating WireGuard adapter...
-默认	14:33:22.587296+0800	WireGuardExtension	✅ WireGuard adapter created
-默认	14:33:22.587348+0800	WireGuardExtension	🚀 Starting WireGuard adapter...
-默认	14:33:22.610766+0800	WireGuardExtension	nw_path_evaluator_start [CC5FC760-52E3-4967-BD4E-41886F0E038E <NULL> generic, multipath service: 1, attribution: developer]
+默认	15:10:36.945461+0800	WireGuardExtension	🔐 MorphProtocol 已启用
+默认	15:10:36.945636+0800	WireGuardExtension	🔐 MorphProtocol 配置:
+默认	15:10:36.945749+0800	WireGuardExtension	   服务器: morph.example.com:51821
+默认	15:10:36.945826+0800	WireGuardExtension	   混淆层数: 3
+默认	15:10:36.945890+0800	WireGuardExtension	   填充长度: 8
+默认	15:10:36.945945+0800	WireGuardExtension	   密钥长度: 61 字符
+默认	15:10:36.946177+0800	WireGuardExtension	🔒 MorphUDPClient: Initializing...
+默认	15:10:36.950793+0800	WireGuardExtension	✅ MorphUDPClient: Initialized with layer=3, padding=8
+默认	15:10:36.951175+0800	WireGuardExtension	🔌 MorphUDPClient: Connecting to morph.example.com:51821
+默认	15:10:36.958611+0800	WireGuardExtension	✅ MorphProtocol 启动成功
+默认	15:10:36.958738+0800	WireGuardExtension	[C1 131FBA33-6BFC-4641-AA35-53ACC411AD37 Hostname#354656e0:51821 udp, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317, required interface type: wifi] start
+默认	15:10:36.958792+0800	WireGuardExtension	🔧 Parsing WireGuard configuration...
+默认	15:10:36.958899+0800	WireGuardExtension	[C1 Hostname#354656e0:51821 initial parent-flow ((null))] event: path:start @0.000s
+默认	15:10:36.960467+0800	WireGuardExtension	[C1 Hostname#354656e0:51821 waiting parent-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: path:satisfied @0.002s, uuid: 3919990D-658E-4741-B8A6-6242D71094E9
+默认	15:10:36.960694+0800	WireGuardExtension	✅ Successfully parsed WireGuard configuration
+默认	15:10:36.960752+0800	WireGuardExtension	[C1 Hostname#354656e0:51821 in_progress parent-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_child @0.002s
+默认	15:10:36.960807+0800	WireGuardExtension	📍 Interface addresses: 10.8.0.2/24
+默认	15:10:36.960861+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state preparing
+默认	15:10:36.967881+0800	WireGuardExtension	[C1.1 Hostname#354656e0:51821 initial path ((null))] event: path:start @0.003s
+默认	15:10:36.967941+0800	WireGuardExtension	👥 Peers count: 1
+默认	15:10:36.968341+0800	WireGuardExtension	[C1.1 Hostname#354656e0:51821 waiting path (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: path:satisfied @0.003s, uuid: 3919990D-658E-4741-B8A6-6242D71094E9
+默认	15:10:36.969120+0800	WireGuardExtension	🔨 Creating WireGuard adapter...
+默认	15:10:36.971388+0800	WireGuardExtension	[C1.1 Hostname#354656e0:51821 in_progress resolver (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: resolver:start_dns @0.003s
+默认	15:10:36.978247+0800	WireGuardExtension	🔌 MorphUDPClient: State changed to preparing
+默认	15:10:36.978318+0800	WireGuardExtension	🔐 MorphProtocol 状态: preparing
+默认	15:10:36.978667+0800	WireGuardExtension	✅ WireGuard adapter created
+默认	15:10:36.978732+0800	WireGuardExtension	🚀 Starting WireGuard adapter...
+默认	15:10:36.979504+0800	WireGuardExtension	nw_path_evaluator_start [DCE676D4-039F-4061-938C-2E2539FAFFB0 <NULL> generic, multipath service: 1, attribution: developer]
 	path: satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns
-错误	14:33:22.610887+0800	WireGuardExtension	Missing IPv6 address
-默认	14:33:22.610949+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: provider set tunnel configuration to 
+错误	15:10:36.979748+0800	WireGuardExtension	Missing IPv6 address
+默认	15:10:36.979805+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: provider set tunnel configuration to 
     tunnelRemoteAddress = <9-char-str>
     DNSSettings = {
         protocol = cleartext
@@ -256,77 +308,112 @@ Endpoint = 81.70.251.128:51820
         )
     }
     MTU = 1280
-默认	14:33:23.496700+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
-默认	14:33:23.498492+0800	WireGuardExtension	WireGuard[verbose]: Attaching to interface
-默认	14:33:23.499118+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Updating private key
-默认	14:33:23.499686+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 6 - started
-默认	14:33:23.499741+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 4 - started
-默认	14:33:23.499958+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Removing all peers
-默认	14:33:23.500065+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 5 - started
-默认	14:33:23.500117+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Created
-默认	14:33:23.500169+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 5 - started
-默认	14:33:23.500330+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 1 - started
-默认	14:33:23.500385+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating preshared key
-默认	14:33:23.500438+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 5 - started
-默认	14:33:23.500545+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 6 - started
-默认	14:33:23.500598+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
-默认	14:33:23.500650+0800	WireGuardExtension	WireGuard[verbose]: Routine: event worker - started
-默认	14:33:23.501013+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating persistent keepalive interval
-默认	14:33:23.501066+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 3 - started
-默认	14:33:23.501120+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 1 - started
-默认	14:33:23.501437+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 2 - started
-默认	14:33:23.501666+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Removing all allowedips
-默认	14:33:23.502401+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 2 - started
-默认	14:33:23.502629+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 4 - started
-默认	14:33:23.503218+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
-默认	14:33:23.503282+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 3 - started
-默认	14:33:23.503880+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
-默认	14:33:23.509991+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0, utun6]
-默认	14:33:23.510185+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
-默认	14:33:23.684096+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
-默认	14:33:28.687488+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Handshake did not complete after 5 seconds, retrying (try 2)
-默认	14:33:28.688203+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
-默认	14:33:32.613676+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0]
-默认	14:33:32.628194+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
-默认	14:33:32.629072+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
-默认	14:33:32.629858+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
-默认	14:33:32.630259+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
-默认	14:33:32.634310+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
-默认	14:33:32.634686+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
-默认	14:33:32.635026+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
-默认	14:33:33.066626+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling stopTunnelWithReason because: Stop command received
-默认	14:33:33.066699+0800	WireGuardExtension	🛑 Stopping WireGuard tunnel, reason: 1
-默认	14:33:33.068860+0800	WireGuardExtension	WireGuard[verbose]: Device closing
-默认	14:33:33.069192+0800	WireGuardExtension	WireGuard[verbose]: Routine: TUN reader - stopped
-默认	14:33:33.069628+0800	WireGuardExtension	WireGuard[verbose]: Routine: event worker - stopped
-默认	14:33:33.069875+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
-默认	14:33:33.070286+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
-默认	14:33:33.070988+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Stopping
-默认	14:33:33.071727+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential receiver - stopped
-默认	14:33:33.071847+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential sender - stopped
-默认	14:33:33.072195+0800	WireGuardExtension	WireGuard[verbose]: Device closed
-默认	14:33:33.072607+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 4 - stopped
-默认	14:33:33.072668+0800	WireGuardExtension	✅ WireGuard tunnel stopped successfully
-默认	14:33:33.072833+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 6 - stopped
-默认	14:33:33.073586+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 1 - stopped
-默认	14:33:33.073724+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 6 - stopped
-默认	14:33:33.073801+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 3 - stopped
-默认	14:33:33.074028+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 2 - stopped
-默认	14:33:33.074100+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 5 - stopped
-默认	14:33:33.074307+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 1 - stopped
-默认	14:33:33.074379+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 5 - stopped
-默认	14:33:33.074825+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 3 - stopped
-默认	14:33:33.074974+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 4 - stopped
-默认	14:33:33.075104+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 2 - stopped
-默认	14:33:33.075309+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: IPC detached
-默认	14:33:33.075381+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 6 - stopped
-默认	14:33:33.076586+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 3 - stopped
-默认	14:33:33.077140+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 4 - stopped
-默认	14:33:33.077605+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 2 - stopped
-默认	14:33:33.077760+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 1 - stopped
-默认	14:33:33.077881+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 5 - stopped
-默认	14:33:33.078975+0800	WireGuardExtension	Tearing down utun6
-默认	14:33:33.079341+0800	WireGuardExtension	Tearing down utun6
-错误	14:33:33.079457+0800	WireGuardExtension	SIOCGIFMTU failed: Device not configured
-错误	14:33:33.079571+0800	WireGuardExtension	NEVirtualInterfaceAdjustReadBufferSize: interface_get_mtu failed (6), defaulting to max mtu
-默认	14:33:33.139056+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Deallocating
+默认	15:10:37.202435+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	15:10:37.203691+0800	WireGuardExtension	WireGuard[verbose]: Attaching to interface
+默认	15:10:37.204044+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Updating private key
+默认	15:10:37.204149+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 3 - started
+默认	15:10:37.204201+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 2 - started
+默认	15:10:37.204310+0800	WireGuardExtension	WireGuard[verbose]: UAPI: Removing all peers
+默认	15:10:37.204410+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 5 - started
+默认	15:10:37.204514+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 1 - started
+默认	15:10:37.204560+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 1 - started
+默认	15:10:37.204605+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 6 - started
+默认	15:10:37.204658+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Created
+默认	15:10:37.204711+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 4 - started
+默认	15:10:37.204869+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 2 - started
+默认	15:10:37.204921+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating preshared key
+默认	15:10:37.204977+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 3 - started
+默认	15:10:37.205028+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 3 - started
+默认	15:10:37.205133+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 2 - started
+默认	15:10:37.205240+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	15:10:37.205528+0800	WireGuardExtension	WireGuard[verbose]: Routine: event worker - started
+默认	15:10:37.205574+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating persistent keepalive interval
+默认	15:10:37.205679+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 5 - started
+默认	15:10:37.205893+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 4 - started
+默认	15:10:37.205957+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Removing all allowedips
+默认	15:10:37.206015+0800	WireGuardExtension	WireGuard[verbose]: Routine: TUN reader - started
+默认	15:10:37.206233+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
+默认	15:10:37.206448+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Adding allowedip
+默认	15:10:37.206491+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 6 - started
+默认	15:10:37.206595+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 4 - started
+默认	15:10:37.206646+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 6 - started
+默认	15:10:37.207246+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 5 - started
+默认	15:10:37.207377+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 1 - started
+默认	15:10:37.207595+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
+默认	15:10:37.207694+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Starting
+默认	15:10:37.207746+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
+默认	15:10:37.207798+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
+默认	15:10:37.207890+0800	WireGuardExtension	WireGuard[verbose]: Interface state was Down, requested Up, now Up
+默认	15:10:37.208091+0800	WireGuardExtension	WireGuard[verbose]: Device started
+默认	15:10:37.208199+0800	WireGuardExtension	✅ WireGuard tunnel started successfully!
+默认	15:10:37.208262+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential receiver - started
+默认	15:10:37.208317+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential sender - started
+默认	15:10:37.209011+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0]
+默认	15:10:37.209604+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	15:10:37.212704+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	15:10:37.213026+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
+默认	15:10:37.213089+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
+默认	15:10:37.222620+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0, utun6]
+默认	15:10:37.223118+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	15:10:37.224009+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	15:10:37.265306+0800	WireGuardExtension	[C1.1 Hostname#354656e0:51821 failed resolver (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: resolver:receive_dns @0.314s, error DNS Error: NoSuchRecord
+默认	15:10:37.265690+0800	WireGuardExtension	[C1 Hostname#354656e0:51821 waiting parent-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: flow:child_failed @0.315s
+默认	15:10:37.265747+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state waiting error DNS Error: NoSuchRecord
+默认	15:10:37.266833+0800	WireGuardExtension	🔌 MorphUDPClient: State changed to waiting(-65554: NoSuchRecord)
+默认	15:10:37.267107+0800	WireGuardExtension	🔐 MorphProtocol 状态: waiting(-65554: NoSuchRecord)
+默认	15:10:37.268795+0800	WireGuardExtension	⏳ MorphUDPClient: Waiting: -65554: NoSuchRecord
+默认	15:10:37.303232+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
+默认	15:10:42.346205+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Handshake did not complete after 5 seconds, retrying (try 2)
+默认	15:10:42.347088+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Sending handshake initiation
+默认	15:10:44.678873+0800	WireGuardExtension	WireGuard[verbose]: Network change detected with satisfied route and interface order [en0]
+默认	15:10:44.679383+0800	WireGuardExtension	WireGuard[verbose]: DNS64: mapped 81.70.251.128 to itself.
+默认	15:10:44.679738+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - UAPI: Updating endpoint
+默认	15:10:44.727909+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
+默认	15:10:44.728768+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
+默认	15:10:44.730139+0800	WireGuardExtension	WireGuard[verbose]: UDP bind has been updated
+默认	15:10:44.741744+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - started
+默认	15:10:44.751678+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - started
+默认	15:10:44.994257+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling stopTunnelWithReason because: Stop command received
+默认	15:10:44.994313+0800	WireGuardExtension	🛑 Stopping WireGuard tunnel, reason: 1
+默认	15:10:44.994431+0800	WireGuardExtension	🛑 停止 MorphProtocol
+默认	15:10:44.994540+0800	WireGuardExtension	🔌 MorphUDPClient: Disconnecting...
+默认	15:10:44.994595+0800	WireGuardExtension	✅ MorphUDPClient: Disconnected
+默认	15:10:44.994647+0800	WireGuardExtension	🔌 MorphUDPClient: Disconnecting...
+默认	15:10:44.994699+0800	WireGuardExtension	✅ MorphUDPClient: Disconnected
+默认	15:10:44.995369+0800	WireGuardExtension	[C1 131FBA33-6BFC-4641-AA35-53ACC411AD37 Hostname#354656e0:51821 udp, attribution: developer] cancel
+默认	15:10:44.995431+0800	WireGuardExtension	[C1 Hostname#354656e0:51821 udp, attribution: developer] cancelled
+默认	15:10:44.995609+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state cancelled error DNS Error: NoSuchRecord
+默认	15:10:44.995723+0800	WireGuardExtension	WireGuard[verbose]: Device closing
+默认	15:10:44.995893+0800	WireGuardExtension	WireGuard[verbose]: Routine: TUN reader - stopped
+默认	15:10:44.996001+0800	WireGuardExtension	WireGuard[verbose]: Routine: event worker - stopped
+默认	15:10:44.996053+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v4 - stopped
+默认	15:10:44.996233+0800	WireGuardExtension	WireGuard[verbose]: Routine: receive incoming v6 - stopped
+默认	15:10:44.996524+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Stopping
+默认	15:10:44.996809+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential receiver - stopped
+默认	15:10:44.996886+0800	WireGuardExtension	WireGuard[verbose]: peer(4oFU…oki4) - Routine: sequential sender - stopped
+默认	15:10:44.997955+0800	WireGuardExtension	WireGuard[verbose]: Device closed
+默认	15:10:44.998018+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 2 - stopped
+默认	15:10:44.998249+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 3 - stopped
+默认	15:10:44.998330+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 3 - stopped
+默认	15:10:44.998392+0800	WireGuardExtension	✅ WireGuard tunnel stopped successfully
+默认	15:10:44.998601+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 5 - stopped
+默认	15:10:44.998656+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 6 - stopped
+默认	15:10:44.998713+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: IPC detached
+默认	15:10:44.998877+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 5 - stopped
+默认	15:10:44.998929+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 6 - stopped
+默认	15:10:44.999083+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 1 - stopped
+默认	15:10:44.999136+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 2 - stopped
+默认	15:10:44.999238+0800	WireGuardExtension	WireGuard[verbose]: Routine: handshake worker 4 - stopped
+默认	15:10:44.999345+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 1 - stopped
+默认	15:10:44.999452+0800	WireGuardExtension	WireGuard[verbose]: Routine: decryption worker 4 - stopped
+默认	15:10:45.999679+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 2 - stopped
+默认	15:10:45.999732+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 6 - stopped
+默认	15:10:45.999958+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 5 - stopped
+默认	15:10:45.000014+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 1 - stopped
+默认	15:10:45.000412+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 4 - stopped
+默认	15:10:45.000946+0800	WireGuardExtension	WireGuard[verbose]: Routine: encryption worker 3 - stopped
+默认	15:10:45.001431+0800	WireGuardExtension	Tearing down utun6
+默认	15:10:45.002105+0800	WireGuardExtension	Tearing down utun6
+错误	15:10:45.002162+0800	WireGuardExtension	SIOCGIFMTU failed: Device not configured
+错误	15:10:45.002219+0800	WireGuardExtension	NEVirtualInterfaceAdjustReadBufferSize: interface_get_mtu failed (6), defaulting to max mtu
+默认	15:10:45.034365+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Deallocating
