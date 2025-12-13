@@ -52,37 +52,18 @@ public class WireGuardPlugin: CAPPlugin {
         print("🔵 WireGuardPlugin: Config length: \(config.count) bytes")
         print("🔵 WireGuardPlugin: Config preview: \(config.prefix(100))...")
         
-        // 解析 MorphProtocol 选项 - 改进的参数解析，同时支持布尔值和整数
-        let useMorphProtocol: Bool = {
-            // 首先尝试作为布尔值解析
-            if let boolValue = call.getBool("useMorphProtocol") {
-                return boolValue
-            }
-            // 如果失败，尝试作为整数解析（Capacitor 可能将 true 转换为 1）
-            if let intValue = call.getInt("useMorphProtocol") {
-                return intValue != 0
-            }
-            // 都失败则返回 false
-            return false
-        }()
-        
+        // 解析 MorphProtocol 选项
+        let useMorphProtocol = call.getBool("useMorphProtocol") ?? false
         let morphEncryptionKey = call.getString("morphEncryptionKey") ?? ""
         let morphServerHost = call.getString("morphServerHost") ?? ""
         let morphServerPort = call.getInt("morphServerPort") ?? 0
         let morphLayerCount = call.getInt("morphLayerCount") ?? 3
         let morphPaddingLength = call.getInt("morphPaddingLength") ?? 8
         
-        // 添加调试日志
-        print("🔍 WireGuardPlugin: useMorphProtocol raw value: \(call.options["useMorphProtocol"] ?? "nil")")
-        print("🔍 WireGuardPlugin: useMorphProtocol parsed: \(useMorphProtocol)")
-        
         if useMorphProtocol {
             print("🔐 WireGuardPlugin: MorphProtocol 已启用")
             print("🔐 WireGuardPlugin: 服务器: \(morphServerHost):\(morphServerPort)")
             print("🔐 WireGuardPlugin: 混淆层数: \(morphLayerCount), 填充: \(morphPaddingLength)")
-            print("🔐 WireGuardPlugin: 密钥长度: \(morphEncryptionKey.count) 字符")
-        } else {
-            print("ℹ️ WireGuardPlugin: MorphProtocol 未启用")
         }
         
         // 保存配置并连接
@@ -311,34 +292,27 @@ public class WireGuardPlugin: CAPPlugin {
         
         print("🔵 WireGuardPlugin: Provider bundle ID: \(providerProtocol.providerBundleIdentifier ?? "nil")")
         
-        // 将WireGuard配置保存到providerConfiguration - 使用 NSObject 类型确保正确保存
-        var providerConfig: [String: NSObject] = [
-            "wg_config": config as NSString
+        // 将WireGuard配置保存到providerConfiguration
+        var providerConfig: [String: Any] = [
+            "wg_config": config
         ]
         
         // 添加 MorphProtocol 配置
         if useMorphProtocol {
-            providerConfig["useMorphProtocol"] = NSNumber(value: true)
-            providerConfig["morphEncryptionKey"] = morphEncryptionKey as NSString
-            providerConfig["morphServerHost"] = morphServerHost as NSString
-            providerConfig["morphServerPort"] = NSNumber(value: morphServerPort)
-            providerConfig["morphLayerCount"] = NSNumber(value: morphLayerCount)
-            providerConfig["morphPaddingLength"] = NSNumber(value: morphPaddingLength)
+            providerConfig["useMorphProtocol"] = true
+            providerConfig["morphEncryptionKey"] = morphEncryptionKey
+            providerConfig["morphServerHost"] = morphServerHost
+            providerConfig["morphServerPort"] = morphServerPort
+            providerConfig["morphLayerCount"] = morphLayerCount
+            providerConfig["morphPaddingLength"] = morphPaddingLength
             
-            print("🔐 WireGuardPlugin: MorphProtocol 配置已添加到 providerConfig")
+            print("🔐 WireGuardPlugin: MorphProtocol 配置已添加")
             print("🔐 WireGuardPlugin: 服务器: \(morphServerHost):\(morphServerPort)")
-            print("🔐 WireGuardPlugin: providerConfig keys: \(providerConfig.keys)")
         }
         
         providerProtocol.providerConfiguration = providerConfig
         
-        print("🔵 WireGuardPlugin: Provider configuration set")
-        // 验证配置是否保存成功
-        if let savedConfig = providerProtocol.providerConfiguration {
-            print("🔵 WireGuardPlugin: Saved config keys: \(savedConfig.keys)")
-        } else {
-            print("⚠️ WireGuardPlugin: Provider configuration is nil!")
-        }
+        print("🔵 WireGuardPlugin: Provider configuration set with wg_config key")
         
         // 加载或创建VPN Manager
         NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in
