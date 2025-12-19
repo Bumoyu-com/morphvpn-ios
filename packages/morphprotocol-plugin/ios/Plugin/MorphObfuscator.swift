@@ -8,13 +8,15 @@
 import Foundation
 
 class MorphObfuscator {
-    private let key: Int
-    private let paddingLength: Int
+    let key: Int  // 改为 public，用于握手
+    let layer: Int  // 添加 layer 属性
+    let paddingLength: Int  // 改为 public，用于握手
     private let functionRegistry: FunctionRegistry
     private let totalCombinations: Int
     
     init(key: Int, layer: Int, paddingLength: Int) {
         self.key = key
+        self.layer = layer
         self.paddingLength = min(max(paddingLength, 1), 16)
         self.functionRegistry = FunctionRegistry(layer: layer)
         self.totalCombinations = functionRegistry.getTotalCombinations()
@@ -200,5 +202,17 @@ extension MorphObfuscator {
         }
         
         return isDynamic
+    }
+    
+    // MARK: - 握手参数获取
+    
+    /// 获取替换表（用于握手）
+    func getSubstitutionTable() -> [Int] {
+        return functionRegistry.getSubstitutionTable()
+    }
+    
+    /// 获取随机值（用于握手）
+    func getRandomValue() -> Int {
+        return functionRegistry.getRandomValue()
     }
 }

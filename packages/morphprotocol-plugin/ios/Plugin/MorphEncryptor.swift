@@ -56,7 +56,7 @@ class MorphEncryptor {
         return try performCrypt(data: data, operation: CCOperation(kCCDecrypt))
     }
     
-    private func performCrypt(data: Data, operation: CCOperation) -> Data {
+    private func performCrypt(data: Data, operation: CCOperation) throws -> Data {
         let dataLength = data.count
         let bufferSize = dataLength + kCCBlockSizeAES128
         var buffer = Data(count: bufferSize)

@@ -156,4 +156,21 @@ extension FunctionRegistry {
         let randomIndex = Int.random(in: 0..<combos.count)
         return combos[randomIndex]
     }
+    
+    /// 获取替换表（用于握手）
+    func getSubstitutionTable() -> [Int] {
+        // 生成 0-255 的替换表
+        var table = Array(0...255)
+        // 使用 Fisher-Yates 洗牌算法
+        for i in (1..<table.count).reversed() {
+            let j = Int.random(in: 0...i)
+            table.swapAt(i, j)
+        }
+        return table
+    }
+    
+    /// 获取随机值（用于握手）
+    func getRandomValue() -> Int {
+        return Int.random(in: 0...Int.max)
+    }
 }

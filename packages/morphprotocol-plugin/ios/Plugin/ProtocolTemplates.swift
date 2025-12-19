@@ -10,12 +10,14 @@ import Foundation
 // MARK: - Protocol Template Interface
 
 protocol ProtocolTemplate {
-    var templateID: UInt8 { get }
+    var id: UInt8 { get }  // 改名为 id，与服务端一致
+    var templateID: UInt8 { get }  // 保留兼容性
     var name: String { get }
     
     func encapsulate(_ data: Data, clientID: Data) -> Data
     func decapsulate(_ packet: Data) -> Data?
     func extractHeaderID(_ packet: Data) -> Data?
+    func getParams() -> [String: Any]  // 新增：获取模板参数
 }
 
 // MARK: - QUIC Template
@@ -295,5 +297,31 @@ class TemplateFactory {
             return nil
         }
         return createTemplate(type)
+    }
+}
+
+// MARK: - Protocol Extensions for Handshake
+
+extension QuicTemplate {
+    var id: UInt8 { return templateID }
+    
+    func getParams() -> [String: Any] {
+        return [:]
+    }
+}
+
+extension KcpTemplate {
+    var id: UInt8 { return templateID }
+    
+    func getParams() -> [String: Any] {
+        return [:]
+    }
+}
+
+extension GenericGamingTemplate {
+    var id: UInt8 { return templateID }
+    
+    func getParams() -> [String: Any] {
+        return [:]
     }
 }

@@ -90,6 +90,8 @@ class MorphUDPClient {
                 NSLog("✅ MorphUDPClient: Connection ready")
                 self.isConnected = true
                 self.startReceiving()
+                // 发送握手包
+                self.sendHandshake()
                 
             case .failed(let error):
                 NSLog("❌ MorphUDPClient: Connection failed: \(error)")
@@ -209,6 +211,63 @@ class MorphUDPClient {
             
             // 继续接收
             self.startReceiving()
+        }
+    }
+    
+    private func sendHandshake() {
+        NSLog("🤝 MorphUDPClient: Sending handshake...")
+        
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            
+            do {
+                // 构建握手数据
+                let handshakeData: [String: Any] = [
+                    "clientID": self.clientID.base64EncodedString(),
+                    "userId": "test_user",  // TODO: 从配置获取
+                    "key": self.obfuscator.key,
+                    "obfuscationLayer": self.obfuscator.layer,
+                    "randomPadding": self.obfuscator.paddingLength,
+                    "fnInitor": [
+                        "substitutionTable": self.obfuscator.getSubstitutionTable(),
+                        "randomValue": self.obfuscator.getRandomValue()
+                    ],
+                    "templateId": self.template?.id ?? 0,
+                    "templateParams": self.template?.getParams() ?? [:],
+                    "publicKey": ""  // TODO: RSA 公钥
+                ]
+                
+                // 转换为 JSON
+                let jsonData = try JSONSerialization.data(withJSONObject: handshakeData)
+                guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                    NSLog("❌ MorphUDPClient: Failed to convert handshake to string")
+                    return
+                }
+                
+                NSLog("🤝 MorphUDPClient: Handshake JSON: \(jsonString)")
+                
+                // 加密握手数据
+                let encrypted = try self.encryptor.encrypt(Data(jsonString.utf8))
+                let encryptedBase64 = encrypted.base64EncodedString()
+                
+                NSLog("🤝 MorphUDPClient: Encrypted handshake: \(encryptedBase64.prefix(50))...")
+                
+                // 发送加密的握手数据（注意：发送 base64 字符串，不是原始数据）
+                let handshakePacket = Data(encryptedBase64.utf8)
+                
+                self.connection?.send(content: handshakePacket, completion: .contentProcessed { error in
+                    if let error = error {
+                        NSLog("❌ MorphUDPClient: Handshake send error: \(error)")
+                        self.onError?(error)
+                    } else {
+                        NSLog("✅ MorphUDPClient: Handshake sent successfully")
+                    }
+                })
+                
+            } catch {
+                NSLog("❌ MorphUDPClient: Handshake preparation error: \(error)")
+                self.onError?(error)
+            }
         }
     }
 }
