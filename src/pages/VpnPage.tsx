@@ -13,6 +13,7 @@ import VpnModal from '../components/VpnModal';
 import VpnDrawer from '../components/settingGroup/main';
 import { getData, setData, showMessageBox, showNotification } from '../components/MyStorage';
 import { getTraffic } from '../components/BaseRequest';
+import { TestMorphProtocol } from '../components/TestMorphProtocol';
 
 interface LoginPageProps { }
 interface StoreState {
@@ -333,6 +334,7 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
                             <VpnDrawer />
                         </div>
                         <Vpngroup onSubmit={onVpnConnect} connecting={connecting} creating={creating} creatingTime={creatingTime} />
+                        <TestMorphProtocol />
                     </div>
                     : <></>}
 

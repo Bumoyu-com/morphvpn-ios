@@ -1,0 +1,449 @@
+import Foundation
+import Capacitor
+import NetworkExtension
+
+/**
+ * WireGuard Capacitor Plugin for iOS
+ * 使用NetworkExtension框架实现WireGuard VPN功能
+ */
+@objc(WireGuardPlugin)
+public class WireGuardPlugin: CAPPlugin {
+    
+    private var vpnManager: NETunnelProviderManager?
+    private var statusObserver: NSObjectProtocol?
+    
+    override public func load() {
+        print("✅ WireGuardPlugin: Plugin loaded successfully")
+        
+        // 加载VPN配置
+        loadVPNManager()
+        
+        // 监听VPN状态变化
+        setupStatusObserver()
+        
+        print("✅ WireGuardPlugin: Initialization complete")
+    }
+    
+    deinit {
+        if let observer = statusObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
+    // MARK: - Plugin Methods
+    
+    /**
+     * 连接WireGuard VPN
+     */
+    @objc func connect(_ call: CAPPluginCall) {
+        print("🔵 WireGuardPlugin: connect() called")
+        print("🔵 WireGuardPlugin: Call options: \(call.options)")
+        
+        guard let config = call.getString("config"),
+              let tunnelName = call.getString("tunnelName") else {
+            print("❌ WireGuardPlugin: Missing parameters")
+            print("❌ WireGuardPlugin: Available keys: \(call.options.keys)")
+            call.reject("Missing required parameters: config and tunnelName")
+            return
+        }
+        
+        print("🔵 WireGuardPlugin: Config received")
+        print("🔵 WireGuardPlugin: Tunnel name: \(tunnelName)")
+        print("🔵 WireGuardPlugin: Config length: \(config.count) bytes")
+        print("🔵 WireGuardPlugin: Config preview: \(config.prefix(100))...")
+        
+        // 解析 MorphProtocol 选项 - 改进的参数解析，同时支持布尔值和整数
+        let useMorphProtocol: Bool = {
+            // 首先尝试作为布尔值解析
+            if let boolValue = call.getBool("useMorphProtocol") {
+                return boolValue
+            }
+            // 如果失败，尝试作为整数解析（Capacitor 可能将 true 转换为 1）
+            if let intValue = call.getInt("useMorphProtocol") {
+                return intValue != 0
+            }
+            // 都失败则返回 false
+            return false
+        }()
+        
+        let morphEncryptionKey = call.getString("morphEncryptionKey") ?? ""
+        let morphServerHost = call.getString("morphServerHost") ?? ""
+        let morphServerPort = call.getInt("morphServerPort") ?? 0
+        let morphLayerCount = call.getInt("morphLayerCount") ?? 3
+        let morphPaddingLength = call.getInt("morphPaddingLength") ?? 8
+        
+        // 添加调试日志
+        print("🔍 WireGuardPlugin: useMorphProtocol raw value: \(call.options["useMorphProtocol"] ?? "nil")")
+        print("🔍 WireGuardPlugin: useMorphProtocol parsed: \(useMorphProtocol)")
+        
+        if useMorphProtocol {
+            print("🔐 WireGuardPlugin: MorphProtocol 已启用")
+            print("🔐 WireGuardPlugin: 服务器: \(morphServerHost):\(morphServerPort)")
+            print("🔐 WireGuardPlugin: 混淆层数: \(morphLayerCount), 填充: \(morphPaddingLength)")
+            print("🔐 WireGuardPlugin: 密钥长度: \(morphEncryptionKey.count) 字符")
+        } else {
+            print("ℹ️ WireGuardPlugin: MorphProtocol 未启用")
+        }
+        
+        // 保存配置并连接
+        saveAndConnect(
+            config: config, 
+            tunnelName: tunnelName,
+            useMorphProtocol: useMorphProtocol,
+            morphEncryptionKey: morphEncryptionKey,
+            morphServerHost: morphServerHost,
+            morphServerPort: morphServerPort,
+            morphLayerCount: morphLayerCount,
+            morphPaddingLength: morphPaddingLength
+        ) { success, error in
+            if success {
+                print("✅ WireGuardPlugin: Connection successful")
+                call.resolve(["success": true])
+            } else {
+                print("❌ WireGuardPlugin: Connection failed - \(error ?? "unknown error")")
+                call.reject(error ?? "Failed to connect")
+            }
+        }
+    }
+    
+    /**
+     * 断开WireGuard VPN连接
+     */
+    @objc func disconnect(_ call: CAPPluginCall) {
+        guard let manager = vpnManager else {
+            call.reject("VPN manager not initialized")
+            return
+        }
+        
+        manager.connection.stopVPNTunnel()
+        call.resolve(["success": true])
+    }
+    
+    /**
+     * 获取当前连接状态
+     */
+    @objc func getStatus(_ call: CAPPluginCall) {
+        print("🔵 WireGuardPlugin: getStatus() called")
+        
+        guard let manager = vpnManager else {
+            print("⚠️ WireGuardPlugin: VPN manager is nil, returning disconnected")
+            call.resolve([
+                "status": "disconnected"
+            ])
+            return
+        }
+        
+        let status = getConnectionStatus(manager.connection.status)
+        var result: [String: Any] = ["status": status]
+        
+        print("🔵 WireGuardPlugin: Current status - \(status)")
+        
+        // 尝试获取统计信息（需要Network Extension支持）
+        if let session = manager.connection as? NETunnelProviderSession {
+            // 注意：实际的流量统计需要在Network Extension中实现
+            result["bytesUploaded"] = 0
+            result["bytesDownloaded"] = 0
+        }
+        
+        call.resolve(result)
+    }
+    
+    /**
+     * 保存WireGuard配置
+     */
+    @objc func saveConfig(_ call: CAPPluginCall) {
+        guard let config = call.getString("config"),
+              let tunnelName = call.getString("tunnelName") else {
+            call.reject("Missing required parameters: config and tunnelName")
+            return
+        }
+        
+        saveConfiguration(config: config, tunnelName: tunnelName) { success, error in
+            if success {
+                call.resolve(["success": true])
+            } else {
+                call.reject(error ?? "Failed to save config")
+            }
+        }
+    }
+    
+    /**
+     * 删除WireGuard配置
+     */
+    @objc func deleteConfig(_ call: CAPPluginCall) {
+        guard let tunnelName = call.getString("tunnelName") else {
+            call.reject("Missing required parameter: tunnelName")
+            return
+        }
+        
+        deleteConfiguration(tunnelName: tunnelName) { success, error in
+            if success {
+                call.resolve(["success": true])
+            } else {
+                call.reject(error ?? "Failed to delete config")
+            }
+        }
+    }
+    
+    /**
+     * 获取所有已保存的隧道名称
+     */
+    @objc func listTunnels(_ call: CAPPluginCall) {
+        NETunnelProviderManager.loadAllFromPreferences { managers, error in
+            if let error = error {
+                call.reject("Failed to load tunnels: \(error.localizedDescription)")
+                return
+            }
+            
+            let tunnelNames = managers?.compactMap { $0.localizedDescription } ?? []
+            call.resolve(["tunnels": tunnelNames])
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func loadVPNManager() {
+        NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in
+            if let error = error {
+                print("Failed to load VPN managers: \(error.localizedDescription)")
+                return
+            }
+            
+            self?.vpnManager = managers?.first
+        }
+    }
+    
+    private func setupStatusObserver() {
+        statusObserver = NotificationCenter.default.addObserver(
+            forName: .NEVPNStatusDidChange,
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            guard let connection = notification.object as? NEVPNConnection else { return }
+            let status = self?.getConnectionStatus(connection.status) ?? "unknown"
+            
+            print("📡 WireGuardPlugin: VPN status changed to: \(status)")
+            
+            // 如果连接失败，尝试获取错误信息
+            if status == "disconnected" || status == "disconnecting" {
+                if let session = connection as? NETunnelProviderSession {
+                    print("🔍 WireGuardPlugin: Checking for connection errors...")
+                    // 注意：lastDisconnectError 可能为 nil
+                }
+            }
+            
+            // 通知JavaScript层状态变化
+            self?.notifyListeners("statusChanged", data: ["status": status])
+        }
+    }
+    
+    private func getConnectionStatus(_ status: NEVPNStatus) -> String {
+        switch status {
+        case .invalid:
+            return "invalid"
+        case .disconnected:
+            return "disconnected"
+        case .connecting:
+            return "connecting"
+        case .connected:
+            return "connected"
+        case .reasserting:
+            return "reconnecting"
+        case .disconnecting:
+            return "disconnecting"
+        @unknown default:
+            return "unknown"
+        }
+    }
+    
+    private func saveAndConnect(
+        config: String, 
+        tunnelName: String,
+        useMorphProtocol: Bool = false,
+        morphEncryptionKey: String = "",
+        morphServerHost: String = "",
+        morphServerPort: Int = 0,
+        morphLayerCount: Int = 3,
+        morphPaddingLength: Int = 8,
+        completion: @escaping (Bool, String?) -> Void
+    ) {
+        // 首先保存配置
+        saveConfiguration(
+            config: config, 
+            tunnelName: tunnelName,
+            useMorphProtocol: useMorphProtocol,
+            morphEncryptionKey: morphEncryptionKey,
+            morphServerHost: morphServerHost,
+            morphServerPort: morphServerPort,
+            morphLayerCount: morphLayerCount,
+            morphPaddingLength: morphPaddingLength
+        ) { [weak self] success, error in
+            guard success else {
+                completion(false, error)
+                return
+            }
+            
+            // 然后连接
+            self?.startVPN(completion: completion)
+        }
+    }
+    
+    private func saveConfiguration(
+        config: String, 
+        tunnelName: String,
+        useMorphProtocol: Bool = false,
+        morphEncryptionKey: String = "",
+        morphServerHost: String = "",
+        morphServerPort: Int = 0,
+        morphLayerCount: Int = 3,
+        morphPaddingLength: Int = 8,
+        completion: @escaping (Bool, String?) -> Void
+    ) {
+        print("🔵 WireGuardPlugin: saveConfiguration called")
+        print("🔵 WireGuardPlugin: Tunnel name: \(tunnelName)")
+        
+        // 创建VPN配置
+        let providerProtocol = NETunnelProviderProtocol()
+        
+        // Network Extension的Bundle ID（需要先在Xcode中创建对应的Network Extension target）
+        providerProtocol.providerBundleIdentifier = "com.morphvpn.app.WireGuardExtension"
+        providerProtocol.serverAddress = "WireGuard"
+        
+        print("🔵 WireGuardPlugin: Provider bundle ID: \(providerProtocol.providerBundleIdentifier ?? "nil")")
+        
+        // 将WireGuard配置保存到providerConfiguration - 使用 NSObject 类型确保正确保存
+        var providerConfig: [String: NSObject] = [
+            "wg_config": config as NSString
+        ]
+        
+        // 添加 MorphProtocol 配置
+        if useMorphProtocol {
+            providerConfig["useMorphProtocol"] = NSNumber(value: true)
+            providerConfig["morphEncryptionKey"] = morphEncryptionKey as NSString
+            providerConfig["morphServerHost"] = morphServerHost as NSString
+            providerConfig["morphServerPort"] = NSNumber(value: morphServerPort)
+            providerConfig["morphLayerCount"] = NSNumber(value: morphLayerCount)
+            providerConfig["morphPaddingLength"] = NSNumber(value: morphPaddingLength)
+            
+            print("🔐 WireGuardPlugin: MorphProtocol 配置已添加到 providerConfig")
+            print("🔐 WireGuardPlugin: 服务器: \(morphServerHost):\(morphServerPort)")
+            print("🔐 WireGuardPlugin: providerConfig keys: \(providerConfig.keys)")
+        }
+        
+        providerProtocol.providerConfiguration = providerConfig
+        
+        print("🔵 WireGuardPlugin: Provider configuration set")
+        // 验证配置是否保存成功
+        if let savedConfig = providerProtocol.providerConfiguration {
+            print("🔵 WireGuardPlugin: Saved config keys: \(savedConfig.keys)")
+        } else {
+            print("⚠️ WireGuardPlugin: Provider configuration is nil!")
+        }
+        
+        // 加载或创建VPN Manager
+        NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in
+            let manager: NETunnelProviderManager
+            
+            if let existingManager = managers?.first {
+                manager = existingManager
+            } else {
+                manager = NETunnelProviderManager()
+            }
+            
+            manager.localizedDescription = tunnelName
+            manager.protocolConfiguration = providerProtocol
+            manager.isEnabled = true
+            
+            // 保存配置
+            print("🔵 WireGuardPlugin: Saving VPN configuration to preferences...")
+            manager.saveToPreferences { error in
+                if let error = error {
+                    print("❌ WireGuardPlugin: Failed to save: \(error.localizedDescription)")
+                    completion(false, "Failed to save VPN configuration: \(error.localizedDescription)")
+                    return
+                }
+                
+                print("✅ WireGuardPlugin: Configuration saved successfully")
+                
+                // 重新加载以确保配置生效
+                print("🔵 WireGuardPlugin: Reloading configuration...")
+                manager.loadFromPreferences { error in
+                    if let error = error {
+                        print("❌ WireGuardPlugin: Failed to reload: \(error.localizedDescription)")
+                        completion(false, "Failed to reload VPN configuration: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    print("✅ WireGuardPlugin: Configuration reloaded successfully")
+                    self?.vpnManager = manager
+                    completion(true, nil)
+                }
+            }
+        }
+    }
+    
+    private func startVPN(completion: @escaping (Bool, String?) -> Void) {
+        print("🔵 WireGuardPlugin: startVPN called")
+        
+        guard let manager = vpnManager else {
+            print("❌ WireGuardPlugin: VPN manager is nil")
+            completion(false, "VPN manager not initialized")
+            return
+        }
+        
+        print("🔵 WireGuardPlugin: VPN manager status: \(getConnectionStatus(manager.connection.status))")
+        print("🔵 WireGuardPlugin: VPN manager enabled: \(manager.isEnabled)")
+        print("🔵 WireGuardPlugin: Protocol configuration: \(manager.protocolConfiguration?.description ?? "nil")")
+        
+        if let proto = manager.protocolConfiguration as? NETunnelProviderProtocol {
+            print("🔵 WireGuardPlugin: Provider bundle ID: \(proto.providerBundleIdentifier ?? "nil")")
+            print("🔵 WireGuardPlugin: Server address: \(proto.serverAddress ?? "nil")")
+        }
+        
+        print("🔵 WireGuardPlugin: Starting VPN tunnel...")
+        
+        do {
+            try manager.connection.startVPNTunnel()
+            print("✅ WireGuardPlugin: startVPNTunnel() called successfully")
+            
+            // 等待一小段时间后检查状态
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                if let status = self?.getConnectionStatus(manager.connection.status) {
+                    print("📊 WireGuardPlugin: Status after 2s: \(status)")
+                    if status == "disconnected" {
+                        print("⚠️ WireGuardPlugin: Connection failed - returned to disconnected state")
+                    }
+                }
+            }
+            
+            completion(true, nil)
+        } catch {
+            print("❌ WireGuardPlugin: Failed to start VPN tunnel: \(error.localizedDescription)")
+            print("❌ WireGuardPlugin: Error details: \(error)")
+            completion(false, "Failed to start VPN: \(error.localizedDescription)")
+        }
+    }
+    
+    private func deleteConfiguration(tunnelName: String, completion: @escaping (Bool, String?) -> Void) {
+        NETunnelProviderManager.loadAllFromPreferences { managers, error in
+            if let error = error {
+                completion(false, "Failed to load configurations: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let manager = managers?.first(where: { $0.localizedDescription == tunnelName }) else {
+                completion(false, "Configuration not found")
+                return
+            }
+            
+            manager.removeFromPreferences { error in
+                if let error = error {
+                    completion(false, "Failed to delete configuration: \(error.localizedDescription)")
+                    return
+                }
+                
+                completion(true, nil)
+            }
+        }
+    }
+}

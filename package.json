@@ -20,6 +20,7 @@
     "@capacitor/splash-screen": "latest",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
+    "@morphvpn/capacitor-morphprotocol": "file:packages/morphprotocol-plugin",
     "@morphvpn/capacitor-wireguard": "file:packages/wireguard-plugin/morphvpn-capacitor-wireguard-1.0.0.tgz",
     "@reduxjs/toolkit": "^1.9.3",
     "@thumbmarkjs/thumbmarkjs": "^1.2.0",
