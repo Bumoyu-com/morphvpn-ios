@@ -56,7 +56,7 @@ install_plugin() {
     cd - > /dev/null
     
     echo -e "${YELLOW}📥 安装插件到主项目...${NC}"
-    npm install "$plugin_dir"
+    npm install "file:$plugin_dir" --legacy-peer-deps
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ 插件安装失败${NC}"
         return 1

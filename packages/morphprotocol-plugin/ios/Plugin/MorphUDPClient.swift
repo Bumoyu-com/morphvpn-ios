@@ -8,12 +8,6 @@
 import Foundation
 import Network
 
-enum MorphError: Error {
-    case connectionFailed
-    case encryptionFailed
-    case decryptionFailed
-}
-
 class MorphUDPClient {
     private var connection: NWConnection?
     private let queue = DispatchQueue(label: "com.morphvpn.morphprotocol", qos: .userInitiated)

@@ -14,7 +14,7 @@ def capacitor_pods
   pod 'CapacitorCamera', :path => '../../node_modules/@capacitor/camera'
   pod 'CapacitorSplashScreen', :path => '../../node_modules/@capacitor/splash-screen'
   pod 'MorphvpnCapacitorMorphprotocol', :path => '../../packages/morphprotocol-plugin'
-  pod 'MorphvpnCapacitorWireguard', :path => '../../node_modules/@morphvpn/capacitor-wireguard'
+  pod 'MorphvpnCapacitorWireguard', :path => '../../packages/wireguard-plugin'
 end
 
 target 'App' do
