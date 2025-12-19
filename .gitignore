@@ -10,7 +10,6 @@ packages/wireguard-apple
 packages/Wireguardkit
 
 node_modules
-package-lock.json
 dist-ssr
 *.local
 test
