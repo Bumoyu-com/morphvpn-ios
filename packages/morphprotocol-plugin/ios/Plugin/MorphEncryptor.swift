@@ -1,64 +1,92 @@
 //
 //  MorphEncryptor.swift
-//  WireGuardExtension
+//  MorphProtocol Plugin
 //
-//  MorphProtocol 加密模块
+//  MorphProtocol 加密模块 - AES-256-CBC
 //
 
 import Foundation
-import CryptoKit
+import CommonCrypto
 
 class MorphEncryptor {
-    private let key: SymmetricKey
-    private var nonce: AES.GCM.Nonce
+    private let key: Data
+    private let iv: Data
     
     init(keyString: String) throws {
+        NSLog("🔐 MorphEncryptor: Initializing with key string")
+        
         // 解析 base64key:base64iv 格式
         let parts = keyString.split(separator: ":")
         guard parts.count == 2 else {
+            NSLog("❌ MorphEncryptor: Invalid key format (expected key:iv)")
             throw MorphError.invalidKey
         }
         
         guard let keyData = Data(base64Encoded: String(parts[0])),
-              let nonceData = Data(base64Encoded: String(parts[1])) else {
+              let ivData = Data(base64Encoded: String(parts[1])) else {
+            NSLog("❌ MorphEncryptor: Failed to decode base64")
             throw MorphError.invalidKey
         }
         
+        NSLog("🔐 MorphEncryptor: Key length: \(keyData.count), IV length: \(ivData.count)")
+        
         // 确保密钥长度正确（256位 = 32字节）
         guard keyData.count == 32 else {
+            NSLog("❌ MorphEncryptor: Invalid key length (expected 32, got \(keyData.count))")
             throw MorphError.invalidKeyLength
         }
         
-        // 确保 nonce 长度正确（96位 = 12字节）
-        guard nonceData.count == 12 else {
+        // 确保 IV 长度正确（128位 = 16字节，用于 AES-256-CBC）
+        guard ivData.count == 16 else {
+            NSLog("❌ MorphEncryptor: Invalid IV length (expected 16, got \(ivData.count))")
             throw MorphError.invalidNonceLength
         }
         
-        self.key = SymmetricKey(data: keyData)
-        self.nonce = try AES.GCM.Nonce(data: nonceData)
+        self.key = keyData
+        self.iv = ivData
+        
+        NSLog("✅ MorphEncryptor: Initialized successfully")
     }
     
     func encrypt(_ data: Data) throws -> Data {
-        do {
-            let sealedBox = try AES.GCM.seal(data, using: key, nonce: nonce)
-            guard let combined = sealedBox.combined else {
-                throw MorphError.encryptionFailed
-            }
-            return combined
-        } catch {
-            NSLog("❌ MorphEncryptor: Encryption failed: \(error)")
-            throw MorphError.encryptionFailed
-        }
+        return try performCrypt(data: data, operation: CCOperation(kCCEncrypt))
     }
     
     func decrypt(_ data: Data) throws -> Data {
-        do {
-            let sealedBox = try AES.GCM.SealedBox(combined: data)
-            let decrypted = try AES.GCM.open(sealedBox, using: key)
-            return decrypted
-        } catch {
-            NSLog("❌ MorphEncryptor: Decryption failed: \(error)")
-            throw MorphError.decryptionFailed
+        return try performCrypt(data: data, operation: CCOperation(kCCDecrypt))
+    }
+    
+    private func performCrypt(data: Data, operation: CCOperation) -> Data {
+        let dataLength = data.count
+        let bufferSize = dataLength + kCCBlockSizeAES128
+        var buffer = Data(count: bufferSize)
+        var numBytesProcessed: size_t = 0
+        
+        let cryptStatus = key.withUnsafeBytes { keyBytes in
+            iv.withUnsafeBytes { ivBytes in
+                data.withUnsafeBytes { dataBytes in
+                    buffer.withUnsafeMutableBytes { bufferBytes in
+                        CCCrypt(
+                            operation,
+                            CCAlgorithm(kCCAlgorithmAES),
+                            CCOptions(kCCOptionPKCS7Padding),
+                            keyBytes.baseAddress, key.count,
+                            ivBytes.baseAddress,
+                            dataBytes.baseAddress, dataLength,
+                            bufferBytes.baseAddress, bufferSize,
+                            &numBytesProcessed
+                        )
+                    }
+                }
+            }
         }
+        
+        guard cryptStatus == kCCSuccess else {
+            NSLog("❌ MorphEncryptor: Crypt operation failed with status: \(cryptStatus)")
+            throw operation == kCCEncrypt ? MorphError.encryptionFailed : MorphError.decryptionFailed
+        }
+        
+        buffer.count = numBytesProcessed
+        return buffer
     }
 }
