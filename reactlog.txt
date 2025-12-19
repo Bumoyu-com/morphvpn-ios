@@ -1,154 +1,96 @@
-✅ WireGuardPlugin: Plugin loaded successfully
-✅ WireGuardPlugin: Initialization complete
-⚡️  Loading app at capacitor://localhost...
-📡 WireGuardPlugin: VPN status changed to: disconnected
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  WebView loaded
-⚡️  [log] - storage web
-⚡️  To Native ->  WireGuard getStatus 62492067
-⚡️  To Native ->  WireGuard addListener 62492068
-⚡️  To Native ->  SplashScreen hide 62492069
-⚡️  To Native ->  WireGuard getStatus 62492070
-🔵 WireGuardPlugin: getStatus() called
-🔵 WireGuardPlugin: Current status - disconnected
-⚡️  TO JS {"bytesDownloaded":0,"status":"disconnected","bytesUploaded":0}
-⚡️  TO JS undefined
-🔵 WireGuardPlugin: getStatus() called
-🔵 WireGuardPlugin: Current status - disconnected
-⚡️  TO JS {"bytesDownloaded":0,"status":"disconnected","bytesUploaded":0}
-⚡️  [log] - 缓存加载失败
-⚡️  To Native ->  WireGuard getStatus 62492071
-🔵 WireGuardPlugin: getStatus() called
-🔵 WireGuardPlugin: Current status - disconnected
-⚡️  TO JS {"status":"disconnected","bytesDownloaded":0,"bytesUploaded":0}
-⚡️  [log] - 🔍 Validating configuration...
-⚡️  [log] - ✅ Configuration validation passed
-⚡️  [log] - 📋 Configuration summary:
-隧道名称: MorphVPN
-配置长度: 315 字节
-MorphProtocol: 已启用
-  服务器: morph.example.com:51821
-  混淆层数: 3
-  填充长度: 8
-  密钥长度: 61 字符
-⚡️  [log] - 🔵 Calling connect with full options...
-⚡️  [log] - 🔵 useWireGuard: connect() called
-⚡️  [log] - 🔵 useWireGuard: tunnelName: MorphVPN
-⚡️  [log] - 🔵 useWireGuard: config length: 315
-⚡️  [log] - 🔵 useWireGuard: config preview: [Interface]
-PrivateKey = 0DiA6lqJWUcqouJeuh17wNaJB
-⚡️  [log] - 🔵 useWireGuard: useMorphProtocol: true
-⚡️  [log] - 🔐 useWireGuard: MorphProtocol enabled
-⚡️  [log] - 🔐 useWireGuard: Server: morph.example.com:51821
-⚡️  [log] - 🔐 useWireGuard: Layers: 3
-⚡️  [log] - 🔐 useWireGuard: Padding: 8
-⚡️  [log] - 🔵 useWireGuard: Calling WireGuard.connect...
-⚡️  To Native ->  WireGuard connect 62492072
-🔵 WireGuardPlugin: connect() called
-🔵 WireGuardPlugin: Call options: Optional([AnyHashable("morphServerHost"): "morph.example.com", AnyHashable("useMorphProtocol"): 1, AnyHashable("morphServerPort"): 51821, AnyHashable("morphEncryptionKey"): "XuNgTBIiWFXHSeunT/xPi6DEp98vjw6XBoGogtIJbE8=:4jww75fhLvms4akS", AnyHashable("morphLayerCount"): 3, AnyHashable("tunnelName"): "MorphVPN", AnyHashable("morphPaddingLength"): 8, AnyHashable("config"): "[Interface]\nPrivateKey = 0DiA6lqJWUcqouJeuh17wNaJB9bIyNuj+pH2zVgoJWk=\nAddress = 10.8.0.2/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = 4oFUG+Nl2hIQx0b3j1IM203+vc0ygkz3IqwtboJoki4=\nPresharedKey = jwvV/AuQpnk0QT5xeDGS143NqNP275zw2yvY0moVsE0=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 81.70.251.128:51820\n"])
-🔵 WireGuardPlugin: Config received
-🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Config length: 315 bytes
-🔵 WireGuardPlugin: Config preview: [Interface]
-PrivateKey = 0DiA6lqJWUcqouJeuh17wNaJB9bIyNuj+pH2zVgoJWk=
-Address = 10.8.0.2/24
-DNS = 1....
-🔍 WireGuardPlugin: useMorphProtocol raw value: 1
-🔍 WireGuardPlugin: useMorphProtocol parsed: true
-🔐 WireGuardPlugin: MorphProtocol 已启用
-🔐 WireGuardPlugin: 服务器: morph.example.com:51821
-🔐 WireGuardPlugin: 混淆层数: 3, 填充: 8
-🔐 WireGuardPlugin: 密钥长度: 61 字符
-🔵 WireGuardPlugin: saveConfiguration called
-🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
-🔐 WireGuardPlugin: MorphProtocol 配置已添加到 providerConfig
-🔐 WireGuardPlugin: 服务器: morph.example.com:51821
-🔐 WireGuardPlugin: providerConfig keys: ["morphServerHost", "morphPaddingLength", "morphServerPort", "wg_config", "useMorphProtocol", "morphLayerCount", "morphEncryptionKey"]
-🔵 WireGuardPlugin: Provider configuration set
-🔵 WireGuardPlugin: Saved config keys: ["morphServerPort", "morphPaddingLength", "useMorphProtocol", "morphLayerCount", "morphEncryptionKey", "wg_config", "morphServerHost"]
-📡 WireGuardPlugin: VPN status changed to: disconnected
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  TO JS {"status":"disconnected"}
-🔵 WireGuardPlugin: Saving VPN configuration to preferences...
-✅ WireGuardPlugin: Configuration saved successfully
-🔵 WireGuardPlugin: Reloading configuration...
-✅ WireGuardPlugin: Configuration reloaded successfully
-🔵 WireGuardPlugin: startVPN called
-🔵 WireGuardPlugin: VPN manager status: disconnected
-🔵 WireGuardPlugin: VPN manager enabled: true
-🔵 WireGuardPlugin: Protocol configuration: 
-    type = plugin
-    identifier = 1C22C027-6729-4CB3-8425-B97382B74B73
-    serverAddress = WireGuard
-    identityDataImported = NO
-    disconnectOnSleep = NO
-    disconnectOnIdle = NO
-    disconnectOnIdleTimeout = 0
-    disconnectOnWake = NO
-    disconnectOnWakeTimeout = 0
-    includeAllNetworks = NO
-    excludeLocalNetworks = YES
-    excludeCellularServices = YES
-    excludeAPNs = YES
-    enforceRoutes = NO
-    pluginType = com.morphvpn.app
-    authenticationMethod = 0
-    reassertTimeout = 0
-    providerConfiguration = {
-        morphServerPort = 51821,
-        morphPaddingLength = 8,
-        morphLayerCount = 3,
-        morphEncryptionKey = XuNgTBIiWFXHSeunT/xPi6DEp98vjw6XBoGogtIJbE8=:4jww75fhLvms4akS,
-        wg_config = [Interface]
-PrivateKey = 0DiA6lqJWUcqouJeuh17wNaJB9bIyNuj+pH2zVgoJWk=
-Address = 10.8.0.2/24
-DNS = 1.1.1.1
-
-[Peer]
-PublicKey = 4oFUG+Nl2hIQx0b3j1IM203+vc0ygkz3IqwtboJoki4=
-PresharedKey = jwvV/AuQpnk0QT5xeDGS143NqNP275zw2yvY0moVsE0=
-AllowedIPs = 0.0.0.0/0, ::/0
-PersistentKeepalive = 0
-Endpoint = 81.70.251.128:51820
-,
-        morphServerHost = morph.example.com,
-        useMorphProtocol = 1,
-    }
-    providerBundleIdentifier = com.morphvpn.app.WireGuardExtension
-🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
-🔵 WireGuardPlugin: Server address: WireGuard
-🔵 WireGuardPlugin: Starting VPN tunnel...
-✅ WireGuardPlugin: startVPNTunnel() called successfully
-✅ WireGuardPlugin: Connection successful
-⚡️  TO JS {"success":true}
-⚡️  [log] - 🔵 useWireGuard: Result: {"success":true}
-⚡️  [log] - ✅ useWireGuard: Connect successful
-📡 WireGuardPlugin: VPN status changed to: connecting
+⚡️  To Native ->  MorphProtocol connect 96847747
+2025-12-19 18:21:16.839598+0800 App[4525:3059398] 🔵 MorphProtocolPlugin: connect() called
+2025-12-19 18:21:16.840013+0800 App[4525:3059398] 🔵 MorphProtocolPlugin: Connecting to 192.168.0.100:12301
+2025-12-19 18:21:16.840134+0800 App[4525:3059398] 🔵 MorphProtocolPlugin: Layer=3, Padding=8, Template=1
+2025-12-19 18:21:16.841451+0800 App[4525:3059398] 🔒 MorphUDPClient: Initializing...
+2025-12-19 18:21:16.842063+0800 App[4525:3059398] 🔐 MorphEncryptor: Initializing with key string
+2025-12-19 18:21:16.843143+0800 App[4525:3059398] 🔐 MorphEncryptor: Key length: 32, IV length: 16
+2025-12-19 18:21:16.843269+0800 App[4525:3059398] ✅ MorphEncryptor: Initialized successfully
+2025-12-19 18:21:16.852094+0800 App[4525:3059398] 🎭 FunctionRegistry: Initializing with layer=3
+2025-12-19 18:21:16.872921+0800 App[4525:3059398] 🎭 FunctionRegistry: Precomputed combinations:
+2025-12-19 18:21:16.873182+0800 App[4525:3059398]    Layer 1: 11 combinations
+2025-12-19 18:21:16.873230+0800 App[4525:3059398]    Layer 2: 110 combinations
+2025-12-19 18:21:16.873268+0800 App[4525:3059398]    Layer 3: 990 combinations
+2025-12-19 18:21:16.873308+0800 App[4525:3059398]    Layer 4: 7920 combinations
+2025-12-19 18:21:16.874121+0800 App[4525:3059398]    Time: 0.021s
+2025-12-19 18:21:16.874235+0800 App[4525:3059398] 🎭 MorphObfuscator: Initialized
+2025-12-19 18:21:16.874275+0800 App[4525:3059398]    Key: 52
+2025-12-19 18:21:16.874309+0800 App[4525:3059398]    Layer: 3
+2025-12-19 18:21:16.874343+0800 App[4525:3059398]    Padding: 8
+2025-12-19 18:21:16.874375+0800 App[4525:3059398]    Total Combinations: 990
+2025-12-19 18:21:16.876338+0800 App[4525:3059398] 🎭 MorphUDPClient: Using QUIC template
+2025-12-19 18:21:16.876441+0800 App[4525:3059398] ✅ MorphUDPClient: Initialized
+2025-12-19 18:21:16.876501+0800 App[4525:3059398]    Layer: 3
+2025-12-19 18:21:16.876538+0800 App[4525:3059398]    Padding: 8
+2025-12-19 18:21:16.876569+0800 App[4525:3059398]    Template: QUIC
+2025-12-19 18:21:16.876652+0800 App[4525:3059398] 🔌 MorphUDPClient: Connecting to 192.168.0.100:12301
+⚡️  TO JS {"success":true,"message":"Connecting to 192.168.0.100:12301"}
+2025-12-19 18:21:17.332568+0800 App[4525:3059801] 🔌 MorphUDPClient: State changed to preparing
 ⚡️  TO JS {"status":"connecting"}
-📡 WireGuardPlugin: VPN status changed to: connecting
+2025-12-19 18:21:17.333510+0800 App[4525:3059801] 🔌 MorphUDPClient: State changed to ready
+⚡️  TO JS {"status":"connected"}
+2025-12-19 18:21:17.334067+0800 App[4525:3059801] ✅ MorphUDPClient: Connection ready
+2025-12-19 18:21:17.334378+0800 App[4525:3059801] 🤝 MorphUDPClient: Sending handshake...
+2025-12-19 18:21:17.339873+0800 App[4525:3059801] 🤝 MorphUDPClient: Handshake JSON: {"clientID":"P7n90Mmw7rVP4nyb97tJTQ==","publicKey":"","fnInitor":{"substitutionTable":[172,134,7,149,87,196,162,133,130,217,0,110,85,231,152,147,116,51,165,27,86,178,173,229,197,17,94,117,1,220,44,73,188,72,78,245,12,29,80,215,238,108,28,163,55,54,219,32,170,69,11,40,171,30,136,63,206,143,140,90,60,137,33,101,91,244,67,58,135,199,203,179,192,121,222,96,209,191,233,15,42,2,36,112,92,242,74,193,68,38,3,41,208,127,189,114,138,122,201,226,99,129,227,181,207,160,148,23,31,105,225,190,106,62,88,159,198,16,43,35,252,141,243,21,210,180,239,24,118,154,109,79,5,97,111,144,123,39,83,145,216,230,228,77,161,246,175,53,204,128,10,8,131,132,218,82,214,75,13,76,22,47,71,156,4,19,64,241,49,14,212,146,26,104,200,186,115,151,34,168,150,50,37,52,221,164,139,185,248,251,142,249,103,177,182,167,236,254,183,126,155,57,253,93,98,6,25,223,65,113,153,20,194,56,176,61,250,59,84,157,81,224,211,66,46,237,174,70,234,255,124,166,184,187,48,158,9,205,169,195,102,202,125,232,213,119,18,89,247,235,240,95,
+⚡️  [log] - Status changed: {"status":"connecting"}
+⚡️  [log] - Status changed: {"status":"connected"}
+2025-12-19 18:21:17.344128+0800 App[4525:3059801] 🤝 MorphUDPClient: Encrypted handshake: c9F3TDFVR4dq0Gp3joQZdDP+tM1jSgMvf8slSs9ww1LZW0CocV...
+2025-12-19 18:21:17.347864+0800 App[4525:3059801] ✅ MorphUDPClient: Handshake sent successfully
+2025-12-19 18:21:17.452789+0800 App[4525:3059621] 📥 MorphUDPClient: Received 108 bytes
+2025-12-19 18:21:17.452885+0800 App[4525:3059621] ❌ MorphUDPClient: Failed to decapsulate packet
+⚡️  To Native ->  MorphProtocol send 96847748
+2025-12-19 18:21:37.128201+0800 App[4525:3059404] 🔐 MorphUDPClient: Encrypted 46 → 48 bytes
+⚡️  TO JS {"message":"Data sent","success":true}
+2025-12-19 18:21:37.131083+0800 App[4525:3059404] 🎭 MorphUDPClient: Obfuscated 48 → 59 bytes
+2025-12-19 18:21:37.132874+0800 App[4525:3059404] 📦 MorphUDPClient: Encapsulated with QUIC: 59 → 72 bytes
+2025-12-19 18:21:37.133428+0800 App[4525:3059398] ✅ MorphUDPClient: Sent 72 bytes
+⚡️  To Native ->  MorphProtocol disconnect 96847749
+2025-12-19 18:23:01.927387+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: disconnect() called
+2025-12-19 18:23:01.927475+0800 App[4525:3059943] 🔌 MorphUDPClient: Disconnecting...
+⚡️  TO JS {"success":true,"message":"Disconnected"}
+⚡️  To Native ->  MorphProtocol connect 96847750
+2025-12-19 18:23:11.890657+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: connect() called
+2025-12-19 18:23:11.891065+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: Connecting to 192.168.0.100:12301
+2025-12-19 18:23:11.891196+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: Layer=2, Padding=8, Template=2
+2025-12-19 18:23:11.891300+0800 App[4525:3059943] 🔒 MorphUDPClient: Initializing...
+2025-12-19 18:23:11.891378+0800 App[4525:3059943] 🔐 MorphEncryptor: Initializing with key string
+2025-12-19 18:23:11.891529+0800 App[4525:3059943] 🔐 MorphEncryptor: Key length: 32, IV length: 16
+2025-12-19 18:23:11.891632+0800 App[4525:3059943] ✅ MorphEncryptor: Initialized successfully
+2025-12-19 18:23:11.891777+0800 App[4525:3059943] 🎭 FunctionRegistry: Initializing with layer=2
+2025-12-19 18:23:11.917535+0800 App[4525:3059943] 🎭 FunctionRegistry: Precomputed combinations:
+2025-12-19 18:23:11.917796+0800 App[4525:3059943]    Layer 1: 11 combinations
+2025-12-19 18:23:11.917936+0800 App[4525:3059943]    Layer 2: 110 combinations
+2025-12-19 18:23:11.918026+0800 App[4525:3059943]    Layer 3: 990 combinations
+2025-12-19 18:23:11.918078+0800 App[4525:3059943]    Layer 4: 7920 combinations
+2025-12-19 18:23:11.918141+0800 App[4525:3059943]    Time: 0.026s
+2025-12-19 18:23:11.918194+0800 App[4525:3059943] 🎭 MorphObfuscator: Initialized
+2025-12-19 18:23:11.918260+0800 App[4525:3059943]    Key: 52
+2025-12-19 18:23:11.918303+0800 App[4525:3059943]    Layer: 2
+2025-12-19 18:23:11.918352+0800 App[4525:3059943]    Padding: 8
+2025-12-19 18:23:11.918395+0800 App[4525:3059943]    Total Combinations: 110
+2025-12-19 18:23:11.918659+0800 App[4525:3059943] 🎭 MorphUDPClient: Using KCP template
+2025-12-19 18:23:11.918705+0800 App[4525:3059943] ✅ MorphUDPClient: Initialized
+2025-12-19 18:23:11.918947+0800 App[4525:3059943]    Layer: 2
+2025-12-19 18:23:11.919150+0800 App[4525:3059943]    Padding: 8
+2025-12-19 18:23:11.919287+0800 App[4525:3059943]    Template: KCP
+2025-12-19 18:23:11.919439+0800 App[4525:3059943] 🔌 MorphUDPClient: Connecting to 192.168.0.100:12301
+⚡️  TO JS {"message":"Connecting to 192.168.0.100:12301","success":true}
+2025-12-19 18:23:11.920853+0800 App[4525:3059943] 🔌 MorphUDPClient: State changed to preparing
 ⚡️  TO JS {"status":"connecting"}
-📡 WireGuardPlugin: VPN status changed to: connected
+2025-12-19 18:23:11.922697+0800 App[4525:3059943] 🔌 MorphUDPClient: State changed to ready
 ⚡️  TO JS {"status":"connected"}
-📡 WireGuardPlugin: VPN status changed to: connected
-⚡️  TO JS {"status":"connected"}
-📊 WireGuardPlugin: Status after 2s: connected
-⚡️  To Native ->  WireGuard getStatus 62492073
-🔵 WireGuardPlugin: getStatus() called
-🔵 WireGuardPlugin: Current status - connected
-⚡️  TO JS {"bytesDownloaded":0,"bytesUploaded":0,"status":"connected"}
-⚡️  To Native ->  WireGuard getStatus 62492074
-🔵 WireGuardPlugin: getStatus() called
-🔵 WireGuardPlugin: Current status - connected
-⚡️  TO JS {"bytesUploaded":0,"bytesDownloaded":0,"status":"connected"}
-⚡️  To Native ->  WireGuard disconnect 62492075
-⚡️  TO JS {"success":true}
-📡 WireGuardPlugin: VPN status changed to: disconnecting
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  TO JS {"status":"disconnecting"}
-📡 WireGuardPlugin: VPN status changed to: disconnecting
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  TO JS {"status":"disconnecting"}
-📡 WireGuardPlugin: VPN status changed to: disconnected
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  TO JS {"status":"disconnected"}
+2025-12-19 18:23:11.922963+0800 App[4525:3059943] ✅ MorphUDPClient: Connection ready
+2025-12-19 18:23:11.923695+0800 App[4525:3059943] 🤝 MorphUDPClient: Sending handshake...
+⚡️  [log] - Status changed: {"status":"connecting"}
+2025-12-19 18:23:11.925095+0800 App[4525:3059943] 🤝 MorphUDPClient: Handshake JSON: {"fnInitor":{"substitutionTable":[109,155,204,97,96,176,234,195,179,159,80,70,59,205,173,42,209,56,251,84,17,177,37,178,106,36,120,210,183,57,53,148,227,18,51,154,35,91,136,86,16,11,79,87,103,10,252,100,60,240,185,129,26,93,127,216,48,171,20,31,104,200,22,9,131,233,247,143,121,248,238,81,119,14,90,189,135,222,126,92,158,114,88,94,208,33,147,82,101,164,169,12,139,225,232,203,128,110,184,50,142,1,241,235,223,107,65,211,213,220,156,190,45,162,44,157,214,78,244,144,122,130,13,75,4,125,2,138,85,193,141,68,113,229,116,250,255,172,124,249,19,181,112,41,111,188,151,236,137,146,168,165,149,7,167,5,21,170,228,27,8,166,25,24,174,66,108,163,242,207,152,253,49,134,140,47,217,175,150,187,133,231,95,69,73,71,186,219,230,196,28,243,29,72,61,32,74,246,105,40,98,115,254,224,52,54,182,58,0,153,38,30,180,218,34,43,226,23,206,102,39,191,197,212,201,123,118,117,46,63,161,194,160,237,64,55,221,6,83,192,198,15,89,215,239,245,62,3,132,145,99,67,76,199,202,77],"randomValue":6860339277009819690},"o
+⚡️  [log] - Status changed: {"status":"connected"}
+2025-12-19 18:23:11.925526+0800 App[4525:3059943] 🤝 MorphUDPClient: Encrypted handshake: lKcmZlItldbfTh7VTiRnlnFezXLKW4leBr+WF6UNRb+LeLosfZ...
+2025-12-19 18:23:11.925972+0800 App[4525:3060366] ✅ MorphUDPClient: Handshake sent successfully
+2025-12-19 18:23:12.236517+0800 App[4525:3059943] 📥 MorphUDPClient: Received 108 bytes
+2025-12-19 18:23:12.236645+0800 App[4525:3059943] ❌ MorphUDPClient: Failed to decapsulate packet
+⚡️  To Native ->  MorphProtocol send 96847751
+⚡️  TO JS {"success":true,"message":"Data sent"}
+2025-12-19 18:23:23.399638+0800 App[4525:3060387] 🔐 MorphUDPClient: Encrypted 46 → 48 bytes
+2025-12-19 18:23:23.400079+0800 App[4525:3060387] 🎭 MorphUDPClient: Obfuscated 48 → 59 bytes
+Swift/arm64e-apple-ios.swiftinterface:41637: Fatal error: Double value cannot be converted to UInt32 because the result would be greater than UInt32.max
+2025-12-19 18:23:23.400635+0800 App[4525:3060387] Swift/arm64e-apple-ios.swiftinterface:41637: Fatal error: Double value cannot be converted to UInt32 because the result would be greater than UInt32.max

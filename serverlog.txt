@@ -1,0 +1,36 @@
+INFO] Received handshake from 192.168.0.102:49812
+[INFO] ClientID: 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+[INFO] UserID: test_user
+[INFO] Template ID: 1
+[INFO] Creating new session for clientID 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+[INFO] Received fnInitor type: object
+[INFO] fnInitor.substitutionTable type: object, isArray: true, length: 256
+[INFO] fnInitor.randomValue: 2792649095349382000 (type: number)
+[INFO] fnInitor validation passed! substitutionTable first 10 values: 172,134,7,149,87,196,162,133,130,217
+[INFO] Creating Obfuscator with: key=52, layer=3, padding=8
+[INFO] Obfuscator created successfully for client 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+[INFO] Created template: QUIC Gaming (ID: 1)
+[INFO] HeaderID: 3fb9fdd0c9b0eeb5 (8 bytes for QUIC Gaming)
+[INFO] Added to ipIndex: 192.168.0.102:49812:3fb9fdd0c9b0eeb5 → 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+[INFO] New session socket listening on port 49959 for clientID 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+[INFO] Response sent to client 3fb9fdd0c9b0eeb54fe27c9bf7bb494d at 192.168.0.102:49812
+[ERROR] Failed to increment client count { error: 'Error' }
+[DEBUG] type: object, str:@�T!ʔF�QS�B�=�������D�<5�e�3ǉf0,�� "���l������h�
+[DEBUG] Received non-control message on main server port from 192.168.0.102:49812
+[INFO] Received handshake from 192.168.0.102:59069
+[INFO] ClientID: bf0995adc2071ca238b6ad4d9beed079
+[INFO] UserID: test_user
+[INFO] Template ID: 2
+[INFO] Creating new session for clientID bf0995adc2071ca238b6ad4d9beed079
+[INFO] Received fnInitor type: object
+[INFO] fnInitor.substitutionTable type: object, isArray: true, length: 256
+[INFO] fnInitor.randomValue: 6860339277009820000 (type: number)
+[INFO] fnInitor validation passed! substitutionTable first 10 values: 109,155,204,97,96,176,234,195,179,159
+[INFO] Creating Obfuscator with: key=52, layer=2, padding=8
+[INFO] Obfuscator created successfully for client bf0995adc2071ca238b6ad4d9beed079
+[INFO] Created template: KCP Protocol (ID: 2)
+[INFO] HeaderID: bf0995ad (4 bytes for KCP Protocol)
+[INFO] Added to ipIndex: 192.168.0.102:59069:bf0995ad → bf0995adc2071ca238b6ad4d9beed079
+[INFO] New session socket listening on port 49621 for clientID bf0995adc2071ca238b6ad4d9beed079
+[INFO] Response sent to client bf0995adc2071ca238b6ad4d9beed079 at 192.168.0.102:59069
+[ERROR] Failed to increment client count { error: 'Error' }
