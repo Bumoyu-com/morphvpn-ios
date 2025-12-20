@@ -108,6 +108,8 @@ class KcpTemplate: ProtocolTemplate {
     /// 封装数据为 KCP 格式
     /// Header: [conv(4)] [cmd(1)] [frg(1)] [wnd(2)] [ts(4)] [sn(4)] [una(4)] [payload]
     func encapsulate(_ data: Data, clientID: Data) -> Data {
+        NSLog("🎭 KCP: Encapsulating \(data.count) bytes, clientID: \(clientID.count) bytes")
+        
         var packet = Data()
         
         // Conv: 从 clientID 派生 (取前4字节)
@@ -116,6 +118,8 @@ class KcpTemplate: ProtocolTemplate {
             conv.append(0x00)
         }
         packet.append(conv)
+        
+        NSLog("🎭 KCP: Conv added: \(conv.map { String(format: "%02x", $0) }.joined(separator: " "))")
         
         // Cmd: 0x51 (PSH - data packet)
         packet.append(0x51)
@@ -128,7 +132,9 @@ class KcpTemplate: ProtocolTemplate {
         packet.append(0x80)
         
         // Ts: timestamp (4 bytes, big-endian, milliseconds)
-        let timestamp = UInt32(Date().timeIntervalSince1970 * 1000) & 0xFFFFFFFF
+        // 注意：使用模运算确保值在 UInt32 范围内
+        let timestampMs = Date().timeIntervalSince1970 * 1000
+        let timestamp = UInt32(truncatingIfNeeded: UInt64(timestampMs))
         packet.append(UInt8((timestamp >> 24) & 0xFF))
         packet.append(UInt8((timestamp >> 16) & 0xFF))
         packet.append(UInt8((timestamp >> 8) & 0xFF))
@@ -156,18 +162,24 @@ class KcpTemplate: ProtocolTemplate {
     
     /// 解封装 KCP 数据包
     func decapsulate(_ packet: Data) -> Data? {
+        NSLog("🎭 KCP: Decapsulating \(packet.count) bytes")
+        
         // 验证最小长度: 4 + 1 + 1 + 2 + 4 + 4 + 4 = 20 bytes
         guard packet.count >= 20 else {
+            NSLog("❌ KCP: Packet too short (\(packet.count) < 20)")
             return nil
         }
         
         // 验证 cmd (应该是 0x51)
         guard packet[4] == 0x51 else {
+            NSLog("❌ KCP: Invalid cmd byte: 0x\(String(format: "%02x", packet[4]))")
             return nil
         }
         
         // 提取 payload (跳过 header)
-        return Data(packet[20...])
+        let payload = Data(packet[20...])
+        NSLog("🎭 KCP: Extracted \(payload.count) bytes payload")
+        return payload
     }
     
     /// 提取 header 中的客户端 ID
@@ -219,7 +231,9 @@ class GenericGamingTemplate: ProtocolTemplate {
         packet.append(UInt8(seq & 0xFF))
         
         // Timestamp: 当前时间戳 (4 bytes, big-endian, milliseconds)
-        let timestamp = UInt32(Date().timeIntervalSince1970 * 1000) & 0xFFFFFFFF
+        // 注意：使用 truncatingIfNeeded 确保值在 UInt32 范围内
+        let timestampMs = Date().timeIntervalSince1970 * 1000
+        let timestamp = UInt32(truncatingIfNeeded: UInt64(timestampMs))
         packet.append(UInt8((timestamp >> 24) & 0xFF))
         packet.append(UInt8((timestamp >> 16) & 0xFF))
         packet.append(UInt8((timestamp >> 8) & 0xFF))

@@ -123,9 +123,12 @@ class MorphUDPClient {
     func send(_ data: Data) {
         guard isConnected else {
             NSLog("❌ MorphUDPClient: Not connected, cannot send")
-            onError?(MorphError.connectionFailed)
+            onError?(MorphError.notConnected)
             return
         }
+        
+        NSLog("📤 MorphUDPClient: Sending \(data.count) bytes")
+        NSLog("📤 Original data (hex): \(data.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
         
         queue.async { [weak self] in
             guard let self = self else { return }
@@ -133,28 +136,34 @@ class MorphUDPClient {
             do {
                 // 1. 加密
                 let encrypted = try self.encryptor.encrypt(data)
-                NSLog("🔐 MorphUDPClient: Encrypted \(data.count) → \(encrypted.count) bytes")
+                NSLog("📤 After encrypt: \(encrypted.count) bytes")
+                NSLog("📤 Encrypted (hex): \(encrypted.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
                 
                 // 2. 混淆
                 let obfuscated = self.obfuscator.obfuscate(encrypted)
-                NSLog("🎭 MorphUDPClient: Obfuscated \(encrypted.count) → \(obfuscated.count) bytes")
+                NSLog("📤 After obfuscate: \(obfuscated.count) bytes")
+                NSLog("📤 Obfuscated (hex): \(obfuscated.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
                 
                 // 3. 协议封装（如果启用）
                 let packet: Data
                 if let template = self.template {
+                    NSLog("📤 Using template: \(template.name)")
                     packet = template.encapsulate(obfuscated, clientID: self.clientID)
-                    NSLog("📦 MorphUDPClient: Encapsulated with \(template.name): \(obfuscated.count) → \(packet.count) bytes")
+                    NSLog("📤 After encapsulate (\(template.name)): \(packet.count) bytes")
+                    NSLog("📤 Final packet (hex): \(packet.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
                 } else {
                     packet = obfuscated
+                    NSLog("📤 No template, using obfuscated data directly")
                 }
                 
                 // 4. 发送
+                NSLog("📤 Sending to connection...")
                 self.connection?.send(content: packet, completion: .contentProcessed { error in
                     if let error = error {
                         NSLog("❌ MorphUDPClient: Send error: \(error)")
                         self.onError?(error)
                     } else {
-                        NSLog("✅ MorphUDPClient: Sent \(packet.count) bytes")
+                        NSLog("✅ MorphUDPClient: Sent \(packet.count) bytes successfully")
                     }
                 })
                 
@@ -177,13 +186,24 @@ class MorphUDPClient {
             
             if let data = data, !data.isEmpty {
                 NSLog("📥 MorphUDPClient: Received \(data.count) bytes")
+                NSLog("📥 Raw data (hex): \(data.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
                 
+                // 尝试作为握手响应处理
+                if let handshakeResponse = self.tryParseHandshakeResponse(data) {
+                    NSLog("✅ MorphUDPClient: Received handshake response")
+                    self.handleHandshakeResponse(handshakeResponse)
+                    self.startReceiving()
+                    return
+                }
+                
+                // 作为普通数据包处理
                 do {
                     // 1. 协议解封装（如果启用）
                     let obfuscated: Data
                     if let template = self.template {
                         guard let extracted = template.decapsulate(data) else {
                             NSLog("❌ MorphUDPClient: Failed to decapsulate packet")
+                            self.startReceiving()
                             return
                         }
                         obfuscated = extracted
@@ -212,6 +232,67 @@ class MorphUDPClient {
             // 继续接收
             self.startReceiving()
         }
+    }
+    
+    private func tryParseHandshakeResponse(_ data: Data) -> [String: Any]? {
+        do {
+            // 握手响应格式：base64 编码的加密数据（作为 UTF-8 字符串）
+            guard let base64String = String(data: data, encoding: .utf8) else {
+                return nil
+            }
+            
+            NSLog("🤝 Trying to parse handshake response")
+            NSLog("🤝 Received \(data.count) bytes, base64 string length: \(base64String.count)")
+            NSLog("🤝 Base64 preview: \(base64String.prefix(50))...")
+            
+            // Base64 解码
+            guard let encryptedData = Data(base64Encoded: base64String) else {
+                NSLog("🤝 Not valid base64")
+                return nil
+            }
+            
+            NSLog("🤝 Decoded to \(encryptedData.count) bytes encrypted data")
+            
+            // 解密
+            let decrypted = try encryptor.decrypt(encryptedData)
+            
+            NSLog("🤝 Decrypted to \(decrypted.count) bytes")
+            
+            guard let jsonString = String(data: decrypted, encoding: .utf8) else {
+                NSLog("🤝 Decrypted data is not valid UTF-8")
+                return nil
+            }
+            
+            NSLog("🤝 JSON string: \(jsonString)")
+            
+            // 解析 JSON
+            if let json = try? JSONSerialization.jsonObject(with: decrypted) as? [String: Any] {
+                if json["port"] != nil && json["status"] != nil {
+                    NSLog("✅ Valid handshake response")
+                    return json
+                } else {
+                    NSLog("🤝 JSON missing required fields (port or status)")
+                }
+            } else {
+                NSLog("🤝 Failed to parse JSON")
+            }
+        } catch {
+            NSLog("🤝 Not a handshake response: \(error)")
+        }
+        return nil
+    }
+    
+    private func handleHandshakeResponse(_ response: [String: Any]) {
+        guard let port = response["port"] as? Int else {
+            NSLog("❌ MorphUDPClient: Invalid handshake response - missing port")
+            return
+        }
+        
+        let status = response["status"] as? String ?? "unknown"
+        NSLog("✅ MorphUDPClient: Handshake response - port: \(port), status: \(status)")
+        
+        // TODO: 切换到新端口（如果需要）
+        // 注意：当前实现使用单一连接，可能需要重新连接到新端口
     }
     
     private func sendHandshake() {
