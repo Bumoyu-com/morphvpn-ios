@@ -9,13 +9,21 @@ import Foundation
 import Network
 
 class MorphUDPClient {
-    private var connection: NWConnection?
+    private var handshakeConnection: NWConnection?  // 握手连接 (12301)
+    private var dataConnection: NWConnection?       // 数据连接 (会话端口)
+    private var connection: NWConnection? {         // 兼容性属性
+        return dataConnection ?? handshakeConnection
+    }
     private let queue = DispatchQueue(label: "com.morphvpn.morphprotocol", qos: .userInitiated)
     private let encryptor: MorphEncryptor
     private let obfuscator: MorphObfuscator
     private let template: ProtocolTemplate?
     private let clientID: Data
     private var isConnected = false
+    
+    private var host: String = ""
+    private var port: UInt16 = 0
+    private var sessionPort: UInt16?
     
     var onReceive: ((Data) -> Void)?
     var onError: ((Error) -> Void)?
@@ -67,6 +75,9 @@ class MorphUDPClient {
     }
     
     func connect(host: String, port: UInt16) {
+        self.host = host
+        self.port = port
+        
         NSLog("🔌 MorphUDPClient: Connecting to \(host):\(port)")
         
         let endpoint = NWEndpoint.hostPort(
@@ -77,9 +88,9 @@ class MorphUDPClient {
         let parameters = NWParameters.udp
         parameters.allowLocalEndpointReuse = true
         
-        connection = NWConnection(to: endpoint, using: parameters)
+        handshakeConnection = NWConnection(to: endpoint, using: parameters)
         
-        connection?.stateUpdateHandler = { [weak self] state in
+        handshakeConnection?.stateUpdateHandler = { [weak self] state in
             guard let self = self else { return }
             
             NSLog("🔌 MorphUDPClient: State changed to \(state)")
@@ -110,13 +121,15 @@ class MorphUDPClient {
             }
         }
         
-        connection?.start(queue: queue)
+        handshakeConnection?.start(queue: queue)
     }
     
     func disconnect() {
         NSLog("🔌 MorphUDPClient: Disconnecting...")
-        connection?.cancel()
-        connection = nil
+        handshakeConnection?.cancel()
+        dataConnection?.cancel()
+        handshakeConnection = nil
+        dataConnection = nil
         isConnected = false
     }
     
@@ -157,8 +170,12 @@ class MorphUDPClient {
                 }
                 
                 // 4. 发送
-                NSLog("📤 Sending to connection...")
-                self.connection?.send(content: packet, completion: .contentProcessed { error in
+                // 使用数据连接（如果已建立），否则使用握手连接
+                let targetConnection = self.dataConnection ?? self.handshakeConnection
+                let connectionType = self.dataConnection != nil ? "data" : "handshake"
+                NSLog("📤 Sending to \(connectionType) connection...")
+                
+                targetConnection?.send(content: packet, completion: .contentProcessed { error in
                     if let error = error {
                         NSLog("❌ MorphUDPClient: Send error: \(error)")
                         self.onError?(error)
@@ -291,8 +308,46 @@ class MorphUDPClient {
         let status = response["status"] as? String ?? "unknown"
         NSLog("✅ MorphUDPClient: Handshake response - port: \(port), status: \(status)")
         
-        // TODO: 切换到新端口（如果需要）
-        // 注意：当前实现使用单一连接，可能需要重新连接到新端口
+        // 创建到会话端口的新连接
+        self.sessionPort = UInt16(port)
+        createDataConnection(port: UInt16(port))
+    }
+    
+    private func createDataConnection(port: UInt16) {
+        NSLog("🔌 MorphUDPClient: Creating data connection to port \(port)")
+        
+        let endpoint = NWEndpoint.hostPort(
+            host: NWEndpoint.Host(self.host),
+            port: NWEndpoint.Port(rawValue: port)!
+        )
+        
+        let parameters = NWParameters.udp
+        parameters.allowLocalEndpointReuse = true
+        
+        dataConnection = NWConnection(to: endpoint, using: parameters)
+        
+        dataConnection?.stateUpdateHandler = { [weak self] state in
+            guard let self = self else { return }
+            
+            NSLog("🔌 MorphUDPClient: Data connection state: \(state)")
+            
+            switch state {
+            case .ready:
+                NSLog("✅ MorphUDPClient: Data connection ready on port \(port)")
+                
+            case .failed(let error):
+                NSLog("❌ MorphUDPClient: Data connection failed: \(error)")
+                self.onError?(error)
+                
+            case .cancelled:
+                NSLog("⚠️ MorphUDPClient: Data connection cancelled")
+                
+            default:
+                break
+            }
+        }
+        
+        dataConnection?.start(queue: queue)
     }
     
     private func sendHandshake() {

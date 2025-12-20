@@ -1,36 +1,61 @@
-INFO] Received handshake from 192.168.0.102:49812
-[INFO] ClientID: 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+> morph-protocol@1.0.0 build
+> tsc
+
+[INFO] Global error handlers initialized
+[INFO] Server starting...
+[INFO] Starting UDP server on port 12301
+[INFO] Encryption info: eYlJKEWW9YvqZvLU1IcgnKnqx5W7nys+btsy4VxdYHA=:26n7M84MgUFuPcT8LR/p2Q==
+[INFO] Rate limiters initialized
+[INFO] Health check server listening on port 8080
+[INFO] Health endpoint: http://localhost:8080/health
+[INFO] Metrics endpoint: http://localhost:8080/metrics
+[INFO] UDP server listening on port 12301
+[ERROR] Failed to update server info { error: 'Error' }
+        [INFO] [RAW] Received 1536 bytes from 192.168.0.102:54772
+[INFO] [RAW] Type: object
+[INFO] [RAW] First 50 bytes (hex): 6b7a733131654d51506d547170655a67574c30625a434d2f6d495662795162776a61742f636e6b44774974626c3851673832
+[INFO] [RAW] First 50 bytes (base64): a3pzMTFlTVFQbVRxcGVaZ1dMMGJaQ00vbUlWYnlRYndqYXQvY25rRHdJdGJsOFFnODI=
+[INFO] [RAW] As string (first 100 chars): kzs11eMQPmTqpeZgWL0bZCM/mIVbyQbwjat/cnkDwItbl8Qg82zgM0dC8Az8o419KVDVNvb3X+GbW/80td+kEmt43KPGGcbsJ2jM
+[INFO] [DECRYPT] Attempting to decrypt 1536 chars
+[INFO] [DECRYPT] String preview: kzs11eMQPmTqpeZgWL0bZCM/mIVbyQbwjat/cnkDwItbl8Qg82zgM0dC8Az8o419KVDVNvb3X+GbW/80td+kEmt43KPGGcbsJ2jM...
+[INFO] [DECRYPT] Success! Decrypted 1142 bytes
+[INFO] [DECRYPT] Decrypted content: {"key":122,"templateId":1,"publicKey":"","userId":"test_user","fnInitor":{"randomValue":5603862874558158673,"substitutionTable":[137,191,202,78,144,50,240,79,128,58,86,87,225,55,105,45,104,107,97,178,37,77,242,186,132,234,53,139,207,117,17,172,7,134,248,83,167,190,205,212,251,208,39,123,197,22,157,8,5,42,222,219,20,103,109,122,243,241,217,147,31,54,237,28,196,199,165,46,76,255,238,43,116,140,146,210,91,66,102,168,113,23,200,166,126,252,232,151,65,25,90,164,93,6,115,244,85,112,183,81,173,181,127,75,231,149,10,95,162,213,106,80,15,245,226,96,18,170,184,121,239,227,67,155,36,33,163,30,24,111,228,145,84,56,229,68,125,108,174,59,150,12,16,57,203,69,192,138,119,63,153,26,250,235,60,13,189,160,230,114,156,177,176,195,135,253,141,175,3,32,161,233,41,220,152,4,209,180,99,62,35,34,70,171,215,120,118,47,148,101,206,74,92,72,188,201,246,218,14,49,254,131,44,61,247,182,130,214,143,100,0,11,193,142,52,9,136,194,73,38,179,159,236,19,64,98,158,124,169,154,249,224,82,198,204,71,185,211,48,2,187,21,133,110,89,40,129,216,51,1,27,94,223,29,88,221]},"obfuscationLayer":3,"clientID":"vVexgUaOaTLsaxYXvXbF5g==","templateParams":{},"randomPadding":8}
+[INFO] Received handshake from 192.168.0.102:54772
+[INFO] ClientID: bd57b181468e6932ec6b1617bd76c5e6
 [INFO] UserID: test_user
 [INFO] Template ID: 1
-[INFO] Creating new session for clientID 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+[INFO] Creating new session for clientID bd57b181468e6932ec6b1617bd76c5e6
 [INFO] Received fnInitor type: object
 [INFO] fnInitor.substitutionTable type: object, isArray: true, length: 256
-[INFO] fnInitor.randomValue: 2792649095349382000 (type: number)
-[INFO] fnInitor validation passed! substitutionTable first 10 values: 172,134,7,149,87,196,162,133,130,217
-[INFO] Creating Obfuscator with: key=52, layer=3, padding=8
-[INFO] Obfuscator created successfully for client 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
+[INFO] fnInitor.randomValue: 5603862874558159000 (type: number)
+[INFO] fnInitor validation passed! substitutionTable first 10 values: 137,191,202,78,144,50,240,79,128,58
+[INFO] Creating Obfuscator with: key=122, layer=3, padding=8
+[INFO] Obfuscator created successfully for client bd57b181468e6932ec6b1617bd76c5e6
 [INFO] Created template: QUIC Gaming (ID: 1)
-[INFO] HeaderID: 3fb9fdd0c9b0eeb5 (8 bytes for QUIC Gaming)
-[INFO] Added to ipIndex: 192.168.0.102:49812:3fb9fdd0c9b0eeb5 → 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
-[INFO] New session socket listening on port 49959 for clientID 3fb9fdd0c9b0eeb54fe27c9bf7bb494d
-[INFO] Response sent to client 3fb9fdd0c9b0eeb54fe27c9bf7bb494d at 192.168.0.102:49812
+[INFO] HeaderID: bd57b181468e6932 (8 bytes for QUIC Gaming)
+[INFO] Added to ipIndex: 192.168.0.102:54772:bd57b181468e6932 → bd57b181468e6932ec6b1617bd76c5e6
+[INFO] New session socket listening on port 65199 for clientID bd57b181468e6932ec6b1617bd76c5e6
+[INFO] Response sent to client bd57b181468e6932ec6b1617bd76c5e6 at 192.168.0.102:54772
 [ERROR] Failed to increment client count { error: 'Error' }
-[DEBUG] type: object, str:@�T!ʔF�QS�B�=�������D�<5�e�3ǉf0,�� "���l������h�
-[DEBUG] Received non-control message on main server port from 192.168.0.102:49812
-[INFO] Received handshake from 192.168.0.102:59069
-[INFO] ClientID: bf0995adc2071ca238b6ad4d9beed079
-[INFO] UserID: test_user
-[INFO] Template ID: 2
-[INFO] Creating new session for clientID bf0995adc2071ca238b6ad4d9beed079
-[INFO] Received fnInitor type: object
-[INFO] fnInitor.substitutionTable type: object, isArray: true, length: 256
-[INFO] fnInitor.randomValue: 6860339277009820000 (type: number)
-[INFO] fnInitor validation passed! substitutionTable first 10 values: 109,155,204,97,96,176,234,195,179,159
-[INFO] Creating Obfuscator with: key=52, layer=2, padding=8
-[INFO] Obfuscator created successfully for client bf0995adc2071ca238b6ad4d9beed079
-[INFO] Created template: KCP Protocol (ID: 2)
-[INFO] HeaderID: bf0995ad (4 bytes for KCP Protocol)
-[INFO] Added to ipIndex: 192.168.0.102:59069:bf0995ad → bf0995adc2071ca238b6ad4d9beed079
-[INFO] New session socket listening on port 49621 for clientID bf0995adc2071ca238b6ad4d9beed079
-[INFO] Response sent to client bf0995adc2071ca238b6ad4d9beed079 at 192.168.0.102:59069
-[ERROR] Failed to increment client count { error: 'Error' }
+[INFO] [RAW] Received 66 bytes from 192.168.0.102:54772
+[INFO] [RAW] Type: object
+[INFO] [RAW] First 50 bytes (hex): 40bd57b181468e6932000000004f24029d80bf98928b460ee178607707b81dc1fdb041fd8b21382f03266e1b1a2e84a8285b
+[INFO] [RAW] First 50 bytes (base64): QL1XsYFGjmkyAAAAAE8kAp2Av5iSi0YO4Xhgdwe4HcH9sEH9iyE4LwMmbhsaLoSoKFs=
+[INFO] [RAW] As string (first 100 chars): @�W��F�i2O$������F�x`w����A��!8/&n.��([�LTK<V+J�_�H
+[INFO] [DECRYPT] Attempting to decrypt 66 chars
+[INFO] [DECRYPT] String preview: @�W��F�i2O$������F�x`w����A��!8/&n.��([�LTK<V+J�_�H...
+[ERROR] [DECRYPT] Failed to decrypt message from 192.168.0.102:54772
+[ERROR] [DECRYPT] Error: error:1C80006B:Provider routines::wrong final block length
+[ERROR] [DECRYPT] Error stack: Error: error:1C80006B:Provider routines::wrong final block length
+    at Decipheriv.final (node:internal/crypto/cipher:184:29)
+    at Encryptor.decrypt (/Users/starnes/Documents/morphProtocol/dist/crypto/encryptor.js:46:31)
+    at Encryptor.simpleDecrypt (/Users/starnes/Documents/morphProtocol/dist/crypto/encryptor.js:86:30)
+    at Socket.<anonymous> (/Users/starnes/Documents/morphProtocol/dist/transport/udp/server.js:141:54)
+    at Socket.emit (node:events:519:28)
+    at UDP.onMessage [as onmessage] (node:dgram:990:8)
+[ERROR] [DECRYPT] Message length: 66
+[ERROR] [DECRYPT] Message type: object
+[ERROR] [DECRYPT] Message hex (first 100): 40bd57b181468e6932000000004f24029d80bf98928b460ee178607707b81dc1fdb041fd8b21382f03266e1b1a2e84a8285b14e44c544b3c5618072b194ab15f9e48
+[ERROR] [DECRYPT] Message base64 (first 100): QL1XsYFGjmkyAAAAAE8kAp2Av5iSi0YO4Xhgdwe4HcH9sEH9iyE4LwMmbhsaLoSoKFsU5ExUSzxWGAcrGUqxX55I
+[INFO] [DECRYPT] Found 1 possible sessions for this IP:port
+[INFO] [DECRYPT]   - Key: 192.168.0.102:54772:bd57b181468e6932, ClientID: bd57b181468e6932ec6b1617bd76c5e6

@@ -1,96 +1,90 @@
-⚡️  To Native ->  MorphProtocol connect 96847747
-2025-12-19 18:21:16.839598+0800 App[4525:3059398] 🔵 MorphProtocolPlugin: connect() called
-2025-12-19 18:21:16.840013+0800 App[4525:3059398] 🔵 MorphProtocolPlugin: Connecting to 192.168.0.100:12301
-2025-12-19 18:21:16.840134+0800 App[4525:3059398] 🔵 MorphProtocolPlugin: Layer=3, Padding=8, Template=1
-2025-12-19 18:21:16.841451+0800 App[4525:3059398] 🔒 MorphUDPClient: Initializing...
-2025-12-19 18:21:16.842063+0800 App[4525:3059398] 🔐 MorphEncryptor: Initializing with key string
-2025-12-19 18:21:16.843143+0800 App[4525:3059398] 🔐 MorphEncryptor: Key length: 32, IV length: 16
-2025-12-19 18:21:16.843269+0800 App[4525:3059398] ✅ MorphEncryptor: Initialized successfully
-2025-12-19 18:21:16.852094+0800 App[4525:3059398] 🎭 FunctionRegistry: Initializing with layer=3
-2025-12-19 18:21:16.872921+0800 App[4525:3059398] 🎭 FunctionRegistry: Precomputed combinations:
-2025-12-19 18:21:16.873182+0800 App[4525:3059398]    Layer 1: 11 combinations
-2025-12-19 18:21:16.873230+0800 App[4525:3059398]    Layer 2: 110 combinations
-2025-12-19 18:21:16.873268+0800 App[4525:3059398]    Layer 3: 990 combinations
-2025-12-19 18:21:16.873308+0800 App[4525:3059398]    Layer 4: 7920 combinations
-2025-12-19 18:21:16.874121+0800 App[4525:3059398]    Time: 0.021s
-2025-12-19 18:21:16.874235+0800 App[4525:3059398] 🎭 MorphObfuscator: Initialized
-2025-12-19 18:21:16.874275+0800 App[4525:3059398]    Key: 52
-2025-12-19 18:21:16.874309+0800 App[4525:3059398]    Layer: 3
-2025-12-19 18:21:16.874343+0800 App[4525:3059398]    Padding: 8
-2025-12-19 18:21:16.874375+0800 App[4525:3059398]    Total Combinations: 990
-2025-12-19 18:21:16.876338+0800 App[4525:3059398] 🎭 MorphUDPClient: Using QUIC template
-2025-12-19 18:21:16.876441+0800 App[4525:3059398] ✅ MorphUDPClient: Initialized
-2025-12-19 18:21:16.876501+0800 App[4525:3059398]    Layer: 3
-2025-12-19 18:21:16.876538+0800 App[4525:3059398]    Padding: 8
-2025-12-19 18:21:16.876569+0800 App[4525:3059398]    Template: QUIC
-2025-12-19 18:21:16.876652+0800 App[4525:3059398] 🔌 MorphUDPClient: Connecting to 192.168.0.100:12301
+⚡️  To Native ->  MorphProtocol connect 98763399
+2025-12-20 16:32:13.192092+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: connect() called
+2025-12-20 16:32:13.192261+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: Connecting to 192.168.0.100:12301
+2025-12-20 16:32:13.192295+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: Layer=3, Padding=8, Template=1
+2025-12-20 16:32:13.192846+0800 App[4787:3312697] 🔒 MorphUDPClient: Initializing...
+2025-12-20 16:32:13.192899+0800 App[4787:3312697] 🔐 MorphEncryptor: Initializing with key string
+2025-12-20 16:32:13.194189+0800 App[4787:3312697] 🔐 MorphEncryptor: Key length: 32, IV length: 12
+2025-12-20 16:32:13.194226+0800 App[4787:3312697] ❌ MorphEncryptor: Invalid IV length (expected 16, got 12)
+2025-12-20 16:32:13.268460+0800 App[4787:3312697] ❌ MorphProtocolPlugin: Failed to create client: invalidNonceLength
+ERROR MESSAGE:  {"message":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)","errorMessage":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)"}
+⚡️  [error] - {"message":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)","errorMessage":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)"}
+⚡️  [error] - Connect failed: {"errorMessage":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)"}
+⚡️  To Native ->  MorphProtocol connect 98763400
+2025-12-20 16:32:17.134732+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: connect() called
+2025-12-20 16:32:17.135013+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: Connecting to 192.168.0.100:12301
+2025-12-20 16:32:17.135082+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: Layer=3, Padding=8, Template=1
+2025-12-20 16:32:17.135139+0800 App[4787:3312697] 🔒 MorphUDPClient: Initializing...
+2025-12-20 16:32:17.135178+0800 App[4787:3312697] 🔐 MorphEncryptor: Initializing with key string
+2025-12-20 16:32:17.135265+0800 App[4787:3312697] 🔐 MorphEncryptor: Key length: 32, IV length: 12
+2025-12-20 16:32:17.135304+0800 App[4787:3312697] ❌ MorphEncryptor: Invalid IV length (expected 16, got 12)
+2025-12-20 16:32:17.135372+0800 App[4787:3312697] ❌ MorphProtocolPlugin: Failed to create client: invalidNonceLength
+ERROR MESSAGE:  {"errorMessage":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)","message":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)"}
+⚡️  [error] - {"errorMessage":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)","message":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)"}
+⚡️  [error] - Connect failed: {"errorMessage":"Failed to create MorphProtocol client: The operation couldn’t be completed. (MorphvpnCapacitorMorphprotocol.MorphError error 2.)"}
+⚡️  To Native ->  MorphProtocol connect 98763401
+2025-12-20 16:32:55.507216+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: connect() called
+2025-12-20 16:32:55.507392+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: Connecting to 192.168.0.100:12301
+2025-12-20 16:32:55.507456+0800 App[4787:3312697] 🔵 MorphProtocolPlugin: Layer=3, Padding=8, Template=1
+2025-12-20 16:32:55.507508+0800 App[4787:3312697] 🔒 MorphUDPClient: Initializing...
+2025-12-20 16:32:55.507546+0800 App[4787:3312697] 🔐 MorphEncryptor: Initializing with key string
+2025-12-20 16:32:55.507625+0800 App[4787:3312697] 🔐 MorphEncryptor: Key length: 32, IV length: 16
+2025-12-20 16:32:55.507666+0800 App[4787:3312697] ✅ MorphEncryptor: Initialized successfully
+2025-12-20 16:32:55.515907+0800 App[4787:3312697] 🎭 FunctionRegistry: Initializing with layer=3
+2025-12-20 16:32:55.536559+0800 App[4787:3312697] 🎭 FunctionRegistry: Precomputed combinations:
+2025-12-20 16:32:55.536691+0800 App[4787:3312697]    Layer 1: 11 combinations
+2025-12-20 16:32:55.536731+0800 App[4787:3312697]    Layer 2: 110 combinations
+2025-12-20 16:32:55.536764+0800 App[4787:3312697]    Layer 3: 990 combinations
+2025-12-20 16:32:55.536795+0800 App[4787:3312697]    Layer 4: 7920 combinations
+2025-12-20 16:32:55.536901+0800 App[4787:3312697]    Time: 0.021s
+2025-12-20 16:32:55.536932+0800 App[4787:3312697] 🎭 MorphObfuscator: Initialized
+2025-12-20 16:32:55.537583+0800 App[4787:3312697]    Key: 122
+2025-12-20 16:32:55.538405+0800 App[4787:3312697]    Layer: 3
+2025-12-20 16:32:55.538521+0800 App[4787:3312697]    Padding: 8
+2025-12-20 16:32:55.538768+0800 App[4787:3312697]    Total Combinations: 990
+2025-12-20 16:32:55.539863+0800 App[4787:3312697] 🎭 MorphUDPClient: Using QUIC template
+2025-12-20 16:32:55.539916+0800 App[4787:3312697] ✅ MorphUDPClient: Initialized
+2025-12-20 16:32:55.539962+0800 App[4787:3312697]    Layer: 3
+2025-12-20 16:32:55.539992+0800 App[4787:3312697]    Padding: 8
+2025-12-20 16:32:55.540022+0800 App[4787:3312697]    Template: QUIC
+2025-12-20 16:32:55.542360+0800 App[4787:3312697] 🔌 MorphUDPClient: Connecting to 192.168.0.100:12301
 ⚡️  TO JS {"success":true,"message":"Connecting to 192.168.0.100:12301"}
-2025-12-19 18:21:17.332568+0800 App[4525:3059801] 🔌 MorphUDPClient: State changed to preparing
+2025-12-20 16:32:55.864652+0800 App[4787:3312697] 🔌 MorphUDPClient: State changed to preparing
 ⚡️  TO JS {"status":"connecting"}
-2025-12-19 18:21:17.333510+0800 App[4525:3059801] 🔌 MorphUDPClient: State changed to ready
-⚡️  TO JS {"status":"connected"}
-2025-12-19 18:21:17.334067+0800 App[4525:3059801] ✅ MorphUDPClient: Connection ready
-2025-12-19 18:21:17.334378+0800 App[4525:3059801] 🤝 MorphUDPClient: Sending handshake...
-2025-12-19 18:21:17.339873+0800 App[4525:3059801] 🤝 MorphUDPClient: Handshake JSON: {"clientID":"P7n90Mmw7rVP4nyb97tJTQ==","publicKey":"","fnInitor":{"substitutionTable":[172,134,7,149,87,196,162,133,130,217,0,110,85,231,152,147,116,51,165,27,86,178,173,229,197,17,94,117,1,220,44,73,188,72,78,245,12,29,80,215,238,108,28,163,55,54,219,32,170,69,11,40,171,30,136,63,206,143,140,90,60,137,33,101,91,244,67,58,135,199,203,179,192,121,222,96,209,191,233,15,42,2,36,112,92,242,74,193,68,38,3,41,208,127,189,114,138,122,201,226,99,129,227,181,207,160,148,23,31,105,225,190,106,62,88,159,198,16,43,35,252,141,243,21,210,180,239,24,118,154,109,79,5,97,111,144,123,39,83,145,216,230,228,77,161,246,175,53,204,128,10,8,131,132,218,82,214,75,13,76,22,47,71,156,4,19,64,241,49,14,212,146,26,104,200,186,115,151,34,168,150,50,37,52,221,164,139,185,248,251,142,249,103,177,182,167,236,254,183,126,155,57,253,93,98,6,25,223,65,113,153,20,194,56,176,61,250,59,84,157,81,224,211,66,46,237,174,70,234,255,124,166,184,187,48,158,9,205,169,195,102,202,125,232,213,119,18,89,247,235,240,95,
 ⚡️  [log] - Status changed: {"status":"connecting"}
-⚡️  [log] - Status changed: {"status":"connected"}
-2025-12-19 18:21:17.344128+0800 App[4525:3059801] 🤝 MorphUDPClient: Encrypted handshake: c9F3TDFVR4dq0Gp3joQZdDP+tM1jSgMvf8slSs9ww1LZW0CocV...
-2025-12-19 18:21:17.347864+0800 App[4525:3059801] ✅ MorphUDPClient: Handshake sent successfully
-2025-12-19 18:21:17.452789+0800 App[4525:3059621] 📥 MorphUDPClient: Received 108 bytes
-2025-12-19 18:21:17.452885+0800 App[4525:3059621] ❌ MorphUDPClient: Failed to decapsulate packet
-⚡️  To Native ->  MorphProtocol send 96847748
-2025-12-19 18:21:37.128201+0800 App[4525:3059404] 🔐 MorphUDPClient: Encrypted 46 → 48 bytes
-⚡️  TO JS {"message":"Data sent","success":true}
-2025-12-19 18:21:37.131083+0800 App[4525:3059404] 🎭 MorphUDPClient: Obfuscated 48 → 59 bytes
-2025-12-19 18:21:37.132874+0800 App[4525:3059404] 📦 MorphUDPClient: Encapsulated with QUIC: 59 → 72 bytes
-2025-12-19 18:21:37.133428+0800 App[4525:3059398] ✅ MorphUDPClient: Sent 72 bytes
-⚡️  To Native ->  MorphProtocol disconnect 96847749
-2025-12-19 18:23:01.927387+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: disconnect() called
-2025-12-19 18:23:01.927475+0800 App[4525:3059943] 🔌 MorphUDPClient: Disconnecting...
-⚡️  TO JS {"success":true,"message":"Disconnected"}
-⚡️  To Native ->  MorphProtocol connect 96847750
-2025-12-19 18:23:11.890657+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: connect() called
-2025-12-19 18:23:11.891065+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: Connecting to 192.168.0.100:12301
-2025-12-19 18:23:11.891196+0800 App[4525:3059943] 🔵 MorphProtocolPlugin: Layer=2, Padding=8, Template=2
-2025-12-19 18:23:11.891300+0800 App[4525:3059943] 🔒 MorphUDPClient: Initializing...
-2025-12-19 18:23:11.891378+0800 App[4525:3059943] 🔐 MorphEncryptor: Initializing with key string
-2025-12-19 18:23:11.891529+0800 App[4525:3059943] 🔐 MorphEncryptor: Key length: 32, IV length: 16
-2025-12-19 18:23:11.891632+0800 App[4525:3059943] ✅ MorphEncryptor: Initialized successfully
-2025-12-19 18:23:11.891777+0800 App[4525:3059943] 🎭 FunctionRegistry: Initializing with layer=2
-2025-12-19 18:23:11.917535+0800 App[4525:3059943] 🎭 FunctionRegistry: Precomputed combinations:
-2025-12-19 18:23:11.917796+0800 App[4525:3059943]    Layer 1: 11 combinations
-2025-12-19 18:23:11.917936+0800 App[4525:3059943]    Layer 2: 110 combinations
-2025-12-19 18:23:11.918026+0800 App[4525:3059943]    Layer 3: 990 combinations
-2025-12-19 18:23:11.918078+0800 App[4525:3059943]    Layer 4: 7920 combinations
-2025-12-19 18:23:11.918141+0800 App[4525:3059943]    Time: 0.026s
-2025-12-19 18:23:11.918194+0800 App[4525:3059943] 🎭 MorphObfuscator: Initialized
-2025-12-19 18:23:11.918260+0800 App[4525:3059943]    Key: 52
-2025-12-19 18:23:11.918303+0800 App[4525:3059943]    Layer: 2
-2025-12-19 18:23:11.918352+0800 App[4525:3059943]    Padding: 8
-2025-12-19 18:23:11.918395+0800 App[4525:3059943]    Total Combinations: 110
-2025-12-19 18:23:11.918659+0800 App[4525:3059943] 🎭 MorphUDPClient: Using KCP template
-2025-12-19 18:23:11.918705+0800 App[4525:3059943] ✅ MorphUDPClient: Initialized
-2025-12-19 18:23:11.918947+0800 App[4525:3059943]    Layer: 2
-2025-12-19 18:23:11.919150+0800 App[4525:3059943]    Padding: 8
-2025-12-19 18:23:11.919287+0800 App[4525:3059943]    Template: KCP
-2025-12-19 18:23:11.919439+0800 App[4525:3059943] 🔌 MorphUDPClient: Connecting to 192.168.0.100:12301
-⚡️  TO JS {"message":"Connecting to 192.168.0.100:12301","success":true}
-2025-12-19 18:23:11.920853+0800 App[4525:3059943] 🔌 MorphUDPClient: State changed to preparing
-⚡️  TO JS {"status":"connecting"}
-2025-12-19 18:23:11.922697+0800 App[4525:3059943] 🔌 MorphUDPClient: State changed to ready
+2025-12-20 16:32:55.929997+0800 App[4787:3312699] 🔌 MorphUDPClient: State changed to ready
 ⚡️  TO JS {"status":"connected"}
-2025-12-19 18:23:11.922963+0800 App[4525:3059943] ✅ MorphUDPClient: Connection ready
-2025-12-19 18:23:11.923695+0800 App[4525:3059943] 🤝 MorphUDPClient: Sending handshake...
-⚡️  [log] - Status changed: {"status":"connecting"}
-2025-12-19 18:23:11.925095+0800 App[4525:3059943] 🤝 MorphUDPClient: Handshake JSON: {"fnInitor":{"substitutionTable":[109,155,204,97,96,176,234,195,179,159,80,70,59,205,173,42,209,56,251,84,17,177,37,178,106,36,120,210,183,57,53,148,227,18,51,154,35,91,136,86,16,11,79,87,103,10,252,100,60,240,185,129,26,93,127,216,48,171,20,31,104,200,22,9,131,233,247,143,121,248,238,81,119,14,90,189,135,222,126,92,158,114,88,94,208,33,147,82,101,164,169,12,139,225,232,203,128,110,184,50,142,1,241,235,223,107,65,211,213,220,156,190,45,162,44,157,214,78,244,144,122,130,13,75,4,125,2,138,85,193,141,68,113,229,116,250,255,172,124,249,19,181,112,41,111,188,151,236,137,146,168,165,149,7,167,5,21,170,228,27,8,166,25,24,174,66,108,163,242,207,152,253,49,134,140,47,217,175,150,187,133,231,95,69,73,71,186,219,230,196,28,243,29,72,61,32,74,246,105,40,98,115,254,224,52,54,182,58,0,153,38,30,180,218,34,43,226,23,206,102,39,191,197,212,201,123,118,117,46,63,161,194,160,237,64,55,221,6,83,192,198,15,89,215,239,245,62,3,132,145,99,67,76,199,202,77],"randomValue":6860339277009819690},"o
+2025-12-20 16:32:55.930507+0800 App[4787:3312699] ✅ MorphUDPClient: Connection ready
+2025-12-20 16:32:55.931613+0800 App[4787:3312699] 🤝 MorphUDPClient: Sending handshake...
+2025-12-20 16:32:55.937270+0800 App[4787:3312699] 🤝 MorphUDPClient: Handshake JSON: {"key":122,"templateId":1,"publicKey":"","userId":"test_user","fnInitor":{"randomValue":5603862874558158673,"substitutionTable":[137,191,202,78,144,50,240,79,128,58,86,87,225,55,105,45,104,107,97,178,37,77,242,186,132,234,53,139,207,117,17,172,7,134,248,83,167,190,205,212,251,208,39,123,197,22,157,8,5,42,222,219,20,103,109,122,243,241,217,147,31,54,237,28,196,199,165,46,76,255,238,43,116,140,146,210,91,66,102,168,113,23,200,166,126,252,232,151,65,25,90,164,93,6,115,244,85,112,183,81,173,181,127,75,231,149,10,95,162,213,106,80,15,245,226,96,18,170,184,121,239,227,67,155,36,33,163,30,24,111,228,145,84,56,229,68,125,108,174,59,150,12,16,57,203,69,192,138,119,63,153,26,250,235,60,13,189,160,230,114,156,177,176,195,135,253,141,175,3,32,161,233,41,220,152,4,209,180,99,62,35,34,70,171,215,120,118,47,148,101,206,74,92,72,188,201,246,218,14,49,254,131,44,61,247,182,130,214,143,100,0,11,193,142,52,9,136,194,73,38,179,159,236,19,64,98,158,124,169,154,249,224,82,198,204,71,185,211,48
+2025-12-20 16:32:55.942788+0800 App[4787:3312699] 🤝 MorphUDPClient: Encrypted handshake: kzs11eMQPmTqpeZgWL0bZCM/mIVbyQbwjat/cnkDwItbl8Qg82...
 ⚡️  [log] - Status changed: {"status":"connected"}
-2025-12-19 18:23:11.925526+0800 App[4525:3059943] 🤝 MorphUDPClient: Encrypted handshake: lKcmZlItldbfTh7VTiRnlnFezXLKW4leBr+WF6UNRb+LeLosfZ...
-2025-12-19 18:23:11.925972+0800 App[4525:3060366] ✅ MorphUDPClient: Handshake sent successfully
-2025-12-19 18:23:12.236517+0800 App[4525:3059943] 📥 MorphUDPClient: Received 108 bytes
-2025-12-19 18:23:12.236645+0800 App[4525:3059943] ❌ MorphUDPClient: Failed to decapsulate packet
-⚡️  To Native ->  MorphProtocol send 96847751
+2025-12-20 16:32:55.947029+0800 App[4787:3312699] ✅ MorphUDPClient: Handshake sent successfully
+2025-12-20 16:32:55.982495+0800 App[4787:3312697] 📥 MorphUDPClient: Received 108 bytes
+2025-12-20 16:32:55.982819+0800 App[4787:3312697] 📥 Raw data (hex): 71 6c 77 77 67 75 45 5a 47 35 47 50 6f 63 49 36 38 43 46 6b 66 6d 47 45 38 57 62 59 61 6e 34 6d 2b 6c 6f 4f 46 65 6e 35 6d 65 6d 4d 43 34 65 58 53 37
+2025-12-20 16:32:55.982904+0800 App[4787:3312697] 🤝 Trying to parse handshake response
+2025-12-20 16:32:55.982947+0800 App[4787:3312697] 🤝 Received 108 bytes, base64 string length: 108
+2025-12-20 16:32:55.982994+0800 App[4787:3312697] 🤝 Base64 preview: qlwwguEZG5GPocI68CFkfmGE8WbYan4m+loOFen5memMC4eXS7...
+2025-12-20 16:32:55.983044+0800 App[4787:3312697] 🤝 Decoded to 80 bytes encrypted data
+2025-12-20 16:32:55.983094+0800 App[4787:3312697] 🤝 Decrypted to 73 bytes
+2025-12-20 16:32:55.983133+0800 App[4787:3312697] 🤝 JSON string: {"port":65199,"clientID":"vVexgUaOaTLsaxYXvXbF5g==","status":"connected"}
+2025-12-20 16:32:55.983247+0800 App[4787:3312697] ✅ Valid handshake response
+2025-12-20 16:32:55.983287+0800 App[4787:3312697] ✅ MorphUDPClient: Received handshake response
+2025-12-20 16:32:55.983418+0800 App[4787:3312697] ✅ MorphUDPClient: Handshake response - port: 65199, status: connected
+⚡️  To Native ->  MorphProtocol send 98763402
+2025-12-20 16:33:02.114890+0800 App[4787:3313210] 📤 MorphUDPClient: Sending 46 bytes
+2025-12-20 16:33:02.115254+0800 App[4787:3313210] 📤 Original data (hex): 48 65 6c 6c 6f 2c 20 4d 6f 72 70 68 50 72 6f 74 6f 63 6f 6c 21 20 32 30 32 35 2d 31 32 2d 32 30 54 30 38 3a 33 33 3a 30 32 2e 31 31 32 5a
+2025-12-20 16:33:02.115375+0800 App[4787:3313784] 📤 After encrypt: 48 bytes
 ⚡️  TO JS {"success":true,"message":"Data sent"}
-2025-12-19 18:23:23.399638+0800 App[4525:3060387] 🔐 MorphUDPClient: Encrypted 46 → 48 bytes
-2025-12-19 18:23:23.400079+0800 App[4525:3060387] 🎭 MorphUDPClient: Obfuscated 48 → 59 bytes
-Swift/arm64e-apple-ios.swiftinterface:41637: Fatal error: Double value cannot be converted to UInt32 because the result would be greater than UInt32.max
-2025-12-19 18:23:23.400635+0800 App[4525:3060387] Swift/arm64e-apple-ios.swiftinterface:41637: Fatal error: Double value cannot be converted to UInt32 because the result would be greater than UInt32.max
+2025-12-20 16:33:02.115650+0800 App[4787:3313784] 📤 Encrypted (hex): eb 09 20 0c 86 65 d6 1e 36 19 11 9d 15 da 2b 71 51 37 47 88 3c b6 4d 2a 07 94 b7 85 b5 5f a5 11 d5 9f 0d 70 12 dd c3 10 9e 53 5e 7a b0 1f b2 5a
+2025-12-20 16:33:02.116061+0800 App[4787:3313784] 📤 After obfuscate: 53 bytes
+2025-12-20 16:33:02.116275+0800 App[4787:3313784] 📤 Obfuscated (hex): 4f 24 02 9d 80 bf 98 92 8b 46 0e e1 78 60 77 07 b8 1d c1 fd b0 41 fd 8b 21 38 2f 03 26 6e 1b 1a 2e 84 a8 28 5b 14 e4 4c 54 4b 3c 56 18 07 2b 19 4a b1
+2025-12-20 16:33:02.116320+0800 App[4787:3313784] 📤 Using template: QUIC
+2025-12-20 16:33:02.117333+0800 App[4787:3313784] 📤 After encapsulate (QUIC): 66 bytes
+2025-12-20 16:33:02.117553+0800 App[4787:3313784] 📤 Final packet (hex): 40 bd 57 b1 81 46 8e 69 32 00 00 00 00 4f 24 02 9d 80 bf 98 92 8b 46 0e e1 78 60 77 07 b8 1d c1 fd b0 41 fd 8b 21 38 2f 03 26 6e 1b 1a 2e 84 a8 28 5b
+2025-12-20 16:33:02.117597+0800 App[4787:3313784] 📤 Sending to connection...
+2025-12-20 16:33:02.118120+0800 App[4787:3313210] ✅ MorphUDPClient: Sent 66 bytes successfully
+⚡️  To Native ->  MorphProtocol disconnect 98763403
+2025-12-20 16:33:13.205424+0800 App[4787:3313210] 🔵 MorphProtocolPlugin: disconnect() called
+2025-12-20 16:33:13.205641+0800 App[4787:3313210] 🔌 MorphUDPClient: Disconnecting...
+⚡️  TO JS {"success":true,"message":"Disconnected"}
