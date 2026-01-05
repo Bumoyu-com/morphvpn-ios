@@ -100,6 +100,7 @@ class ICMPPinger {
     private func createICMPPacket(identifier: UInt16, sequenceNumber: UInt16) -> Data? {
         var packet = Data(count: 64)
         
+        // 第一步：写入 header 和填充数据
         packet.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) in
             guard let baseAddress = ptr.baseAddress else { return }
             
@@ -118,9 +119,12 @@ class ICMPPinger {
             let dataStart = baseAddress.advanced(by: MemoryLayout<ICMPHeader>.size)
             let dataSize = 64 - MemoryLayout<ICMPHeader>.size
             memset(dataStart, 0x42, dataSize)
-            
-            // 计算校验和
-            let checksum = calculateChecksum(data: packet)
+        }
+        
+        // 第二步：计算并写入校验和（避免重叠访问）
+        let checksum = calculateChecksum(data: packet)
+        packet.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) in
+            guard let baseAddress = ptr.baseAddress else { return }
             var checksumBigEndian = checksum.bigEndian
             baseAddress.advanced(by: 2).copyMemory(from: &checksumBigEndian, byteCount: 2)
         }
@@ -166,9 +170,10 @@ class ICMPPinger {
     
     private func receiveReply(identifier: UInt16, sequenceNumber: UInt16) -> Bool {
         var buffer = Data(count: 1024)
+        let bufferSize = buffer.count
         
         let received = buffer.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) -> Int in
-            recv(socket, ptr.baseAddress, buffer.count, 0)
+            recv(socket, ptr.baseAddress, bufferSize, 0)
         }
         
         guard received > 0 else {
