@@ -21,6 +21,7 @@
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
     "@morphvpn/capacitor-morphprotocol": "file:packages/morphprotocol-plugin",
+    "@morphvpn/capacitor-ping": "file:packages/ping-plugin",
     "@morphvpn/capacitor-wireguard": "file:packages/wireguard-plugin",
     "@reduxjs/toolkit": "^1.9.3",
     "@thumbmarkjs/thumbmarkjs": "^1.2.0",

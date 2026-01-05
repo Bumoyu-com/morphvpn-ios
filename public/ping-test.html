@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ping 插件测试</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .test-group {
+      margin-bottom: 30px;
+    }
+    .test-group h2 {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007AFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      background: #0051D5;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .result {
+      padding: 15px;
+      background: #f8f8f8;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .success {
+      color: #34C759;
+    }
+    .error {
+      color: #FF3B30;
+    }
+    .loading {
+      color: #007AFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏓 Ping 插件测试</h1>
+    
+    <div class="test-group">
+      <h2>单个地址测试</h2>
+      <input type="text" id="singleAddress" placeholder="输入地址（如：8.8.8.8 或 google.com）" value="8.8.8.8">
+      <button onclick="testSinglePing()">开始 Ping</button>
+      <div id="singleResult" class="result"></div>
+    </div>
+
+    <div class="test-group">
+      <h2>批量测试（顺序）</h2>
+      <button onclick="testMultiplePing()">测试多个地址</button>
+      <div id="multipleResult" class="result"></div>
+    </div>
+
+    <div class="test-group">
+      <h2>并发测试</h2>
+      <button onclick="testConcurrentPing()">并发测试多个地址</button>
+      <div id="concurrentResult" class="result"></div>
+    </div>
+  </div>
+
+  <script src="/ping-bridge.js"></script>
+  <script>
+    function log(elementId, message, type = 'info') {
+      const element = document.getElementById(elementId);
+      const timestamp = new Date().toLocaleTimeString();
+      const className = type === 'success' ? 'success' : type === 'error' ? 'error' : 'loading';
+      element.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+      element.scrollTop = element.scrollHeight;
+    }
+
+    function clearLog(elementId) {
+      document.getElementById(elementId).innerHTML = '';
+    }
+
+    async function testSinglePing() {
+      const address = document.getElementById('singleAddress').value.trim();
+      if (!address) {
+        alert('请输入地址');
+        return;
+      }
+
+      clearLog('singleResult');
+      log('singleResult', `开始 ping ${address}...`, 'loading');
+
+      try {
+        const startTime = Date.now();
+        const latency = await window.PingBridge.ping(address);
+        const totalTime = Date.now() - startTime;
+
+        if (latency !== null) {
+          log('singleResult', `✅ 成功！平均延迟: ${latency} ms`, 'success');
+          log('singleResult', `总耗时: ${totalTime} ms`, 'info');
+        } else {
+          log('singleResult', `❌ 超时或失败`, 'error');
+        }
+      } catch (error) {
+        log('singleResult', `❌ 错误: ${error.message}`, 'error');
+      }
+    }
+
+    async function testMultiplePing() {
+      const addresses = ['8.8.8.8', 'google.com', 'https://cloudflare.com', '1.1.1.1'];
+      
+      clearLog('multipleResult');
+      log('multipleResult', `开始批量测试 ${addresses.length} 个地址...`, 'loading');
+
+      try {
+        const startTime = Date.now();
+        const results = await window.PingBridge.pingMultiple(addresses);
+        const totalTime = Date.now() - startTime;
+
+        results.forEach(result => {
+          if (result.latency !== null) {
+            log('multipleResult', `✅ ${result.address}: ${result.latency} ms`, 'success');
+          } else {
+            log('multipleResult', `❌ ${result.address}: 超时`, 'error');
+          }
+        });
+
+        log('multipleResult', `总耗时: ${totalTime} ms`, 'info');
+      } catch (error) {
+        log('multipleResult', `❌ 错误: ${error.message}`, 'error');
+      }
+    }
+
+    async function testConcurrentPing() {
+      const addresses = ['8.8.8.8', 'google.com', 'https://cloudflare.com', '1.1.1.1'];
+      
+      clearLog('concurrentResult');
+      log('concurrentResult', `开始并发测试 ${addresses.length} 个地址...`, 'loading');
+
+      try {
+        const startTime = Date.now();
+        const results = await window.PingBridge.pingConcurrent(addresses);
+        const totalTime = Date.now() - startTime;
+
+        results.forEach(result => {
+          if (result.latency !== null) {
+            log('concurrentResult', `✅ ${result.address}: ${result.latency} ms`, 'success');
+          } else {
+            log('concurrentResult', `❌ ${result.address}: 超时`, 'error');
+          }
+        });
+
+        log('concurrentResult', `总耗时: ${totalTime} ms (并发)`, 'info');
+      } catch (error) {
+        log('concurrentResult', `❌ 错误: ${error.message}`, 'error');
+      }
+    }
+
+    // 页面加载完成后检查插件
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (window.PingBridge) {
+          console.log('✅ PingBridge 已加载');
+        } else {
+          console.error('❌ PingBridge 未加载');
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

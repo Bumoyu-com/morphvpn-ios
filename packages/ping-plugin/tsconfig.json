@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "target": "ES2017",
+    "lib": ["ES2017", "DOM"],
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist/esm",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
