@@ -74,17 +74,13 @@ class ICMPPinger {
     private func resolveHost() -> sockaddr_in? {
         NSLog("🏓 ICMPPinger: Resolving host: \(host)")
         
-        var hints = addrinfo()
-        hints.ai_family = AF_INET
-        hints.ai_socktype = SOCK_DGRAM
-        hints.ai_protocol = IPPROTO_ICMP
-        
+        // 不设置 hints，让系统自动选择
         var result: UnsafeMutablePointer<addrinfo>?
-        let status = getaddrinfo(host, nil, &hints, &result)
+        let status = getaddrinfo(host, nil, nil, &result)
         
         if status != 0 {
             let errorStr = String(cString: gai_strerror(status))
-            NSLog("❌ ICMPPinger: getaddrinfo failed: \(errorStr)")
+            NSLog("❌ ICMPPinger: getaddrinfo failed: \(errorStr) (status: \(status))")
             return nil
         }
         
@@ -95,14 +91,29 @@ class ICMPPinger {
         
         defer { freeaddrinfo(info) }
         
-        guard let addr = info.pointee.ai_addr else {
-            NSLog("❌ ICMPPinger: ai_addr is null")
-            return nil
+        // 遍历结果，找到 IPv4 地址
+        var current = info
+        while true {
+            if current.pointee.ai_family == AF_INET {
+                guard let addr = current.pointee.ai_addr else {
+                    NSLog("❌ ICMPPinger: ai_addr is null")
+                    return nil
+                }
+                
+                let sockaddr = addr.withMemoryRebound(to: sockaddr_in.self, capacity: 1) { $0.pointee }
+                let ipString = String(cString: inet_ntoa(sockaddr.sin_addr))
+                NSLog("🏓 ICMPPinger: Successfully resolved to IPv4: \(ipString)")
+                return sockaddr
+            }
+            
+            guard let next = current.pointee.ai_next else {
+                break
+            }
+            current = next
         }
         
-        let sockaddr = addr.withMemoryRebound(to: sockaddr_in.self, capacity: 1) { $0.pointee }
-        NSLog("🏓 ICMPPinger: Successfully resolved host")
-        return sockaddr
+        NSLog("❌ ICMPPinger: No IPv4 address found")
+        return nil
     }
     
     private func createSocket() -> Bool {
