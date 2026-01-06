@@ -8,6 +8,8 @@ PODS:
     - Capacitor
   - MorphvpnCapacitorMorphprotocol (1.0.0):
     - Capacitor
+  - MorphvpnCapacitorPing (1.0.0):
+    - Capacitor
   - MorphvpnCapacitorWireguard (1.0.0):
     - Capacitor
 
@@ -17,6 +19,7 @@ DEPENDENCIES:
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - MorphvpnCapacitorMorphprotocol (from `../../packages/morphprotocol-plugin`)
+  - MorphvpnCapacitorPing (from `../../packages/ping-plugin`)
   - MorphvpnCapacitorWireguard (from `../../packages/wireguard-plugin`)
 
 EXTERNAL SOURCES:
@@ -30,6 +33,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/splash-screen"
   MorphvpnCapacitorMorphprotocol:
     :path: "../../packages/morphprotocol-plugin"
+  MorphvpnCapacitorPing:
+    :path: "../../packages/ping-plugin"
   MorphvpnCapacitorWireguard:
     :path: "../../packages/wireguard-plugin"
 
@@ -39,8 +44,9 @@ SPEC CHECKSUMS:
   CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
   CapacitorSplashScreen: e388b8e0ed0e982a9d3a40417f478e7a018a8763
   MorphvpnCapacitorMorphprotocol: 7d69b1af1f2bfcf7bcc12d372d5b3d84053eb427
+  MorphvpnCapacitorPing: 216f9a6602f0f43aa35939b288efadabc7d86d3e
   MorphvpnCapacitorWireguard: 5479c74a178f7f9ed43baccb79c3cd760acb312c
 
-PODFILE CHECKSUM: 13cf4c1a9538ced2df5489b89d88fa223d620162
+PODFILE CHECKSUM: 171d3c65550803073258469f4502f26aa28e8e55
 
 COCOAPODS: 1.16.2

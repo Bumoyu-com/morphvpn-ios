@@ -7,9 +7,9 @@ const { Option } = Select;
 
 export const TestMorphProtocol: React.FC = () => {
   const [status, setStatus] = useState<string>('disconnected');
-  const [host, setHost] = useState('192.168.0.100');
+  const [host, setHost] = useState('192.168.0.105');
   const [port, setPort] = useState(12301);
-  const [encryptionKey, setEncryptionKey] = useState('eYlJKEWW9YvqZvLU1IcgnKnqx5W7nys+btsy4VxdYHA=:26n7M84MgUFuPcT8LR/p2Q==');
+  const [encryptionKey, setEncryptionKey] = useState('5GyRGmlcLEPoisGEZ7/GwDPqRD25k9+Eb4fcRizo+6k=:kYVe55c+rVYcFfpcM/gr0g==');
   const [layer, setLayer] = useState(3);
   const [padding, setPadding] = useState(8);
   const [templateType, setTemplateType] = useState(1);

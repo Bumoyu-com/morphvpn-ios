@@ -9,6 +9,7 @@ import Input from '../components/base/Input';
 import LocaleSelector from '../components/settingGroup/LocaleSelector'
 import { getData } from '../components/MyStorage';
 import { VPNComponent } from '../components/TestVpn';
+import { MorphProtocolTestHub } from '../components/MorphProtocolTestHub';
 
 interface LoginPageProps { }
 const LoginPage: React.FC<LoginPageProps> = ({ }) => {
@@ -16,6 +17,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ }) => {
 
     const [userEmail, setuserEmail] = useState<string>('');
     const [userPSW, setuserPSW] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
     const [onSubmiting, setOnSubmiting] = useState(false);
 
 
@@ -107,9 +109,84 @@ const LoginPage: React.FC<LoginPageProps> = ({ }) => {
         }
     }
 
+    //test ping
+    async function testSinglePing() {
+
+        console.log('singleResult', `开始 ping ${address}...`, 'loading');
+
+        try {
+            const startTime = Date.now();
+            const latency = await window.PingBridge.ping(address);
+            const totalTime = Date.now() - startTime;
+
+            if (latency !== null) {
+                console.log('singleResult', `✅ 成功！平均延迟: ${latency} ms`, 'success');
+                console.log('singleResult', `总耗时: ${totalTime} ms`, 'info');
+            } else {
+                console.log('singleResult', `❌ 超时或失败`, 'error');
+            }
+        } catch (error: any) {
+            console.log('singleResult', `❌ 错误: ${error.message}`, 'error');
+        }
+    }
+
+    async function testMultiplePing() {
+        const addresses = ['8.8.8.8', '1.1.1.1', '141.164.34.61', '108.61.196.101', 'https://www.google.com'];
+
+        console.log('multipleResult', `开始批量测试 ${addresses.length} 个地址...`, 'loading');
+
+        try {
+            const startTime = Date.now();
+            const results = await window.PingBridge.pingMultiple(addresses);
+            const totalTime = Date.now() - startTime;
+
+            results.forEach(result => {
+                if (result.latency !== null) {
+                    console.log('multipleResult', `✅ ${result.address}: ${result.latency} ms`, 'success');
+                } else {
+                    console.log('multipleResult', `❌ ${result.address}: 超时`, 'error');
+                }
+            });
+
+            console.log('multipleResult', `总耗时: ${totalTime} ms`, 'info');
+        } catch (error: any) {
+            console.log('multipleResult', `❌ 错误: ${error.message}`, 'error');
+        }
+    }
+
+    async function testConcurrentPing() {
+        const addresses = ['8.8.8.8', '1.1.1.1', '141.164.34.61', '108.61.196.101', 'https://www.google.com'];
+
+        console.log('concurrentResult', `开始并发测试 ${addresses.length} 个地址...`, 'loading');
+
+        try {
+            const startTime = Date.now();
+            const results = await window.PingBridge.pingConcurrent(addresses);
+            const totalTime = Date.now() - startTime;
+
+            results.forEach(result => {
+                if (result.latency !== null) {
+                    console.log('concurrentResult', `✅ ${result.address}: ${result.latency} ms`, 'success');
+                } else {
+                    console.log('concurrentResult', `❌ ${result.address}: 超时`, 'error');
+                }
+            });
+
+            console.log('concurrentResult', `总耗时: ${totalTime} ms (并发)`, 'info');
+        } catch (error: any) {
+            console.log('concurrentResult', `❌ 错误: ${error?.message || String(error)}`, 'error');
+        }
+    }
+
+
     useEffect(() => {
         setTimeout(() => {
             getStorage();
+            if (window.PingBridge) {
+                console.log('✅ PingBridge 已加载');
+            } else {
+                console.error('❌ PingBridge 未加载');
+            }
         }, 100);
     }, []);
 
@@ -150,11 +227,47 @@ const LoginPage: React.FC<LoginPageProps> = ({ }) => {
                             onClick={onSubmit}
                             loading={onSubmiting}
                             style={{ color: 'white', height: '44px' }}
-                            className={btnstyles + ' mt-12 mb-44 w-full'}
+                            className={btnstyles + ' mt-12 mb-24 w-full'}
                         >
                             {onSubmiting ? i18n.t('account.logining') as string : i18n.t('account.ok') as string}
                         </Button>
-                        <VPNComponent />
+
+                        <Input
+                            id='singleAddress'
+                            type={'text'}
+                            value={address}
+                            onChange={e => setAddress(e.target.value)}
+                            className='form-input h-12 mt-10 w-full'
+                            placeholder="请输入要测试的地址"
+                        />
+                        <Button
+                            type="text"
+                            onClick={testSinglePing}
+                            style={{ color: 'white', height: '44px' }}
+                            className={btnstyles + ' mt-12 mb-12 w-full'}
+                        >
+                            单IP测试
+                        </Button>
+                        <Button
+                            type="text"
+                            onClick={testMultiplePing}
+                            style={{ color: 'white', height: '44px' }}
+                            className={btnstyles + ' mt-12 mb-12 w-full'}
+                        >
+                            多IP测试
+                        </Button>
+                        <Button
+                            type="text"
+                            onClick={testConcurrentPing}
+                            style={{ color: 'white', height: '44px' }}
+                            className={btnstyles + ' mt-12 mb-12 w-full'}
+                        >
+                            并发测试
+                        </Button>
+                        {/* <VPNComponent /> */}
+                        <div>
+                            <MorphProtocolTestHub />
+                        </div>
                     </div>
                 </div>
 
