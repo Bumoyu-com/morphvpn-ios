@@ -4,6 +4,8 @@ import Capacitor
 @objc(PingPlugin)
 public class PingPlugin: CAPPlugin {
     
+    private var activePingers: [String: SwiftyPing] = [:]
+    
     @objc func ping(_ call: CAPPluginCall) {
         guard let address = call.getString("address") else {
             NSLog("🏓 PingPlugin: Missing address parameter")
@@ -18,23 +20,71 @@ public class PingPlugin: CAPPlugin {
         NSLog("🏓 PingPlugin: Extracted host: \(host)")
         
         // 在后台线程执行 ping
-        DispatchQueue.global(qos: .userInitiated).async {
-            let pinger = ICMPPinger(host: host, timeout: 3.0)
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.performPing(host: host, call: call)
+        }
+    }
+    
+    private func performPing(host: String, call: CAPPluginCall) {
+        var latencies: [Double] = []
+        let semaphore = DispatchSemaphore(value: 0)
+        var pingCount = 0
+        let targetCount = 3
+        
+        do {
+            // 创建 SwiftyPing 配置
+            let configuration = PingConfiguration(interval: 0.5, with: 3)
             
-            var latencies: [Double] = []
+            // 创建 pinger
+            let pinger = try SwiftyPing(host: host, configuration: configuration, queue: DispatchQueue.global())
             
-            // Ping 3次
-            for i in 0..<3 {
-                NSLog("🏓 PingPlugin: Ping attempt \(i+1)/3 to \(host)")
-                if let latency = pinger.ping() {
-                    NSLog("🏓 PingPlugin: Ping \(i+1) succeeded: \(latency) ms")
-                    latencies.append(latency)
-                } else {
-                    NSLog("🏓 PingPlugin: Ping \(i+1) failed")
+            NSLog("🏓 PingPlugin: SwiftyPing created for \(host)")
+            
+            // 设置观察者
+            pinger.observer = { response in
+                let duration = response.duration * 1000.0 // 转换为毫秒
+                NSLog("🏓 PingPlugin: Received response, duration: \(String(format: "%.2f", duration)) ms")
+                latencies.append(duration)
+                pingCount += 1
+                
+                if pingCount >= targetCount {
+                    pinger.stopPinging()
+                    semaphore.signal()
                 }
             }
             
-            // 计算平均值
+            // 设置完成回调
+            pinger.finished = { result in
+                NSLog("🏓 PingPlugin: Ping finished with result")
+                if pingCount < targetCount {
+                    semaphore.signal()
+                }
+            }
+            
+            // 设置目标次数
+            pinger.targetCount = targetCount
+            
+            // 开始 ping
+            NSLog("🏓 PingPlugin: Starting ping to \(host)")
+            try pinger.startPinging()
+            
+            // 等待完成（最多 10 秒）
+            let timeout = DispatchTime.now() + .seconds(10)
+            let result = semaphore.wait(timeout: timeout)
+            
+            // 停止 ping
+            pinger.stopPinging()
+            
+            if result == .timedOut {
+                NSLog("⏱️ PingPlugin: Ping operation timed out")
+            }
+            
+        } catch {
+            NSLog("❌ PingPlugin: Failed to create pinger: \(error.localizedDescription)")
+        }
+        
+        // 计算平均值并返回结果
+        DispatchQueue.main.async {
             let result: [String: Any]
             if latencies.isEmpty {
                 NSLog("🏓 PingPlugin: All pings failed, returning null")
@@ -42,13 +92,10 @@ public class PingPlugin: CAPPlugin {
             } else {
                 let average = latencies.reduce(0, +) / Double(latencies.count)
                 let avgInt = Int(round(average))
-                NSLog("🏓 PingPlugin: Average latency: \(avgInt) ms")
+                NSLog("🏓 PingPlugin: Average latency: \(avgInt) ms (from \(latencies.count) responses)")
                 result = ["latency": avgInt]
             }
-            
-            DispatchQueue.main.async {
-                call.resolve(result)
-            }
+            call.resolve(result)
         }
     }
     
