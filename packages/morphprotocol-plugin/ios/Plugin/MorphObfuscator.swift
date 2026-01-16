@@ -17,14 +17,15 @@ class MorphObfuscator {
     init(key: Int, layer: Int, paddingLength: Int) {
         self.key = key
         self.layer = layer
-        self.paddingLength = min(max(paddingLength, 1), 16)
+        // 与服务端保持一致：padding 范围是 1-8
+        self.paddingLength = min(max(paddingLength, 1), 8)
         self.functionRegistry = FunctionRegistry(layer: layer)
         self.totalCombinations = functionRegistry.getTotalCombinations()
         
         NSLog("🎭 MorphObfuscator: Initialized")
         NSLog("   Key: \(key)")
         NSLog("   Layer: \(layer)")
-        NSLog("   Padding: \(paddingLength)")
+        NSLog("   Padding: \(self.paddingLength)")
         NSLog("   Total Combinations: \(totalCombinations)")
     }
     

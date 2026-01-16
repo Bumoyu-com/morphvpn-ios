@@ -24,20 +24,22 @@ protocol ProtocolTemplate {
 
 /// QUIC 协议模板
 /// 模拟 QUIC 短头部格式
+/// 与服务端保持一致: Header: [flags(1)] [connectionID(8)] [packetNumber(2)] = 11 bytes
 class QuicTemplate: ProtocolTemplate {
     let templateID: UInt8 = 1
     let name = "QUIC"
     
-    private var sequenceNumber: UInt32 = 0
+    private var sequenceNumber: UInt16 = 0
     private let lock = NSLock()
     
     /// 封装数据为 QUIC 格式
-    /// Header: [flags(1)] [connectionID(8)] [packetNumber(4)] [payload]
+    /// Header: [flags(1)] [connectionID(8)] [packetNumber(2)] [payload]
+    /// Total header: 11 bytes (与服务端一致)
     func encapsulate(_ data: Data, clientID: Data) -> Data {
         var packet = Data()
         
-        // Flags: 0x40 (QUIC short header, fixed bit set)
-        packet.append(0x40)
+        // Flags: 0x40-0x4f (QUIC short header, various spin bits)
+        packet.append(0x40 | UInt8(arc4random_uniform(16)))
         
         // Connection ID: 从 clientID 派生 (取前8字节，不足则填充)
         var connID = clientID.prefix(8)
@@ -46,14 +48,12 @@ class QuicTemplate: ProtocolTemplate {
         }
         packet.append(connID)
         
-        // Packet Number: 递增序列号 (4 bytes, big-endian)
+        // Packet Number: 递增序列号 (2 bytes, big-endian) - 与服务端一致
         lock.lock()
         let packetNum = sequenceNumber
         sequenceNumber = sequenceNumber &+ 1
         lock.unlock()
         
-        packet.append(UInt8((packetNum >> 24) & 0xFF))
-        packet.append(UInt8((packetNum >> 16) & 0xFF))
         packet.append(UInt8((packetNum >> 8) & 0xFF))
         packet.append(UInt8(packetNum & 0xFF))
         
@@ -65,18 +65,18 @@ class QuicTemplate: ProtocolTemplate {
     
     /// 解封装 QUIC 数据包
     func decapsulate(_ packet: Data) -> Data? {
-        // 验证最小长度: 1 + 8 + 4 = 13 bytes
-        guard packet.count >= 13 else {
+        // 验证最小长度: 1 + 8 + 2 = 11 bytes
+        guard packet.count >= 11 else {
             return nil
         }
         
-        // 验证 flags (应该是 0x40)
-        guard packet[0] == 0x40 else {
+        // 验证 flags (应该是 0x40-0x4f)
+        guard (packet[0] & 0xF0) == 0x40 else {
             return nil
         }
         
-        // 提取 payload (跳过 header)
-        return Data(packet[13...])
+        // 提取 payload (跳过 11 字节 header)
+        return Data(packet[11...])
     }
     
     /// 提取 header 中的客户端 ID
@@ -85,7 +85,7 @@ class QuicTemplate: ProtocolTemplate {
             return nil
         }
         
-        guard packet[0] == 0x40 else {
+        guard (packet[0] & 0xF0) == 0x40 else {
             return nil
         }
         
@@ -98,6 +98,7 @@ class QuicTemplate: ProtocolTemplate {
 
 /// KCP 协议模板
 /// 模拟 KCP 协议头部格式
+/// 与服务端保持一致: Header: [conv(4)] [cmd(1)] [frg(1)] [wnd(2)] [ts(4)] [sn(4)] [una(4)] [len(4)] = 24 bytes
 class KcpTemplate: ProtocolTemplate {
     let templateID: UInt8 = 2
     let name = "KCP"
@@ -106,7 +107,8 @@ class KcpTemplate: ProtocolTemplate {
     private let lock = NSLock()
     
     /// 封装数据为 KCP 格式
-    /// Header: [conv(4)] [cmd(1)] [frg(1)] [wnd(2)] [ts(4)] [sn(4)] [una(4)] [payload]
+    /// Header: [conv(4)] [cmd(1)] [frg(1)] [wnd(2)] [ts(4)] [sn(4)] [una(4)] [len(4)] [payload]
+    /// Total header: 24 bytes (与服务端一致)
     func encapsulate(_ data: Data, clientID: Data) -> Data {
         NSLog("🎭 KCP: Encapsulating \(data.count) bytes, clientID: \(clientID.count) bytes")
         
@@ -127,32 +129,42 @@ class KcpTemplate: ProtocolTemplate {
         // Frg: 0 (no fragmentation)
         packet.append(0x00)
         
-        // Wnd: 128 (window size, 2 bytes, big-endian)
-        packet.append(0x00)
-        packet.append(0x80)
+        // Wnd: 256 (window size, 2 bytes, little-endian - 与服务端一致)
+        packet.append(0x00)  // low byte
+        packet.append(0x01)  // high byte (256 = 0x0100)
         
-        // Ts: timestamp (4 bytes, big-endian, milliseconds)
-        // 注意：使用模运算确保值在 UInt32 范围内
+        // Ts: timestamp (4 bytes, little-endian - 与服务端一致)
         let timestampMs = Date().timeIntervalSince1970 * 1000
         let timestamp = UInt32(truncatingIfNeeded: UInt64(timestampMs))
-        packet.append(UInt8((timestamp >> 24) & 0xFF))
-        packet.append(UInt8((timestamp >> 16) & 0xFF))
-        packet.append(UInt8((timestamp >> 8) & 0xFF))
         packet.append(UInt8(timestamp & 0xFF))
+        packet.append(UInt8((timestamp >> 8) & 0xFF))
+        packet.append(UInt8((timestamp >> 16) & 0xFF))
+        packet.append(UInt8((timestamp >> 24) & 0xFF))
         
-        // Sn: sequence number (4 bytes, big-endian)
+        // Sn: sequence number (4 bytes, little-endian - 与服务端一致)
         lock.lock()
         let sn = sequenceNumber
         sequenceNumber = sequenceNumber &+ 1
         lock.unlock()
         
-        packet.append(UInt8((sn >> 24) & 0xFF))
-        packet.append(UInt8((sn >> 16) & 0xFF))
-        packet.append(UInt8((sn >> 8) & 0xFF))
         packet.append(UInt8(sn & 0xFF))
+        packet.append(UInt8((sn >> 8) & 0xFF))
+        packet.append(UInt8((sn >> 16) & 0xFF))
+        packet.append(UInt8((sn >> 24) & 0xFF))
         
-        // Una: 0 (4 bytes)
-        packet.append(contentsOf: [0x00, 0x00, 0x00, 0x00])
+        // Una: sn - 1 (4 bytes, little-endian - 与服务端一致)
+        let una = sn > 0 ? sn - 1 : 0
+        packet.append(UInt8(una & 0xFF))
+        packet.append(UInt8((una >> 8) & 0xFF))
+        packet.append(UInt8((una >> 16) & 0xFF))
+        packet.append(UInt8((una >> 24) & 0xFF))
+        
+        // Len: payload length (4 bytes, little-endian - 与服务端一致)
+        let len = UInt32(data.count)
+        packet.append(UInt8(len & 0xFF))
+        packet.append(UInt8((len >> 8) & 0xFF))
+        packet.append(UInt8((len >> 16) & 0xFF))
+        packet.append(UInt8((len >> 24) & 0xFF))
         
         // Payload
         packet.append(data)
@@ -164,9 +176,9 @@ class KcpTemplate: ProtocolTemplate {
     func decapsulate(_ packet: Data) -> Data? {
         NSLog("🎭 KCP: Decapsulating \(packet.count) bytes")
         
-        // 验证最小长度: 4 + 1 + 1 + 2 + 4 + 4 + 4 = 20 bytes
-        guard packet.count >= 20 else {
-            NSLog("❌ KCP: Packet too short (\(packet.count) < 20)")
+        // 验证最小长度: 24 bytes header
+        guard packet.count >= 24 else {
+            NSLog("❌ KCP: Packet too short (\(packet.count) < 24)")
             return nil
         }
         
@@ -176,8 +188,8 @@ class KcpTemplate: ProtocolTemplate {
             return nil
         }
         
-        // 提取 payload (跳过 header)
-        let payload = Data(packet[20...])
+        // 提取 payload (跳过 24 字节 header)
+        let payload = Data(packet[24...])
         NSLog("🎭 KCP: Extracted \(payload.count) bytes payload")
         return payload
     }
@@ -197,15 +209,17 @@ class KcpTemplate: ProtocolTemplate {
 
 /// 通用游戏协议模板
 /// 模拟游戏 UDP 协议格式
+/// 与服务端保持一致: Header: [magic(4)] [sessionID(4)] [seq(2)] [type(1)] [flags(1)] = 12 bytes
 class GenericGamingTemplate: ProtocolTemplate {
     let templateID: UInt8 = 3
     let name = "GenericGaming"
     
-    private var sequenceNumber: UInt32 = 0
+    private var sequenceNumber: UInt16 = 0
     private let lock = NSLock()
     
     /// 封装数据为游戏协议格式
-    /// Header: [magic(4)] [sessionID(4)] [sequence(4)] [timestamp(4)] [payload]
+    /// Header: [magic(4)] [sessionID(4)] [seq(2)] [type(1)] [flags(1)] [payload]
+    /// Total header: 12 bytes (与服务端一致)
     func encapsulate(_ data: Data, clientID: Data) -> Data {
         var packet = Data()
         
@@ -219,25 +233,20 @@ class GenericGamingTemplate: ProtocolTemplate {
         }
         packet.append(sessionID)
         
-        // Sequence: 递增序列号 (4 bytes, big-endian)
+        // Sequence: 递增序列号 (2 bytes, big-endian - 与服务端一致)
         lock.lock()
         let seq = sequenceNumber
         sequenceNumber = sequenceNumber &+ 1
         lock.unlock()
         
-        packet.append(UInt8((seq >> 24) & 0xFF))
-        packet.append(UInt8((seq >> 16) & 0xFF))
         packet.append(UInt8((seq >> 8) & 0xFF))
         packet.append(UInt8(seq & 0xFF))
         
-        // Timestamp: 当前时间戳 (4 bytes, big-endian, milliseconds)
-        // 注意：使用 truncatingIfNeeded 确保值在 UInt32 范围内
-        let timestampMs = Date().timeIntervalSince1970 * 1000
-        let timestamp = UInt32(truncatingIfNeeded: UInt64(timestampMs))
-        packet.append(UInt8((timestamp >> 24) & 0xFF))
-        packet.append(UInt8((timestamp >> 16) & 0xFF))
-        packet.append(UInt8((timestamp >> 8) & 0xFF))
-        packet.append(UInt8(timestamp & 0xFF))
+        // Packet type (1 byte): 0x01-0x05 (与服务端一致)
+        packet.append(UInt8(1 + arc4random_uniform(5)))
+        
+        // Flags (1 byte): random flags (与服务端一致)
+        packet.append(UInt8(arc4random_uniform(256)))
         
         // Payload
         packet.append(data)
@@ -247,8 +256,8 @@ class GenericGamingTemplate: ProtocolTemplate {
     
     /// 解封装游戏协议数据包
     func decapsulate(_ packet: Data) -> Data? {
-        // 验证最小长度: 4 + 4 + 4 + 4 = 16 bytes
-        guard packet.count >= 16 else {
+        // 验证最小长度: 12 bytes header
+        guard packet.count >= 12 else {
             return nil
         }
         
@@ -258,8 +267,8 @@ class GenericGamingTemplate: ProtocolTemplate {
             return nil
         }
         
-        // 提取 payload (跳过 header)
-        return Data(packet[16...])
+        // 提取 payload (跳过 12 字节 header)
+        return Data(packet[12...])
     }
     
     /// 提取 header 中的客户端 ID

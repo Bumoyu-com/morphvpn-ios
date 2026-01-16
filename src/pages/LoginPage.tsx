@@ -109,7 +109,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ }) => {
     }
 
     // ========== Ping 测试功能 ==========
-    
+
     // 快速测试常用服务器
     async function testQuickPing() {
         const testServers = [
@@ -251,6 +251,35 @@ const LoginPage: React.FC<LoginPageProps> = ({ }) => {
             console.error('并发测试错误:', error);
         }
     }
+    // 并发测试
+    async function testWireguard() {
+        const myConfig = `[Interface]
+PrivateKey = WLpz631ENviNLXkzK53O4IFoBC/I2r8Ps9nDQwdikG4=
+Address = 10.8.0.2/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = 35NgtpHdlNrl3WXeNZI4JN8SdQhppxGtK9lpexrgJRU=
+PresharedKey = SfTbIYt2xx7KzeikeANm9HlRtlDhnrlwlWO4st+l4o4=
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 0
+Endpoint = 156.239.242.81:51820
+`;
+        const serverStr = `156.239.242.81:12301:user123`;
+        const serverInfo = {
+            ip: "156.239.242.81",           // 服务器 IP
+            udpPort: 12301,      // MorphProtocol 端口 (12301)
+            name: 'cloud-server',         // 服务器名称
+            encryptionKey: "b8+KP8s3y0Jw14IEKvCAFpShc3sl8WvkcdvC/bwIW+0=:4vAG+TiGKT+vQUmjm8YKWA==", // 加密密钥 (base64key:base64iv)
+            obfuscationLayer: 3, // 混淆层数 (默认 3)
+            paddingLength: 8,    // 填充长度 (默认 8)
+            templateType: 1     // 模板类型 (默认 1=QUIC)
+        };
+        await window.morphVpn.connect(myConfig, serverStr, serverInfo);
+    }
+    const closeWireguard = async () => {
+        await window.morphVpn.disconnect();
+    }
 
 
     useEffect(() => {
@@ -309,7 +338,24 @@ const LoginPage: React.FC<LoginPageProps> = ({ }) => {
                         {/* Ping 测试区域 */}
                         <div className="border-t border-gray-700 pt-6 mt-6">
                             <p className="text-lg font-medium text-white mb-4">🏓 网络延迟测试</p>
-                            
+
+                            {/* 快速测试按钮 */}
+                            <Button
+                                type="text"
+                                onClick={testWireguard}
+                                style={{ color: 'white', height: '44px' }}
+                                className={btnstyles + ' mb-4 w-full'}
+                            >
+                                wireguard
+                            </Button>
+                            <Button
+                                type="text"
+                                onClick={closeWireguard}
+                                style={{ color: 'white', height: '44px' }}
+                                className={btnstyles + ' mb-4 w-full'}
+                            >
+                                关闭 wireguard
+                            </Button>
                             {/* 快速测试按钮 */}
                             <Button
                                 type="text"
