@@ -2,18 +2,24 @@
 //  MorphUDPClient.swift
 //  MorphProtocol Plugin
 //
-//  MorphProtocol UDP 客户端 - 完整实现
+//  MorphProtocol UDP 客户端 - 带本地 UDP 代理功能
+//  使用 NWListener 监听本地端口，接收 WireGuard 数据并转发到远程服务器
 //
 
 import Foundation
 import Network
 
 class MorphUDPClient {
+    // MARK: - 远程服务器连接
     private var handshakeConnection: NWConnection?  // 握手连接 (12301)
     private var dataConnection: NWConnection?       // 数据连接 (会话端口)
-    private var connection: NWConnection? {         // 兼容性属性
-        return dataConnection ?? handshakeConnection
-    }
+    
+    // MARK: - 本地 UDP 代理 (NWListener)
+    private var localListener: NWListener?          // 本地 UDP 监听器
+    private var localPort: UInt16 = 0               // 本地监听端口
+    private var wireGuardConnection: NWConnection?  // 用于回复 WireGuard 的连接
+    
+    // MARK: - 核心组件
     private let queue = DispatchQueue(label: "com.morphvpn.morphprotocol", qos: .userInitiated)
     private let encryptor: MorphEncryptor
     private let obfuscator: MorphObfuscator
@@ -21,20 +27,30 @@ class MorphUDPClient {
     private let clientID: Data
     private var isConnected = false
     
-    private var host: String = ""
-    private var port: UInt16 = 0
+    // MARK: - 配置
+    private var remoteHost: String = ""
+    private var remotePort: UInt16 = 0
     private var sessionPort: UInt16?
+    private var userId: String = ""
     
+    // MARK: - 回调
     var onReceive: ((Data) -> Void)?
     var onError: ((Error) -> Void)?
     var onStateChange: ((NWConnection.State) -> Void)?
+    var onLocalPortReady: ((UInt16) -> Void)?       // 本地端口就绪回调
+    var onHandshakeComplete: ((UInt16) -> Void)?    // 握手完成回调，返回会话端口
+    
+    // MARK: - 初始化
     
     init(encryptionKey: String, 
          obfuscationLayer: Int, 
          paddingLength: Int,
-         templateType: TemplateType? = nil) throws {
+         templateType: TemplateType? = nil,
+         userId: String = "") throws {
         
         NSLog("🔒 MorphUDPClient: Initializing...")
+        
+        self.userId = userId
         
         // 初始化加密器
         self.encryptor = try MorphEncryptor(keyString: encryptionKey)
@@ -72,13 +88,126 @@ class MorphUDPClient {
         NSLog("   Layer: \(obfuscationLayer)")
         NSLog("   Padding: \(paddingLength)")
         NSLog("   Template: \(template?.name ?? "None")")
+        NSLog("   UserId: \(userId)")
     }
     
-    func connect(host: String, port: UInt16) {
-        self.host = host
-        self.port = port
+    // MARK: - 启动本地 UDP 代理
+    
+    /// 启动本地 UDP 监听器，返回监听端口
+    func startLocalProxy(preferredPort: UInt16 = 0) -> UInt16? {
+        NSLog("🔌 MorphUDPClient: Starting local UDP proxy...")
         
-        NSLog("🔌 MorphUDPClient: Connecting to \(host):\(port)")
+        let parameters = NWParameters.udp
+        parameters.allowLocalEndpointReuse = true
+        
+        do {
+            // 如果指定了端口，使用指定端口；否则让系统分配
+            if preferredPort > 0 {
+                localListener = try NWListener(using: parameters, on: NWEndpoint.Port(rawValue: preferredPort)!)
+            } else {
+                localListener = try NWListener(using: parameters)
+            }
+            
+            localListener?.stateUpdateHandler = { [weak self] state in
+                guard let self = self else { return }
+                
+                switch state {
+                case .ready:
+                    if let port = self.localListener?.port?.rawValue {
+                        self.localPort = port
+                        NSLog("✅ MorphUDPClient: Local proxy listening on 127.0.0.1:\(port)")
+                        self.onLocalPortReady?(port)
+                    }
+                    
+                case .failed(let error):
+                    NSLog("❌ MorphUDPClient: Local listener failed: \(error)")
+                    self.onError?(error)
+                    
+                case .cancelled:
+                    NSLog("⚠️ MorphUDPClient: Local listener cancelled")
+                    
+                default:
+                    break
+                }
+            }
+            
+            // 处理新的 UDP 连接（来自 WireGuard）
+            localListener?.newConnectionHandler = { [weak self] connection in
+                self?.handleNewLocalConnection(connection)
+            }
+            
+            localListener?.start(queue: queue)
+            
+            // 等待端口分配
+            Thread.sleep(forTimeInterval: 0.1)
+            return localListener?.port?.rawValue
+            
+        } catch {
+            NSLog("❌ MorphUDPClient: Failed to create local listener: \(error)")
+            onError?(error)
+            return nil
+        }
+    }
+    
+    /// 处理来自 WireGuard 的新连接
+    private func handleNewLocalConnection(_ connection: NWConnection) {
+        NSLog("📥 MorphUDPClient: New connection from WireGuard")
+        
+        // 保存 WireGuard 连接用于回复
+        wireGuardConnection = connection
+        
+        connection.stateUpdateHandler = { [weak self] state in
+            switch state {
+            case .ready:
+                NSLog("✅ MorphUDPClient: WireGuard connection ready")
+                self?.receiveFromWireGuard(connection)
+                
+            case .failed(let error):
+                NSLog("❌ MorphUDPClient: WireGuard connection failed: \(error)")
+                
+            default:
+                break
+            }
+        }
+        
+        connection.start(queue: queue)
+    }
+    
+    /// 接收来自 WireGuard 的数据
+    private func receiveFromWireGuard(_ connection: NWConnection) {
+        connection.receiveMessage { [weak self] data, context, isComplete, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                NSLog("❌ MorphUDPClient: Receive from WireGuard error: \(error)")
+                return
+            }
+            
+            if let data = data, !data.isEmpty {
+                NSLog("📥 [WG→Morph] Received \(data.count) bytes from WireGuard")
+                
+                // 转发到远程服务器
+                self.forwardToRemoteServer(data)
+            }
+            
+            // 继续接收
+            self.receiveFromWireGuard(connection)
+        }
+    }
+    
+    // MARK: - 连接远程服务器
+    
+    /// 连接到远程 MorphProtocol 服务器（旧接口兼容）
+    func connect(host: String, port: UInt16) {
+        connectToRemote(host: host, port: port)
+    }
+    
+    /// 连接到远程 MorphProtocol 服务器
+    func connectToRemote(host: String, port: UInt16) {
+        self.remoteHost = host
+        self.remotePort = port
+        
+        NSLog("🔌 MorphUDPClient: Connecting to remote \(host):\(port)")
         
         let endpoint = NWEndpoint.hostPort(
             host: NWEndpoint.Host(host),
@@ -93,28 +222,24 @@ class MorphUDPClient {
         handshakeConnection?.stateUpdateHandler = { [weak self] state in
             guard let self = self else { return }
             
-            NSLog("🔌 MorphUDPClient: State changed to \(state)")
+            NSLog("🔌 MorphUDPClient: Handshake connection state: \(state)")
             self.onStateChange?(state)
             
             switch state {
             case .ready:
-                NSLog("✅ MorphUDPClient: Connection ready")
+                NSLog("✅ MorphUDPClient: Handshake connection ready")
                 self.isConnected = true
-                self.startReceiving()
-                // 发送握手包
+                self.startReceivingHandshake()
                 self.sendHandshake()
                 
             case .failed(let error):
-                NSLog("❌ MorphUDPClient: Connection failed: \(error)")
+                NSLog("❌ MorphUDPClient: Handshake connection failed: \(error)")
                 self.isConnected = false
                 self.onError?(error)
                 
             case .cancelled:
-                NSLog("⚠️ MorphUDPClient: Connection cancelled")
+                NSLog("⚠️ MorphUDPClient: Handshake connection cancelled")
                 self.isConnected = false
-                
-            case .waiting(let error):
-                NSLog("⏳ MorphUDPClient: Waiting: \(error)")
                 
             default:
                 break
@@ -124,178 +249,189 @@ class MorphUDPClient {
         handshakeConnection?.start(queue: queue)
     }
     
-    func disconnect() {
-        NSLog("🔌 MorphUDPClient: Disconnecting...")
-        handshakeConnection?.cancel()
-        dataConnection?.cancel()
-        handshakeConnection = nil
-        dataConnection = nil
-        isConnected = false
-    }
+    // MARK: - 数据转发
     
-    func send(_ data: Data) {
-        guard isConnected else {
-            NSLog("❌ MorphUDPClient: Not connected, cannot send")
-            onError?(MorphError.notConnected)
+    /// 将 WireGuard 数据转发到远程服务器
+    private func forwardToRemoteServer(_ data: Data) {
+        guard let _ = sessionPort else {
+            NSLog("⚠️ MorphUDPClient: Session not established, cannot forward")
             return
         }
         
-        NSLog("📤 MorphUDPClient: Sending \(data.count) bytes")
-        NSLog("📤 Original data (hex): \(data.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
+        NSLog("📤 [WG→Server] Forwarding \(data.count) bytes to server")
+        
+        queue.async { [weak self] in
+            guard let self = self else { return }
+            
+            // 1. 混淆 (WireGuard 数据只需要混淆，不需要加密)
+            let obfuscated = self.obfuscator.obfuscate(data)
+            NSLog("📤 [WG→Server] After obfuscate: \(obfuscated.count) bytes")
+            
+            // 2. 协议封装
+            let packet: Data
+            if let template = self.template {
+                packet = template.encapsulate(obfuscated, clientID: self.clientID)
+                NSLog("📤 [WG→Server] After template: \(packet.count) bytes")
+            } else {
+                packet = obfuscated
+            }
+            
+            // 3. 发送到会话端口
+            self.dataConnection?.send(content: packet, completion: .contentProcessed { error in
+                if let error = error {
+                    NSLog("❌ [WG→Server] Send error: \(error)")
+                    self.onError?(error)
+                } else {
+                    NSLog("✅ [WG→Server] Sent \(packet.count) bytes")
+                }
+            })
+        }
+    }
+    
+    /// 将服务器响应转发回 WireGuard
+    private func forwardToWireGuard(_ data: Data) {
+        guard let connection = wireGuardConnection else {
+            NSLog("⚠️ MorphUDPClient: No WireGuard connection, cannot forward")
+            return
+        }
+        
+        NSLog("📤 [Server→WG] Forwarding \(data.count) bytes to WireGuard")
+        
+        connection.send(content: data, completion: .contentProcessed { error in
+            if let error = error {
+                NSLog("❌ [Server→WG] Send error: \(error)")
+            } else {
+                NSLog("✅ [Server→WG] Sent \(data.count) bytes")
+            }
+        })
+    }
+    
+    // MARK: - 握手处理
+    
+    private func sendHandshake() {
+        NSLog("🤝 MorphUDPClient: Sending handshake...")
         
         queue.async { [weak self] in
             guard let self = self else { return }
             
             do {
-                // 1. 加密
-                let encrypted = try self.encryptor.encrypt(data)
-                NSLog("📤 After encrypt: \(encrypted.count) bytes")
-                NSLog("📤 Encrypted (hex): \(encrypted.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
+                // 构建握手数据
+                let handshakeData: [String: Any] = [
+                    "clientID": self.clientID.base64EncodedString(),
+                    "userId": self.userId,
+                    "key": self.obfuscator.key,
+                    "obfuscationLayer": self.obfuscator.layer,
+                    "randomPadding": self.obfuscator.paddingLength,
+                    "fnInitor": [
+                        "substitutionTable": self.obfuscator.getSubstitutionTable(),
+                        "randomValue": self.obfuscator.getRandomValue()
+                    ],
+                    "templateId": self.template?.id ?? 0,
+                    "templateParams": self.template?.getParams() ?? [:],
+                    "publicKey": ""
+                ]
                 
-                // 2. 混淆
-                let obfuscated = self.obfuscator.obfuscate(encrypted)
-                NSLog("📤 After obfuscate: \(obfuscated.count) bytes")
-                NSLog("📤 Obfuscated (hex): \(obfuscated.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
-                
-                // 3. 协议封装（如果启用）
-                let packet: Data
-                if let template = self.template {
-                    NSLog("📤 Using template: \(template.name)")
-                    packet = template.encapsulate(obfuscated, clientID: self.clientID)
-                    NSLog("📤 After encapsulate (\(template.name)): \(packet.count) bytes")
-                    NSLog("📤 Final packet (hex): \(packet.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
-                } else {
-                    packet = obfuscated
-                    NSLog("📤 No template, using obfuscated data directly")
+                // 转换为 JSON
+                let jsonData = try JSONSerialization.data(withJSONObject: handshakeData)
+                guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                    NSLog("❌ MorphUDPClient: Failed to convert handshake to string")
+                    return
                 }
                 
-                // 4. 发送
-                // 使用数据连接（如果已建立），否则使用握手连接
-                let targetConnection = self.dataConnection ?? self.handshakeConnection
-                let connectionType = self.dataConnection != nil ? "data" : "handshake"
-                NSLog("📤 Sending to \(connectionType) connection...")
+                NSLog("🤝 MorphUDPClient: Handshake JSON: \(jsonString)")
                 
-                targetConnection?.send(content: packet, completion: .contentProcessed { error in
+                // 加密握手数据
+                let encrypted = try self.encryptor.encrypt(Data(jsonString.utf8))
+                let encryptedBase64 = encrypted.base64EncodedString()
+                
+                NSLog("🤝 MorphUDPClient: Encrypted handshake length: \(encryptedBase64.count)")
+                
+                // 发送加密的握手数据
+                let handshakePacket = Data(encryptedBase64.utf8)
+                
+                self.handshakeConnection?.send(content: handshakePacket, completion: .contentProcessed { error in
                     if let error = error {
-                        NSLog("❌ MorphUDPClient: Send error: \(error)")
+                        NSLog("❌ MorphUDPClient: Handshake send error: \(error)")
                         self.onError?(error)
                     } else {
-                        NSLog("✅ MorphUDPClient: Sent \(packet.count) bytes successfully")
+                        NSLog("✅ MorphUDPClient: Handshake sent successfully")
                     }
                 })
                 
             } catch {
-                NSLog("❌ MorphUDPClient: Processing error: \(error)")
+                NSLog("❌ MorphUDPClient: Handshake preparation error: \(error)")
                 self.onError?(error)
             }
         }
     }
     
-    private func startReceiving() {
-        connection?.receiveMessage { [weak self] data, context, isComplete, error in
+    private func startReceivingHandshake() {
+        handshakeConnection?.receiveMessage { [weak self] data, context, isComplete, error in
             guard let self = self else { return }
             
             if let error = error {
-                NSLog("❌ MorphUDPClient: Receive error: \(error)")
+                NSLog("❌ MorphUDPClient: Handshake receive error: \(error)")
                 self.onError?(error)
                 return
             }
             
             if let data = data, !data.isEmpty {
-                NSLog("📥 MorphUDPClient: Received \(data.count) bytes")
-                NSLog("📥 Raw data (hex): \(data.prefix(50).map { String(format: "%02x", $0) }.joined(separator: " "))")
+                NSLog("📥 MorphUDPClient: Received handshake response: \(data.count) bytes")
                 
-                // 尝试作为握手响应处理
-                if let handshakeResponse = self.tryParseHandshakeResponse(data) {
-                    NSLog("✅ MorphUDPClient: Received handshake response")
-                    self.handleHandshakeResponse(handshakeResponse)
-                    self.startReceiving()
-                    return
-                }
-                
-                // 作为普通数据包处理
-                do {
-                    // 1. 协议解封装（如果启用）
-                    let obfuscated: Data
-                    if let template = self.template {
-                        guard let extracted = template.decapsulate(data) else {
-                            NSLog("❌ MorphUDPClient: Failed to decapsulate packet")
-                            self.startReceiving()
-                            return
-                        }
-                        obfuscated = extracted
-                        NSLog("📦 MorphUDPClient: Decapsulated with \(template.name): \(data.count) → \(obfuscated.count) bytes")
-                    } else {
-                        obfuscated = data
-                    }
-                    
-                    // 2. 解混淆
-                    let encrypted = self.obfuscator.deobfuscate(obfuscated)
-                    NSLog("🎭 MorphUDPClient: Deobfuscated \(obfuscated.count) → \(encrypted.count) bytes")
-                    
-                    // 3. 解密
-                    let decrypted = try self.encryptor.decrypt(encrypted)
-                    NSLog("🔐 MorphUDPClient: Decrypted \(encrypted.count) → \(decrypted.count) bytes")
-                    
-                    // 4. 回调
-                    self.onReceive?(decrypted)
-                    
-                } catch {
-                    NSLog("❌ MorphUDPClient: Processing error: \(error)")
-                    self.onError?(error)
+                if let response = self.tryParseHandshakeResponse(data) {
+                    self.handleHandshakeResponse(response)
                 }
             }
             
-            // 继续接收
-            self.startReceiving()
+            // 继续接收（用于接收 inactivity 等消息）
+            self.startReceivingHandshake()
         }
     }
     
     private func tryParseHandshakeResponse(_ data: Data) -> [String: Any]? {
+        guard let base64String = String(data: data, encoding: .utf8) else {
+            return nil
+        }
+        
+        NSLog("🤝 Trying to parse handshake response")
+        
+        // 检查是否是特殊消息
+        if base64String == "inactivity" {
+            NSLog("⚠️ MorphUDPClient: Server detected inactivity")
+            return nil
+        }
+        
+        if base64String == "server_full" {
+            NSLog("⚠️ MorphUDPClient: Server is full")
+            return nil
+        }
+        
+        // Base64 解码
+        guard let encryptedData = Data(base64Encoded: base64String) else {
+            NSLog("🤝 Not valid base64")
+            return nil
+        }
+        
         do {
-            // 握手响应格式：base64 编码的加密数据（作为 UTF-8 字符串）
-            guard let base64String = String(data: data, encoding: .utf8) else {
-                return nil
-            }
-            
-            NSLog("🤝 Trying to parse handshake response")
-            NSLog("🤝 Received \(data.count) bytes, base64 string length: \(base64String.count)")
-            NSLog("🤝 Base64 preview: \(base64String.prefix(50))...")
-            
-            // Base64 解码
-            guard let encryptedData = Data(base64Encoded: base64String) else {
-                NSLog("🤝 Not valid base64")
-                return nil
-            }
-            
-            NSLog("🤝 Decoded to \(encryptedData.count) bytes encrypted data")
-            
             // 解密
             let decrypted = try encryptor.decrypt(encryptedData)
             
-            NSLog("🤝 Decrypted to \(decrypted.count) bytes")
-            
             guard let jsonString = String(data: decrypted, encoding: .utf8) else {
-                NSLog("🤝 Decrypted data is not valid UTF-8")
                 return nil
             }
             
-            NSLog("🤝 JSON string: \(jsonString)")
+            NSLog("🤝 Decrypted response: \(jsonString)")
             
             // 解析 JSON
             if let json = try? JSONSerialization.jsonObject(with: decrypted) as? [String: Any] {
-                if json["port"] != nil && json["status"] != nil {
-                    NSLog("✅ Valid handshake response")
+                if json["port"] != nil {
                     return json
-                } else {
-                    NSLog("🤝 JSON missing required fields (port or status)")
                 }
-            } else {
-                NSLog("🤝 Failed to parse JSON")
             }
         } catch {
-            NSLog("🤝 Not a handshake response: \(error)")
+            NSLog("🤝 Decrypt error: \(error)")
         }
+        
         return nil
     }
     
@@ -306,18 +442,27 @@ class MorphUDPClient {
         }
         
         let status = response["status"] as? String ?? "unknown"
-        NSLog("✅ MorphUDPClient: Handshake response - port: \(port), status: \(status)")
+        let confirmedClientID = response["clientID"] as? String ?? ""
         
-        // 创建到会话端口的新连接
+        NSLog("✅ MorphUDPClient: Handshake response:")
+        NSLog("   Port: \(port)")
+        NSLog("   Status: \(status)")
+        NSLog("   ClientID: \(confirmedClientID)")
+        
         self.sessionPort = UInt16(port)
+        
+        // 创建到会话端口的数据连接
         createDataConnection(port: UInt16(port))
+        
+        // 通知握手完成
+        onHandshakeComplete?(UInt16(port))
     }
     
     private func createDataConnection(port: UInt16) {
         NSLog("🔌 MorphUDPClient: Creating data connection to port \(port)")
         
         let endpoint = NWEndpoint.hostPort(
-            host: NWEndpoint.Host(self.host),
+            host: NWEndpoint.Host(self.remoteHost),
             port: NWEndpoint.Port(rawValue: port)!
         )
         
@@ -334,13 +479,11 @@ class MorphUDPClient {
             switch state {
             case .ready:
                 NSLog("✅ MorphUDPClient: Data connection ready on port \(port)")
+                self.startReceivingData()
                 
             case .failed(let error):
                 NSLog("❌ MorphUDPClient: Data connection failed: \(error)")
                 self.onError?(error)
-                
-            case .cancelled:
-                NSLog("⚠️ MorphUDPClient: Data connection cancelled")
                 
             default:
                 break
@@ -350,60 +493,92 @@ class MorphUDPClient {
         dataConnection?.start(queue: queue)
     }
     
-    private func sendHandshake() {
-        NSLog("🤝 MorphUDPClient: Sending handshake...")
-        
-        queue.async { [weak self] in
+    private func startReceivingData() {
+        dataConnection?.receiveMessage { [weak self] data, context, isComplete, error in
             guard let self = self else { return }
             
-            do {
-                // 构建握手数据
-                let handshakeData: [String: Any] = [
-                    "clientID": self.clientID.base64EncodedString(),
-                    "userId": "test_user",  // TODO: 从配置获取
-                    "key": self.obfuscator.key,
-                    "obfuscationLayer": self.obfuscator.layer,
-                    "randomPadding": self.obfuscator.paddingLength,
-                    "fnInitor": [
-                        "substitutionTable": self.obfuscator.getSubstitutionTable(),
-                        "randomValue": self.obfuscator.getRandomValue()
-                    ],
-                    "templateId": self.template?.id ?? 0,
-                    "templateParams": self.template?.getParams() ?? [:],
-                    "publicKey": ""  // TODO: RSA 公钥
-                ]
-                
-                // 转换为 JSON
-                let jsonData = try JSONSerialization.data(withJSONObject: handshakeData)
-                guard let jsonString = String(data: jsonData, encoding: .utf8) else {
-                    NSLog("❌ MorphUDPClient: Failed to convert handshake to string")
-                    return
-                }
-                
-                NSLog("🤝 MorphUDPClient: Handshake JSON: \(jsonString)")
-                
-                // 加密握手数据
-                let encrypted = try self.encryptor.encrypt(Data(jsonString.utf8))
-                let encryptedBase64 = encrypted.base64EncodedString()
-                
-                NSLog("🤝 MorphUDPClient: Encrypted handshake: \(encryptedBase64.prefix(50))...")
-                
-                // 发送加密的握手数据（注意：发送 base64 字符串，不是原始数据）
-                let handshakePacket = Data(encryptedBase64.utf8)
-                
-                self.connection?.send(content: handshakePacket, completion: .contentProcessed { error in
-                    if let error = error {
-                        NSLog("❌ MorphUDPClient: Handshake send error: \(error)")
-                        self.onError?(error)
-                    } else {
-                        NSLog("✅ MorphUDPClient: Handshake sent successfully")
-                    }
-                })
-                
-            } catch {
-                NSLog("❌ MorphUDPClient: Handshake preparation error: \(error)")
-                self.onError?(error)
+            if let error = error {
+                NSLog("❌ MorphUDPClient: Data receive error: \(error)")
+                return
             }
+            
+            if let data = data, !data.isEmpty {
+                NSLog("📥 [Server→Morph] Received \(data.count) bytes from server")
+                
+                // 处理服务器响应
+                self.processServerResponse(data)
+            }
+            
+            // 继续接收
+            self.startReceivingData()
         }
+    }
+    
+    /// 处理服务器响应并转发给 WireGuard
+    private func processServerResponse(_ data: Data) {
+        // 1. 协议解封装
+        let obfuscated: Data
+        if let template = self.template {
+            guard let extracted = template.decapsulate(data) else {
+                NSLog("❌ [Server→WG] Failed to decapsulate")
+                return
+            }
+            obfuscated = extracted
+            NSLog("📦 [Server→WG] After decapsulate: \(obfuscated.count) bytes")
+        } else {
+            obfuscated = data
+        }
+        
+        // 2. 解混淆
+        let deobfuscated = self.obfuscator.deobfuscate(obfuscated)
+        NSLog("🎭 [Server→WG] After deobfuscate: \(deobfuscated.count) bytes")
+        
+        // 3. 转发给 WireGuard
+        forwardToWireGuard(deobfuscated)
+        
+        // 4. 也通知回调（可选）
+        onReceive?(deobfuscated)
+    }
+    
+    // MARK: - 公共方法
+    
+    /// 手动发送数据（用于测试）
+    func send(_ data: Data) {
+        forwardToRemoteServer(data)
+    }
+    
+    /// 获取本地监听端口
+    func getLocalPort() -> UInt16 {
+        return localPort
+    }
+    
+    /// 获取会话端口
+    func getSessionPort() -> UInt16? {
+        return sessionPort
+    }
+    
+    /// 断开连接
+    func disconnect() {
+        NSLog("🔌 MorphUDPClient: Disconnecting...")
+        
+        // 停止本地监听
+        localListener?.cancel()
+        localListener = nil
+        
+        // 关闭 WireGuard 连接
+        wireGuardConnection?.cancel()
+        wireGuardConnection = nil
+        
+        // 关闭远程连接
+        handshakeConnection?.cancel()
+        dataConnection?.cancel()
+        handshakeConnection = nil
+        dataConnection = nil
+        
+        isConnected = false
+        sessionPort = nil
+        localPort = 0
+        
+        NSLog("✅ MorphUDPClient: Disconnected")
     }
 }
