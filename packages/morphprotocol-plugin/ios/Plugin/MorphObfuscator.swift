@@ -30,11 +30,7 @@ class MorphObfuscator {
         }
         self.keyArray = ka
         
-        NSLog("🎭 MorphObfuscator: Initialized")
-        NSLog("   Key: \(key)")
-        NSLog("   Layer: \(layer)")
-        NSLog("   Padding: \(self.paddingLength)")
-        NSLog("   Total Combinations: \(totalCombinations)")
+        NSLog("🎭 MorphObfuscator: key=\(key) layer=\(layer) pad=\(self.paddingLength) combos=\(totalCombinations)")
     }
     
     /// 混淆数据

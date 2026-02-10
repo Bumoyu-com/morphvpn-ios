@@ -13,7 +13,7 @@ class MorphEncryptor {
     private let iv: Data
     
     init(keyString: String) throws {
-        NSLog("🔐 MorphEncryptor: Initializing with key string")
+        NSLog("🔐 MorphEncryptor: init")
         
         // 解析 base64key:base64iv 格式
         let parts = keyString.split(separator: ":")
@@ -28,7 +28,7 @@ class MorphEncryptor {
             throw MorphError.invalidKey
         }
         
-        NSLog("🔐 MorphEncryptor: Key length: \(keyData.count), IV length: \(ivData.count)")
+        // 验证长度
         
         // 确保密钥长度正确（256位 = 32字节）
         guard keyData.count == 32 else {
@@ -45,7 +45,7 @@ class MorphEncryptor {
         self.key = keyData
         self.iv = ivData
         
-        NSLog("✅ MorphEncryptor: Initialized successfully")
+        NSLog("✅ MorphEncryptor: ready")
     }
     
     func encrypt(_ data: Data) throws -> Data {

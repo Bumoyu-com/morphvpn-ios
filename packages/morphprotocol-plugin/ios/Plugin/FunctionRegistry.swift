@@ -25,24 +25,11 @@ class FunctionRegistry {
         self.functionRegistry = ObfuscationFunctionRegistry()
         self.functions = functionRegistry.functions
         
-        NSLog("🎭 FunctionRegistry: Initializing with layer=\(obfuscationLayer)")
-        
         // 预计算所有排列
-        let startTime = Date()
-        
         combos1 = calculatePermutations(n: functions.count, r: 1)
         combos2 = calculatePermutations(n: functions.count, r: 2)
         combos3 = calculatePermutations(n: functions.count, r: 3)
         combos4 = calculatePermutations(n: functions.count, r: 4)
-        
-        let elapsed = Date().timeIntervalSince(startTime)
-        
-        NSLog("🎭 FunctionRegistry: Precomputed combinations:")
-        NSLog("   Layer 1: \(combos1.count) combinations")
-        NSLog("   Layer 2: \(combos2.count) combinations")
-        NSLog("   Layer 3: \(combos3.count) combinations")
-        NSLog("   Layer 4: \(combos4.count) combinations")
-        NSLog("   Time: \(String(format: "%.3f", elapsed))s")
     }
     
     /// 获取当前层数的函数组合

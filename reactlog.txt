@@ -1,94 +1,98 @@
-✅ WireGuardPlugin: Plugin loaded successfully
-✅ WireGuardPlugin: Initialization complete
-⚡️  Loading app at capacitor://localhost...
-📡 WireGuardPlugin: VPN status changed to: disconnected
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  [log] - ✅ PingBridge loaded and ready
-⚡️  WebView loaded
-⚡️  [log] - ✅ window.morphVpn 已初始化
-⚡️  [log] - storage web
-⚡️  To Native ->  SplashScreen hide 68851404
-⚡️  TO JS undefined
-⚡️  [log] - ✅ PingBridge 已加载
-⚡️  [log] - 缓存加载失败
-⚡️  [log] - 🔵 VpnConnector: 开始连接...
-⚡️  To Native ->  MorphProtocol connect 68851405
-⚡️  [log] - 🔵 VpnConnector: 启动 MorphProtocol 代理...
-2026-01-16 17:48:29.853155+0800 App[85160:12354869] 🔵 MorphProtocolPlugin: connect() called
-2026-01-16 17:48:29.853771+0800 App[85160:12354869] 🔵 MorphProtocolPlugin: Config:
-2026-01-16 17:48:29.854109+0800 App[85160:12354869]    Host: 156.239.242.81:12301
-2026-01-16 17:48:29.854331+0800 App[85160:12354869]    UserId: user123
-2026-01-16 17:48:29.854546+0800 App[85160:12354869]    Layer: 3, Padding: 8, Template: 1
-2026-01-16 17:48:29.854751+0800 App[85160:12354869]    LocalProxyPort: 0
-2026-01-16 17:48:29.855950+0800 App[85160:12354869] 🔒 MorphUDPClient: Initializing...
-2026-01-16 17:48:29.856220+0800 App[85160:12354869] 🔐 MorphEncryptor: Initializing with key string
-2026-01-16 17:48:29.857309+0800 App[85160:12354869] 🔐 MorphEncryptor: Key length: 32, IV length: 16
-2026-01-16 17:48:29.857456+0800 App[85160:12354869] ✅ MorphEncryptor: Initialized successfully
-2026-01-16 17:48:29.864834+0800 App[85160:12354869] 🎭 FunctionRegistry: Initializing with layer=3
-2026-01-16 17:48:29.887255+0800 App[85160:12354869] 🎭 FunctionRegistry: Precomputed combinations:
-2026-01-16 17:48:29.887443+0800 App[85160:12354869]    Layer 1: 11 combinations
-2026-01-16 17:48:29.887510+0800 App[85160:12354869]    Layer 2: 110 combinations
-2026-01-16 17:48:29.887567+0800 App[85160:12354869]    Layer 3: 990 combinations
-2026-01-16 17:48:29.887619+0800 App[85160:12354869]    Layer 4: 7920 combinations
-2026-01-16 17:48:29.888592+0800 App[85160:12354869]    Time: 0.022s
-2026-01-16 17:48:29.888666+0800 App[85160:12354869] 🎭 MorphObfuscator: Initialized
-2026-01-16 17:48:29.888839+0800 App[85160:12354869]    Key: 111
-2026-01-16 17:48:29.888886+0800 App[85160:12354869]    Layer: 3
-2026-01-16 17:48:29.888928+0800 App[85160:12354869]    Padding: 8
-2026-01-16 17:48:29.889045+0800 App[85160:12354869]    Total Combinations: 990
-2026-01-16 17:48:29.890957+0800 App[85160:12354869] 🎭 MorphUDPClient: Using QUIC template
-2026-01-16 17:48:29.891011+0800 App[85160:12354869] ✅ MorphUDPClient: Initialized
-2026-01-16 17:48:29.891059+0800 App[85160:12354869]    Layer: 3
-2026-01-16 17:48:29.891100+0800 App[85160:12354869]    Padding: 8
-2026-01-16 17:48:29.891143+0800 App[85160:12354869]    Template: QUIC
-2026-01-16 17:48:29.891194+0800 App[85160:12354869]    UserId: user123
-2026-01-16 17:48:29.891242+0800 App[85160:12354869] 🔵 MorphProtocolPlugin: Starting local proxy...
-2026-01-16 17:48:29.891297+0800 App[85160:12354869] 🔌 MorphUDPClient: Starting local UDP proxy...
-2026-01-16 17:48:30.171550+0800 App[85160:12354864] ✅ MorphUDPClient: Local proxy listening on 127.0.0.1:63943
-2026-01-16 17:48:30.172048+0800 App[85160:12354864] ✅ MorphProtocolPlugin: Local port ready: 63943
-2026-01-16 17:48:30.206015+0800 App[85160:12354869] ✅ MorphProtocolPlugin: Local proxy started on port 63943
-2026-01-16 17:48:30.206292+0800 App[85160:12354869] 🔵 MorphProtocolPlugin: Connecting to remote server...
-2026-01-16 17:48:30.207113+0800 App[85160:12354869] 🔌 MorphUDPClient: Connecting to remote 156.239.242.81:12301
-⚡️  TO JS {"localPort":63943,"message":"Connecting to 156.239.242.81:12301","success":true}
-⚡️  [log] - ✅ VpnConnector: MorphProtocol 本地端口: 63943
-⚡️  To Native ->  MorphProtocol addListener 68851406
-⚡️  To Native ->  MorphProtocol addListener 68851407
-2026-01-16 17:48:30.316413+0800 App[85160:12354869] 🔌 MorphUDPClient: Handshake connection state: preparing
-⚡️  TO JS {"localPort":63943,"status":"connecting","sessionPort":0}
-2026-01-16 17:48:30.319722+0800 App[85160:12354869] 🔌 MorphUDPClient: Handshake connection state: ready
-⚡️  TO JS {"localPort":63943,"status":"connecting","sessionPort":0}
-2026-01-16 17:48:30.320849+0800 App[85160:12354869] ✅ MorphUDPClient: Handshake connection ready
-2026-01-16 17:48:30.321254+0800 App[85160:12354869] 🤝 MorphUDPClient: Sending handshake...
-2026-01-16 17:48:30.328528+0800 App[85160:12354869] 🤝 MorphUDPClient: Handshake JSON: {"templateParams":{},"templateId":1,"clientID":"1Em1kWpeTkSfF+O50YTCRA==","randomPadding":8,"key":111,"userId":"user123","obfuscationLayer":3,"fnInitor":{"randomValue":8574421586290826732,"substitutionTable":[20,166,117,124,206,71,161,197,91,215,37,239,227,205,57,31,229,173,96,81,9,46,169,137,17,47,18,164,127,149,3,82,10,180,58,76,150,6,192,131,176,158,143,141,87,79,255,204,30,115,211,16,97,233,172,189,235,234,212,85,70,220,232,246,253,75,177,199,43,228,123,33,209,168,78,93,88,84,175,156,7,5,21,216,63,248,196,217,121,74,60,94,237,145,223,8,4,224,14,86,221,68,118,226,69,222,243,126,240,23,186,110,103,83,195,250,122,190,160,247,225,202,32,134,244,148,213,106,90,116,41,135,144,139,104,251,203,142,174,48,26,108,61,13,29,66,159,34,39,130,181,100,35,72,111,102,136,52,167,183,40,201,98,112,242,171,119,15,133,178,163,107,153,208,230,162,184,165,62,67,65,114,53,109,138,95,155,12,54,73,154,193,200,146,105,194,128,236,210,59,101,77,214,152,157,182,51,2,147,0,19,125,80,179,89,36,187,
-2026-01-16 17:48:30.334198+0800 App[85160:12354869] 🤝 MorphUDPClient: Encrypted handshake length: 1536
-2026-01-16 17:48:30.337489+0800 App[85160:12354869] ✅ MorphUDPClient: Handshake sent successfully
-2026-01-16 17:48:30.672549+0800 App[85160:12354865] 📥 MorphUDPClient: Received handshake response: 108 bytes
-2026-01-16 17:48:30.672989+0800 App[85160:12354865] 🤝 Trying to parse handshake response
-2026-01-16 17:48:30.673391+0800 App[85160:12354865] 🤝 Decrypted response: {"port":59892,"clientID":"1Em1kWpeTkSfF+O50YTCRA==","status":"connected"}
-2026-01-16 17:48:30.674204+0800 App[85160:12354865] ✅ MorphUDPClient: Handshake response:
-2026-01-16 17:48:30.674661+0800 App[85160:12354865]    Port: 59892
-2026-01-16 17:48:30.674983+0800 App[85160:12354865]    Status: connected
-2026-01-16 17:48:30.675292+0800 App[85160:12354865]    ClientID: 1Em1kWpeTkSfF+O50YTCRA==
-2026-01-16 17:48:30.675588+0800 App[85160:12354865] 🔌 MorphUDPClient: Creating data connection to port 59892
-2026-01-16 17:48:30.676371+0800 App[85160:12354865] ✅ MorphProtocolPlugin: Handshake complete, session port: 59892
-⚡️  TO JS {"sessionPort":59892}
-⚡️  TO JS {"status":"connected","localPort":63943,"sessionPort":59892}
-2026-01-16 17:48:30.682353+0800 App[85160:12354865] 🔌 MorphUDPClient: Data connection state: preparing
-⚡️  [log] - ✅ VpnConnector: MorphProtocol 握手完成，会话端口: 59892
-2026-01-16 17:48:30.685929+0800 App[85160:12354941] 🔌 MorphUDPClient: Data connection state: ready
-⚡️  [log] - 🔵 VpnConnector: WireGuard 配置已修改
-2026-01-16 17:48:30.686398+0800 App[85160:12354941] ✅ MorphUDPClient: Data connection ready on port 59892
-⚡️  [log] - 🔵 VpnConnector: 启动 WireGuard...
-⚡️  To Native ->  WireGuard connect 68851408
+⚡️  [log] - 创建新配置,当前网络: GFW is true
+⚡️  [log] - 转发请求结果==>> {"data":"d1f55892-b39b-4d90-8cd7-f8094859255e","error":null}
+⚡️  [log] - 新配置id d1f55892-b39b-4d90-8cd7-f8094859255e
+⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = gEpcVLaGN548heJDfNqVu6MPJ8unk1p5+sLK0yQImXM=\nAddress = 10.8.0.42/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = sMRYFrYHgaZ8m97GdNKqpo2DX3aMahFBlJ+u4qOXOCQ=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 64.176.39.111:51820","error":null}
+⚡️  [log] - wireguard配置 [Interface]
+PrivateKey = gEpcVLaGN548heJDfNqVu6MPJ8unk1p5+sLK0yQImXM=
+Address = 10.8.0.42/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
+PresharedKey = sMRYFrYHgaZ8m97GdNKqpo2DX3aMahFBlJ+u4qOXOCQ=
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 0
+Endpoint = 64.176.39.111:51820
+⚡️  [log] - [morphVpn_ios] 连接 MorphProtocol → 64.176.39.111:16783
+⚡️  To Native ->  MorphProtocol connect 71752209
+2026-02-10 14:47:17.574090+0800 App[81804:20721954] 🔵 MorphProtocolPlugin: connect() called
+2026-02-10 14:47:17.575228+0800 App[81804:20721954] 🔵 MorphProtocolPlugin: Config:
+2026-02-10 14:47:17.575609+0800 App[81804:20721954]    Host: 64.176.39.111:16783
+2026-02-10 14:47:17.576468+0800 App[81804:20721954]    UserId: 01de806b-6dd8-4820-bedd-ca048b96c5a0
+2026-02-10 14:47:17.576704+0800 App[81804:20721954]    Layer: 3, Padding: 8, Template: 1
+2026-02-10 14:47:17.576885+0800 App[81804:20721954]    LocalProxyPort: 0
+2026-02-10 14:47:17.578334+0800 App[81804:20721954] 🔒 MorphUDPClient: Initializing...
+2026-02-10 14:47:17.578644+0800 App[81804:20721954] 🔐 MorphEncryptor: Initializing with key string
+2026-02-10 14:47:17.580242+0800 App[81804:20721954] 🔐 MorphEncryptor: Key length: 32, IV length: 16
+2026-02-10 14:47:17.580454+0800 App[81804:20721954] ✅ MorphEncryptor: Initialized successfully
+2026-02-10 14:47:17.595065+0800 App[81804:20721954] 🎭 FunctionRegistry: Initializing with layer=3
+2026-02-10 14:47:17.616162+0800 App[81804:20721954] 🎭 FunctionRegistry: Precomputed combinations:
+2026-02-10 14:47:17.616342+0800 App[81804:20721954]    Layer 1: 11 combinations
+2026-02-10 14:47:17.616399+0800 App[81804:20721954]    Layer 2: 110 combinations
+2026-02-10 14:47:17.616444+0800 App[81804:20721954]    Layer 3: 990 combinations
+2026-02-10 14:47:17.616488+0800 App[81804:20721954]    Layer 4: 7920 combinations
+2026-02-10 14:47:17.616640+0800 App[81804:20721954]    Time: 0.021s
+2026-02-10 14:47:17.616896+0800 App[81804:20721954] 🎭 MorphObfuscator: Initialized
+2026-02-10 14:47:17.616946+0800 App[81804:20721954]    Key: 40
+2026-02-10 14:47:17.616992+0800 App[81804:20721954]    Layer: 3
+2026-02-10 14:47:17.617036+0800 App[81804:20721954]    Padding: 8
+2026-02-10 14:47:17.617077+0800 App[81804:20721954]    Total Combinations: 990
+2026-02-10 14:47:17.617419+0800 App[81804:20721954] 🎭 MorphUDPClient: Using QUIC template
+2026-02-10 14:47:17.617466+0800 App[81804:20721954] ✅ MorphUDPClient: Initialized
+2026-02-10 14:47:17.617511+0800 App[81804:20721954]    Layer: 3
+2026-02-10 14:47:17.617552+0800 App[81804:20721954]    Padding: 8
+2026-02-10 14:47:17.617592+0800 App[81804:20721954]    Template: QUIC
+2026-02-10 14:47:17.617639+0800 App[81804:20721954]    UserId: 01de806b-6dd8-4820-bedd-ca048b96c5a0
+2026-02-10 14:47:17.617683+0800 App[81804:20721954] 🔵 MorphProtocolPlugin: Starting local proxy...
+2026-02-10 14:47:17.617735+0800 App[81804:20721954] 🔌 MorphUDPClient: Starting local UDP proxy...
+2026-02-10 14:47:17.978429+0800 App[81804:20721954] ✅ MorphProtocolPlugin: Local proxy started on port 63991
+2026-02-10 14:47:17.978672+0800 App[81804:20721954] 🔵 MorphProtocolPlugin: Connecting to remote server...
+2026-02-10 14:47:17.979067+0800 App[81804:20722079] ✅ MorphUDPClient: Local proxy listening on 127.0.0.1:63991
+2026-02-10 14:47:17.979322+0800 App[81804:20722079] ✅ MorphProtocolPlugin: Local port ready: 63991
+2026-02-10 14:47:17.979889+0800 App[81804:20721954] 🔌 MorphUDPClient: Connecting to remote 64.176.39.111:16783
+⚡️  TO JS {"success":true,"localPort":63991,"message":"Connecting to 64.176.39.111:16783"}
+⚡️  [log] - [morphVpn_ios] MorphProtocol 本地端口: 63991
+⚡️  To Native ->  MorphProtocol addListener 71752210
+⚡️  To Native ->  MorphProtocol addListener 71752211
+2026-02-10 14:47:18.070445+0800 App[81804:20721954] 🔌 MorphUDPClient: Handshake connection state: preparing
+⚡️  TO JS {"localPort":63991,"status":"connecting","sessionPort":0}
+2026-02-10 14:47:18.071368+0800 App[81804:20721954] 🔌 MorphUDPClient: Handshake connection state: ready
+⚡️  TO JS {"localPort":63991,"sessionPort":0,"status":"connecting"}
+2026-02-10 14:47:18.071796+0800 App[81804:20721954] ✅ MorphUDPClient: Handshake connection ready
+2026-02-10 14:47:18.072315+0800 App[81804:20721954] 🤝 MorphUDPClient: Sending handshake...
+2026-02-10 14:47:18.074613+0800 App[81804:20721954] 🤝 MorphUDPClient: Handshake JSON: {"key":40,"templateId":1,"randomPadding":8,"fnInitor":{"substitutionTable":[32,210,117,62,236,154,245,237,240,107,169,241,145,118,61,98,171,79,81,180,223,136,199,168,191,161,57,176,87,193,149,125,112,153,130,235,99,252,37,217,77,205,213,49,234,35,140,38,116,119,253,167,39,44,63,115,187,178,12,185,248,46,230,251,200,10,231,151,152,175,250,90,89,97,65,64,23,51,211,146,212,0,33,113,70,41,215,144,198,73,141,135,3,31,162,60,54,102,8,196,195,84,17,78,80,111,174,247,201,52,222,184,221,114,106,11,208,94,108,133,2,47,13,156,104,177,45,204,83,160,121,124,22,150,181,182,27,207,74,242,228,219,19,190,165,88,36,15,72,179,92,55,56,93,67,126,1,202,110,183,225,34,166,227,206,127,139,232,249,164,48,58,30,24,103,86,43,7,246,128,197,157,29,192,21,95,138,220,229,53,226,109,25,105,209,131,40,163,172,91,255,101,134,100,243,20,59,28,218,76,18,75,123,132,159,85,147,96,142,68,214,188,233,42,9,155,16,216,254,189,173,148,203,71,14,239,82,50,26,224,186,170,69,122,4,129,244,158,66,120,194,5,6,137,143,
+2026-02-10 14:47:18.077472+0800 App[81804:20721954] 🤝 MorphUDPClient: Encrypted handshake length: 1536
+2026-02-10 14:47:18.079714+0800 App[81804:20721954] ✅ MorphUDPClient: Handshake sent successfully
+2026-02-10 14:47:18.311321+0800 App[81804:20722079] 📥 MorphUDPClient: Received handshake response: 108 bytes
+2026-02-10 14:47:18.311657+0800 App[81804:20722079] 🤝 Trying to parse handshake response
+2026-02-10 14:47:18.311965+0800 App[81804:20722079] 🤝 Decrypted response: {"port":48038,"clientID":"JVShIJp3Nhgm54d14up96A==","status":"connected"}
+2026-02-10 14:47:18.312601+0800 App[81804:20722079] ✅ MorphUDPClient: Handshake response:
+2026-02-10 14:47:18.312982+0800 App[81804:20722079]    Port: 48038
+2026-02-10 14:47:18.313286+0800 App[81804:20722079]    Status: connected
+2026-02-10 14:47:18.313594+0800 App[81804:20722079]    ClientID: JVShIJp3Nhgm54d14up96A==
+2026-02-10 14:47:18.313848+0800 App[81804:20722079] 🔌 MorphUDPClient: Creating data connection to port 48038
+2026-02-10 14:47:18.314557+0800 App[81804:20722079] ✅ MorphProtocolPlugin: Handshake complete, session port: 48038
+⚡️  TO JS {"sessionPort":48038}
+⚡️  TO JS {"status":"connected","localPort":63991,"sessionPort":48038}
+2026-02-10 14:47:18.319385+0800 App[81804:20722079] 🔌 MorphUDPClient: Data connection state: preparing
+2026-02-10 14:47:18.323089+0800 App[81804:20722079] 🔌 MorphUDPClient: Data connection state: ready
+2026-02-10 14:47:18.323592+0800 App[81804:20722079] ✅ MorphUDPClient: Data connection ready on port 48038
+⚡️  To Native ->  MorphProtocol removeListener 71752212
+⚡️  [debug] - Removing listener MorphProtocol handshakeComplete
+⚡️  To Native ->  MorphProtocol removeListener ⚡️  [debug] - Removing listener MorphProtocol statusChanged
+71752213
+⚡️  [log] - [morphVpn_ios] 握手完成，会话端口: 48038
+⚡️  To Native ->  WireGuard connect 71752214
+⚡️  [log] - [morphVpn_ios] WireGuard 配置已改写
 🔵 WireGuardPlugin: connect() called
-🔵 WireGuardPlugin: Call options: Optional([AnyHashable("tunnelName"): "MorphVPN", AnyHashable("config"): "[Interface]\nPrivateKey = WLpz631ENviNLXkzK53O4IFoBC/I2r8Ps9nDQwdikG4=\nAddress = 10.8.0.2/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = 35NgtpHdlNrl3WXeNZI4JN8SdQhppxGtK9lpexrgJRU=\nPresharedKey = SfTbIYt2xx7KzeikeANm9HlRtlDhnrlwlWO4st+l4o4=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 127.0.0.1:63943\n"])
+🔵 WireGuardPlugin: Call options: Optional([AnyHashable("config"): "[Interface]\nAddress = 10.8.0.42/24\nDNS = 1.1.1.1\nPrivateKey = gEpcVLaGN548heJDfNqVu6MPJ8unk1p5+sLK0yQImXM=\nListenPort = 51820\n\n[Peer]\nAllowedIPs = 0.0.0.0/0,::/0\nEndpoint = 127.0.0.1:63991\nPresharedKey = sMRYFrYHgaZ8m97GdNKqpo2DX3aMahFBlJ+u4qOXOCQ=\nPersistentKeepalive = 0\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=", AnyHashable("tunnelName"): "MorphVPN"])
 🔵 WireGuardPlugin: Config received
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Config length: 311 bytes
+🔵 WireGuardPlugin: Config length: 329 bytes
 🔵 WireGuardPlugin: Config preview: [Interface]
-PrivateKey = WLpz631ENviNLXkzK53O4IFoBC/I2r8Ps9nDQwdikG4=
-Address = 10.8.0.2/24
-DNS = 1....
+Address = 10.8.0.42/24
+DNS = 1.1.1.1
+PrivateKey = gEpcVLaGN548heJDfNqVu6MPJ8unk1p5+sLK0y...
 🔵 WireGuardPlugin: saveConfiguration called
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
 🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
@@ -104,7 +108,7 @@ DNS = 1....
 🔵 WireGuardPlugin: VPN manager enabled: true
 🔵 WireGuardPlugin: Protocol configuration: 
     type = plugin
-    identifier = E242D84B-33AF-4DD3-A269-77829AD269DA
+    identifier = 99CBE5C9-5674-4567-B462-8421A8A34D0C
     serverAddress = WireGuard
     identityDataImported = NO
     disconnectOnSleep = NO
@@ -122,17 +126,17 @@ DNS = 1....
     reassertTimeout = 0
     providerConfiguration = {
         wg_config = [Interface]
-PrivateKey = WLpz631ENviNLXkzK53O4IFoBC/I2r8Ps9nDQwdikG4=
-Address = 10.8.0.2/24
+Address = 10.8.0.42/24
 DNS = 1.1.1.1
+PrivateKey = gEpcVLaGN548heJDfNqVu6MPJ8unk1p5+sLK0yQImXM=
+ListenPort = 51820
 
 [Peer]
-PublicKey = 35NgtpHdlNrl3WXeNZI4JN8SdQhppxGtK9lpexrgJRU=
-PresharedKey = SfTbIYt2xx7KzeikeANm9HlRtlDhnrlwlWO4st+l4o4=
-AllowedIPs = 0.0.0.0/0, ::/0
+AllowedIPs = 0.0.0.0/0,::/0
+Endpoint = 127.0.0.1:63991
+PresharedKey = sMRYFrYHgaZ8m97GdNKqpo2DX3aMahFBlJ+u4qOXOCQ=
 PersistentKeepalive = 0
-Endpoint = 127.0.0.1:63943
-,
+PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
     }
     providerBundleIdentifier = com.morphvpn.app.WireGuardExtension
 🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
@@ -141,58 +145,94 @@ Endpoint = 127.0.0.1:63943
 ✅ WireGuardPlugin: startVPNTunnel() called successfully
 ✅ WireGuardPlugin: Connection successful
 ⚡️  TO JS {"success":true}
-⚡️  [log] - ✅ VpnConnector: VPN 连接成功!
+⚡️  [log] - [morphVpn_ios] VPN 连接成功
+⚡️  [log] - vpn已打开,检测IP {"id":"f1a8167f-5fb7-460d-b0d0-977335915188","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"64.176.39.111","name":"0df54fe9-4b07-485a-8b85-d4ffcaef774c","udpPort":"16783","tcpPort":null,"lastInvoke":1770684171,"type":"vhp-1c-1gb","info":"MOC0FtO5iy5YpQENcGFe3qSgXNxLGVNw4b+q5EJtsrc=:3OdlPlt9uwfInTwZs/260A==","instanceId":"e5106ed3-26f4-46fb-bc77-4fa37bffb9b8","cityName":"itm","status":"running","clientNum":0,"updatedAt":"2026-02-10T02:23:55.000Z","createdAt":"2026-02-09T22:22:17.000Z"}
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connected
 📡 WireGuardPlugin: VPN status changed to: connected
-2026-01-16 17:48:31.234188+0800 App[85160:12354864] 📥 MorphUDPClient: New connection from WireGuard
-2026-01-16 17:48:31.238512+0800 App[85160:12354864] ✅ MorphUDPClient: WireGuard connection ready
-2026-01-16 17:48:31.239188+0800 App[85160:12354864] 📥 [WG→Morph] Received 148 bytes from WireGuard
-2026-01-16 17:48:31.239387+0800 App[85160:12354864] 📤 [WG→Server] Forwarding 148 bytes to server
-2026-01-16 17:48:31.241465+0800 App[85160:12354864] 📤 [WG→Server] After obfuscate: 155 bytes
-2026-01-16 17:48:31.244098+0800 App[85160:12354864] 📤 [WG→Server] After template: 168 bytes
-2026-01-16 17:48:31.244957+0800 App[85160:12354864] ✅ [WG→Server] Sent 168 bytes
+2026-02-10 14:47:18.841627+0800 App[81804:20722069] 📥 MorphUDPClient: New connection from WireGuard
+2026-02-10 14:47:18.844046+0800 App[81804:20722069] ✅ MorphUDPClient: WireGuard connection ready
+2026-02-10 14:47:18.844498+0800 App[81804:20722079] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:18.844642+0800 App[81804:20722079] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:18.845881+0800 App[81804:20722079] 📤 [WG→Server] After obfuscate: 152 bytes
+2026-02-10 14:47:18.847741+0800 App[81804:20722079] 📤 [WG→Server] After template: 163 bytes
+2026-02-10 14:47:18.848435+0800 App[81804:20722079] ✅ [WG→Server] Sent 163 bytes
 📊 WireGuardPlugin: Status after 2s: connected
-2026-01-16 17:48:36.262718+0800 App[85160:12354864] 📥 [WG→Morph] Received 148 bytes from WireGuard
-2026-01-16 17:48:36.263120+0800 App[85160:12354864] 📤 [WG→Server] Forwarding 148 bytes to server
-2026-01-16 17:48:36.276070+0800 App[85160:12354864] 📤 [WG→Server] After obfuscate: 158 bytes
-2026-01-16 17:48:36.276505+0800 App[85160:12354864] 📤 [WG→Server] After template: 171 bytes
-2026-01-16 17:48:36.277423+0800 App[85160:12354864] ✅ [WG→Server] Sent 171 bytes
-2026-01-16 17:48:41.517559+0800 App[85160:12354941] 📥 [WG→Morph] Received 148 bytes from WireGuard
-2026-01-16 17:48:41.517991+0800 App[85160:12354941] 📤 [WG→Server] Forwarding 148 bytes to server
-2026-01-16 17:48:41.520715+0800 App[85160:12354941] 📤 [WG→Server] After obfuscate: 152 bytes
-2026-01-16 17:48:41.521072+0800 App[85160:12354941] 📤 [WG→Server] After template: 165 bytes
-2026-01-16 17:48:41.521916+0800 App[85160:12354941] ✅ [WG→Server] Sent 165 bytes
-2026-01-16 17:48:46.675559+0800 App[85160:12354941] 📥 [WG→Morph] Received 148 bytes from WireGuard
-2026-01-16 17:48:46.675962+0800 App[85160:12354941] 📤 [WG→Server] Forwarding 148 bytes to server
-2026-01-16 17:48:46.678161+0800 App[85160:12354941] 📤 [WG→Server] After obfuscate: 154 bytes
-2026-01-16 17:48:46.678622+0800 App[85160:12354941] 📤 [WG→Server] After template: 167 bytes
-2026-01-16 17:48:46.679584+0800 App[85160:12354941] ✅ [WG→Server] Sent 167 bytes
-2026-01-16 17:48:51.891304+0800 App[85160:12354941] 📥 [WG→Morph] Received 148 bytes from WireGuard
-2026-01-16 17:48:51.891610+0800 App[85160:12354941] 📤 [WG→Server] Forwarding 148 bytes to server
-2026-01-16 17:48:51.894565+0800 App[85160:12354941] 📤 [WG→Server] After obfuscate: 153 bytes
-2026-01-16 17:48:51.894758+0800 App[85160:12354941] 📤 [WG→Server] After template: 166 bytes
-2026-01-16 17:48:51.895396+0800 App[85160:12354941] ✅ [WG→Server] Sent 166 bytes
-⚡️  To Native ->  WireGuard disconnect 68851409
-⚡️  [log] - 🔵 VpnConnector: 断开连接...
-⚡️  TO JS {"success":true}
-📡 WireGuardPlugin: VPN status changed to: disconnecting
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  To Native ->  MorphProtocol disconnect 68851410
-⚡️  [log] - ✅ VpnConnector: WireGuard 已断开
-2026-01-16 17:48:51.965044+0800 App[85160:12354869] 🔵 MorphProtocolPlugin: disconnect() called
-2026-01-16 17:48:51.965129+0800 App[85160:12354869] 🔌 MorphUDPClient: Disconnecting...
-2026-01-16 17:48:51.965524+0800 App[85160:12354869] ✅ MorphUDPClient: Disconnected
-📡 WireGuardPlugin: VPN status changed to: disconnecting
-🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  TO JS {"status":"disconnected"}
-⚡️  TO JS {"message":"Disconnected","success":true}
-⚡️  To Native ->  MorphProtocol removeListener 68851411
-⚡️  [log] - ✅ VpnConnector: MorphProtocol 已断开
-⚡️  To Native ->  MorphProtocol removeListener 68851412
-⚡️  [warn] - Using addListener() without 'await' is deprecated.
-⚡️  [warn] - Using addListener() without 'await' is deprecated.
-⚡️  [log] - ✅ VpnConnector: 已断开连接
-📡 WireGuardPlugin: VPN status changed to: disconnected
-🔍 WireGuardPlugin: Checking for connection errors...
+2026-02-10 14:47:23.914880+0800 App[81804:20722069] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:23.915302+0800 App[81804:20722069] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:23.917943+0800 App[81804:20722069] 📤 [WG→Server] After obfuscate: 156 bytes
+2026-02-10 14:47:23.918317+0800 App[81804:20722069] 📤 [WG→Server] After template: 167 bytes
+2026-02-10 14:47:23.919246+0800 App[81804:20722069] ✅ [WG→Server] Sent 167 bytes
+⚡️  [log] - failtimes 1
+2026-02-10 14:47:28.922716+0800 App[81804:20722069] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:28.923462+0800 App[81804:20722069] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:28.926361+0800 App[81804:20722069] 📤 [WG→Server] After obfuscate: 155 bytes
+2026-02-10 14:47:28.926784+0800 App[81804:20722069] 📤 [WG→Server] After template: 166 bytes
+2026-02-10 14:47:28.928182+0800 App[81804:20722069] ✅ [WG→Server] Sent 166 bytes
+2026-02-10 14:47:34.209082+0800 App[81804:20722253] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:34.209553+0800 App[81804:20722253] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:34.217625+0800 App[81804:20722253] 📤 [WG→Server] After obfuscate: 155 bytes
+2026-02-10 14:47:34.217905+0800 App[81804:20722253] 📤 [WG→Server] After template: 166 bytes
+2026-02-10 14:47:34.218551+0800 App[81804:20722253] ✅ [WG→Server] Sent 166 bytes
+⚡️  [log] - failtimes 2
+2026-02-10 14:47:39.339981+0800 App[81804:20721954] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:39.340689+0800 App[81804:20721954] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:39.343573+0800 App[81804:20721954] 📤 [WG→Server] After obfuscate: 159 bytes
+2026-02-10 14:47:39.343977+0800 App[81804:20721954] 📤 [WG→Server] After template: 170 bytes
+2026-02-10 14:47:39.345101+0800 App[81804:20722253] ✅ [WG→Server] Sent 170 bytes
+2026-02-10 14:47:44.469168+0800 App[81804:20721954] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:44.469573+0800 App[81804:20721954] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:44.477522+0800 App[81804:20721954] 📤 [WG→Server] After obfuscate: 154 bytes
+2026-02-10 14:47:44.478345+0800 App[81804:20721954] 📤 [WG→Server] After template: 165 bytes
+2026-02-10 14:47:44.479457+0800 App[81804:20721954] ✅ [WG→Server] Sent 165 bytes
+⚡️  [log] - failtimes 3
+2026-02-10 14:47:49.628784+0800 App[81804:20721954] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:49.629027+0800 App[81804:20721954] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:49.630229+0800 App[81804:20721954] 📤 [WG→Server] After obfuscate: 152 bytes
+2026-02-10 14:47:49.630675+0800 App[81804:20721954] 📤 [WG→Server] After template: 163 bytes
+2026-02-10 14:47:49.631435+0800 App[81804:20721954] ✅ [WG→Server] Sent 163 bytes
+2026-02-10 14:47:54.750312+0800 App[81804:20722323] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:54.750746+0800 App[81804:20722323] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:54.757495+0800 App[81804:20722323] 📤 [WG→Server] After obfuscate: 154 bytes
+2026-02-10 14:47:54.757908+0800 App[81804:20722323] 📤 [WG→Server] After template: 165 bytes
+2026-02-10 14:47:54.759148+0800 App[81804:20722323] ✅ [WG→Server] Sent 165 bytes
+⚡️  [log] - failtimes 4
+2026-02-10 14:47:59.871820+0800 App[81804:20721954] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:47:59.872293+0800 App[81804:20721954] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:47:59.880147+0800 App[81804:20721954] 📤 [WG→Server] After obfuscate: 157 bytes
+2026-02-10 14:47:59.880563+0800 App[81804:20721954] 📤 [WG→Server] After template: 168 bytes
+2026-02-10 14:47:59.881246+0800 App[81804:20721954] ✅ [WG→Server] Sent 168 bytes
+2026-02-10 14:48:05.203871+0800 App[81804:20722323] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:48:05.204270+0800 App[81804:20722323] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:48:05.206239+0800 App[81804:20722323] 📤 [WG→Server] After obfuscate: 156 bytes
+2026-02-10 14:48:05.206622+0800 App[81804:20722323] 📤 [WG→Server] After template: 167 bytes
+2026-02-10 14:48:05.207521+0800 App[81804:20722323] ✅ [WG→Server] Sent 167 bytes
+⚡️  [log] - failtimes 5
+2026-02-10 14:48:10.318976+0800 App[81804:20721954] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:48:10.319375+0800 App[81804:20721954] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:48:10.321803+0800 App[81804:20721954] 📤 [WG→Server] After obfuscate: 159 bytes
+2026-02-10 14:48:10.322269+0800 App[81804:20721954] 📤 [WG→Server] After template: 170 bytes
+2026-02-10 14:48:10.323180+0800 App[81804:20721954] ✅ [WG→Server] Sent 170 bytes
+2026-02-10 14:48:15.493318+0800 App[81804:20721954] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:48:15.493771+0800 App[81804:20721954] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:48:15.496072+0800 App[81804:20721954] 📤 [WG→Server] After obfuscate: 157 bytes
+2026-02-10 14:48:15.496593+0800 App[81804:20721954] 📤 [WG→Server] After template: 168 bytes
+2026-02-10 14:48:15.498014+0800 App[81804:20722323] ✅ [WG→Server] Sent 168 bytes
+⚡️  [log] - failtimes 6
+2026-02-10 14:48:20.573453+0800 App[81804:20722323] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:48:20.573845+0800 App[81804:20722323] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:48:20.577096+0800 App[81804:20722323] 📤 [WG→Server] After obfuscate: 155 bytes
+2026-02-10 14:48:20.577570+0800 App[81804:20722323] 📤 [WG→Server] After template: 166 bytes
+2026-02-10 14:48:20.578447+0800 App[81804:20722323] ✅ [WG→Server] Sent 166 bytes
+2026-02-10 14:48:25.837568+0800 App[81804:20721954] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:48:25.837971+0800 App[81804:20721954] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:48:25.839752+0800 App[81804:20721954] 📤 [WG→Server] After obfuscate: 159 bytes
+2026-02-10 14:48:25.840391+0800 App[81804:20721954] 📤 [WG→Server] After template: 170 bytes
+2026-02-10 14:48:25.841260+0800 App[81804:20722323] ✅ [WG→Server] Sent 170 bytes
+⚡️  [log] - failtimes 7
+2026-02-10 14:48:30.932461+0800 App[81804:20722323] 📥 [WG→Morph] Received 148 bytes from WireGuard
+2026-02-10 14:48:30.932867+0800 App[81804:20722323] 📤 [WG→Server] Forwarding 148 bytes to server
+2026-02-10 14:48:30.934966+0800 App[81804:20722323] 📤 [WG→Server] After obfuscate: 154 bytes
+2026-02-10 14:48:30.935325+0800 App[81804:20722323] 📤 [WG→Server] After template: 165 bytes
+2026-02-10 14:48:30.936123+0800 App[81804:20721954] ✅ [WG→Server] Sent 165 bytes

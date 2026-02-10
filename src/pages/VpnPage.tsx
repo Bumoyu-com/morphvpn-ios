@@ -197,8 +197,10 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
             }
             setConnecting(false);
         }
-        catch (err) {
-            console.log('开启vpn失败', err);
+        catch (err: any) {
+            console.error('开启vpn失败', err?.message || err);
+            message.error(err?.message || '开启vpn失败');
+            setConnecting(false);
         }
 
     }

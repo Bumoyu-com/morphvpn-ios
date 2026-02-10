@@ -50,11 +50,7 @@ public class MorphProtocolPlugin: CAPPlugin {
         let templateType = call.getInt("templateType") ?? 1
         let localProxyPort = call.getInt("localProxyPort") ?? 0
         
-        NSLog("🔵 MorphProtocolPlugin: Config:")
-        NSLog("   Host: \(host):\(port)")
-        NSLog("   UserId: \(userId)")
-        NSLog("   Layer: \(obfuscationLayer), Padding: \(paddingLength), Template: \(templateType)")
-        NSLog("   LocalProxyPort: \(localProxyPort)")
+        NSLog("🔵 MorphProtocol: \(host):\(port) layer=\(obfuscationLayer) tpl=\(templateType)")
         
         connectionStatus = "connecting"
         
@@ -88,7 +84,6 @@ public class MorphProtocolPlugin: CAPPlugin {
             }
             
             morphClient?.onLocalPortReady = { [weak self] port in
-                NSLog("✅ MorphProtocolPlugin: Local port ready: \(port)")
                 self?.localPort = port
                 self?.notifyListeners("localPortReady", data: [
                     "port": Int(port)
@@ -96,7 +91,7 @@ public class MorphProtocolPlugin: CAPPlugin {
             }
             
             morphClient?.onHandshakeComplete = { [weak self] sessionPort in
-                NSLog("✅ MorphProtocolPlugin: Handshake complete, session port: \(sessionPort)")
+                NSLog("✅ MorphProtocol: handshake done, session=\(sessionPort)")
                 self?.sessionPort = sessionPort
                 self?.connectionStatus = "connected"
                 self?.notifyListeners("handshakeComplete", data: [
@@ -110,17 +105,15 @@ public class MorphProtocolPlugin: CAPPlugin {
             }
             
             // 1. 启动本地 UDP 代理
-            NSLog("🔵 MorphProtocolPlugin: Starting local proxy...")
             if let assignedPort = morphClient?.startLocalProxy(preferredPort: UInt16(localProxyPort)) {
                 self.localPort = assignedPort
-                NSLog("✅ MorphProtocolPlugin: Local proxy started on port \(assignedPort)")
+                NSLog("✅ MorphProtocol: proxy on port \(assignedPort)")
             } else {
                 call.reject("Failed to start local UDP proxy")
                 return
             }
             
             // 2. 连接到远程服务器
-            NSLog("🔵 MorphProtocolPlugin: Connecting to remote server...")
             morphClient?.connectToRemote(host: host, port: UInt16(port))
             
             // 返回本地端口（WireGuard 应连接到此端口）

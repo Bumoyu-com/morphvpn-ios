@@ -48,7 +48,7 @@ class MorphUDPClient {
          templateType: TemplateType? = nil,
          userId: String = "") throws {
         
-        NSLog("🔒 MorphUDPClient: Initializing...")
+        NSLog("🔒 MorphUDPClient: init userId=\(userId)")
         
         self.userId = userId
         
@@ -83,11 +83,7 @@ class MorphUDPClient {
             NSLog("ℹ️ MorphUDPClient: No protocol template")
         }
         
-        NSLog("✅ MorphUDPClient: Initialized")
-        NSLog("   Layer: \(obfuscationLayer)")
-        NSLog("   Padding: \(paddingLength)")
-        NSLog("   Template: \(template?.name ?? "None")")
-        NSLog("   UserId: \(userId)")
+        NSLog("✅ MorphUDPClient: ready tpl=\(template?.name ?? "None")")
     }
     
     // MARK: - 启动本地 UDP 代理
@@ -150,9 +146,6 @@ class MorphUDPClient {
     
     /// 处理来自 WireGuard 的新连接
     private func handleNewLocalConnection(_ connection: NWConnection) {
-        NSLog("📥 MorphUDPClient: New connection from WireGuard")
-        
-        // 保存 WireGuard 连接用于回复
         wireGuardConnection = connection
         
         connection.stateUpdateHandler = { [weak self] state in
@@ -160,10 +153,8 @@ class MorphUDPClient {
             case .ready:
                 NSLog("✅ MorphUDPClient: WireGuard connection ready")
                 self?.receiveFromWireGuard(connection)
-                
             case .failed(let error):
                 NSLog("❌ MorphUDPClient: WireGuard connection failed: \(error)")
-                
             default:
                 break
             }
@@ -178,18 +169,14 @@ class MorphUDPClient {
             guard let self = self else { return }
             
             if let error = error {
-                NSLog("❌ MorphUDPClient: Receive from WireGuard error: \(error)")
+                NSLog("❌ [WG→Morph] Receive error: \(error)")
                 return
             }
             
             if let data = data, !data.isEmpty {
-                NSLog("📥 [WG→Morph] Received \(data.count) bytes from WireGuard")
-                
-                // 转发到远程服务器
                 self.forwardToRemoteServer(data)
             }
             
-            // 继续接收
             self.receiveFromWireGuard(connection)
         }
     }
@@ -221,7 +208,6 @@ class MorphUDPClient {
         handshakeConnection?.stateUpdateHandler = { [weak self] state in
             guard let self = self else { return }
             
-            NSLog("🔌 MorphUDPClient: Handshake connection state: \(state)")
             self.onStateChange?(state)
             
             switch state {
@@ -253,35 +239,25 @@ class MorphUDPClient {
     /// 将 WireGuard 数据转发到远程服务器
     private func forwardToRemoteServer(_ data: Data) {
         guard let _ = sessionPort else {
-            NSLog("⚠️ MorphUDPClient: Session not established, cannot forward")
+            NSLog("⚠️ [WG→Server] Session not established")
             return
         }
-        
-        NSLog("📤 [WG→Server] Forwarding \(data.count) bytes to server")
         
         queue.async { [weak self] in
             guard let self = self else { return }
             
-            // 1. 混淆 (WireGuard 数据只需要混淆，不需要加密)
             let obfuscated = self.obfuscator.obfuscate(data)
-            NSLog("📤 [WG→Server] After obfuscate: \(obfuscated.count) bytes")
-            
-            // 2. 协议封装
             let packet: Data
             if let template = self.template {
                 packet = template.encapsulate(obfuscated, clientID: self.clientID)
-                NSLog("📤 [WG→Server] After template: \(packet.count) bytes")
             } else {
                 packet = obfuscated
             }
             
-            // 3. 发送到会话端口
             self.dataConnection?.send(content: packet, completion: .contentProcessed { error in
                 if let error = error {
                     NSLog("❌ [WG→Server] Send error: \(error)")
                     self.onError?(error)
-                } else {
-                    NSLog("✅ [WG→Server] Sent \(packet.count) bytes")
                 }
             })
         }
@@ -290,17 +266,13 @@ class MorphUDPClient {
     /// 将服务器响应转发回 WireGuard
     private func forwardToWireGuard(_ data: Data) {
         guard let connection = wireGuardConnection else {
-            NSLog("⚠️ MorphUDPClient: No WireGuard connection, cannot forward")
+            NSLog("⚠️ [Server→WG] No WireGuard connection")
             return
         }
-        
-        NSLog("📤 [Server→WG] Forwarding \(data.count) bytes to WireGuard")
         
         connection.send(content: data, completion: .contentProcessed { error in
             if let error = error {
                 NSLog("❌ [Server→WG] Send error: \(error)")
-            } else {
-                NSLog("✅ [Server→WG] Sent \(data.count) bytes")
             }
         })
     }
@@ -337,13 +309,9 @@ class MorphUDPClient {
                     return
                 }
                 
-                NSLog("🤝 MorphUDPClient: Handshake JSON: \(jsonString)")
-                
                 // 加密握手数据
                 let encrypted = try self.encryptor.encrypt(Data(jsonString.utf8))
                 let encryptedBase64 = encrypted.base64EncodedString()
-                
-                NSLog("🤝 MorphUDPClient: Encrypted handshake length: \(encryptedBase64.count)")
                 
                 // 发送加密的握手数据
                 let handshakePacket = Data(encryptedBase64.utf8)
@@ -375,8 +343,6 @@ class MorphUDPClient {
             }
             
             if let data = data, !data.isEmpty {
-                NSLog("📥 MorphUDPClient: Received handshake response: \(data.count) bytes")
-                
                 if let response = self.tryParseHandshakeResponse(data) {
                     self.handleHandshakeResponse(response)
                 }
@@ -391,8 +357,6 @@ class MorphUDPClient {
         guard let base64String = String(data: data, encoding: .utf8) else {
             return nil
         }
-        
-        NSLog("🤝 Trying to parse handshake response")
         
         // 检查是否是特殊消息
         if base64String == "inactivity" {

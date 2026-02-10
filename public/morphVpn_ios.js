@@ -63,21 +63,6 @@
       'PublicKey = ' + (peer.PublicKey || '');
   }
 
-  // ========== 排除 IP 计算 ==========
-
-  /**
-   * 如果全局存在 calculateAllowedIPs（由 wasm_exec 注入），
-   * 则用它排除服务器 IP，避免 VPN 回环。
-   */
-  function computeAllowedIPs(baseAllowedIPs, serverIP) {
-    var disallowed = serverIP + '/32';
-    if (typeof window.calculateAllowedIPs === 'function') {
-      var result = window.calculateAllowedIPs(baseAllowedIPs, disallowed);
-      return result.allowed_ips.split(', ');
-    }
-    return baseAllowedIPs.split(',').map(function (s) { return s.trim(); });
-  }
-
   // ========== 状态 ==========
 
   var morphConnected = false;
@@ -151,7 +136,8 @@
 
   // ========== connect ==========
 
-  async function connect(wgConfigText, remoteAddress, serverInfo) {
+  // 第三个参数 remotePublicKey 是 encryptionKey 字符串（与 Android morphVpn_android.js 一致）
+  async function connect(wgConfigText, remoteAddress, remotePublicKey) {
     var MorphProtocol = getMorphProtocol();
     var WireGuard = getWireGuard();
 
@@ -168,14 +154,14 @@
     var morphPort = Number(parts[1]);
     var userId = parts[2] || '';
 
-    var encryptionKey = (serverInfo && (serverInfo.encryptionKey || serverInfo.key)) || '';
+    var encryptionKey = remotePublicKey || '';
     if (!encryptionKey) {
       throw new Error('缺少加密密钥 (encryptionKey)');
     }
 
-    var obfuscationLayer = (serverInfo && serverInfo.obfuscationLayer != null) ? serverInfo.obfuscationLayer : 3;
-    var paddingLength = (serverInfo && serverInfo.paddingLength != null) ? serverInfo.paddingLength : 8;
-    var templateType = (serverInfo && serverInfo.templateType != null) ? serverInfo.templateType : 1;
+    var obfuscationLayer = 3;
+    var paddingLength = 8;
+    var templateType = 1;
 
     console.log('[morphVpn_ios] 连接 MorphProtocol → ' + morphHost + ':' + morphPort);
 
@@ -202,15 +188,23 @@
     morphConnected = true;
     console.log('[morphVpn_ios] 握手完成，会话端口: ' + sessionPort);
 
-    // 3. 改写 WireGuard 配置
+    // 3. 改写 WireGuard 配置（与 Android 对齐）
     var config = wgConfigToObj(wgConfigText);
     config['Peer'] = config['Peer'] || {};
 
-    // 排除服务器 IP
-    var baseAllowed = Array.isArray(config['Peer']['AllowedIPs'])
-      ? config['Peer']['AllowedIPs'].join(', ')
-      : '0.0.0.0/0';
-    config['Peer']['AllowedIPs'] = computeAllowedIPs(baseAllowed, morphHost);
+    // 先重置为仅 IPv4（与 Android 一致，去掉 ::/0）
+    config['Peer']['AllowedIPs'] = ['0.0.0.0/0'];
+
+    // 排除服务器 IP，避免路由回环
+    var disallowedIPs = morphHost + '/32';
+    if (typeof window.calculateAllowedIPs === 'function') {
+      var calcResult = window.calculateAllowedIPs(
+        config['Peer']['AllowedIPs'].join(', '),
+        disallowedIPs
+      );
+      config['Peer']['AllowedIPs'] = calcResult.allowed_ips.split(', ');
+    }
+    console.log('[morphVpn_ios] AllowedIPs: ' + config['Peer']['AllowedIPs'].join(', '));
 
     var finalConfig = objToWgConfig(config, localPort);
     console.log('[morphVpn_ios] WireGuard 配置已改写');
