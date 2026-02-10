@@ -6,4 +6,5 @@ CAP_PLUGIN(MorphProtocolPlugin, "MorphProtocol",
     CAP_PLUGIN_METHOD(disconnect, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(getStatus, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(send, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(testObfuscation, CAPPluginReturnPromise);
 )

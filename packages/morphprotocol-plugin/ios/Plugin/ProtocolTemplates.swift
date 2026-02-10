@@ -10,14 +10,16 @@ import Foundation
 // MARK: - Protocol Template Interface
 
 protocol ProtocolTemplate {
-    var id: UInt8 { get }  // 改名为 id，与服务端一致
-    var templateID: UInt8 { get }  // 保留兼容性
+    var id: UInt8 { get }
+    var templateID: UInt8 { get }
     var name: String { get }
     
     func encapsulate(_ data: Data, clientID: Data) -> Data
     func decapsulate(_ packet: Data) -> Data?
     func extractHeaderID(_ packet: Data) -> Data?
-    func getParams() -> [String: Any]  // 新增：获取模板参数
+    func getParams() -> [String: Any]
+    /// 更新内部状态（序列号等），与 Android updateState() 对齐
+    func updateState()
 }
 
 // MARK: - QUIC Template
@@ -318,15 +320,34 @@ class TemplateFactory {
         }
         return createTemplate(type)
     }
+    
+    /// 按权重随机选择模板（与 Android TemplateSelector 对齐）
+    /// QUIC 40%, KCP 35%, Gaming 25%
+    static func createRandomTemplate() -> ProtocolTemplate? {
+        let random = Int.random(in: 0..<100)
+        if random < 40 {
+            return QuicTemplate()
+        } else if random < 75 {
+            return KcpTemplate()
+        } else {
+            return GenericGamingTemplate()
+        }
+    }
 }
 
-// MARK: - Protocol Extensions for Handshake
+// MARK: - Protocol Extensions
 
 extension QuicTemplate {
     var id: UInt8 { return templateID }
     
     func getParams() -> [String: Any] {
-        return [:]
+        return ["initialSeq": Int(sequenceNumber)]
+    }
+    
+    func updateState() {
+        lock.lock()
+        sequenceNumber = sequenceNumber &+ 1
+        lock.unlock()
     }
 }
 
@@ -334,7 +355,13 @@ extension KcpTemplate {
     var id: UInt8 { return templateID }
     
     func getParams() -> [String: Any] {
-        return [:]
+        return ["initialSeq": Int(sequenceNumber)]
+    }
+    
+    func updateState() {
+        lock.lock()
+        sequenceNumber = sequenceNumber &+ 1
+        lock.unlock()
     }
 }
 
@@ -342,6 +369,12 @@ extension GenericGamingTemplate {
     var id: UInt8 { return templateID }
     
     func getParams() -> [String: Any] {
-        return [:]
+        return ["initialSeq": Int(sequenceNumber)]
+    }
+    
+    func updateState() {
+        lock.lock()
+        sequenceNumber = sequenceNumber &+ 1
+        lock.unlock()
     }
 }

@@ -38,4 +38,11 @@ export class MorphProtocolWeb extends WebPlugin implements MorphProtocolPlugin {
       message: 'MorphProtocol is not supported on web platform',
     };
   }
+
+  async testObfuscation(): Promise<{ success: boolean; message: string }> {
+    return {
+      success: false,
+      message: 'MorphProtocol is not supported on web platform',
+    };
+  }
 }

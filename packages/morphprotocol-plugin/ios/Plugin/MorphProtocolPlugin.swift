@@ -50,19 +50,27 @@ public class MorphProtocolPlugin: CAPPlugin {
         let templateType = call.getInt("templateType") ?? 1
         let localProxyPort = call.getInt("localProxyPort") ?? 0
         
+        // P2-2: 连接配置参数（与 Android ClientConfig 对齐）
+        var clientConfig = MorphClientConfig()
+        if let hb = call.getInt("heartbeatInterval") { clientConfig.heartbeatInterval = TimeInterval(hb) / 1000.0 }
+        if let it = call.getInt("inactivityTimeout") { clientConfig.inactivityTimeout = TimeInterval(it) / 1000.0 }
+        if let mr = call.getInt("maxRetries") { clientConfig.maxRetries = mr }
+        if let hi = call.getInt("handshakeInterval") { clientConfig.handshakeInterval = TimeInterval(hi) / 1000.0 }
+        
         NSLog("🔵 MorphProtocol: \(host):\(port) layer=\(obfuscationLayer) tpl=\(templateType)")
         
         connectionStatus = "connecting"
         
         do {
-            // 创建 MorphUDPClient
-            let template = TemplateType(rawValue: UInt8(templateType))
+            // templateType=0 表示随机选择（与 Android TemplateSelector 对齐）
+            let template: TemplateType? = templateType > 0 ? TemplateType(rawValue: UInt8(templateType)) : nil
             morphClient = try MorphUDPClient(
                 encryptionKey: encryptionKey,
                 obfuscationLayer: obfuscationLayer,
                 paddingLength: paddingLength,
                 templateType: template,
-                userId: userId
+                userId: userId,
+                config: clientConfig
             )
             
             // 设置回调
@@ -221,6 +229,37 @@ public class MorphProtocolPlugin: CAPPlugin {
                 "status": statusString,
                 "localPort": Int(localPort),
                 "sessionPort": Int(sessionPort)
+            ])
+        }
+    }
+    
+    // MARK: - testObfuscation（P2-3，与 Android 对齐）
+    
+    @objc func testObfuscation(_ call: CAPPluginCall) {
+        do {
+            let obfuscator = MorphObfuscator(key: Int.random(in: 0...255), layer: 3, paddingLength: 8)
+            
+            // 测试数据
+            let testData = Data((0..<64).map { _ in UInt8.random(in: 0...255) })
+            
+            // 混淆
+            let obfuscated = obfuscator.obfuscate(testData)
+            
+            // 解混淆
+            guard let deobfuscated = obfuscator.deobfuscate(obfuscated) else {
+                call.resolve(["success": false, "message": "Deobfuscation returned nil"])
+                return
+            }
+            
+            // 验证
+            let match = testData == deobfuscated
+            let dynamism = obfuscator.testDynamism(testData: testData, iterations: 10)
+            
+            call.resolve([
+                "success": match && dynamism,
+                "message": match
+                    ? (dynamism ? "OK: roundtrip + dynamism" : "WARN: roundtrip OK but low dynamism")
+                    : "FAIL: data mismatch after roundtrip"
             ])
         }
     }

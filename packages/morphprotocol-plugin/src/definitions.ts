@@ -36,7 +36,7 @@ export interface MorphProtocolConnectOptions {
   
   /**
    * 协议模板类型
-   * 0 = None, 1 = QUIC, 2 = KCP, 3 = Gaming
+   * 0 = 随机选择, 1 = QUIC, 2 = KCP, 3 = Gaming
    * @default 1
    */
   templateType?: number;
@@ -47,6 +47,30 @@ export interface MorphProtocolConnectOptions {
    * @default 0
    */
   localProxyPort?: number;
+
+  /**
+   * 心跳间隔（毫秒）
+   * @default 120000
+   */
+  heartbeatInterval?: number;
+
+  /**
+   * 不活跃超时（毫秒）
+   * @default 30000
+   */
+  inactivityTimeout?: number;
+
+  /**
+   * 握手最大重试次数
+   * @default 10
+   */
+  maxRetries?: number;
+
+  /**
+   * 握手重试间隔（毫秒）
+   * @default 5000
+   */
+  handshakeInterval?: number;
 }
 
 /**
@@ -163,6 +187,11 @@ export interface MorphProtocolPlugin {
    * 发送数据 (用于测试)
    */
   send(options: MorphProtocolSendOptions): Promise<MorphProtocolResponse>;
+
+  /**
+   * 测试混淆功能（与 Android testObfuscation 对齐）
+   */
+  testObfuscation(): Promise<{ success: boolean; message: string }>;
   
   /**
    * 添加接收数据监听器
