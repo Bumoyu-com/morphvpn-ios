@@ -63,6 +63,45 @@
       'PublicKey = ' + (peer.PublicKey || '');
   }
 
+  // ========== 排除 IP 计算 ==========
+
+  /**
+   * 纯 JS 实现：从 0.0.0.0/0 中排除一个 /32 地址
+   * 将 0.0.0.0/0 拆分为不包含 excludeIP 的 CIDR 列表
+   */
+  function excludeIPFromAllRoutes(excludeIP) {
+    var parts = excludeIP.split('.');
+    var ip = ((parseInt(parts[0]) << 24) | (parseInt(parts[1]) << 16) |
+              (parseInt(parts[2]) << 8) | parseInt(parts[3])) >>> 0;
+
+    var result = [];
+    var start = 0;
+    var bits = 32;
+
+    // 逐 bit 缩小范围，每次排除包含目标 IP 的那一半，保留另一半
+    for (var i = 0; i < bits; i++) {
+      var mask = (0xFFFFFFFF << (31 - i)) >>> 0;
+      var prefix = (ip & mask) >>> 0;
+      var bit = (ip >>> (31 - i)) & 1;
+
+      // 保留不包含目标 IP 的那一半
+      var otherHalf;
+      if (bit === 0) {
+        otherHalf = (prefix | (1 << (31 - i))) >>> 0;
+      } else {
+        otherHalf = (prefix & ~(1 << (31 - i))) >>> 0;
+      }
+
+      var cidr = ((otherHalf >>> 24) & 0xFF) + '.' +
+                 ((otherHalf >>> 16) & 0xFF) + '.' +
+                 ((otherHalf >>> 8) & 0xFF) + '.' +
+                 (otherHalf & 0xFF) + '/' + (i + 1);
+      result.push(cidr);
+    }
+
+    return result;
+  }
+
   // ========== 状态 ==========
 
   var morphConnected = false;
@@ -203,6 +242,9 @@
         disallowedIPs
       );
       config['Peer']['AllowedIPs'] = calcResult.allowed_ips.split(', ');
+    } else {
+      // WASM 未加载时使用纯 JS fallback
+      config['Peer']['AllowedIPs'] = excludeIPFromAllRoutes(morphHost);
     }
     console.log('[morphVpn_ios] AllowedIPs: ' + config['Peer']['AllowedIPs'].join(', '));
 

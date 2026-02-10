@@ -334,13 +334,17 @@ class MorphUDPClient {
         }
     }
     
-    /// 重连：生成新 clientID、新模板、新混淆参数，重新握手
+    /// 重连：生成新 clientID、新模板、新混淆参数，重建连接并重新握手
     private func reconnectWithNewParams() {
         stopHeartbeat()
         stopInactivityCheck()
+        stopHandshakeRetry()
         
+        // 关闭旧的数据连接和握手连接
         dataConnection?.cancel()
         dataConnection = nil
+        handshakeConnection?.cancel()
+        handshakeConnection = nil
         sessionPort = nil
         
         // 生成新 clientID
@@ -357,7 +361,8 @@ class MorphUDPClient {
         
         NSLog("🔄 Reconnecting: tpl=\(template?.name ?? "None") key=\(newKey)")
         
-        startHandshakeRetry()
+        // 重建握手连接（不能复用已 failed/cancelled 的 NWConnection）
+        connectToRemote(host: remoteHost, port: remotePort)
     }
     
     // MARK: - 数据转发
@@ -562,7 +567,7 @@ class MorphUDPClient {
             obfuscated = data
         }
         
-        guard let deobfuscated = self.obfuscator.deobfuscate(obfuscated) else { return }
+        let deobfuscated = self.obfuscator.deobfuscate(obfuscated)
         
         forwardToWireGuard(deobfuscated)
         onReceive?(deobfuscated)

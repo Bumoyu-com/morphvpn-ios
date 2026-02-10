@@ -246,10 +246,7 @@ public class MorphProtocolPlugin: CAPPlugin {
             let obfuscated = obfuscator.obfuscate(testData)
             
             // 解混淆
-            guard let deobfuscated = obfuscator.deobfuscate(obfuscated) else {
-                call.resolve(["success": false, "message": "Deobfuscation returned nil"])
-                return
-            }
+            let deobfuscated = obfuscator.deobfuscate(obfuscated)
             
             // 验证
             let match = testData == deobfuscated
