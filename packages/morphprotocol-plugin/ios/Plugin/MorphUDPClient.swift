@@ -55,9 +55,8 @@ class MorphUDPClient {
         // 初始化加密器
         self.encryptor = try MorphEncryptor(keyString: encryptionKey)
         
-        // 从加密密钥派生混淆 key
-        let keyData = Data(encryptionKey.utf8)
-        let key = keyData.reduce(0) { $0 ^ Int($1) }
+        // 随机生成混淆 key（0-255），与 Android Random.nextInt(256) 对齐
+        let key = Int.random(in: 0...255)
         
         // 初始化混淆器
         self.obfuscator = MorphObfuscator(

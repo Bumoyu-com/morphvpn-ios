@@ -13,6 +13,7 @@ class MorphObfuscator {
     let paddingLength: Int  // 改为 public，用于握手
     private let functionRegistry: FunctionRegistry
     private let totalCombinations: Int
+    private let keyArray: Data  // 固定 256 字节，与 Android 对齐
     
     init(key: Int, layer: Int, paddingLength: Int) {
         self.key = key
@@ -21,6 +22,13 @@ class MorphObfuscator {
         self.paddingLength = min(max(paddingLength, 1), 8)
         self.functionRegistry = FunctionRegistry(layer: layer)
         self.totalCombinations = functionRegistry.getTotalCombinations()
+        
+        // 生成固定 256 字节 keyArray，与 Android 对齐: (key + i * 37) % 256
+        var ka = Data(count: 256)
+        for i in 0..<256 {
+            ka[i] = UInt8((key + i * 37) % 256)
+        }
+        self.keyArray = ka
         
         NSLog("🎭 MorphObfuscator: Initialized")
         NSLog("   Key: \(key)")
@@ -52,9 +60,8 @@ class MorphObfuscator {
             return data
         }
         
-        // 3. 应用函数组合
+        // 3. 应用函数组合（使用固定 256 字节 keyArray）
         var result = data
-        let keyArray = generateKeyArray(length: data.count)
         
         for funcIndex in combo {
             guard let function = functionRegistry.getFunction(at: funcIndex) else {
@@ -95,8 +102,8 @@ class MorphObfuscator {
         let header = data[0..<3]
         let paddingLength = Int(header[2])
         
-        // 验证填充长度
-        guard paddingLength >= 1 && paddingLength <= 16 else {
+        // 验证填充长度（与 Android 对齐：1-8）
+        guard paddingLength >= 1 && paddingLength <= 8 else {
             NSLog("❌ MorphObfuscator: Invalid padding length: \(paddingLength)")
             return Data()
         }
@@ -127,9 +134,8 @@ class MorphObfuscator {
             return Data()
         }
         
-        // 4. 反向应用函数组合
+        // 4. 反向应用函数组合（使用固定 256 字节 keyArray）
         var result = body
-        let keyArray = generateKeyArray(length: body.count)
         
         for funcIndex in combo.reversed() {
             guard let function = functionRegistry.getFunction(at: funcIndex) else {
@@ -141,15 +147,6 @@ class MorphObfuscator {
         }
         
         return result
-    }
-    
-    /// 生成密钥数组
-    private func generateKeyArray(length: Int) -> Data {
-        var keyArray = Data(count: length)
-        for i in 0..<length {
-            keyArray[i] = UInt8((key + i * 37) % 256)
-        }
-        return keyArray
     }
     
     /// 打印统计信息

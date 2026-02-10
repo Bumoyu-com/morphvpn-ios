@@ -11,6 +11,9 @@ class FunctionRegistry {
     private let obfuscationLayer: Int
     private let functions: [FunctionPair]
     
+    /// 每次实例化时创建的 ObfuscationFunctionRegistry（含随机 initializers）
+    private let functionRegistry: ObfuscationFunctionRegistry
+    
     // 预计算的函数组合（排列）
     private var combos1: [[Int]] = []
     private var combos2: [[Int]] = []
@@ -19,7 +22,8 @@ class FunctionRegistry {
     
     init(layer: Int) {
         self.obfuscationLayer = min(max(layer, 1), 4)
-        self.functions = ObfuscationFunctionRegistry.shared.functions
+        self.functionRegistry = ObfuscationFunctionRegistry()
+        self.functions = functionRegistry.functions
         
         NSLog("🎭 FunctionRegistry: Initializing with layer=\(obfuscationLayer)")
         
@@ -157,20 +161,13 @@ extension FunctionRegistry {
         return combos[randomIndex]
     }
     
-    /// 获取替换表（用于握手）
+    /// 获取替换表（用于握手）— 返回实际使用的表
     func getSubstitutionTable() -> [Int] {
-        // 生成 0-255 的替换表
-        var table = Array(0...255)
-        // 使用 Fisher-Yates 洗牌算法
-        for i in (1..<table.count).reversed() {
-            let j = Int.random(in: 0...i)
-            table.swapAt(i, j)
-        }
-        return table
+        return functionRegistry.substitutionTable.map { Int($0) }
     }
     
-    /// 获取随机值（用于握手）
+    /// 获取随机值（用于握手）— 返回实际使用的值
     func getRandomValue() -> Int {
-        return Int.random(in: 0...Int.max)
+        return Int(functionRegistry.randomValue)
     }
 }

@@ -23,28 +23,30 @@ struct FunctionPair {
 /// 对每个字节进行位旋转和XOR操作
 struct BitwiseRotationAndXOR {
     static func obfuscation(_ data: Data, _ keyArray: Data, _ initor: Any?) -> Data {
-        var result = Data(count: data.count)
-        for i in 0..<data.count {
-            let key = keyArray[i % keyArray.count]
-            // XOR with key
-            var byte = data[i] ^ key
-            // Rotate left by 3 bits
-            byte = ((byte << 3) | (byte >> 5)) & 0xFF
-            result[i] = byte
+        let length = data.count
+        var result = Data(count: length)
+        for i in 0..<length {
+            let shift = (i % 8) + 1
+            let inputValue = Int(data[i])
+            // Rotate left by shift bits
+            let rotated = ((inputValue << shift) | (inputValue >> (8 - shift))) & 0xFF
+            // XOR with key at index (i + length - 1) % length
+            let keyIndex = (i + length - 1) % length
+            result[i] = UInt8(rotated ^ Int(keyArray[keyIndex % keyArray.count]))
         }
         return result
     }
     
     static func deobfuscation(_ data: Data, _ keyArray: Data, _ initor: Any?) -> Data {
-        var result = Data(count: data.count)
-        for i in 0..<data.count {
-            let key = keyArray[i % keyArray.count]
-            var byte = data[i]
-            // Rotate right by 3 bits
-            byte = ((byte >> 3) | (byte << 5)) & 0xFF
-            // XOR with key
-            byte = byte ^ key
-            result[i] = byte
+        let length = data.count
+        var result = Data(count: length)
+        for i in 0..<length {
+            let shift = (i % 8) + 1
+            let keyIndex = (i + length - 1) % length
+            // XOR with key first
+            let xored = Int(data[i]) ^ Int(keyArray[keyIndex % keyArray.count])
+            // Rotate right by shift bits
+            result[i] = UInt8(((xored >> shift) | (xored << (8 - shift))) & 0xFF)
         }
         return result
     }
@@ -111,39 +113,23 @@ struct DivideAndSwap {
 }
 
 /// 5. Circular Shift Obfuscation
-/// 循环移位混淆
+/// 每字节左移 1 bit（与 Android 对齐）
 struct CircularShiftObfuscation {
     static func obfuscation(_ data: Data, _ keyArray: Data, _ initor: Any?) -> Data {
-        let count = data.count
-        if count == 0 {
-            return data
+        var result = Data(count: data.count)
+        for i in 0..<data.count {
+            let v = Int(data[i])
+            result[i] = UInt8(((v << 1) | (v >> 7)) & 0xFF)
         }
-        
-        // Shift amount based on first key byte
-        let shift = Int(keyArray[0]) % count
-        
-        var result = Data(count: count)
-        for i in 0..<count {
-            result[(i + shift) % count] = data[i]
-        }
-        
         return result
     }
     
     static func deobfuscation(_ data: Data, _ keyArray: Data, _ initor: Any?) -> Data {
-        let count = data.count
-        if count == 0 {
-            return data
+        var result = Data(count: data.count)
+        for i in 0..<data.count {
+            let v = Int(data[i])
+            result[i] = UInt8(((v >> 1) | (v << 7)) & 0xFF)
         }
-        
-        // Reverse shift
-        let shift = Int(keyArray[0]) % count
-        
-        var result = Data(count: count)
-        for i in 0..<count {
-            result[i] = data[(i + shift) % count]
-        }
-        
         return result
     }
 }
@@ -210,15 +196,13 @@ struct ReverseBits {
 }
 
 /// 9. Shift Bits
-/// 位移操作
+/// 固定左移 2 bit（与 Android 对齐）
 struct ShiftBits {
     static func obfuscation(_ data: Data, _ keyArray: Data, _ initor: Any?) -> Data {
         var result = Data(count: data.count)
         for i in 0..<data.count {
-            let shift = Int(keyArray[i % keyArray.count]) % 8
-            let byte = data[i]
-            // Left shift with wrap
-            result[i] = ((byte << shift) | (byte >> (8 - shift))) & 0xFF
+            let v = Int(data[i])
+            result[i] = UInt8(((v << 2) | (v >> 6)) & 0xFF)
         }
         return result
     }
@@ -226,10 +210,8 @@ struct ShiftBits {
     static func deobfuscation(_ data: Data, _ keyArray: Data, _ initor: Any?) -> Data {
         var result = Data(count: data.count)
         for i in 0..<data.count {
-            let shift = Int(keyArray[i % keyArray.count]) % 8
-            let byte = data[i]
-            // Right shift with wrap
-            result[i] = ((byte >> shift) | (byte << (8 - shift))) & 0xFF
+            let v = Int(data[i])
+            result[i] = UInt8(((v >> 2) | (v << 6)) & 0xFF)
         }
         return result
     }
@@ -313,17 +295,26 @@ struct AddRandomValue {
 
 // MARK: - Function Registry
 
+/// 每次实例化时随机生成 substitutionTable 和 randomValue，
+/// 与 Android FunctionInitializer.generateInitializers() 对齐。
+/// 不再使用单例，由 FunctionRegistry 持有。
 class ObfuscationFunctionRegistry {
-    static let shared = ObfuscationFunctionRegistry()
-    
     private(set) var functions: [FunctionPair] = []
     
-    private init() {
+    /// 运行时随机生成的 substitutionTable（256 字节），用于握手发送
+    private(set) var substitutionTable: [UInt8] = []
+    /// 运行时随机生成的 randomValue（0-255），用于握手发送
+    private(set) var randomValue: UInt8 = 0
+    
+    init() {
+        // 运行时随机生成 initializers（与 Android FunctionInitializer 对齐）
+        substitutionTable = ObfuscationFunctionRegistry.generateRandomSubstitutionTable()
+        randomValue = UInt8.random(in: 0...255)
+        
         registerAllFunctions()
     }
     
     private func registerAllFunctions() {
-        // Register all 11 obfuscation functions
         functions = [
             FunctionPair(
                 obfuscation: BitwiseRotationAndXOR.obfuscation,
@@ -391,48 +382,27 @@ class ObfuscationFunctionRegistry {
             FunctionPair(
                 obfuscation: Substitution.obfuscation,
                 deobfuscation: Substitution.deobfuscation,
-                initor: generateSubstitutionTable(),
+                initor: substitutionTable,  // 运行时随机生成的表
                 index: 9,
                 name: "Substitution"
             ),
             FunctionPair(
                 obfuscation: AddRandomValue.obfuscation,
                 deobfuscation: AddRandomValue.deobfuscation,
-                initor: UInt8(42),  // Fixed random value for reversibility
+                initor: randomValue,  // 运行时随机生成的值
                 index: 10,
                 name: "AddRandomValue"
             )
         ]
     }
     
-    private func generateSubstitutionTable() -> [UInt8] {
-        // Generate a fixed substitution table (S-box)
-        // Using a simple permutation for demonstration
+    /// Fisher-Yates shuffle 生成随机 256 字节替换表
+    private static func generateRandomSubstitutionTable() -> [UInt8] {
         var table = [UInt8](0...255)
-        
-        // Fisher-Yates shuffle with fixed seed for reproducibility
-        var rng = SeededRandom(seed: 12345)
         for i in (1..<256).reversed() {
-            let j = rng.next() % (i + 1)
+            let j = Int.random(in: 0...i)
             table.swapAt(i, j)
         }
-        
         return table
-    }
-}
-
-// MARK: - Seeded Random Number Generator
-
-struct SeededRandom {
-    private var state: UInt64
-    
-    init(seed: UInt64) {
-        self.state = seed
-    }
-    
-    mutating func next() -> Int {
-        // Linear congruential generator
-        state = (state &* 1103515245 &+ 12345) & 0x7FFFFFFF
-        return Int(state)
     }
 }

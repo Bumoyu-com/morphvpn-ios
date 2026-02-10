@@ -108,11 +108,10 @@ class KcpTemplate: ProtocolTemplate {
     
     /// 封装数据为 KCP 格式
     /// Header: [conv(4)] [cmd(1)] [frg(1)] [wnd(2)] [ts(4)] [sn(4)] [una(4)] [len(4)] [payload]
-    /// Total header: 24 bytes (与服务端一致)
+    /// Total header: 24 bytes
+    /// 所有多字节字段使用 big-endian（与 Android ByteBuffer 默认行为对齐）
     func encapsulate(_ data: Data, clientID: Data) -> Data {
-        NSLog("🎭 KCP: Encapsulating \(data.count) bytes, clientID: \(clientID.count) bytes")
-        
-        var packet = Data()
+        var packet = Data(capacity: 24 + data.count)
         
         // Conv: 从 clientID 派生 (取前4字节)
         var conv = clientID.prefix(4)
@@ -121,50 +120,48 @@ class KcpTemplate: ProtocolTemplate {
         }
         packet.append(conv)
         
-        NSLog("🎭 KCP: Conv added: \(conv.map { String(format: "%02x", $0) }.joined(separator: " "))")
-        
         // Cmd: 0x51 (PSH - data packet)
         packet.append(0x51)
         
         // Frg: 0 (no fragmentation)
         packet.append(0x00)
         
-        // Wnd: 256 (window size, 2 bytes, little-endian - 与服务端一致)
-        packet.append(0x00)  // low byte
-        packet.append(0x01)  // high byte (256 = 0x0100)
+        // Wnd: 256 (window size, 2 bytes, big-endian)
+        packet.append(UInt8((256 >> 8) & 0xFF))  // 0x01
+        packet.append(UInt8(256 & 0xFF))          // 0x00
         
-        // Ts: timestamp (4 bytes, little-endian - 与服务端一致)
+        // Ts: timestamp (4 bytes, big-endian)
         let timestampMs = Date().timeIntervalSince1970 * 1000
         let timestamp = UInt32(truncatingIfNeeded: UInt64(timestampMs))
-        packet.append(UInt8(timestamp & 0xFF))
-        packet.append(UInt8((timestamp >> 8) & 0xFF))
-        packet.append(UInt8((timestamp >> 16) & 0xFF))
         packet.append(UInt8((timestamp >> 24) & 0xFF))
+        packet.append(UInt8((timestamp >> 16) & 0xFF))
+        packet.append(UInt8((timestamp >> 8) & 0xFF))
+        packet.append(UInt8(timestamp & 0xFF))
         
-        // Sn: sequence number (4 bytes, little-endian - 与服务端一致)
+        // Sn: sequence number (4 bytes, big-endian)
         lock.lock()
         let sn = sequenceNumber
         sequenceNumber = sequenceNumber &+ 1
         lock.unlock()
         
-        packet.append(UInt8(sn & 0xFF))
-        packet.append(UInt8((sn >> 8) & 0xFF))
-        packet.append(UInt8((sn >> 16) & 0xFF))
         packet.append(UInt8((sn >> 24) & 0xFF))
+        packet.append(UInt8((sn >> 16) & 0xFF))
+        packet.append(UInt8((sn >> 8) & 0xFF))
+        packet.append(UInt8(sn & 0xFF))
         
-        // Una: sn - 1 (4 bytes, little-endian - 与服务端一致)
+        // Una: sn - 1 (4 bytes, big-endian)
         let una = sn > 0 ? sn - 1 : 0
-        packet.append(UInt8(una & 0xFF))
-        packet.append(UInt8((una >> 8) & 0xFF))
-        packet.append(UInt8((una >> 16) & 0xFF))
         packet.append(UInt8((una >> 24) & 0xFF))
+        packet.append(UInt8((una >> 16) & 0xFF))
+        packet.append(UInt8((una >> 8) & 0xFF))
+        packet.append(UInt8(una & 0xFF))
         
-        // Len: payload length (4 bytes, little-endian - 与服务端一致)
+        // Len: payload length (4 bytes, big-endian)
         let len = UInt32(data.count)
-        packet.append(UInt8(len & 0xFF))
-        packet.append(UInt8((len >> 8) & 0xFF))
-        packet.append(UInt8((len >> 16) & 0xFF))
         packet.append(UInt8((len >> 24) & 0xFF))
+        packet.append(UInt8((len >> 16) & 0xFF))
+        packet.append(UInt8((len >> 8) & 0xFF))
+        packet.append(UInt8(len & 0xFF))
         
         // Payload
         packet.append(data)
