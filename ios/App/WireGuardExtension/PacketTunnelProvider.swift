@@ -12,6 +12,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     // MARK: - Lifecycle
 
     override init() {
+        // 在 Go runtime 初始化前设置内存限制，防止 Extension 超过 50MB 被系统杀死
+        setenv("GOGC", "10", 1)
+        setenv("GOMEMLIMIT", "30MiB", 1)
         super.init()
         NSLog("🎯 PacketTunnelProvider: init()")
     }
@@ -132,61 +135,61 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             NSLog("✅ MorphProtocol: local proxy on 127.0.0.1:\(localPort)")
             SharedLog.shared.log("local proxy on 127.0.0.1:\(localPort)")
 
-            // 连接远程服务器并等待握手
-            let handshakeSemaphore = DispatchSemaphore(value: 0)
-            var handshakeError: Error?
-            var sessionPort: UInt16 = 0
+            // 异步等待握手完成，不阻塞 NEPacketTunnelProvider 的内部队列
+            let completionLock = NSLock()
+            var completionCalled = false
 
-            client.onHandshakeComplete = { port in
+            let callCompletionOnce: (Error?) -> Void = { error in
+                completionLock.lock()
+                let alreadyCalled = completionCalled
+                completionCalled = true
+                completionLock.unlock()
+                
+                if !alreadyCalled {
+                    completionHandler(error)
+                }
+            }
+
+            client.onHandshakeComplete = { [weak self] port in
+                guard let self = self else { return }
+
                 NSLog("✅ MorphProtocol: handshake done, session port=\(port)")
-                sessionPort = port
-                handshakeSemaphore.signal()
+                NSLog("✅ MorphProtocol: connected, session=\(port), local=\(localPort)")
+                SharedLog.shared.log("connected session=\(port) local=\(localPort)")
+
+                let modifiedConfig = self.rewriteWireGuardConfig(wgConfig,
+                                                                  localPort: localPort,
+                                                                  excludeServerIP: morphConfig.host)
+                NSLog("✅ WireGuard config rewritten, Endpoint=127.0.0.1:\(localPort), excluded server=\(morphConfig.host)")
+
+                for line in modifiedConfig.split(separator: "\n") {
+                    let trimmed = line.trimmingCharacters(in: .whitespaces)
+                    if !trimmed.isEmpty {
+                        NSLog("📋 WG config: \(trimmed)")
+                        SharedLog.shared.log("WG: \(trimmed)")
+                    }
+                }
+
+                self.startWireGuard(config: modifiedConfig, completionHandler: callCompletionOnce)
             }
 
             client.onError = { error in
                 NSLog("❌ MorphProtocol: error during handshake: \(error)")
-                handshakeError = error
-                handshakeSemaphore.signal()
+                SharedLog.shared.log("ERROR: handshake failed: \(error)")
+                callCompletionOnce(NSError(domain: "com.morphvpn.WireGuardExtension",
+                                           code: 13,
+                                           userInfo: [NSLocalizedDescriptionKey: "MorphProtocol handshake failed: \(error)"]))
             }
 
             client.connectToRemote(host: morphConfig.host, port: UInt16(morphConfig.port))
 
-            // 等待握手完成（最多 30 秒）
-            let waitResult = handshakeSemaphore.wait(timeout: .now() + 30)
-
-            if waitResult == .timedOut {
-                SharedLog.shared.log("ERROR: handshake timeout")
-                completionHandler(makeError(code: 12, message: "MorphProtocol handshake timeout"))
-                return
+            // 设置握手超时（30 秒）
+            DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
+                NSLog("⚠️ MorphProtocol: handshake timeout check")
+                callCompletionOnce(NSError(domain: "com.morphvpn.WireGuardExtension",
+                                           code: 12,
+                                           userInfo: [NSLocalizedDescriptionKey: "MorphProtocol handshake timeout"]))
             }
-
-            if let error = handshakeError {
-                SharedLog.shared.log("ERROR: handshake failed: \(error)")
-                completionHandler(makeError(code: 13, message: "MorphProtocol handshake failed: \(error)"))
-                return
-            }
-
-            NSLog("✅ MorphProtocol: connected, session=\(sessionPort), local=\(localPort)")
-            SharedLog.shared.log("connected session=\(sessionPort) local=\(localPort)")
-
-            // 改写 WireGuard 配置：
-            //   Endpoint → 127.0.0.1:localPort
-            //   AllowedIPs → 排除 127.0.0.0/8 和远程服务器 IP（防止 VPN 路由回环）
-            let modifiedConfig = rewriteWireGuardConfig(wgConfig,
-                                                         localPort: localPort,
-                                                         excludeServerIP: morphConfig.host)
-            NSLog("✅ WireGuard config rewritten, Endpoint=127.0.0.1:\(localPort), excluded server=\(morphConfig.host)")
-
-            // 打印改写后的完整配置（调试用）
-            for line in modifiedConfig.split(separator: "\n") {
-                let trimmed = line.trimmingCharacters(in: .whitespaces)
-                if !trimmed.isEmpty {
-                    NSLog("📋 WG config: \(trimmed)")
-                    SharedLog.shared.log("WG: \(trimmed)")
-                }
-            }
-
-            startWireGuard(config: modifiedConfig, completionHandler: completionHandler)
 
         } catch {
             NSLog("❌ MorphProtocol init failed: \(error)")
@@ -207,7 +210,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 
         adapter = WireGuardAdapter(with: self) { logLevel, message in
-            NSLog("WireGuard: [\(logLevel)] \(message)")
+            // 只记录 error 级别日志，verbose 日志会消耗大量内存导致 Extension 被系统杀死
+            if logLevel == .error {
+                NSLog("WireGuard: [error] \(message)")
+            }
         }
 
         adapter?.start(tunnelConfiguration: tunnelConfiguration) { [weak self] error in

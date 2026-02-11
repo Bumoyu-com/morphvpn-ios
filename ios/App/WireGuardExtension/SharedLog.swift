@@ -7,6 +7,13 @@ class SharedLog {
     private let fileManager = FileManager.default
     private let maxSize = 100 * 1024  // 100KB
     private var logURL: URL?
+    
+    // 复用 DateFormatter，避免每次 log 都创建新实例（DateFormatter 是重量级对象）
+    private let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm:ss.SSS"
+        return f
+    }()
 
     private init() {
         if let containerURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.com.morphvpn.app.wireguard") {
@@ -17,13 +24,8 @@ class SharedLog {
     func log(_ message: String) {
         guard let url = logURL else { return }
 
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss.SSS"
         let timestamp = formatter.string(from: Date())
         let line = "[\(timestamp)] \(message)\n"
-
-        // 同时输出到 NSLog
-        NSLog("📋 EXT: \(message)")
 
         // 写入共享文件
         if fileManager.fileExists(atPath: url.path) {

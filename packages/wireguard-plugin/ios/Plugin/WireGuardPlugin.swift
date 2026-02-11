@@ -18,7 +18,7 @@ public class WireGuardPlugin: CAPPlugin {
         // 加载VPN配置
         loadVPNManager()
         
-        // 监听VPN状态变化
+        // 监听VPN状态变化（只注册一次）
         setupStatusObserver()
         
         print("✅ WireGuardPlugin: Initialization complete")
@@ -27,6 +27,7 @@ public class WireGuardPlugin: CAPPlugin {
     deinit {
         if let observer = statusObserver {
             NotificationCenter.default.removeObserver(observer)
+            statusObserver = nil
         }
     }
     
@@ -189,26 +190,32 @@ public class WireGuardPlugin: CAPPlugin {
     }
     
     private func setupStatusObserver() {
+        // 移除旧的 observer（防止重复注册）
+        if let observer = statusObserver {
+            NotificationCenter.default.removeObserver(observer)
+            statusObserver = nil
+        }
+        
         statusObserver = NotificationCenter.default.addObserver(
             forName: .NEVPNStatusDidChange,
             object: nil,
             queue: .main
         ) { [weak self] notification in
-            guard let connection = notification.object as? NEVPNConnection else { return }
-            let status = self?.getConnectionStatus(connection.status) ?? "unknown"
+            // 只处理当前 vpnManager 的 connection 状态变化，忽略其他 manager
+            guard let self = self,
+                  let connection = notification.object as? NEVPNConnection,
+                  let manager = self.vpnManager,
+                  connection === manager.connection else { return }
+            
+            let status = self.getConnectionStatus(connection.status)
             
             print("📡 WireGuardPlugin: VPN status changed to: \(status)")
             
-            // 如果连接失败，尝试获取错误信息
             if status == "disconnected" || status == "disconnecting" {
-                if let session = connection as? NETunnelProviderSession {
-                    print("🔍 WireGuardPlugin: Checking for connection errors...")
-                    // 注意：lastDisconnectError 可能为 nil
-                }
+                print("🔍 WireGuardPlugin: Checking for connection errors...")
             }
             
-            // 通知JavaScript层状态变化
-            self?.notifyListeners("statusChanged", data: ["status": status])
+            self.notifyListeners("statusChanged", data: ["status": status])
         }
     }
     

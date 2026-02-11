@@ -14,33 +14,20 @@ class FunctionRegistry {
     /// 每次实例化时创建的 ObfuscationFunctionRegistry（含随机 initializers）
     private let functionRegistry: ObfuscationFunctionRegistry
     
-    // 预计算的函数组合（排列）
-    private var combos1: [[Int]] = []
-    private var combos2: [[Int]] = []
-    private var combos3: [[Int]] = []
-    private var combos4: [[Int]] = []
+    // 懒加载：只计算当前 layer 需要的排列，避免浪费内存
+    private lazy var combos: [[Int]] = {
+        return calculatePermutations(n: functions.count, r: obfuscationLayer)
+    }()
     
     init(layer: Int) {
         self.obfuscationLayer = min(max(layer, 1), 4)
         self.functionRegistry = ObfuscationFunctionRegistry()
         self.functions = functionRegistry.functions
-        
-        // 预计算所有排列
-        combos1 = calculatePermutations(n: functions.count, r: 1)
-        combos2 = calculatePermutations(n: functions.count, r: 2)
-        combos3 = calculatePermutations(n: functions.count, r: 3)
-        combos4 = calculatePermutations(n: functions.count, r: 4)
     }
     
     /// 获取当前层数的函数组合
     func getFunctionCombos() -> [[Int]] {
-        switch obfuscationLayer {
-        case 1: return combos1
-        case 2: return combos2
-        case 3: return combos3
-        case 4: return combos4
-        default: return combos3
-        }
+        return combos
     }
     
     /// 获取函数对象
