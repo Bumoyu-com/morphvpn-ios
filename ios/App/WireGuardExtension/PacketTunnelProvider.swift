@@ -6,11 +6,30 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private var adapter: WireGuardAdapter?
     private lazy var logger = Logger(subsystem: "com.morphvpn.app.WireGuardExtension", category: "PacketTunnel")
+    private var hasMorphProxy = false
     
     override init() {
         super.init()
         NSLog("🎯 PacketTunnelProvider: init() called")
         logger.info("🎯 PacketTunnelProvider: Initialized")
+    }
+    
+    // 拦截 WireGuardAdapter 的 setTunnelNetworkSettings 调用
+    // 当有 MorphProxy 时，添加 127.0.0.0/8 到 excludedRoutes，
+    // 确保 wireguard-go 发到 localhost 的 UDP 包不被 VPN 隧道捕获
+    override func setTunnelNetworkSettings(_ tunnelNetworkSettings: NETunnelNetworkSettings?, completionHandler: ((Error?) -> Void)? = nil) {
+        if hasMorphProxy, let settings = tunnelNetworkSettings as? NEPacketTunnelNetworkSettings {
+            // 添加 loopback 排除路由
+            if let ipv4 = settings.ipv4Settings {
+                var excluded = ipv4.excludedRoutes ?? []
+                excluded.append(NEIPv4Route(destinationAddress: "127.0.0.0", subnetMask: "255.0.0.0"))
+                ipv4.excludedRoutes = excluded
+                SharedLog.shared.log("🔧 Added 127.0.0.0/8 to excludedRoutes")
+            }
+            super.setTunnelNetworkSettings(settings, completionHandler: completionHandler)
+        } else {
+            super.setTunnelNetworkSettings(tunnelNetworkSettings, completionHandler: completionHandler)
+        }
     }
     
     override func startTunnel(options: [String : NSObject]?, 
@@ -71,6 +90,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             SharedLog.shared.log("🎭 morph_config found, len=\(morphConfigJSON.count)")
             NSLog("🎭 MorphProtocol config found, starting local proxy in extension...")
             finalConfigString = startMorphProxy(wgConfig: configString, morphConfigJSON: morphConfigJSON)
+            hasMorphProxy = (morphProxy != nil)
+            SharedLog.shared.log("🔧 hasMorphProxy=\(hasMorphProxy)")
         } else {
             SharedLog.shared.log("⚠️ No morph_config in providerConfiguration, keys=\(providerConfiguration.keys)")
         }

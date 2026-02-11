@@ -102,6 +102,57 @@
     return result;
   }
 
+  /**
+   * 判断 CIDR 是否包含某个 IP
+   */
+  function cidrContainsIP(cidr, ip) {
+    var parts = cidr.split('/');
+    var prefix = ipToInt(parts[0]);
+    var bits = parseInt(parts[1]);
+    var mask = bits === 0 ? 0 : (0xFFFFFFFF << (32 - bits)) >>> 0;
+    var target = ipToInt(ip);
+    return (prefix & mask) === (target & mask);
+  }
+
+  /**
+   * 从一个 CIDR 中排除一个 /32 IP，返回不包含该 IP 的 CIDR 列表
+   */
+  function excludeIPFromCIDR(cidr, excludeIP) {
+    var parts = cidr.split('/');
+    var prefix = ipToInt(parts[0]);
+    var prefixLen = parseInt(parts[1]);
+    var target = ipToInt(excludeIP);
+    var result = [];
+
+    for (var i = prefixLen; i < 32; i++) {
+      var bit = (target >>> (31 - i)) & 1;
+      var otherHalf;
+      if (bit === 0) {
+        otherHalf = (prefix | (1 << (31 - i))) >>> 0;
+      } else {
+        otherHalf = (prefix & ~(1 << (31 - i))) >>> 0;
+      }
+      result.push(intToIP(otherHalf) + '/' + (i + 1));
+      // 缩小 prefix 到包含 target 的那一半
+      prefix = (prefix & ((0xFFFFFFFF << (31 - i)) >>> 0)) >>> 0;
+      if (bit === 1) {
+        prefix = (prefix | (1 << (31 - i))) >>> 0;
+      }
+    }
+    return result;
+  }
+
+  function ipToInt(ip) {
+    var p = ip.split('.');
+    return ((parseInt(p[0]) << 24) | (parseInt(p[1]) << 16) |
+            (parseInt(p[2]) << 8) | parseInt(p[3])) >>> 0;
+  }
+
+  function intToIP(n) {
+    return ((n >>> 24) & 0xFF) + '.' + ((n >>> 16) & 0xFF) + '.' +
+           ((n >>> 8) & 0xFF) + '.' + (n & 0xFF);
+  }
+
   // ========== 状态 ==========
 
   var morphConnected = false;
@@ -238,22 +289,33 @@
     config['Peer'] = config['Peer'] || {};
 
     // 先重置为仅 IPv4（与 Android 一致，去掉 ::/0）
-    config['Peer']['AllowedIPs'] = ['0.0.0.0/0'];
+    // 排除服务器 IP（避免路由回环）和 127.0.0.0/8（loopback，Extension 内部代理需要）
+    //
+    // 0.0.0.0/0 拆分为不含 127.0.0.0/8 的 CIDR：
+    //   0.0.0.0/1     (0-127)   → 再拆: 0.0.0.0/2 (0-63) + 64.0.0.0/3 (64-95) + 96.0.0.0/4 (96-111) + 112.0.0.0/5 (112-119) + 120.0.0.0/6 (120-123) + 124.0.0.0/7 (124-125) + 126.0.0.0/8 (126)
+    //   128.0.0.0/1   (128-255)
+    // 即排除 127.0.0.0/8 后的等价路由
+    var baseRoutes = [
+      '0.0.0.0/2', '64.0.0.0/3', '96.0.0.0/4', '112.0.0.0/5',
+      '120.0.0.0/6', '124.0.0.0/7', '126.0.0.0/8',
+      '128.0.0.0/1'
+    ];
 
-    // 排除服务器 IP，避免路由回环
-    var disallowedIPs = morphHost + '/32';
-    if (typeof window.calculateAllowedIPs === 'function') {
-      var calcResult = window.calculateAllowedIPs(
-        config['Peer']['AllowedIPs'].join(', '),
-        disallowedIPs
-      );
-      config['Peer']['AllowedIPs'] = calcResult.allowed_ips.split(', ');
-    } else {
-      // WASM 未加载时使用纯 JS fallback
-      config['Peer']['AllowedIPs'] = excludeIPFromAllRoutes(morphHost);
+    // 从 baseRoutes 中排除服务器 IP
+    var finalRoutes = [];
+    for (var ri = 0; ri < baseRoutes.length; ri++) {
+      var cidr = baseRoutes[ri];
+      if (cidrContainsIP(cidr, morphHost)) {
+        // 这个 CIDR 包含服务器 IP，需要进一步拆分排除
+        var subRoutes = excludeIPFromCIDR(cidr, morphHost);
+        finalRoutes = finalRoutes.concat(subRoutes);
+      } else {
+        finalRoutes.push(cidr);
+      }
     }
-    console.log('[morphVpn_ios] AllowedIPs: ' + config['Peer']['AllowedIPs'].join(', '));
-    console.log('[morphVpn_ios] Excluded server IP: ' + morphHost);
+    config['Peer'] = config['Peer'] || {};
+    config['Peer']['AllowedIPs'] = finalRoutes;
+    console.log('[morphVpn_ios] AllowedIPs (' + finalRoutes.length + ' routes), excluded: 127.0.0.0/8 + ' + morphHost);
 
     // Endpoint 设为远程服务器（Extension 中会替换为本地代理端口）
     var finalConfig = objToWgConfig(config, morphPort);
