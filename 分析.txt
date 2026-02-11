@@ -1,0 +1,107 @@
+日志非常清晰，关键证据：
+
+📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
+wgConn=false — wireGuardConnection 为 nil，newConnectionHandler 从未被触发。WireGuard Network Extension 发往 127.0.0.1:53479 的 UDP 包完全没有到达 App 进程的 NWListener。
+
+wgPkts=0 — 零个包从 WireGuard 到达 MorphProtocol。
+
+这确认了之前的推断：WireGuard Network Extension 运行在独立进程中，它的 UDP 流量发往 127.0.0.1 不会到达 App 进程的 localhost。
+
+iOS Network Extension 的 WireGuardAdapter 使用 utun 接口处理隧道数据，但 WireGuard 协议本身的 UDP 包（发往 Endpoint）是通过 Network Extension 进程的网络栈发出的。这些包发往 127.0.0.1 时，它们留在 Network Extension 进程的 loopback 中，不会跨进程到达 App 的 loopback。
+
+解决方案：WireGuard 的 Endpoint 不能用 127.0.0.1。需要让 MorphProtocol 代理监听在一个真实网络接口上，或者改变架构。
+
+最可行的方案：让 NWListener 监听在 0.0.0.0（所有接口）而不是 127.0.0.1，并且 WireGuard Endpoint 使用设备的真实 IP 地址或 10.x.x.x 等非 loopback 地址。
+
+但实际上更根本的问题是：Network Extension 是独立进程，即使监听 0.0.0.0，Extension 进程发往本机 IP 的包也可能被 VPN 隧道自身捕获。
+
+正确的架构方案：将 MorphProtocol 的代理逻辑移入 Network Extension 进程中（PacketTunnelProvider），这样 WireGuard 和 MorphProtocol 在同一进程内通信，不需要通过 localhost。
+
+但这是一个大的架构改动。短期可行的方案：不使用 127.0.0.1 + NWListener，而是在 App 进程中直接用 MorphProtocol 连接远程服务器，然后通过 NETunnelProviderSession.sendProviderMessage 与 Network Extension 通信，或者直接让 WireGuard Endpoint 指向远程服务器的真实 IP（MorphProtocol 在服务端做代理）。
+
+等等——让我重新思考。Android 端是怎么做的？Android 的 WireGuard 也是用 VpnService，Endpoint 也是 127.0.0.1:localPort。Android 的 VpnService 和 App 在同一进程中，所以 localhost 通信没问题。但 iOS 的 Network Extension 是独立进程。
+
+让我检查 WireGuard 插件的实现——它是否使用了 NETunnelProviderManager（独立进程）还是其他方式：
+确认了：WireGuard 使用 NETunnelProviderManager + PacketTunnelProvider（Network Extension，独立进程）。WireGuard 的 UDP 发往 127.0.0.1 时，这些包在 Extension 进程的 loopback 中，不会到达 App 进程。
+
+Android 不存在这个问题，因为 Android 的 VpnService 和 App 在同一进程中。
+
+
+
+正确的方案：不使用本地 UDP 代理。改为在 PacketTunnelProvider（Network Extension 进程）中直接集成 MorphProtocol 混淆逻辑。但这需要大改架构。
+
+更快的可行方案：不让 WireGuard 发往 127.0.0.1，而是让 WireGuard 的 Endpoint 直接指向远程服务器，MorphProtocol 的混淆逻辑放在 Network Extension 的 PacketTunnelProvider 中。
+
+但实际上最简单的方案是：在 PacketTunnelProvider 中拦截 WireGuard 的出站 UDP 包，做混淆后再发出去。
+
+让我看看 PacketTunnelProvider 的当前实现，看它是否可以扩展：
+PacketTunnelProvider 使用 WireGuardAdapter（来自 WireGuardKit）。WireGuardKit 内部管理 WireGuard 的 UDP socket。我们无法在不修改 WireGuardKit 的情况下拦截它的 UDP 包。
+
+最可行的方案：改变架构，不使用本地 UDP 代理。让 WireGuard 的 Endpoint 直接指向远程服务器的真实 IP 和 MorphProtocol 的会话端口。MorphProtocol 的混淆/解混淆在服务端完成。
+
+但这需要服务端支持。让我重新看 Android 的架构——Android 是怎么让 WireGuard 和本地代理通信的？
+
+Android 的 MorphProtocolService 使用 DatagramSocket 监听本地端口，WireGuard 的 VpnService 在同一进程中，所以 127.0.0.1 通信没问题。而且 Android 的 VpnService.protect(socket) 可以让特定 socket 绕过 VPN 隧道。
+
+Extension 日志已成功获取，关键内容：
+
+🚀 startTunnel() called
+🎭 morph_config found, len=1094
+📋 morph_config: host=65.20.77.40 session=50791 key=196 layer=3 tpl=1 fnInitor=true
+📡 Proxy listener state → ready
+🔌 Connecting to server 65.20.77.40:50791
+✅ Proxy started on 127.0.0.1:54621
+✅ WG Endpoint replaced → 127.0.0.1:54621
+📡 Server conn state → preparing
+📡 Server conn state → ready
+Extension 代理启动成功了！ 但多次调用 getExtensionLog 日志内容完全相同——没有新增任何 📤 WG→Server 或 📡 WireGuard connected to proxy 日志。
+
+问题定位：WireGuard 没有连接到本地代理端口 54621。
+
+原因分析：
+
+✅ Proxy listener 在 127.0.0.1:54621 就绪
+✅ WG Endpoint 被替换为 127.0.0.1:54621
+✅ Server connection 到 65.20.77.40:50791 就绪
+❌ 没有 📡 WireGuard connected to proxy — newConnectionHandler 从未触发
+这说明 WireGuard 发出的 UDP 包没有到达 NWListener。可能原因：
+
+WireGuard 使用的是内核态 wireguard-go，它通过 utun 设备直接发包，不经过用户态网络栈。 NWListener 监听的是用户态 UDP socket。在 Network Extension 中，WireGuard 的 Endpoint 流量走的是 NEPacketTunnelProvider 的网络路径，可能绕过了 NWListener。
+
+让我检查 NWListener 的参数配置——可能需要设置 requiredLocalEndpoint 或使用 includePeerToPeer：
+问题找到了。NWListener 默认监听所有接口，但在 Network Extension 进程中，WireGuard（wireguard-go）发送 UDP 到 127.0.0.1:54621 时，这个流量可能被 VPN 隧道自身的路由规则拦截了。
+
+更根本的问题是：WireGuard 的 wireguard-go 实现使用 conn.Bind 直接创建 UDP socket 发包到 Endpoint。在 Network Extension 中，这些 socket 需要通过 NEPacketTunnelProvider 的 packetFlow 或者被标记为不走隧道的流量。
+
+实际上 WireGuardKit 的做法是：WireGuard Endpoint 的 UDP 流量通过 NWConnection 发出，这些连接会被 Network Extension 框架正确路由（不走隧道）。但 127.0.0.1 是 loopback，可能有特殊处理。
+
+让我换一个思路——不用 NWListener，而是直接在 WireGuard 的数据路径上拦截。但这需要修改 WireGuardKit，太侵入了。
+
+更好的方案：用 socketpair 或 pipe 在同一进程内通信，或者直接用 NWConnection 连接到 listener。 但问题是 WireGuard 用自己的 socket 连接 Endpoint。
+
+让我重新思考——WireGuardKit 在 Extension 中是怎么发包的？
+SPM 包在本地没有缓存。让我看看 wireguard-apple 的 WireGuardAdapter 是怎么处理 Endpoint 连接的：
+关键发现：WireGuard 使用 wgTurnOn(wgConfig, tunnelFileDescriptor) 启动 wireguard-go 后端。wireguard-go 使用自己的 UDP socket 连接 Endpoint。这些 socket 是在 Extension 进程中创建的普通 BSD socket。
+
+127.0.0.1 的 loopback 流量在同一进程中应该是可达的。问题可能是：
+
+DNS 解析 — resolvePeers 会对 Endpoint 做 DNS 解析。127.0.0.1 不需要解析，但可能有问题
+wireguard-go 的 socket 绑定 — wireguard-go 创建的 UDP socket 可能被 NEPacketTunnelProvider 的网络设置影响
+让我检查 PacketTunnelSettingsGenerator 中的网络设置，特别是 tunnelRemoteAddress 和路由配置：
+
+
+现在我找到了关键线索。看 generateNetworkSettings() 中的路由设置：
+
+for peer in tunnelConfiguration.peers {
+    for addressRange in peer.allowedIPs {
+        ipv4IncludedRoutes.append(NEIPv4Route(...))
+    }
+}
+AllowedIPs 中的所有路由都被设为 includedRoutes，这意味着这些 IP 范围的流量都会被路由到 VPN 隧道。我们的 AllowedIPs 覆盖了几乎所有 IPv4 地址（排除了服务器 IP），但 127.0.0.1 也在这些路由范围内（0.0.0.0/2 包含 0.0.0.0 到 63.255.255.255，不包含 127；但 128.0.0.0/1 包含 128.0.0.0 到 255.255.255.255，也不包含 127）。
+
+等等，让我重新检查。127.0.0.1 属于 0.0.0.0/2（0-63）吗？不，127 在 64.0.0.0/2（64-127）范围内。看我们的 AllowedIPs：
+
+128.0.0.0/1, 0.0.0.0/2, 96.0.0.0/3, 80.0.0.0/4, 72.0.0.0/5, 68.0.0.0/6, 66.0.0.0/7, 64.0.0.0/8, 65.128.0.0/9, ...
+0.0.0.0/2 = 0.0.0.0 - 63.255.255.255 ❌ 不含 127
+96.0.0.0/3 = 96.0.0.0 - 127.255.255.255 ✅ 包含 127.0.0.1！
+所以 127.0.0.1 的流量被路由到了 VPN 隧道！wireguard-go 发送到 127.0.0.1:54621 的 UDP 包被自己的隧道捕获了，形成了回环。

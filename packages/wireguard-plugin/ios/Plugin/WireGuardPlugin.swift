@@ -34,26 +34,29 @@ public class WireGuardPlugin: CAPPlugin {
     
     /**
      * 连接WireGuard VPN
+     * 支持可选的 morphConfig 参数，传递给 Network Extension 进程
      */
     @objc func connect(_ call: CAPPluginCall) {
         print("🔵 WireGuardPlugin: connect() called")
-        print("🔵 WireGuardPlugin: Call options: \(call.options)")
         
         guard let config = call.getString("config"),
               let tunnelName = call.getString("tunnelName") else {
             print("❌ WireGuardPlugin: Missing parameters")
-            print("❌ WireGuardPlugin: Available keys: \(call.options.keys)")
             call.reject("Missing required parameters: config and tunnelName")
             return
         }
         
-        print("🔵 WireGuardPlugin: Config received")
+        // 可选：MorphProtocol 配置（JSON 字符串）
+        let morphConfig = call.getString("morphConfig")
+        if morphConfig != nil {
+            print("🔵 WireGuardPlugin: MorphProtocol config provided, will run in Extension")
+        }
+        
         print("🔵 WireGuardPlugin: Tunnel name: \(tunnelName)")
         print("🔵 WireGuardPlugin: Config length: \(config.count) bytes")
-        print("🔵 WireGuardPlugin: Config preview: \(config.prefix(100))...")
         
         // 保存配置并连接
-        saveAndConnect(config: config, tunnelName: tunnelName) { success, error in
+        saveAndConnect(config: config, tunnelName: tunnelName, morphConfig: morphConfig) { success, error in
             if success {
                 print("✅ WireGuardPlugin: Connection successful")
                 call.resolve(["success": true])
@@ -214,38 +217,35 @@ public class WireGuardPlugin: CAPPlugin {
         }
     }
     
-    private func saveAndConnect(config: String, tunnelName: String, completion: @escaping (Bool, String?) -> Void) {
-        // 首先保存配置
-        saveConfiguration(config: config, tunnelName: tunnelName) { [weak self] success, error in
+    private func saveAndConnect(config: String, tunnelName: String, morphConfig: String? = nil, completion: @escaping (Bool, String?) -> Void) {
+        saveConfiguration(config: config, tunnelName: tunnelName, morphConfig: morphConfig) { [weak self] success, error in
             guard success else {
                 completion(false, error)
                 return
             }
-            
-            // 然后连接
             self?.startVPN(completion: completion)
         }
     }
     
-    private func saveConfiguration(config: String, tunnelName: String, completion: @escaping (Bool, String?) -> Void) {
+    private func saveConfiguration(config: String, tunnelName: String, morphConfig: String? = nil, completion: @escaping (Bool, String?) -> Void) {
         print("🔵 WireGuardPlugin: saveConfiguration called")
-        print("🔵 WireGuardPlugin: Tunnel name: \(tunnelName)")
         
-        // 创建VPN配置
         let providerProtocol = NETunnelProviderProtocol()
-        
-        // Network Extension的Bundle ID（需要先在Xcode中创建对应的Network Extension target）
         providerProtocol.providerBundleIdentifier = "com.morphvpn.app.WireGuardExtension"
         providerProtocol.serverAddress = "WireGuard"
         
-        print("🔵 WireGuardPlugin: Provider bundle ID: \(providerProtocol.providerBundleIdentifier ?? "nil")")
-        
-        // 将WireGuard配置保存到providerConfiguration
-        providerProtocol.providerConfiguration = [
+        // providerConfiguration 传递给 PacketTunnelProvider
+        var providerConfiguration: [String: Any] = [
             "wg_config": config
         ]
         
-        print("🔵 WireGuardPlugin: Provider configuration set with wg_config key")
+        // 如果有 MorphProtocol 配置，一并传入 Extension
+        if let morphConfig = morphConfig {
+            providerConfiguration["morph_config"] = morphConfig
+            print("🔵 WireGuardPlugin: morph_config added to providerConfiguration")
+        }
+        
+        providerProtocol.providerConfiguration = providerConfiguration
         
         // 加载或创建VPN Manager
         NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in

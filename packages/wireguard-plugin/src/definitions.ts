@@ -11,6 +11,13 @@ export interface WireGuardConnectOptions {
    * 隧道名称
    */
   tunnelName: string;
+
+  /**
+   * MorphProtocol 配置 JSON 字符串（可选）。
+   * 传入后，Network Extension 内部会启动 MorphProtocol 代理，
+   * 自动改写 WireGuard Endpoint 和 AllowedIPs。
+   */
+  morphConfig?: string;
 }
 
 export interface WireGuardPlugin {

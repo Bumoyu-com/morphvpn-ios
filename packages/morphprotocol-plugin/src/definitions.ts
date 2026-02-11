@@ -141,6 +141,12 @@ export interface MorphProtocolResponse {
    * 远程会话端口 (握手成功后返回)
    */
   sessionPort?: number;
+
+  /**
+   * MorphProtocol 配置 JSON 字符串。
+   * 新架构下由 connect() 返回，供 WireGuard.connect() 传入 Extension。
+   */
+  morphConfig?: string;
 }
 
 /**

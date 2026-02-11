@@ -1,130 +1,390 @@
 import NetworkExtension
 import WireGuardKit
+import Network
 import os.log
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
-    
+
     private var adapter: WireGuardAdapter?
+    private var morphClient: MorphUDPClient?
     private lazy var logger = Logger(subsystem: "com.morphvpn.app.WireGuardExtension", category: "PacketTunnel")
-    
+
+    // MARK: - Lifecycle
+
     override init() {
         super.init()
-        NSLog("🎯 PacketTunnelProvider: init() called")
-        logger.info("🎯 PacketTunnelProvider: Initialized")
+        NSLog("🎯 PacketTunnelProvider: init()")
     }
-    
-    override func startTunnel(options: [String : NSObject]?, 
-                            completionHandler: @escaping (Error?) -> Void) {
-        
-        NSLog("🚀 PacketTunnelProvider: startTunnel() called")
-        logger.info("🚀 Starting WireGuard tunnel...")
-        
-        // 打印所有传入的选项
-        if let options = options {
-            NSLog("📋 Options: \(options)")
-            logger.debug("Options: \(options)")
+
+    override func startTunnel(options: [String: NSObject]?,
+                              completionHandler: @escaping (Error?) -> Void) {
+        NSLog("🚀 PacketTunnelProvider: startTunnel()")
+
+        guard let protocolConfiguration = self.protocolConfiguration as? NETunnelProviderProtocol,
+              let providerConfig = protocolConfiguration.providerConfiguration else {
+            completionHandler(makeError(code: 1, message: "Invalid protocol configuration"))
+            return
+        }
+
+        guard let wgConfigString = providerConfig["wg_config"] as? String else {
+            completionHandler(makeError(code: 2, message: "WireGuard config not found"))
+            return
+        }
+
+        // 检查是否有 MorphProtocol 配置
+        if let morphConfigJSON = providerConfig["morph_config"] as? String {
+            NSLog("🎭 MorphProtocol config found, starting with obfuscation")
+            startWithMorphProtocol(wgConfig: wgConfigString,
+                                   morphConfigJSON: morphConfigJSON,
+                                   completionHandler: completionHandler)
         } else {
-            NSLog("📋 No options provided")
-            logger.debug("No options provided")
-        }
-        
-        // 获取配置
-        NSLog("📦 Getting protocol configuration...")
-        guard let protocolConfiguration = self.protocolConfiguration as? NETunnelProviderProtocol else {
-            NSLog("❌ Failed to get protocol configuration")
-            logger.error("❌ Failed to get protocol configuration")
-            let error = NSError(domain: "WireGuard", code: 1, userInfo: [
-                NSLocalizedDescriptionKey: "Invalid protocol configuration"
-            ])
-            completionHandler(error)
-            return
-        }
-        NSLog("✅ Got protocol configuration")
-        
-        guard let providerConfiguration = protocolConfiguration.providerConfiguration else {
-            logger.error("❌ Provider configuration is nil")
-            let error = NSError(domain: "WireGuard", code: 2, userInfo: [
-                NSLocalizedDescriptionKey: "Provider configuration not found"
-            ])
-            completionHandler(error)
-            return
-        }
-        
-        guard let configString = providerConfiguration["wg_config"] as? String else {
-            NSLog("❌ WireGuard config string not found in provider configuration")
-            NSLog("📋 Provider configuration keys: \(providerConfiguration.keys)")
-            logger.error("❌ WireGuard config string not found in provider configuration")
-            logger.debug("Provider configuration keys: \(providerConfiguration.keys)")
-            let error = NSError(domain: "WireGuard", code: 3, userInfo: [
-                NSLocalizedDescriptionKey: "WireGuard configuration not found"
-            ])
-            completionHandler(error)
-            return
-        }
-        
-        NSLog("✅ Got WireGuard config, length: \(configString.count) bytes")
-        logger.info("✅ Got WireGuard config, length: \(configString.count) bytes")
-        
-        // 解析 WireGuard 配置
-        NSLog("🔧 Parsing WireGuard configuration...")
-        logger.info("🔧 Parsing WireGuard configuration...")
-        
-        guard let tunnelConfiguration = try? TunnelConfiguration(fromWgQuickConfig: configString) else {
-            NSLog("❌ Failed to parse WireGuard configuration")
-            logger.error("❌ Failed to parse WireGuard configuration")
-            let error = NSError(domain: "WireGuard", code: 4, userInfo: [
-                NSLocalizedDescriptionKey: "Invalid WireGuard configuration format"
-            ])
-            completionHandler(error)
-            return
-        }
-        
-        NSLog("✅ Successfully parsed WireGuard configuration")
-        logger.info("✅ Successfully parsed WireGuard configuration")
-        
-        // 启动 WireGuard adapter
-        NSLog("🚀 Starting WireGuard adapter...")
-        logger.info("🚀 Starting WireGuard adapter...")
-        
-        adapter = WireGuardAdapter(with: self) { logLevel, message in
-            NSLog("WireGuard: [\(logLevel)] \(message)")
-        }
-        
-        adapter?.start(tunnelConfiguration: tunnelConfiguration) { [weak self] error in
-            if let error = error {
-                NSLog("❌ WireGuard adapter failed to start: \(error)")
-                self?.logger.error("❌ WireGuard adapter failed to start: \(error.localizedDescription)")
-                completionHandler(error)
-            } else {
-                NSLog("✅ WireGuard tunnel started successfully!")
-                self?.logger.info("✅ WireGuard tunnel started successfully!")
-                completionHandler(nil)
-            }
+            NSLog("📡 No MorphProtocol config, starting plain WireGuard")
+            startPlainWireGuard(wgConfig: wgConfigString,
+                                completionHandler: completionHandler)
         }
     }
-    
-    override func stopTunnel(with reason: NEProviderStopReason, 
-                           completionHandler: @escaping () -> Void) {
-        NSLog("🛑 PacketTunnelProvider: stopTunnel() called, reason: \(reason)")
-        logger.info("🛑 Stopping WireGuard tunnel, reason: \(reason.rawValue)")
-        
+
+    override func stopTunnel(with reason: NEProviderStopReason,
+                             completionHandler: @escaping () -> Void) {
+        NSLog("🛑 PacketTunnelProvider: stopTunnel(), reason: \(reason.rawValue)")
+
+        morphClient?.disconnect()
+        morphClient = nil
+
         adapter?.stop { error in
             if let error = error {
-                NSLog("❌ Error stopping adapter: \(error)")
+                NSLog("❌ Error stopping WireGuard adapter: \(error)")
             } else {
                 NSLog("✅ WireGuard tunnel stopped")
             }
             completionHandler()
         }
-        
         adapter = nil
     }
-    
-    override func handleAppMessage(_ messageData: Data, 
-                                  completionHandler: ((Data?) -> Void)?) {
-        NSLog("📨 PacketTunnelProvider: handleAppMessage() called")
-        logger.debug("📨 Received app message")
-        
-        completionHandler?(nil)
+
+    override func handleAppMessage(_ messageData: Data,
+                                   completionHandler: ((Data?) -> Void)?) {
+        guard let message = String(data: messageData, encoding: .utf8) else {
+            completionHandler?(nil)
+            return
+        }
+
+        NSLog("📨 handleAppMessage: \(message)")
+
+        switch message {
+        case "getStatus":
+            let status = getMorphStatus()
+            let responseData = try? JSONSerialization.data(withJSONObject: status)
+            completionHandler?(responseData)
+        default:
+            completionHandler?(nil)
+        }
+    }
+
+    // MARK: - MorphProtocol + WireGuard
+
+    private func startWithMorphProtocol(wgConfig: String,
+                                         morphConfigJSON: String,
+                                         completionHandler: @escaping (Error?) -> Void) {
+        guard let morphConfig = parseMorphConfig(morphConfigJSON) else {
+            completionHandler(makeError(code: 10, message: "Invalid MorphProtocol config"))
+            return
+        }
+
+        NSLog("🎭 MorphProtocol: host=\(morphConfig.host):\(morphConfig.port) layer=\(morphConfig.obfuscationLayer) tpl=\(morphConfig.templateType)")
+
+        do {
+            let templateType: TemplateType? = morphConfig.templateType > 0
+                ? TemplateType(rawValue: UInt8(morphConfig.templateType))
+                : nil
+
+            var clientConfig = MorphClientConfig()
+            clientConfig.heartbeatInterval = morphConfig.heartbeatInterval
+            clientConfig.inactivityTimeout = morphConfig.inactivityTimeout
+            clientConfig.maxRetries = morphConfig.maxRetries
+            clientConfig.handshakeInterval = morphConfig.handshakeInterval
+
+            let client = try MorphUDPClient(
+                encryptionKey: morphConfig.encryptionKey,
+                obfuscationLayer: morphConfig.obfuscationLayer,
+                paddingLength: morphConfig.paddingLength,
+                templateType: templateType,
+                userId: morphConfig.userId,
+                config: clientConfig
+            )
+            self.morphClient = client
+
+            // 启动本地 UDP 代理（Extension 进程内的 localhost）
+            guard let localPort = client.startLocalProxy(preferredPort: 0) else {
+                completionHandler(makeError(code: 11, message: "Failed to start local UDP proxy"))
+                return
+            }
+            NSLog("✅ MorphProtocol: local proxy on 127.0.0.1:\(localPort)")
+
+            // 连接远程服务器并等待握手
+            let handshakeSemaphore = DispatchSemaphore(value: 0)
+            var handshakeError: Error?
+            var sessionPort: UInt16 = 0
+
+            client.onHandshakeComplete = { port in
+                NSLog("✅ MorphProtocol: handshake done, session port=\(port)")
+                sessionPort = port
+                handshakeSemaphore.signal()
+            }
+
+            client.onError = { error in
+                NSLog("❌ MorphProtocol: error during handshake: \(error)")
+                handshakeError = error
+                handshakeSemaphore.signal()
+            }
+
+            client.connectToRemote(host: morphConfig.host, port: UInt16(morphConfig.port))
+
+            // 等待握手完成（最多 30 秒）
+            let waitResult = handshakeSemaphore.wait(timeout: .now() + 30)
+
+            if waitResult == .timedOut {
+                completionHandler(makeError(code: 12, message: "MorphProtocol handshake timeout"))
+                return
+            }
+
+            if let error = handshakeError {
+                completionHandler(makeError(code: 13, message: "MorphProtocol handshake failed: \(error)"))
+                return
+            }
+
+            NSLog("✅ MorphProtocol: connected, session=\(sessionPort), local=\(localPort)")
+
+            // 改写 WireGuard 配置：Endpoint → 127.0.0.1:localPort，AllowedIPs 排除 127.0.0.0/8
+            let modifiedConfig = rewriteWireGuardConfig(wgConfig, localPort: localPort)
+            NSLog("✅ WireGuard config rewritten, Endpoint=127.0.0.1:\(localPort)")
+
+            startWireGuard(config: modifiedConfig, completionHandler: completionHandler)
+
+        } catch {
+            NSLog("❌ MorphProtocol init failed: \(error)")
+            completionHandler(makeError(code: 14, message: "MorphProtocol init failed: \(error)"))
+        }
+    }
+
+    private func startPlainWireGuard(wgConfig: String,
+                                      completionHandler: @escaping (Error?) -> Void) {
+        startWireGuard(config: wgConfig, completionHandler: completionHandler)
+    }
+
+    private func startWireGuard(config: String,
+                                 completionHandler: @escaping (Error?) -> Void) {
+        guard let tunnelConfiguration = try? TunnelConfiguration(fromWgQuickConfig: config) else {
+            completionHandler(makeError(code: 4, message: "Invalid WireGuard configuration"))
+            return
+        }
+
+        adapter = WireGuardAdapter(with: self) { logLevel, message in
+            NSLog("WireGuard: [\(logLevel)] \(message)")
+        }
+
+        adapter?.start(tunnelConfiguration: tunnelConfiguration) { [weak self] error in
+            if let error = error {
+                NSLog("❌ WireGuard adapter failed: \(error)")
+                completionHandler(error)
+            } else {
+                NSLog("✅ WireGuard tunnel started")
+                completionHandler(nil)
+            }
+        }
+    }
+
+    // MARK: - WireGuard 配置改写
+
+    private func rewriteWireGuardConfig(_ config: String, localPort: UInt16) -> String {
+        let lines = config.split(separator: "\n", omittingEmptySubsequences: false)
+        var result: [String] = []
+
+        for line in lines {
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            let lower = trimmed.lowercased()
+
+            if lower.hasPrefix("endpoint") && lower.contains("=") {
+                result.append("Endpoint = 127.0.0.1:\(localPort)")
+            } else if lower.hasPrefix("allowedips") && lower.contains("=") {
+                let newAllowedIPs = rewriteAllowedIPs(trimmed)
+                result.append(newAllowedIPs)
+            } else {
+                result.append(String(line))
+            }
+        }
+
+        return result.joined(separator: "\n")
+    }
+
+    /// 改写 AllowedIPs：将覆盖 127.0.0.0/8 的 CIDR 拆分，排除 loopback 网段。
+    /// 这样 wireguard-go 发往 127.0.0.1 的 UDP 包不会被隧道路由捕获。
+    private func rewriteAllowedIPs(_ line: String) -> String {
+        guard let equalsIndex = line.firstIndex(of: "=") else { return line }
+        let value = line[line.index(after: equalsIndex)...].trimmingCharacters(in: .whitespaces)
+        let cidrs = value.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+
+        var newCIDRs: [String] = []
+
+        for cidr in cidrs {
+            if cidr.contains(":") {
+                // IPv6 保持不变
+                newCIDRs.append(cidr)
+            } else if cidrCovers127(cidr) {
+                let split = splitCIDRExcluding127(cidr)
+                newCIDRs.append(contentsOf: split)
+            } else {
+                newCIDRs.append(cidr)
+            }
+        }
+
+        let result = "AllowedIPs = \(newCIDRs.joined(separator: ", "))"
+        NSLog("🔧 AllowedIPs rewritten: \(result.prefix(200))...")
+        return result
+    }
+
+    /// 检查 IPv4 CIDR 是否覆盖 127.0.0.0/8
+    private func cidrCovers127(_ cidr: String) -> Bool {
+        let parts = cidr.split(separator: "/")
+        guard parts.count == 2, let prefix = Int(parts[1]) else { return false }
+
+        let octets = parts[0].split(separator: ".").compactMap { UInt32($0) }
+        guard octets.count == 4 else { return false }
+
+        let ip = (octets[0] << 24) | (octets[1] << 16) | (octets[2] << 8) | octets[3]
+        let mask: UInt32 = prefix == 0 ? 0 : UInt32(0xFFFFFFFF) << UInt32(32 - prefix)
+        let networkStart = ip & mask
+        let networkEnd = networkStart | ~mask
+
+        let loopbackStart: UInt32 = 127 << 24
+        let loopbackEnd: UInt32 = (127 << 24) | 0x00FFFFFF
+
+        return networkStart <= loopbackStart && networkEnd >= loopbackEnd
+    }
+
+    /// 将覆盖 127.0.0.0/8 的 CIDR 拆分为排除 loopback 的子网列表。
+    /// 二分法递归：将 CIDR 分成两半，排除包含 127.0.0.0/8 的部分。
+    private func splitCIDRExcluding127(_ cidr: String) -> [String] {
+        let parts = cidr.split(separator: "/")
+        guard parts.count == 2, let prefix = Int(parts[1]) else { return [cidr] }
+
+        let octets = parts[0].split(separator: ".").compactMap { UInt32($0) }
+        guard octets.count == 4 else { return [cidr] }
+
+        let ip = (octets[0] << 24) | (octets[1] << 16) | (octets[2] << 8) | octets[3]
+        let mask: UInt32 = prefix == 0 ? 0 : UInt32(0xFFFFFFFF) << UInt32(32 - prefix)
+        let networkAddr = ip & mask
+
+        return splitExcluding127(network: networkAddr, prefix: prefix)
+    }
+
+    private func splitExcluding127(network: UInt32, prefix: Int) -> [String] {
+        let mask: UInt32 = prefix == 0 ? 0 : UInt32(0xFFFFFFFF) << UInt32(32 - prefix)
+        let networkStart = network & mask
+        let networkEnd = networkStart | ~mask
+
+        let loopbackStart: UInt32 = 127 << 24
+        let loopbackEnd: UInt32 = (127 << 24) | 0x00FFFFFF
+
+        // 不包含 loopback，直接保留
+        if networkEnd < loopbackStart || networkStart > loopbackEnd {
+            return [formatCIDR(network: networkStart, prefix: prefix)]
+        }
+
+        // 恰好是 127.0.0.0/8 或其子网，排除
+        if networkStart >= loopbackStart && networkEnd <= loopbackEnd {
+            return []
+        }
+
+        // 包含 loopback，继续二分
+        guard prefix < 32 else { return [] }
+
+        let newPrefix = prefix + 1
+        let halfSize: UInt32 = 1 << UInt32(31 - prefix)
+        let firstHalf = networkStart
+        let secondHalf = networkStart + halfSize
+
+        var result: [String] = []
+        result.append(contentsOf: splitExcluding127(network: firstHalf, prefix: newPrefix))
+        result.append(contentsOf: splitExcluding127(network: secondHalf, prefix: newPrefix))
+        return result
+    }
+
+    private func formatCIDR(network: UInt32, prefix: Int) -> String {
+        let a = (network >> 24) & 0xFF
+        let b = (network >> 16) & 0xFF
+        let c = (network >> 8) & 0xFF
+        let d = network & 0xFF
+        return "\(a).\(b).\(c).\(d)/\(prefix)"
+    }
+
+    // MARK: - MorphProtocol 配置解析
+
+    private struct MorphConfig {
+        let host: String
+        let port: Int
+        let encryptionKey: String
+        let userId: String
+        let obfuscationLayer: Int
+        let paddingLength: Int
+        let templateType: Int
+        let heartbeatInterval: TimeInterval
+        let inactivityTimeout: TimeInterval
+        let maxRetries: Int
+        let handshakeInterval: TimeInterval
+    }
+
+    private func parseMorphConfig(_ jsonString: String) -> MorphConfig? {
+        guard let data = jsonString.data(using: .utf8),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return nil
+        }
+
+        guard let host = json["host"] as? String,
+              let port = json["port"] as? Int,
+              let encryptionKey = json["encryptionKey"] as? String,
+              let userId = json["userId"] as? String else {
+            return nil
+        }
+
+        return MorphConfig(
+            host: host,
+            port: port,
+            encryptionKey: encryptionKey,
+            userId: userId,
+            obfuscationLayer: json["obfuscationLayer"] as? Int ?? 3,
+            paddingLength: json["paddingLength"] as? Int ?? 8,
+            templateType: json["templateType"] as? Int ?? 1,
+            heartbeatInterval: TimeInterval(json["heartbeatInterval"] as? Int ?? 120000) / 1000.0,
+            inactivityTimeout: TimeInterval(json["inactivityTimeout"] as? Int ?? 30000) / 1000.0,
+            maxRetries: json["maxRetries"] as? Int ?? 10,
+            handshakeInterval: TimeInterval(json["handshakeInterval"] as? Int ?? 5000) / 1000.0
+        )
+    }
+
+    // MARK: - Status
+
+    private func getMorphStatus() -> [String: Any] {
+        var status: [String: Any] = [:]
+
+        if let client = morphClient {
+            status["morphConnected"] = client.getSessionPort() != nil
+            status["localPort"] = Int(client.getLocalPort())
+            if let sp = client.getSessionPort() {
+                status["sessionPort"] = Int(sp)
+            }
+        } else {
+            status["morphConnected"] = false
+        }
+
+        return status
+    }
+
+    // MARK: - Helpers
+
+    private func makeError(code: Int, message: String) -> NSError {
+        return NSError(domain: "com.morphvpn.WireGuardExtension",
+                       code: code,
+                       userInfo: [NSLocalizedDescriptionKey: message])
     }
 }
