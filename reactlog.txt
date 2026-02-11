@@ -1,93 +1,92 @@
-2026-02-11 19:15:19.051424+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking up debug dylib relative path
-2026-02-11 19:15:19.051828+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Found debug dylib relative path string `App.debug.dylib`
-2026-02-11 19:15:19.051840+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking up debug dylib entry point name
-2026-02-11 19:15:19.051845+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] No debug dylib entry point name defined.
-2026-02-11 19:15:19.051850+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking up debug dylib install name
-2026-02-11 19:15:19.051856+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Found debug dylib install name string `@rpath/App.debug.dylib`
-2026-02-11 19:15:19.051862+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking for Previews JIT link entry point.
-2026-02-11 19:15:19.053081+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] No Previews JIT entry point found.
-2026-02-11 19:15:19.053094+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Gave PreviewsInjection a chance to run and it returned, continuing with debug dylib.
-2026-02-11 19:15:19.053100+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking for main entry point.
-2026-02-11 19:15:19.053107+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Opening debug dylib with '@rpath/App.debug.dylib'
-2026-02-11 19:15:19.053125+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Debug dylib handle: 0xf65819f0
-2026-02-11 19:15:19.053263+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] No entry point found. Checking for alias.
-2026-02-11 19:15:19.053273+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Calling provided entry point.
-2026-02-11 19:15:19.094231+0800 App[1118:320182] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///private/var/mobile/Containers/Data/Application/239C1547-123B-4140-8B02-0646BA0F5FD6/Library/Cookies/Cookies.binarycookies
+2026-02-11 21:29:16.594920+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Looking up debug dylib relative path
+2026-02-11 21:29:16.595733+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Found debug dylib relative path string `App.debug.dylib`
+2026-02-11 21:29:16.595782+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Looking up debug dylib entry point name
+2026-02-11 21:29:16.595816+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] No debug dylib entry point name defined.
+2026-02-11 21:29:16.595844+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Looking up debug dylib install name
+2026-02-11 21:29:16.595862+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Found debug dylib install name string `@rpath/App.debug.dylib`
+2026-02-11 21:29:16.595902+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Looking for Previews JIT link entry point.
+2026-02-11 21:29:16.641020+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] No Previews JIT entry point found.
+2026-02-11 21:29:16.641099+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Gave PreviewsInjection a chance to run and it returned, continuing with debug dylib.
+2026-02-11 21:29:16.641122+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Looking for main entry point.
+2026-02-11 21:29:16.641142+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Opening debug dylib with '@rpath/App.debug.dylib'
+2026-02-11 21:29:16.641186+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Debug dylib handle: 0xf00419f0
+2026-02-11 21:29:16.641553+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] No entry point found. Checking for alias.
+2026-02-11 21:29:16.641588+0800 App[1319:378072] [PreviewsAgentExecutorLibrary] Calling provided entry point.
 ✅ WireGuardPlugin: Plugin loaded successfully
 ✅ WireGuardPlugin: Initialization complete
 ⚡️  Loading app at capacitor://localhost...
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...
 ⚡️  [log] - ✅ PingBridge loaded and ready
-⚡️  WebView loaded
 ⚡️  [log] - [morphVpn_ios] window.morphVpn 已初始化 (Extension 内置架构)
+⚡️  WebView loaded
 ⚡️  [log] - storage web
-⚡️  To Native ->  SplashScreen hide 81366848
+⚡️  To Native ->  SplashScreen hide 43339636
 ⚡️  TO JS undefined
 ⚡️  [log] - ✅ PingBridge 已加载
-⚡️  [log] - 缓存加载失败
-    ️  [log] - 还未检查GFW,检查中...
+⚡️  [log] - login缓存已加载 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":1537614240786,"vpnChoose":"bom","vpnConnect":false}}
+⚡️  [log] - 还未检查GFW,检查中...
 ⚡️  [log] - GFW,检查完成==>> GFW is true
 ⚡️  [log] - baseUrl==>> https://bumoyu-saas-morphvpn-api.zhendong-ge.workers.dev
 ⚡️  [log] - 转发请求结果==>> {"data":{"result":true,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0"},"error":null}
 ⚡️  [log] - login success
 ⚡️  [log] - 开始全局轮询
-⚡️  [log] - 当前用户数据 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":0,"vpnConnect":false}}
-⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614240786,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T10:35:26.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - 当前用户数据 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":1537602559885,"vpnChoose":"bom","vpnConnect":false}}
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537602559885,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T13:26:08.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
 ⚡️  [log] - user admin==>> true
-⚡️  [log] - 转发请求结果==>> {"data":[{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T06:22:15.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T02:04:08.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b7
-⚡️  [log] - [{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T06:22:15.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T02:04:08.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b763f-110e-4b56-b81c-
-⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614240786,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T10:35:26.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
-⚡️  [log] - getTraffic==>> {"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614240786,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T10:35:26.000Z","createdAt":"2025-04-09T09:42:53.000Z"}
-⚡️  [log] - {"code":"bom","city":"Mumbai","country":"India"}
-⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614028372,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
-⚡️  [log] - getTraffic loop Traffic is  1537614028372
-⚡️  [log] - 转发请求结果==>> {"data":{"msg":"success","server":{"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770808581,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":0,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2026-02-11T00:31:45.000Z"}},"error":null}
-⚡️  [log] - 服务器信息 {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770808581,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":0,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537602559885,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T13:26:08.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - getTraffic==>> {"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537602559885,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T13:26:08.000Z","createdAt":"2025-04-09T09:42:53.000Z"}
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T06:22:15.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T12:42:50.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b7
+⚡️  [log] - [{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T06:22:15.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T12:42:50.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b763f-110e-4b56-b81c-
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537602462422,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T13:29:42.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - getTraffic loop Traffic is  1537602462422
+⚡️  [log] - 转发请求结果==>> {"data":{"msg":"success","server":{"id":"ff9f0d9b-77df-402d-a1f3-40ae16672a5e","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.91.215","name":"3fbf259d-f4b3-48dd-9d2c-1e64cdf5b54b","udpPort":"5814","tcpPort":null,"lastInvoke":1770816573,"type":"vhp-1c-1gb","info":"qbBgBHk4UjYcS1qp+/i/QjsjRyGKHDn6FN2gXvTMbVQ=:yVcCH36klglzRdViR8Ka4A==","instanceId":"e5c7a788-f33d-42c7-8346-109ca5ca9d80","cityName":"bom","status":"running","clientNum":1,"updatedAt":"2026-02-11T13:29:42.000Z","createdAt":"2026-02-11T12:38:37.000Z"}},"error":null}
+⚡️  [log] - 服务器信息 {"id":"ff9f0d9b-77df-402d-a1f3-40ae16672a5e","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.91.215","name":"3fbf259d-f4b3-48dd-9d2c-1e64cdf5b54b","udpPort":"5814","tcpPort":null,"lastInvoke":1770816573,"type":"vhp-1c-1gb","info":"qbBgBHk4UjYcS1qp+/i/QjsjRyGKHDn6FN2gXvTMbVQ=:yVcCH36klglzRdViR8Ka4A==","instanceId":"e5c7a788-f33d-42c7-8346-109ca5ca9d80","cityName":"bom","status":"running","clientNum":1,"updatedAt":"2026-02-11T13:29:42.000Z","createdAt":"2026-02-11T12:38:37.000Z"}
 ⚡️  [log] - 创建新配置,当前网络: GFW is true
-⚡️  [log] - 转发请求结果==>> {"data":"22124bf3-bea1-4ead-9190-8761382a2de5","error":null}
-⚡️  [log] - 新配置id 22124bf3-bea1-4ead-9190-8761382a2de5
-⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = 6NGkaQjXpOvPz3Nr6nDBdqqCOHa++sXBchDMeZuvG3M=\nAddress = 10.8.0.33/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = iYlEwhiHMUOyIXnDbwxTzFGOKDBHWvj/21McXuCcBmk=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 65.20.86.216:51820","error":null}
+⚡️  [log] - 转发请求结果==>> {"data":"d0427316-03a4-4f8c-b0a7-f047904844a0","error":null}
+⚡️  [log] - 新配置id d0427316-03a4-4f8c-b0a7-f047904844a0
+⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = OHFTqZ/YV46ZteHSRyDw2o54wBZhZUJ6ylrhImcM/1s=\nAddress = 10.8.0.13/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = mRqgdNzu1J9a6B3HYGoNlNez5zaOtNUFoOpMUkr/rIE=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 65.20.91.215:51820","error":null}
 ⚡️  [log] - wireguard配置 [Interface]
-PrivateKey = 6NGkaQjXpOvPz3Nr6nDBdqqCOHa++sXBchDMeZuvG3M=
-Address = 10.8.0.33/24
+PrivateKey = OHFTqZ/YV46ZteHSRyDw2o54wBZhZUJ6ylrhImcM/1s=
+Address = 10.8.0.13/24
 DNS = 1.1.1.1
 
 [Peer]
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-PresharedKey = iYlEwhiHMUOyIXnDbwxTzFGOKDBHWvj/21McXuCcBmk=
+PresharedKey = mRqgdNzu1J9a6B3HYGoNlNez5zaOtNUFoOpMUkr/rIE=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
-Endpoint = 65.20.86.216:51820
-⚡️  [log] - [morphVpn_ios] 连接开始 → 65.20.86.216:29203 userId=01de806b-6dd8-4820-bedd-ca048b96c5a0
-⚡️  To Native ->  MorphProtocol connect 81366849
+Endpoint = 65.20.91.215:51820
+⚡️  [log] - [morphVpn_ios] 连接开始 → 65.20.91.215:5814 userId=01de806b-6dd8-4820-bedd-ca048b96c5a0
+⚡️  To Native ->  MorphProtocol connect 43339637
 ⚡️  [log] - [morphVpn_ios] 步骤1: 构建 MorphProtocol 配置...
-2026-02-11 19:16:36.462408+0800 App[1118:320606] 🔵 MorphProtocolPlugin: connect() called (config-only mode)
-2026-02-11 19:16:36.463784+0800 App[1118:320606] 🔵 MorphProtocol: config ready for 65.20.86.216:29203
-⚡️  TO JS {"success":true,"morphConfig":"{\"port\":29203,\"inactivityTimeout\":30000,\"maxRetries\":10,\"handshakeInterval\":5000,\"templateType\":1,\"host\":\"65.20.86.216\",\"heartbeatInterval\":120000,\"userId\":\"01de806b-6dd8-4820-bedd-ca048b96c5a0\",\"obfuscat
-⚡️  [log] - [morphVpn_ios] 步骤1 完成: morphConfig 已生成, message=MorphProtocol config ready (will run in Extension)
-⚡️  [log] - [morphVpn_ios]   morphConfig: host=65.20.86.216:29203 layer=3 tpl=1 userId=01de806b...
+2026-02-11 21:29:50.492816+0800 App[1319:378581] 🔵 MorphProtocolPlugin: connect() called (config-only mode)
+2026-02-11 21:29:50.493326+0800 App[1319:378581] 🔵 MorphProtocol: config ready for 65.20.91.215:5814
+⚡️  TO JS {"morphConfig":"{\"host\":\"65.20.91.215\",\"inactivityTimeout\":30000,\"obfuscationLayer\":3,\"maxRetries\":10,\"heartbeatInterval\":120000,\"encryptionKey\":\"qbBgBHk4UjYcS1qp+\\\/i\\\/QjsjRyGKHDn6FN2gXvTMbVQ=:yVcCH36klglzRdViR8Ka4A==\",\"userId\":\"01de
+⚡️  To Native ->  WireGuard ⚡️  [log] - [morphVpn_ios] 步骤1 完成: morphConfig 已生成, message=MorphProtocol config ready (will run in Extension)
+connect 43339638
+⚡️  [log] - [morphVpn_ios]   morphConfig: host=65.20.91.215:5814 layer=3 tpl=1 userId=01de806b...
 ⚡️  [log] - [morphVpn_ios] 步骤2: 启动 WireGuard (含 MorphProtocol)...
-⚡️  To Native ->  ⚡️  [log] - [morphVpn_ios]   wgConfig 长度: 314 bytes
-WireGuard connect 81366850
-⚡️  [log] - [morphVpn_ios]   morphConfig 长度: 322 bytes
+⚡️  [log] - [morphVpn_ios]   wgConfig 长度: 314 bytes
+⚡️  [log] - [morphVpn_ios]   morphConfig 长度: 323 bytes
 🔵 WireGuardPlugin: connect() called
 🔵 WireGuardPlugin: MorphProtocol config provided, will run in Extension
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
 🔵 WireGuardPlugin: Config length: 314 bytes
 🔵 WireGuardPlugin: saveConfiguration called
 🔵 WireGuardPlugin: morph_config added to providerConfiguration
-🔵 WireGuardPlugin: Saving VPN configuration to preferences...
-2026-02-11 19:16:39.669288+0800 App[1118:320182] [Snapshotting] Snapshotting a view (0x105875c00, UIKeyboardImpl) that is not in a visible window requires afterScreenUpdates:YES.
-✅ WireGuardPlugin: Configuration saved successfully
-🔵 WireGuardPlugin: Reloading configuration...
 📡 WireGuardPlugin: VPN status changed to: disconnected
 🔍 WireGuardPlugin: Checking for connection errors...
+🔵 WireGuardPlugin: Saving VPN configuration to preferences...
+✅ WireGuardPlugin: Configuration saved successfully
+🔵 WireGuardPlugin: Reloading configuration...
 ✅ WireGuardPlugin: Configuration reloaded successfully
 🔵 WireGuardPlugin: startVPN called
 🔵 WireGuardPlugin: VPN manager status: disconnected
 🔵 WireGuardPlugin: VPN manager enabled: true
 🔵 WireGuardPlugin: Protocol configuration: 
     type = plugin
-    identifier = 5936B707-A2CA-4675-AB81-CFC6B2864008
+    identifier = 27DDBA89-2AB4-4C94-ADB0-5314DC708AD8
     serverAddress = WireGuard
     identityDataImported = NO
     disconnectOnSleep = NO
@@ -105,17 +104,17 @@ WireGuard connect 81366850
     reassertTimeout = 0
     providerConfiguration = {
         wg_config = [Interface]
-PrivateKey = 6NGkaQjXpOvPz3Nr6nDBdqqCOHa++sXBchDMeZuvG3M=
-Address = 10.8.0.33/24
+PrivateKey = OHFTqZ/YV46ZteHSRyDw2o54wBZhZUJ6ylrhImcM/1s=
+Address = 10.8.0.13/24
 DNS = 1.1.1.1
 
 [Peer]
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-PresharedKey = iYlEwhiHMUOyIXnDbwxTzFGOKDBHWvj/21McXuCcBmk=
+PresharedKey = mRqgdNzu1J9a6B3HYGoNlNez5zaOtNUFoOpMUkr/rIE=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
-Endpoint = 65.20.86.216:51820,
-        morph_config = {"port":29203,"inactivityTimeout":30000,"maxRetries":10,"handshakeInterval":5000,"templateType":1,"host":"65.20.86.216","heartbeatInterval":120000,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","obfuscationLayer":3,"paddingLength":8,"encryptionKey":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w=="},
+Endpoint = 65.20.91.215:51820,
+        morph_config = {"host":"65.20.91.215","inactivityTimeout":30000,"obfuscationLayer":3,"maxRetries":10,"heartbeatInterval":120000,"encryptionKey":"qbBgBHk4UjYcS1qp+\/i\/QjsjRyGKHDn6FN2gXvTMbVQ=:yVcCH36klglzRdViR8Ka4A==","userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","paddingLength":8,"handshakeInterval":5000,"port":5814,"templateType":1},
     }
     providerBundleIdentifier = com.morphvpn.app.WireGuardExtension
 🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
@@ -125,28 +124,24 @@ Endpoint = 65.20.86.216:51820,
 ✅ WireGuardPlugin: Connection successful
 ⚡️  TO JS {"success":true}
 ⚡️  [log] - [morphVpn_ios] 步骤2 完成: VPN 连接成功
-⚡️  [log] - vpn已打开,检测IP {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770808581,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":0,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
+⚡️  [log] - vpn已打开,检测IP {"id":"ff9f0d9b-77df-402d-a1f3-40ae16672a5e","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.91.215","name":"3fbf259d-f4b3-48dd-9d2c-1e64cdf5b54b","udpPort":"5814","tcpPort":null,"lastInvoke":1770816573,"type":"vhp-1c-1gb","info":"qbBgBHk4UjYcS1qp+/i/QjsjRyGKHDn6FN2gXvTMbVQ=:yVcCH36klglzRdViR8Ka4A==","instanceId":"e5c7a788-f33d-42c7-8346-109ca5ca9d80","cityName":"bom","status":"running","clientNum":1,"updatedAt":"2026-02-11T13:29:42.000Z","createdAt":"2026-02-11T12:38:37.000Z"}
+📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connected
+📡 WireGuardPlugin: VPN status changed to: connected
 📊 WireGuardPlugin: Status after 2s: connected
-⚡️  [log] - failtimes 1
-⚡️  [log] - failtimes 2
-⚡️  [log] - failtimes 3
-⚡️  [log] - failtimes 4
-⚡️  [log] - failtimes 5
-⚡️  [log] - failtimes 6
-⚡️  [log] - failtimes 7
-⚡️  [log] - failtimes 8
-⚡️  To Native ->  WireGuard disconnect 81366851
-⚡️  [log] - [morphVpn_ios] 断开连接...
-⚡️  TO JS {"success":true}
 📡 WireGuardPlugin: VPN status changed to: disconnecting
 🔍 WireGuardPlugin: Checking for connection errors...
-⚡️  To Native ->  MorphProtocol disconnect 81366852
-⚡️  [log] - [morphVpn_ios] WireGuard 已断开
-2026-02-11 19:18:02.860936+0800 App[1118:321450] 🔵 MorphProtocolPlugin: disconnect()
-⚡️  TO JS {"success":true,"message":"Disconnected"}
-⚡️  [log] - [morphVpn_ios] 已断开
-⚡️  [log] - vpn已关闭
+📡 WireGuardPlugin: VPN status changed to: disconnecting
+🔍 WireGuardPlugin: Checking for connection errors...
 📡 WireGuardPlugin: VPN status changed to: disconnected
 🔍 WireGuardPlugin: Checking for connection errors...
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...
+⚡️  [log] - {"message":"Network Error","name":"AxiosError","stack":"ue@capacitor://localhost/assets/index-BVPW8ily.js:197:66759\n@capacitor://localhost/assets/index-BVPW8ily.js:199:6205\n@capacitor://localhost/assets/index-BVPW8ily.js:201:2126","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http","fetch"],"transformRequest":[null],"transformResponse":[null],"timeout":5000,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*"},"url":"https://api.ipify.org?format=json","method":"get","allowAbsoluteUrls":true},"code":"ERR_NETWORK"}
+⚡️  [log] - failtimes 1
+⚡️  [log] - ip===>>  111.31.170.38 =?= 65.20.91.215
+⚡️  [log] - failtimes ip error
+⚡️  [log] - ip===>>  111.31.170.38 =?= 65.20.91.215
+⚡️  [log] - failtimes ip error
+⚡️  [log] - 停止检测

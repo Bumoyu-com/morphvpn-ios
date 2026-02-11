@@ -169,15 +169,20 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             NSLog("✅ MorphProtocol: connected, session=\(sessionPort), local=\(localPort)")
             SharedLog.shared.log("connected session=\(sessionPort) local=\(localPort)")
 
-            // 改写 WireGuard 配置：Endpoint → 127.0.0.1:localPort，AllowedIPs 排除 127.0.0.0/8
-            let modifiedConfig = rewriteWireGuardConfig(wgConfig, localPort: localPort)
-            NSLog("✅ WireGuard config rewritten, Endpoint=127.0.0.1:\(localPort)")
+            // 改写 WireGuard 配置：
+            //   Endpoint → 127.0.0.1:localPort
+            //   AllowedIPs → 排除 127.0.0.0/8 和远程服务器 IP（防止 VPN 路由回环）
+            let modifiedConfig = rewriteWireGuardConfig(wgConfig,
+                                                         localPort: localPort,
+                                                         excludeServerIP: morphConfig.host)
+            NSLog("✅ WireGuard config rewritten, Endpoint=127.0.0.1:\(localPort), excluded server=\(morphConfig.host)")
 
-            // 打印改写后的配置关键行（调试用）
+            // 打印改写后的完整配置（调试用）
             for line in modifiedConfig.split(separator: "\n") {
-                let trimmed = line.trimmingCharacters(in: .whitespaces).lowercased()
-                if trimmed.hasPrefix("endpoint") || trimmed.hasPrefix("allowedips") {
-                    NSLog("📋 WG config: \(line)")
+                let trimmed = line.trimmingCharacters(in: .whitespaces)
+                if !trimmed.isEmpty {
+                    NSLog("📋 WG config: \(trimmed)")
+                    SharedLog.shared.log("WG: \(trimmed)")
                 }
             }
 
@@ -219,7 +224,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
     // MARK: - WireGuard 配置改写
 
-    private func rewriteWireGuardConfig(_ config: String, localPort: UInt16) -> String {
+    private func rewriteWireGuardConfig(_ config: String,
+                                         localPort: UInt16,
+                                         excludeServerIP: String? = nil) -> String {
         let lines = config.split(separator: "\n", omittingEmptySubsequences: false)
         var result: [String] = []
 
@@ -230,7 +237,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             if lower.hasPrefix("endpoint") && lower.contains("=") {
                 result.append("Endpoint = 127.0.0.1:\(localPort)")
             } else if lower.hasPrefix("allowedips") && lower.contains("=") {
-                let newAllowedIPs = rewriteAllowedIPs(trimmed)
+                let newAllowedIPs = rewriteAllowedIPs(trimmed, excludeServerIP: excludeServerIP)
                 result.append(newAllowedIPs)
             } else {
                 result.append(String(line))
@@ -240,12 +247,25 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         return result.joined(separator: "\n")
     }
 
-    /// 改写 AllowedIPs：将覆盖 127.0.0.0/8 的 CIDR 拆分，排除 loopback 网段。
-    /// 这样 wireguard-go 发往 127.0.0.1 的 UDP 包不会被隧道路由捕获。
-    private func rewriteAllowedIPs(_ line: String) -> String {
+    /// 改写 AllowedIPs：排除 127.0.0.0/8（loopback）和远程服务器 IP/32（防止路由回环）。
+    private func rewriteAllowedIPs(_ line: String, excludeServerIP: String? = nil) -> String {
         guard let equalsIndex = line.firstIndex(of: "=") else { return line }
         let value = line[line.index(after: equalsIndex)...].trimmingCharacters(in: .whitespaces)
         let cidrs = value.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+
+        // 构建需要排除的 IP 列表
+        var excludeIPs: [UInt32] = []
+        // 始终排除 127.0.0.0/8
+        // （通过 cidrCoversIP 检查处理）
+
+        // 解析远程服务器 IP
+        var serverIPValue: UInt32?
+        if let serverIP = excludeServerIP {
+            serverIPValue = parseIPv4(serverIP)
+            if let ip = serverIPValue {
+                NSLog("🔧 Will exclude server IP \(serverIP) from AllowedIPs")
+            }
+        }
 
         var newCIDRs: [String] = []
 
@@ -253,41 +273,20 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             if cidr.contains(":") {
                 // IPv6 保持不变
                 newCIDRs.append(cidr)
-            } else if cidrCovers127(cidr) {
-                let split = splitCIDRExcluding127(cidr)
-                newCIDRs.append(contentsOf: split)
             } else {
-                newCIDRs.append(cidr)
+                let split = splitCIDRExcludingIPs(cidr, serverIP: serverIPValue)
+                newCIDRs.append(contentsOf: split)
             }
         }
 
         let result = "AllowedIPs = \(newCIDRs.joined(separator: ", "))"
-        NSLog("🔧 AllowedIPs rewritten: \(result.prefix(200))...")
+        NSLog("🔧 AllowedIPs rewritten (\(newCIDRs.count) entries)")
+        SharedLog.shared.log("AllowedIPs: \(newCIDRs.count) entries")
         return result
     }
 
-    /// 检查 IPv4 CIDR 是否覆盖 127.0.0.0/8
-    private func cidrCovers127(_ cidr: String) -> Bool {
-        let parts = cidr.split(separator: "/")
-        guard parts.count == 2, let prefix = Int(parts[1]) else { return false }
-
-        let octets = parts[0].split(separator: ".").compactMap { UInt32($0) }
-        guard octets.count == 4 else { return false }
-
-        let ip = (octets[0] << 24) | (octets[1] << 16) | (octets[2] << 8) | octets[3]
-        let mask: UInt32 = prefix == 0 ? 0 : UInt32(0xFFFFFFFF) << UInt32(32 - prefix)
-        let networkStart = ip & mask
-        let networkEnd = networkStart | ~mask
-
-        let loopbackStart: UInt32 = 127 << 24
-        let loopbackEnd: UInt32 = (127 << 24) | 0x00FFFFFF
-
-        return networkStart <= loopbackStart && networkEnd >= loopbackEnd
-    }
-
-    /// 将覆盖 127.0.0.0/8 的 CIDR 拆分为排除 loopback 的子网列表。
-    /// 二分法递归：将 CIDR 分成两半，排除包含 127.0.0.0/8 的部分。
-    private func splitCIDRExcluding127(_ cidr: String) -> [String] {
+    /// 将一个 IPv4 CIDR 拆分，排除 127.0.0.0/8 和指定的服务器 IP/32。
+    private func splitCIDRExcludingIPs(_ cidr: String, serverIP: UInt32?) -> [String] {
         let parts = cidr.split(separator: "/")
         guard parts.count == 2, let prefix = Int(parts[1]) else { return [cidr] }
 
@@ -298,10 +297,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let mask: UInt32 = prefix == 0 ? 0 : UInt32(0xFFFFFFFF) << UInt32(32 - prefix)
         let networkAddr = ip & mask
 
-        return splitExcluding127(network: networkAddr, prefix: prefix)
+        return splitRecursive(network: networkAddr, prefix: prefix, serverIP: serverIP)
     }
 
-    private func splitExcluding127(network: UInt32, prefix: Int) -> [String] {
+    private func splitRecursive(network: UInt32, prefix: Int, serverIP: UInt32?) -> [String] {
         let mask: UInt32 = prefix == 0 ? 0 : UInt32(0xFFFFFFFF) << UInt32(32 - prefix)
         let networkStart = network & mask
         let networkEnd = networkStart | ~mask
@@ -309,17 +308,35 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let loopbackStart: UInt32 = 127 << 24
         let loopbackEnd: UInt32 = (127 << 24) | 0x00FFFFFF
 
-        // 不包含 loopback，直接保留
-        if networkEnd < loopbackStart || networkStart > loopbackEnd {
+        let coversLoopback = networkStart <= loopbackStart && networkEnd >= loopbackEnd
+        let coversServer: Bool
+        if let serverIP = serverIP {
+            coversServer = serverIP >= networkStart && serverIP <= networkEnd
+        } else {
+            coversServer = false
+        }
+
+        // 不包含任何需要排除的 IP，直接保留
+        if !coversLoopback && !coversServer {
             return [formatCIDR(network: networkStart, prefix: prefix)]
         }
 
-        // 恰好是 127.0.0.0/8 或其子网，排除
-        if networkStart >= loopbackStart && networkEnd <= loopbackEnd {
+        // 恰好是 127.0.0.0/8 或其子网，且不包含 server IP → 排除
+        if networkStart >= loopbackStart && networkEnd <= loopbackEnd && !coversServer {
             return []
         }
 
-        // 包含 loopback，继续二分
+        // 是 /32 且恰好是 server IP → 排除
+        if prefix == 32 && serverIP != nil && networkStart == serverIP! {
+            return []
+        }
+
+        // 是 /32 且是 loopback → 排除
+        if prefix == 32 && networkStart >= loopbackStart && networkStart <= loopbackEnd {
+            return []
+        }
+
+        // 需要继续拆分
         guard prefix < 32 else { return [] }
 
         let newPrefix = prefix + 1
@@ -328,9 +345,15 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let secondHalf = networkStart + halfSize
 
         var result: [String] = []
-        result.append(contentsOf: splitExcluding127(network: firstHalf, prefix: newPrefix))
-        result.append(contentsOf: splitExcluding127(network: secondHalf, prefix: newPrefix))
+        result.append(contentsOf: splitRecursive(network: firstHalf, prefix: newPrefix, serverIP: serverIP))
+        result.append(contentsOf: splitRecursive(network: secondHalf, prefix: newPrefix, serverIP: serverIP))
         return result
+    }
+
+    private func parseIPv4(_ ip: String) -> UInt32? {
+        let octets = ip.split(separator: ".").compactMap { UInt32($0) }
+        guard octets.count == 4 else { return nil }
+        return (octets[0] << 24) | (octets[1] << 16) | (octets[2] << 8) | octets[3]
     }
 
     private func formatCIDR(network: UInt32, prefix: Int) -> String {

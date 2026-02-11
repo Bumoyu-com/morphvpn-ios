@@ -46,6 +46,9 @@ class MorphUDPClient {
     private let paddingLength: Int
     let config: MorphClientConfig
     
+    // 握手连接的本地端口，dataConnection 需要绑定到同一端口
+    private var handshakeLocalPort: UInt16?
+    
     // MARK: - 握手重试
     private var handshakeTimer: DispatchSourceTimer?
     private var handshakeRetryCount = 0
@@ -148,28 +151,64 @@ class MorphUDPClient {
     }
     
     private func handleNewLocalConnection(_ connection: NWConnection) {
+        NSLog("🔗 MorphUDPClient: newConnectionHandler fired, endpoint=\(connection.endpoint), state=\(connection.state)")
+        SharedLog.shared.log("WG connected from \(connection.endpoint)")
         wireGuardConnection = connection
+        
+        var receiveStarted = false
+        
         connection.stateUpdateHandler = { [weak self] state in
+            NSLog("🔗 MorphUDPClient: WG connection state → \(state)")
             switch state {
             case .ready:
                 NSLog("✅ MorphUDPClient: WireGuard connection ready")
-                self?.receiveFromWireGuard(connection)
+                SharedLog.shared.log("WG connection ready")
+                if !receiveStarted {
+                    receiveStarted = true
+                    NSLog("🔗 MorphUDPClient: Starting receive loop from stateUpdateHandler")
+                    self?.receiveFromWireGuard(connection)
+                }
             case .failed(let error):
                 NSLog("❌ MorphUDPClient: WireGuard connection failed: \(error)")
+                SharedLog.shared.log("WG connection failed: \(error)")
+            case .cancelled:
+                NSLog("🔗 MorphUDPClient: WG connection cancelled")
             default: break
             }
         }
         connection.start(queue: queue)
+        
+        // NWListener 创建的 UDP 连接可能已经 ready，
+        // stateUpdateHandler 可能不会再触发 .ready。
+        // 延迟一小段时间后检查状态，确保 receive 已启动。
+        queue.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+            if !receiveStarted && connection.state == .ready {
+                receiveStarted = true
+                NSLog("🔗 MorphUDPClient: Starting receive loop from fallback check")
+                SharedLog.shared.log("WG receive started (fallback)")
+                self?.receiveFromWireGuard(connection)
+            }
+        }
     }
+    
+    private var wgPacketCount = 0
+    private var serverPacketCount = 0
     
     private func receiveFromWireGuard(_ connection: NWConnection) {
         connection.receiveMessage { [weak self] data, context, isComplete, error in
             guard let self = self else { return }
             if let error = error {
                 NSLog("❌ [WG→Morph] Receive error: \(error)")
+                SharedLog.shared.log("[WG→Morph] ERROR: \(error)")
                 return
             }
             if let data = data, !data.isEmpty {
+                self.wgPacketCount += 1
+                // 前 10 个包详细日志，之后每 50 个包一次
+                if self.wgPacketCount <= 10 || self.wgPacketCount % 50 == 0 {
+                    NSLog("📦 [WG→Morph] #\(self.wgPacketCount) \(data.count) bytes")
+                    SharedLog.shared.log("[WG→Morph] #\(self.wgPacketCount) \(data.count)b")
+                }
                 self.forwardToRemoteServer(data)
             }
             self.receiveFromWireGuard(connection)
@@ -204,7 +243,14 @@ class MorphUDPClient {
             
             switch state {
             case .ready:
-                NSLog("✅ MorphUDPClient: Handshake connection ready")
+                // 记录握手连接的本地端口，dataConnection 需要绑定到同一端口
+                if let localEndpoint = self.handshakeConnection?.currentPath?.localEndpoint,
+                   case .hostPort(_, let port) = localEndpoint {
+                    self.handshakeLocalPort = port.rawValue
+                    NSLog("✅ MorphUDPClient: Handshake connection ready, local port=\(port.rawValue)")
+                } else {
+                    NSLog("✅ MorphUDPClient: Handshake connection ready, local port unknown")
+                }
                 self.isConnected = true
                 self.startReceivingHandshake()
                 self.startHandshakeRetry()
@@ -385,7 +431,7 @@ class MorphUDPClient {
             
             self.dataConnection?.send(content: packet, completion: .contentProcessed { error in
                 if let error = error {
-                    NSLog("❌ [WG→Server] Send error: \(error)")
+                    SharedLog.shared.log("[WG→Server] SEND ERROR: \(error)")
                     self.onError?(error)
                 }
             })
@@ -393,10 +439,13 @@ class MorphUDPClient {
     }
     
     private func forwardToWireGuard(_ data: Data) {
-        guard let connection = wireGuardConnection else { return }
+        guard let connection = wireGuardConnection else {
+            SharedLog.shared.log("[Server→WG] wgConn nil, DROP \(data.count)b")
+            return
+        }
         connection.send(content: data, completion: .contentProcessed { error in
             if let error = error {
-                NSLog("❌ [Server→WG] Send error: \(error)")
+                SharedLog.shared.log("[Server→WG] SEND ERROR: \(error)")
             }
         })
     }
@@ -510,6 +559,16 @@ class MorphUDPClient {
         self.sessionPort = UInt16(port)
         
         stopHandshakeRetry()
+        
+        // 关闭 handshakeConnection 释放本地端口，
+        // 让 dataConnection 可以绑定到同一个端口（服务器通过源端口识别客户端）
+        NSLog("🔗 Closing handshakeConnection to release local port \(handshakeLocalPort ?? 0)")
+        handshakeConnection?.cancel()
+        handshakeConnection = nil
+        
+        // 短暂延迟确保端口释放
+        Thread.sleep(forTimeInterval: 0.05)
+        
         createDataConnection(port: UInt16(port))
         startHeartbeat()
         startInactivityCheck()
@@ -524,6 +583,16 @@ class MorphUDPClient {
         
         let parameters = NWParameters.udp
         parameters.allowLocalEndpointReuse = true
+        
+        // 绑定到与 handshakeConnection 相同的本地端口，
+        // 服务器通过源 IP:port 识别客户端
+        if let localPort = handshakeLocalPort, let nwPort = NWEndpoint.Port(rawValue: localPort) {
+            parameters.requiredLocalEndpoint = NWEndpoint.hostPort(host: .ipv4(.any), port: nwPort)
+            NSLog("🔗 DataConnection: binding to local port \(localPort) (same as handshake)")
+            SharedLog.shared.log("DataConn binding to local port \(localPort)")
+        } else {
+            NSLog("⚠️ DataConnection: handshake local port unknown, using ephemeral port")
+        }
         
         dataConnection = NWConnection(to: endpoint, using: parameters)
         
@@ -548,10 +617,16 @@ class MorphUDPClient {
             
             if let error = error {
                 NSLog("❌ Data receive error: \(error)")
+                SharedLog.shared.log("[Server→] Receive error: \(error)")
                 return
             }
             
             if let data = data, !data.isEmpty {
+                self.serverPacketCount += 1
+                if self.serverPacketCount <= 10 || self.serverPacketCount % 50 == 0 {
+                    NSLog("📥 [Server→Morph] #\(self.serverPacketCount) \(data.count) bytes")
+                }
+                SharedLog.shared.log("[Server→] #\(self.serverPacketCount) \(data.count)b")
                 self.lastReceivedTime = Date()
                 self.processServerResponse(data)
             }
@@ -563,14 +638,26 @@ class MorphUDPClient {
     private func processServerResponse(_ data: Data) {
         let obfuscated: Data
         if let template = self.template {
-            guard let extracted = template.decapsulate(data) else { return }
+            guard let extracted = template.decapsulate(data) else {
+                // decapsulate 失败，尝试直接解混淆（服务器可能不使用模板封装回复）
+                SharedLog.shared.log("[Server] decap FAIL \(data.count)b hex:\(data.prefix(8).map { String(format: "%02x", $0) }.joined())")
+                let deobfuscated = self.obfuscator.deobfuscate(data)
+                if deobfuscated.count >= 32 {
+                    SharedLog.shared.log("[Server] raw deobf → \(deobfuscated.count)b → WG")
+                    forwardToWireGuard(deobfuscated)
+                    onReceive?(deobfuscated)
+                } else {
+                    SharedLog.shared.log("[Server] raw deobf too small \(deobfuscated.count)b DROP")
+                }
+                return
+            }
             obfuscated = extracted
         } else {
             obfuscated = data
         }
         
         let deobfuscated = self.obfuscator.deobfuscate(obfuscated)
-        
+        SharedLog.shared.log("[Server→WG] \(data.count)b → decap \(obfuscated.count)b → deobf \(deobfuscated.count)b")
         forwardToWireGuard(deobfuscated)
         onReceive?(deobfuscated)
     }
