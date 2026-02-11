@@ -40,6 +40,9 @@ class MorphObfuscator {
             return data
         }
         
+        // 确保 startIndex 从 0 开始
+        let data = data.startIndex == 0 ? data : Data(data)
+        
         // 1. 生成随机 header (3 bytes)
         var header = Data(count: 3)
         header[0] = UInt8.random(in: 0...255)
@@ -88,6 +91,9 @@ class MorphObfuscator {
     
     /// 解混淆数据
     func deobfuscate(_ data: Data) -> Data {
+        // 确保 startIndex 从 0 开始，防止 slice 导致下标越界
+        let data = data.startIndex == 0 ? data : Data(data)
+        
         // 验证最小长度: header(3) + at least 1 byte data + padding(1)
         guard data.count >= 5 else {
             NSLog("❌ MorphObfuscator: Data too short for deobfuscation (length: \(data.count))")
@@ -95,8 +101,9 @@ class MorphObfuscator {
         }
         
         // 1. 提取 header
-        let header = data[0..<3]
-        let paddingLength = Int(header[2])
+        let header0 = data[0]
+        let header1 = data[1]
+        let paddingLength = Int(data[2])
         
         // 验证填充长度（与 Android 对齐：1-8）
         guard paddingLength >= 1 && paddingLength <= 8 else {
@@ -117,12 +124,14 @@ class MorphObfuscator {
             return Data()
         }
         
-        let body = data[3..<(3 + bodyLength)]
+        // Data(data[...]) 创建独立副本，startIndex 从 0 开始
+        // 避免 slice 的 startIndex 非零导致混淆函数中 data[i] 越界
+        let body = Data(data[3..<(3 + bodyLength)])
         
         // 3. 计算函数组合索引
         let comboIndex = functionRegistry.calculateComboIndex(
-            header0: header[0],
-            header1: header[1]
+            header0: header0,
+            header1: header1
         )
         
         guard let combo = functionRegistry.getCombo(at: comboIndex) else {

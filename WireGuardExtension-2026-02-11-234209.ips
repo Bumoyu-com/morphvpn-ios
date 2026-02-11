@@ -1,0 +1,196 @@
+{"app_name":"WireGuardExtension","timestamp":"2026-02-11 23:42:09.00 +0800","app_version":"1.0","slice_uuid":"7446542b-fa06-3f4a-a6c0-6b2ff16e2317","build_version":"1","platform":2,"bundleID":"com.morphvpn.app.WireGuardExtension","share_with_app_devs":1,"is_first_party":0,"bug_type":"309","os_version":"iPhone OS 16.7.14 (20H370)","roots_installed":0,"name":"WireGuardExtension","incident_id":"B6E63FD4-6FC9-4701-AA93-F7154D67CBFE"}
+{
+  "uptime" : 100000,
+  "procRole" : "Unspecified",
+  "version" : 2,
+  "userID" : 501,
+  "deployVersion" : 210,
+  "modelCode" : "iPhone10,1",
+  "coalitionID" : 1233,
+  "osVersion" : {
+    "isEmbedded" : true,
+    "train" : "iPhone OS 16.7.14",
+    "releaseType" : "User",
+    "build" : "20H370"
+  },
+  "captureTime" : "2026-02-11 23:42:06.1537 +0800",
+  "incident" : "B6E63FD4-6FC9-4701-AA93-F7154D67CBFE",
+  "pid" : 1467,
+  "cpuType" : "ARM-64",
+  "roots_installed" : 0,
+  "bug_type" : "309",
+  "procLaunch" : "2026-02-11 23:41:54.4650 +0800",
+  "procStartAbsTime" : 2575491616838,
+  "procExitAbsTime" : 2575771909521,
+  "procName" : "WireGuardExtension",
+  "procPath" : "\/private\/var\/containers\/Bundle\/Application\/F5B5CFC4-C273-44AB-96A4-4646D9FF55A2\/App.app\/PlugIns\/WireGuardExtension.appex\/WireGuardExtension",
+  "bundleInfo" : {"CFBundleShortVersionString":"1.0","CFBundleVersion":"1","CFBundleIdentifier":"com.morphvpn.app.WireGuardExtension"},
+  "storeInfo" : {"deviceIdentifierForVendor":"80A516DC-19CF-4FCA-9749-E4A6FECC276D","thirdParty":true},
+  "parentProc" : "launchd",
+  "parentPid" : 1,
+  "coalitionName" : "com.morphvpn.app.WireGuardExtension",
+  "crashReporterKey" : "91943b849726c8483fb55743f4eb392dda22c38e",
+  "wasUnlockedSinceBoot" : 1,
+  "isLocked" : 0,
+  "throttleTimeout" : 10,
+  "codeSigningID" : "com.morphvpn.app.WireGuardExtension",
+  "codeSigningTeamID" : "VH4H8G9Y3U",
+  "codeSigningFlags" : 570434309,
+  "codeSigningValidationCategory" : 3,
+  "codeSigningTrustLevel" : 0,
+  "basebandVersion" : "9.00.02",
+  "exception" : {"codes":"0x0000000000000001, 0x00000001cfd1fb78","rawCodes":[1,7781612408],"type":"EXC_BREAKPOINT","signal":"SIGTRAP"},
+  "termination" : {"flags":0,"code":5,"namespace":"SIGNAL","indicator":"Trace\/BPT trap: 5","byProc":"exc handler","byPid":1467},
+  "os_fault" : {"process":"WireGuardExtension"},
+  "faultingThread" : 2,
+  "threads" : [{"id":428365,"queue":"com.apple.main-thread","frames":[{"imageOffset":4144,"symbol":"mach_msg2_trap","symbolLocation":8,"imageIndex":2},{"imageOffset":76568,"symbol":"mach_msg2_internal","symbolLocation":76,"imageIndex":2},{"imageOffset":77240,"symbol":"mach_msg_overwrite","symbolLocation":484,"imageIndex":2},{"imageOffset":5412,"symbol":"mach_msg","symbolLocation":20,"imageIndex":2},{"imageOffset":475464,"symbol":"__CFRunLoopServiceMachPort","symbolLocation":156,"imageIndex":3},{"imageOffset":479968,"symbol":"__CFRunLoopRun","symbolLocation":1208,"imageIndex":3},{"imageOffset":498976,"symbol":"CFRunLoopRunSpecific","symbolLocation":584,"imageIndex":3},{"imageOffset":257784,"symbol":"-[NSRunLoop(NSRunLoop) runMode:beforeDate:]","symbolLocation":208,"imageIndex":4},{"imageOffset":257444,"symbol":"-[NSRunLoop(NSRunLoop) run]","symbolLocation":60,"imageIndex":4},{"imageOffset":96320,"symbol":"_xpc_objc_main","symbolLocation":492,"imageIndex":5},{"imageOffset":104808,"symbol":"xpc_main","symbolLocation":152,"imageIndex":5},{"imageOffset":533780,"symbol":"-[NSXPCListener resume]","symbolLocation":260,"imageIndex":4},{"imageOffset":98392,"imageIndex":6},{"imageOffset":22936,"imageIndex":6},{"imageOffset":19780,"imageIndex":6},{"imageOffset":134304,"symbol":"EXExtensionMain","symbolLocation":248,"imageIndex":7},{"imageOffset":796184,"symbol":"NSExtensionMain","symbolLocation":176,"imageIndex":4},{"imageOffset":82756,"symbol":"start","symbolLocation":1860,"imageIndex":8}]},{"id":428371,"frames":[{"imageOffset":6268,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":2},{"imageOffset":9740,"symbol":"_pthread_cond_wait$VARIANT$armv81","symbolLocation":1220,"imageIndex":9},{"imageOffset":883912,"symbol":"runtime.pthread_cond_wait_trampoline.abi0","symbolLocation":24,"imageIndex":1},{"imageOffset":878136,"symbol":"runtime.asmcgocall.abi0","symbolLocation":200,"imageIndex":1},{"imageOffset":3596551104,"imageIndex":10}]},{"triggered":true,"id":428372,"threadState":{"x":[{"value":0},{"value":408021893123},{"value":4611686022740234208},{"value":9352868264,"symbolLocation":0,"symbol":"type metadata for Int"},{"value":7776863512,"symbolLocation":0,"symbol":"associated conformance descriptor for ExpressibleByIntegerLiteral.ExpressibleByIntegerLiteral.IntegerLiteralType: _ExpressibleByBuiltinIntegerLiteral"},{"value":9401108608,"symbolLocation":0,"symbol":"flag for loading of canonical specialized generic type metadata for Range"},{"value":5},{"value":0},{"value":3},{"value":7781612436},{"value":7781612304,"symbolLocation":36,"symbol":"Data.subscript.getter"},{"value":24},{"value":16},{"value":9352880224,"symbolLocation":0,"symbol":"value witness table for Range<Int>"},{"value":9352868264,"symbolLocation":0,"symbol":"type metadata for Int"},{"value":0},{"value":7781612268,"symbolLocation":0,"symbol":"Data.subscript.getter"},{"value":276858025},{"value":0},{"value":6156559248},{"value":6156556208},{"value":1},{"value":472446402560},{"value":4611686022740216464},{"value":0},{"value":4312851936},{"value":4336981776},{"value":308},{"value":4343203456}],"flavor":"ARM_THREAD_STATE64","lr":{"value":4315669236},"cpsr":{"value":536870912},"fp":{"value":6156556304},"sp":{"value":6156556032},"esr":{"value":4060086273,"description":"(Breakpoint) brk 1"},"pc":{"value":7781612408,"matchesCrashFrame":1},"far":{"value":0}},"queue":"com.morphvpn.morphprotocol","frames":[{"imageOffset":3578744,"symbol":"Data.subscript.getter","symbolLocation":140,"imageIndex":4},{"imageOffset":156404,"symbol":"static ReverseBits.obfuscation(_:_:_:)","symbolLocation":400,"imageIndex":1},{"imageOffset":156544,"symbol":"static ReverseBits.deobfuscation(_:_:_:)","symbolLocation":60,"imageIndex":1},{"imageOffset":167596,"symbol":"implicit closure #16 in ObfuscationFunctionRegistry.registerAllFunctions()","symbolLocation":60,"imageIndex":1},{"imageOffset":42740,"symbol":"MorphObfuscator.deobfuscate(_:)","symbolLocation":1244,"imageIndex":1},{"imageOffset":132076,"symbol":"MorphUDPClient.processServerResponse(_:)","symbolLocation":1964,"imageIndex":1},{"imageOffset":130024,"symbol":"closure #1 in MorphUDPClient.startReceivingData()","symbolLocation":2636,"imageIndex":1},{"imageOffset":82956,"symbol":"closure #1 in NWConnection.receive(minimumIncompleteLength:maximumLength:completion:)","symbolLocation":160,"imageIndex":11},{"imageOffset":94344,"symbol":"partial apply for closure #1 in NWConnection.receiveMessage(completion:)","symbolLocation":16,"imageIndex":11},{"imageOffset":82468,"symbol":"thunk for @escaping @callee_guaranteed (@guaranteed OS_dispatch_data?, @guaranteed OS_nw_content_context?, @unowned Bool, @guaranteed OS_nw_error?) -> ()","symbolLocation":100,"imageIndex":11},{"imageOffset":288304,"symbol":"_dispatch_block_async_invoke2","symbolLocation":104,"imageIndex":12},{"imageOffset":411520,"symbol":"_dispatch_client_callout","symbolLocation":16,"imageIndex":12},{"imageOffset":259836,"symbol":"_dispatch_lane_serial_drain$VARIANT$armv81","symbolLocation":600,"imageIndex":12},{"imageOffset":262576,"symbol":"_dispatch_lane_invoke$VARIANT$armv81","symbolLocation":380,"imageIndex":12},{"imageOffset":302868,"symbol":"_dispatch_workloop_worker_thread","symbolLocation":608,"imageIndex":12},{"imageOffset":7120,"symbol":"_pthread_wqthread","symbolLocation":284,"imageIndex":9},{"imageOffset":5920,"symbol":"start_wqthread","symbolLocation":8,"imageIndex":9}]},{"id":428373,"frames":[{"imageOffset":5912,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":9}]},{"id":428374,"frames":[{"imageOffset":6268,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":2},{"imageOffset":9784,"symbol":"_pthread_cond_wait$VARIANT$armv81","symbolLocation":1264,"imageIndex":9},{"imageOffset":883964,"symbol":"runtime.pthread_cond_timedwait_relative_np_trampoline.abi0","symbolLocation":28,"imageIndex":1},{"imageOffset":878136,"symbol":"runtime.asmcgocall.abi0","symbolLocation":200,"imageIndex":1}]},{"id":428375,"frames":[{"imageOffset":7576,"symbol":"read","symbolLocation":8,"imageIndex":2},{"imageOffset":882124,"symbol":"runtime.read_trampoline.abi0","symbolLocation":28,"imageIndex":1}]},{"id":428376,"frames":[{"imageOffset":6268,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":2},{"imageOffset":9740,"symbol":"_pthread_cond_wait$VARIANT$armv81","symbolLocation":1220,"imageIndex":9},{"imageOffset":883912,"symbol":"runtime.pthread_cond_wait_trampoline.abi0","symbolLocation":24,"imageIndex":1},{"imageOffset":878136,"symbol":"runtime.asmcgocall.abi0","symbolLocation":200,"imageIndex":1},{"imageOffset":3596551104,"imageIndex":10}]},{"id":428377,"frames":[{"imageOffset":7576,"symbol":"read","symbolLocation":8,"imageIndex":2},{"imageOffset":884252,"symbol":"runtime.syscall.abi0","symbolLocation":44,"imageIndex":1},{"imageOffset":878060,"symbol":"runtime.asmcgocall.abi0","symbolLocation":124,"imageIndex":1},{"imageOffset":13,"imageIndex":10}]},{"id":428378,"frames":[{"imageOffset":6268,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":2},{"imageOffset":9740,"symbol":"_pthread_cond_wait$VARIANT$armv81","symbolLocation":1220,"imageIndex":9},{"imageOffset":883912,"symbol":"runtime.pthread_cond_wait_trampoline.abi0","symbolLocation":24,"imageIndex":1},{"imageOffset":878136,"symbol":"runtime.asmcgocall.abi0","symbolLocation":200,"imageIndex":1},{"imageOffset":3596551104,"imageIndex":10}]},{"id":428517,"frames":[{"imageOffset":6268,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":2},{"imageOffset":9740,"symbol":"_pthread_cond_wait$VARIANT$armv81","symbolLocation":1220,"imageIndex":9},{"imageOffset":883912,"symbol":"runtime.pthread_cond_wait_trampoline.abi0","symbolLocation":24,"imageIndex":1},{"imageOffset":878136,"symbol":"runtime.asmcgocall.abi0","symbolLocation":200,"imageIndex":1},{"imageOffset":3596551104,"imageIndex":10}]},{"id":428518,"frames":[{"imageOffset":6268,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":2},{"imageOffset":9740,"symbol":"_pthread_cond_wait$VARIANT$armv81","symbolLocation":1220,"imageIndex":9},{"imageOffset":883912,"symbol":"runtime.pthread_cond_wait_trampoline.abi0","symbolLocation":24,"imageIndex":1},{"imageOffset":878136,"symbol":"runtime.asmcgocall.abi0","symbolLocation":200,"imageIndex":1},{"imageOffset":3596551104,"imageIndex":10}]},{"id":428519,"frames":[{"imageOffset":10240,"symbol":"kevent","symbolLocation":8,"imageIndex":2},{"imageOffset":883224,"symbol":"runtime.kevent_trampoline.abi0","symbolLocation":40,"imageIndex":1}]}],
+  "usedImages" : [
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4311449600,
+    "size" : 49152,
+    "uuid" : "7446542b-fa06-3f4a-a6c0-6b2ff16e2317",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/F5B5CFC4-C273-44AB-96A4-4646D9FF55A2\/App.app\/PlugIns\/WireGuardExtension.appex\/WireGuardExtension",
+    "name" : "WireGuardExtension"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4315512832,
+    "size" : 1785856,
+    "uuid" : "9b82a8e4-bcdb-3de3-b0ce-e67e3eb27d1d",
+    "path" : "\/private\/var\/containers\/Bundle\/Application\/F5B5CFC4-C273-44AB-96A4-4646D9FF55A2\/App.app\/PlugIns\/WireGuardExtension.appex\/WireGuardExtension.debug.dylib",
+    "name" : "WireGuardExtension.debug.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 8873361408,
+    "size" : 221176,
+    "uuid" : "2e54c705-1974-30d2-b371-81fd168f8d76",
+    "path" : "\/usr\/lib\/system\/libsystem_kernel.dylib",
+    "name" : "libsystem_kernel.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 7874969600,
+    "size" : 3993600,
+    "uuid" : "55b9ba28-4c5c-3fe7-9c47-4983337d6e83",
+    "path" : "\/System\/Library\/Frameworks\/CoreFoundation.framework\/CoreFoundation",
+    "name" : "CoreFoundation"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 7778033664,
+    "size" : 8687616,
+    "uuid" : "dce5e587-2a0d-34cf-8245-23e1b12936a9",
+    "path" : "\/System\/Library\/Frameworks\/Foundation.framework\/Foundation",
+    "name" : "Foundation"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 9131114496,
+    "size" : 249856,
+    "uuid" : "dd50de06-4365-361e-a7e8-0e013e7ddc1d",
+    "path" : "\/usr\/lib\/system\/libxpc.dylib",
+    "name" : "libxpc.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 8480215040,
+    "size" : 212992,
+    "uuid" : "4bec9f11-e33b-38b9-a96a-f495e61c248d",
+    "path" : "\/System\/Library\/PrivateFrameworks\/PlugInKit.framework\/PlugInKit",
+    "name" : "PlugInKit"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 8085884928,
+    "size" : 393216,
+    "uuid" : "f1100ce5-49b1-34bd-aafd-30cfb2466b47",
+    "path" : "\/System\/Library\/Frameworks\/ExtensionFoundation.framework\/ExtensionFoundation",
+    "name" : "ExtensionFoundation"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 8370044928,
+    "size" : 510172,
+    "uuid" : "199941a5-95ee-3054-8e54-ae6387a9fa9a",
+    "path" : "\/usr\/lib\/dyld",
+    "name" : "dyld"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 9130823680,
+    "size" : 69632,
+    "uuid" : "78c98f18-5985-3be3-bc4b-f2a3a34ae906",
+    "path" : "\/usr\/lib\/system\/libsystem_pthread.dylib",
+    "name" : "libsystem_pthread.dylib"
+  },
+  {
+    "size" : 0,
+    "source" : "A",
+    "base" : 0,
+    "uuid" : "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 8314589184,
+    "size" : 466935,
+    "uuid" : "d4f14879-7cfe-3dca-a393-694b1c24741d",
+    "path" : "\/usr\/lib\/swift\/libswiftNetwork.dylib",
+    "name" : "libswiftNetwork.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 7989575680,
+    "size" : 540672,
+    "uuid" : "b51e7cdb-abc9-35af-b8bb-2dce23bc4d6e",
+    "path" : "\/usr\/lib\/system\/libdispatch.dylib",
+    "name" : "libdispatch.dylib"
+  }
+],
+  "sharedCache" : {
+  "base" : 7759740928,
+  "size" : 2865692672,
+  "uuid" : "1c8282db-78a0-3676-b70a-39e08b1b46a7"
+},
+  "vmSummary" : "ReadOnly portion of Libraries: Total=476.0M resident=0K(0%) swapped_out_or_unallocated=476.0M(100%)\nWritable regions: Total=77.5M written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=77.5M(100%)\n\n                                VIRTUAL   REGION \nREGION TYPE                        SIZE    COUNT (non-coalesced) \n===========                     =======  ======= \nActivity Tracing                   256K        1 \nDispatch continuations            6144K        1 \nKernel Alloc Once                   32K        1 \nMALLOC                            56.3M       26 \nMALLOC guard page                  128K        8 \nSTACK GUARD                        192K       12 \nStack                             6992K       12 \nVM_ALLOCATE                       11.8M       21 \n__DATA                            2723K      237 \n__DATA_CONST                      15.2M      248 \n__DATA_DIRTY                      1534K      223 \n__FONT_DATA                          4K        1 \n__INFO_FILTER                         8        1 \n__LINKEDIT                       318.2M        3 \n__OBJC_RO                         79.7M        1 \n__OBJC_RW                         2463K        1 \n__TEXT                           157.8M      252 \ndyld private memory                272K        2 \nlibnetwork                         128K        8 \nmapped file                       29.3M        3 \nshared memory                       48K        3 \n===========                     =======  ======= \nTOTAL                            688.8M     1065 \n",
+  "legacyInfo" : {
+  "threadTriggered" : {
+    "queue" : "com.morphvpn.morphprotocol"
+  }
+},
+  "logWritingSignature" : "8b5b33d2e83903d68c320c71a864c4846c90b3bd",
+  "trialInfo" : {
+  "rollouts" : [
+    {
+      "rolloutId" : "6425c75e4327780c10cc4252",
+      "factorPackIds" : {
+        "SIRI_HOME_AUTOMATION_INTENT_SELECTION_CACHE" : "642600a457e7664b1698eb32"
+      },
+      "deploymentId" : 240000004
+    },
+    {
+      "rolloutId" : "6010753cf9bfc4000c247bdd",
+      "factorPackIds" : {
+        "BIFROST_DEV_2" : "68d6ce121d01cb469a236633"
+      },
+      "deploymentId" : 240002280
+    }
+  ],
+  "experiments" : [
+
+  ]
+}
+}

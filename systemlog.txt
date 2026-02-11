@@ -1,227 +1,212 @@
-默认	22:59:56.544358+0800	nesessionmanager	Found 0 (0 active) registrations for com.morphvpn.app.WireGuardExtension (com.apple.networkextension.packet-tunnel)
-默认	22:59:56.581374+0800	nesessionmanager	Found 0 (0 active) registrations for com.morphvpn.app.WireGuardExtension (com.apple.networkextension.packet-tunnel)
-默认	22:59:56.599349+0800	neagent	Looking for an extension with identifier com.morphvpn.app.WireGuardExtension and extension point com.apple.networkextension.packet-tunnel
-默认	22:59:56.606175+0800	neagent	Found 1 extension(s) with identifier com.morphvpn.app.WireGuardExtension and extension point com.apple.networkextension.packet-tunnel
-默认	22:59:56.606245+0800	neagent	Beginning extension request with extension com.morphvpn.app.WireGuardExtension
-默认	22:59:56.608589+0800	runningboardd	Executing launch request for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])> (Launching extension com.morphvpn.app.WireGuardExtension(548DC3F0-C12B-4C8A-AC27-17121FDF88C2) for host 804)
-错误	22:59:56.609365+0800	runningboardd	Failed to get LSApplicationRecord for <RBSLaunchRequest| xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>; "Launching extension com.morphvpn.app.WireGuardExtension(548DC3F0-C12B-4C8A-AC27-17121FDF88C2) for host 804"> with error Error Domain=NSOSStatusErrorDomain Code=-10814 "(null)" UserInfo={_LSLine=1569, _LSFunction=runEvaluator}
-默认	22:59:56.609466+0800	runningboardd	Creating and launching job for: xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>
-默认	22:59:56.609582+0800	runningboardd	'759B89DB-B0B3-4461-A88B-F31F4AF46097' Submitting extension overlay (context <RBSLaunchContext: 0x792e32f30>):
-<dictionary: 0x792a52900> { count = 4, transaction: 0, voucher = 0x0, contents =
-	"_AdditionalProperties" => <dictionary: 0x792a9a710> { count = 1, transaction: 0, voucher = 0x0, contents =
-		"RunningBoard" => <dictionary: 0x792a82e90> { count = 3, transaction: 0, voucher = 0x0, contents =
+默认	23:41:54.401597+0800	nesessionmanager	Found 0 (0 active) registrations for com.morphvpn.app.WireGuardExtension (com.apple.networkextension.packet-tunnel)
+默认	23:41:54.437876+0800	nesessionmanager	Found 0 (0 active) registrations for com.morphvpn.app.WireGuardExtension (com.apple.networkextension.packet-tunnel)
+默认	23:41:54.455449+0800	neagent	Looking for an extension with identifier com.morphvpn.app.WireGuardExtension and extension point com.apple.networkextension.packet-tunnel
+默认	23:41:54.464585+0800	neagent	Found 1 extension(s) with identifier com.morphvpn.app.WireGuardExtension and extension point com.apple.networkextension.packet-tunnel
+默认	23:41:54.464741+0800	neagent	Beginning extension request with extension com.morphvpn.app.WireGuardExtension
+默认	23:41:54.466845+0800	runningboardd	Executing launch request for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])> (Launching extension com.morphvpn.app.WireGuardExtension(8E86E8D7-C79F-4ABA-A29B-54735BE52C5E) for host 804)
+错误	23:41:54.467783+0800	runningboardd	Failed to get LSApplicationRecord for <RBSLaunchRequest| xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>; "Launching extension com.morphvpn.app.WireGuardExtension(8E86E8D7-C79F-4ABA-A29B-54735BE52C5E) for host 804"> with error Error Domain=NSOSStatusErrorDomain Code=-10814 "(null)" UserInfo={_LSLine=1569, _LSFunction=runEvaluator}
+默认	23:41:54.467854+0800	runningboardd	Creating and launching job for: xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>
+默认	23:41:54.468329+0800	runningboardd	'0D52EBBE-B5D6-43E9-BF69-E3CAAF4013DB' Submitting extension overlay (context <RBSLaunchContext: 0x792d56f90>):
+<dictionary: 0x792d716f0> { count = 4, transaction: 0, voucher = 0x0, contents =
+	"_AdditionalProperties" => <dictionary: 0x792d4f310> { count = 1, transaction: 0, voucher = 0x0, contents =
+		"RunningBoard" => <dictionary: 0x792d4df80> { count = 3, transaction: 0, voucher = 0x0, contents =
 			"Managed" => <bool: 0x22939ae50>: true
-			"RunningBoardLaunchedIdentity" => <dictionary: 0x792a9e720> { count = 4, transaction: 0, voucher = 0x0, contents =
-				"u" => <uuid: 0x792a3fbd0> 759B89DB-B0B3-4461-A88B-F31F4AF46097
+			"RunningBoardLaunchedIdentity" => <dictionary: 0x792d6c8e0> { count = 4, transaction: 0, voucher = 0x0, contents =
+				"u" => <uuid: 0x792d6c9d0> 0D52EBBE-B5D6-43E9-BF69-E3CAAF4013DB
 				"TYPE" => <int64: 0x95c2e742ab90ca8f>: 4
 				"h" => <int64: 0x95c2e742ab90d38f>: 804
-				"i" => <string: 0x792a301a0> { length = 35, contents = "com.morphvpn.app.WireGuardExtension" }
+				"i" => <string: 0x792d6c970> { length = 35, contents = "com.morphvpn.app.WireGuardExtension" }
 			}
 			"RunningBoardLaunched" => <bool: 0x22939ae50>: true
 		}
 	}
-	"XPCService" => <dictionary: 0x792a9d380> { count = 11, transaction: 0, voucher = 0x0, contents =
-		"RunLoopType" => <string: 0x792a73f20> { length = 9, contents = "NSRunLoop" }
+	"XPCService" => <dictionary: 0x792d5aae0> { count = 11, transaction: 0, voucher = 0x0, contents =
+		"RunLoopType" => <string: 0x792d31be0> { length = 9, contents = "NSRunLoop" }
 		"Platform" => <int64: 0x95c2e742ab90cabf>: 2
 		"_LaunchWatchdogTimeOut" => <int64: 0x95c2e742ab90caaf>: 0
-		"_SandboxProfile" => <string: 0x792a30db0> { length = 6, contents = "plugin" }
-		"_AdditionalSubServices" => <dictionary: 0x792aa4230> { count = 1, transaction: 0, voucher = 0x0, contents =
+		"_SandboxProfile" => <string: 0x792d5c4b0> { length = 6, contents = "plugin" }
+		"_AdditionalSubServices" => <dictionary: 0x792d4a3e0> { count = 1, transaction: 0, voucher = 0x0, contents =
 			"apple-extension-service" => <bool: 0x22939ae50>: true
 		}
 		"PersonaEnterprise" => <int64: 0x95c2e742ab90d5ef>: 1000
-		"EnvironmentVariables" => <dictionary: 0x792a46270> { count = 3, transaction: 0, voucher = 0x0, contents =
-			"TMPDIR" => <string: 0x792a73cf0> { length = 92, contents = "/private/var/mobile/Containers/Data/PluginKitPlugin/1C0E6B74-FB5C-44A0-A261-C044ACFF5368/tmp" }
-			"HOME" => <string: 0x792a55ec0> { length = 88, contents = "/private/var/mobile/Containers/Data/PluginKitPlugin/1C0E6B74-FB5C-44A0-A261-C044ACFF5368" }
-			"CFFIXED_USER_HOME" => <string: 0x792a98820> { length = 88, contents = "/private/var/mobile/Containers/Data/PluginKitPlugin/1C0E6B74-FB5C-44A0-A261-C044ACFF5368" }
+		"EnvironmentVariables" => <dictionary: 0x792d75130> { count = 3, transaction: 0, voucher = 0x0, contents =
+			"TMPDIR" => <string: 0x792d51030> { length = 92, contents = "/private/var/mobile/Containers/Data/PluginKitPlugin/9B475F55-B3FD-48E9-8429-E6941435BF1C/tmp" }
+			"HOME" => <string: 0x792d5c460> { length = 88, contents = "/private/var/mobile/Containers/Data/PluginKitPlugin/9B475F55-B3FD-48E9-8429-E6941435BF1C" }
+			"CFFIXED_USER_HOME" => <string: 0x792d472d0> { length = 88, contents = "/private/var/mobile/Containers/Data/PluginKitPlugin/9B475F55-B3FD-48E9-8429-E6941435BF1C" }
 		}
 		"_OmitSandboxParameters" => <bool: 0x22939ae50>: true
 		"_MultipleInstances" => <bool: 0x22939ae50>: true
-		"ServiceType" => <string: 0x792a7bc40> { length = 11, contents = "Application" }
-		"ProgramArguments" => <array: 0x792a259e0> { count = 3, capacity = 8, contents =
-			0: <string: 0x792aa3b70> { length = 139, contents = "/private/var/containers/Bundle/Application/262705A5-0633-41BB-93D5-51235F462092/App.app/PlugIns/WireGuardExtension.appex/WireGuardExtension" }
-			1: <string: 0x792a9b0b0> { length = 15, contents = "-AppleLanguages" }
-			2: <string: 0x792a9fde0> { length = 14, contents = "("zh-Hans-CN")" }
+		"ServiceType" => <string: 0x792d47830> { length = 11, contents = "Application" }
+		"ProgramArguments" => <array: 0x792d361b0> { count = 3, capacity = 8, contents =
+			0: <string: 0x792d50db0> { length = 139, contents = "/private/var/containers/Bundle/Application/F5B5CFC4-C273-44AB-96A4-4646D9FF55A2/App.app/PlugIns/WireGuardExtension.appex/WireGuardExtension" }
+			1: <string: 0x792d4af00> { length = 15, contents = "-AppleLanguages" }
+			2: <string: 0x792d4ee00> { length = 14, contents = "("zh-Hans-CN")" }
 		}
 	}
-	"RunningBoard" => <dictionary: 0x792a82e90> { count = 3, transaction: 0, voucher = 0x0, contents =
+	"RunningBoard" => <dictionary: 0x792d4df80> { count = 3, transaction: 0, voucher = 0x0, contents =
 		"Managed" => <bool: 0x22939ae50>: true
-		"RunningBoardLaunchedIdentity" => <dictionary: 0x792a9e720> { count = 4, transaction: 0, voucher = 0x0, contents =
-			"u" => <uuid: 0x792a3fbd0> 759B89DB-B0B3-4461-A88B-F31F4AF46097
+		"RunningBoardLaunchedIdentity" => <dictionary: 0x792d6c8e0> { count = 4, transaction: 0, voucher = 0x0, contents =
+			"u" => <uuid: 0x792d6c9d0> 0D52EBBE-B5D6-43E9-BF69-E3CAAF4013DB
 			"TYPE" => <int64: 0x95c2e742ab90ca8f>: 4
 			"h" => <int64: 0x95c2e742ab90d38f>: 804
-			"i" => <string: 0x792a301a0> { length = 35, contents = "com.morphvpn.app.WireGuardExtension" }
+			"i" => <string: 0x792d6c970> { length = 35, contents = "com.morphvpn.app.WireGuardExtension" }
 		}
 		"RunningBoardLaunched" => <bool: 0x22939ae50>: true
 	}
-	"CFBundlePackageType" => <string: 0x792a57030> { length = 4, contents = "XPC!" }
+	"CFBundlePackageType" => <string: 0x792d52b10> { length = 4, contents = "XPC!" }
 }
-默认	22:59:56.610246+0800	kernel	/private/var/containers/Bundle/Application/262705A5-0633-41BB-93D5-51235F462092/App.app/PlugIns/WireGuardExtension.appex/WireGuardExtension[1426] ==> container
-错误	22:59:56.611115+0800	kernel	Sandbox: WireGuardExtension(1426) deny(1) sysctl-read kern.bootargs
-默认	22:59:56.611200+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] Memory Limits: active 50 inactive 50
+默认	23:41:54.498701+0800	kernel	/private/var/containers/Bundle/Application/F5B5CFC4-C273-44AB-96A4-4646D9FF55A2/App.app/PlugIns/WireGuardExtension.appex/WireGuardExtension[1467] ==> container
+错误	23:41:54.500703+0800	kernel	Sandbox: WireGuardExtension(1467) deny(1) sysctl-read kern.bootargs
+默认	23:41:54.501069+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] Memory Limits: active 50 inactive 50
  <private>
-默认	22:59:56.611259+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] This process will be managed.
-默认	22:59:56.611318+0800	runningboardd	Now tracking process: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.611382+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: running-suspended (role: None)
-默认	22:59:56.611794+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] reported to RB as running
-默认	22:59:56.612478+0800	runningboardd	Acquiring assertion targeting [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] from originator [osservice<com.apple.neagent-ios>:804:804] with description <RBSAssertionDescriptor| "com.apple.extension.session" ID:33-804-111828 target:1426 attributes:[
+默认	23:41:54.501231+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] This process will be managed.
+默认	23:41:54.501296+0800	runningboardd	Now tracking process: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.501352+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: running-suspended (role: None)
+默认	23:41:54.501724+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] reported to RB as running
+默认	23:41:54.503411+0800	runningboardd	Acquiring assertion targeting [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] from originator [osservice<com.apple.neagent-ios>:804:804] with description <RBSAssertionDescriptor| "com.apple.extension.session" ID:33-804-114780 target:1467 attributes:[
 	<RBSLegacyAttribute| requestedReason:ViewService reason:ViewService flags:( AllowIdleSleep PreventTaskSuspend PreventTaskThrottleDown )>,
 	<RBSAcquisitionCompletionAttribute| policy:AfterValidation>
 	]>
-默认	22:59:56.612637+0800	runningboardd	Assertion 33-804-111828 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]) will be created as active
-默认	22:59:56.613146+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: running-active (role: UserInteractiveNonFocal)
-默认	22:59:56.613599+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] Set jetsam priority to 40 [0] flag[1]
-默认	22:59:56.613815+0800	SpringBoard	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.613985+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] Resuming task.
-默认	22:59:56.614036+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] Result 45 setting darwin role to UserInteractiveNonFocal: Operation not supported, falling back to setting priority
-默认	22:59:56.614130+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] Set darwin priority to: PRIO_DEFAULT
-默认	22:59:56.615345+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] set Memory Limits to Hard Inactive (50)
-默认	22:59:56.617803+0800	neagent	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.626194+0800	SpringBoard	[com.morphvpn.app.WireGuardExtension] com.morphvpn.app.WireGuardExtension application state changed to BackgroundTaskSuspended
-默认	22:59:56.633188+0800	wifid	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.634469+0800	useractivityd	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.635168+0800	aggregated	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.636316+0800	UserEventAgent	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.638328+0800	symptomsd	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.640022+0800	mediaserverd	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.642699+0800	contextstored	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.643038+0800	locationd	Hit the server for a process handle 98b502b00000592 that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	22:59:56.644357+0800	locationd	{"msg":"invoking applicationStateChange handler", "StateChangeData":"{\n    BKSApplicationStateAppIsFrontmost = 0;\n    BKSApplicationStateExtensionKey = 1;\n    BKSApplicationStateHostPIDKey = 804;\n    SBApplicationStateDisplayIDKey = \"com.morphvpn.app.WireGuardExtension\";\n    SBApplicationStateKey = 2;\n    SBApplicationStateProcessIDKey = 1426;\n    SBMostElevatedStateForProcessID = 2;\n}"}
-默认	22:59:56.644762+0800	locationd	{"msg":"Post Application State Change Notification", "notification":"BackgroundTaskSuspended", "pid":1426, "bundleId":"com.morphvpn.app.WireGuardExtension"}
-默认	22:59:56.648353+0800	WireGuardExtension	Hello, I'm launching as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	22:59:56.652122+0800	locationd	{"msg":"#CLIUA AppMonitor notification", "notification":"BackgroundTaskSuspended", "pid":1426, "bundleId":"com.morphvpn.app.WireGuardExtension", "ClientKey":"com.morphvpn.app"}
-默认	22:59:56.653594+0800	locationd	{"msg":"skip erasing #CLIUA for RunningBoard Process State. Does not exists", "bundleId":"com.morphvpn.app.WireGuardExtension"}
-默认	22:59:56.659040+0800	WireGuardExtension	Initializing connection
-默认	22:59:56.659149+0800	WireGuardExtension	Removing all cached process handles
-默认	22:59:56.659265+0800	WireGuardExtension	Sending handshake request attempt #1 to server
-默认	22:59:56.659487+0800	WireGuardExtension	Creating connection to com.apple.runningboard
-默认	22:59:56.661676+0800	runningboardd	Setting client for [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] as ready
-默认	22:59:56.662915+0800	WireGuardExtension	Handshake succeeded
-默认	22:59:56.662980+0800	WireGuardExtension	Identity resolved as xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>
-默认	22:59:56.663247+0800	kernel	memorystatus_set_process_is_freezable: disabling freeze for pid 1426 [WireGuardExtension]
-默认	22:59:56.663758+0800	WireGuardExtension	Bootstrapping; Bootstrap complete. Ready for handshake from host.
-默认	22:59:56.668231+0800	WireGuardExtension	[u 548DC3F0-C12B-4C8A-AC27-17121FDF88C2] [(null)((null))] Prepare received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	22:59:56.670171+0800	WireGuardExtension	[u B6722D58-BA53-40E7-8134-7F099D292F97] [<private>(<private>)] Set sole personality.
-默认	22:59:56.676126+0800	WireGuardExtension	[u B6722D58-BA53-40E7-8134-7F099D292F97] [<private>(<private>)] Begin using received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
-默认	22:59:56.681173+0800	runningboardd	Acquiring assertion targeting [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] from originator [osservice<com.apple.neagent-ios>:804:804] with description <RBSAssertionDescriptor| "com.apple.extension.session" ID:33-804-111829 target:1426 attributes:[
+默认	23:41:54.503711+0800	runningboardd	Assertion 33-804-114780 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]) will be created as active
+默认	23:41:54.510270+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: running-active (role: UserInteractiveNonFocal)
+默认	23:41:54.510536+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] Set jetsam priority to 40 [0] flag[1]
+默认	23:41:54.510721+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] Resuming task.
+默认	23:41:54.511115+0800	SpringBoard	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.511185+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] Result 45 setting darwin role to UserInteractiveNonFocal: Operation not supported, falling back to setting priority
+默认	23:41:54.511305+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] Set darwin priority to: PRIO_DEFAULT
+默认	23:41:54.511945+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] set Memory Limits to Hard Inactive (50)
+默认	23:41:54.513674+0800	neagent	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.518254+0800	SpringBoard	[com.morphvpn.app.WireGuardExtension] com.morphvpn.app.WireGuardExtension application state changed to BackgroundTaskSuspended
+默认	23:41:54.519743+0800	useractivityd	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.521554+0800	UserEventAgent	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.524996+0800	contextstored	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.527919+0800	mediaserverd	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.529512+0800	wifid	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.532660+0800	locationd	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.534460+0800	locationd	{"msg":"invoking applicationStateChange handler", "StateChangeData":"{\n    BKSApplicationStateAppIsFrontmost = 0;\n    BKSApplicationStateExtensionKey = 1;\n    BKSApplicationStateHostPIDKey = 804;\n    SBApplicationStateDisplayIDKey = \"com.morphvpn.app.WireGuardExtension\";\n    SBApplicationStateKey = 2;\n    SBApplicationStateProcessIDKey = 1467;\n    SBMostElevatedStateForProcessID = 2;\n}"}
+默认	23:41:54.534852+0800	locationd	{"msg":"Post Application State Change Notification", "notification":"BackgroundTaskSuspended", "pid":1467, "bundleId":"com.morphvpn.app.WireGuardExtension"}
+默认	23:41:54.539053+0800	symptomsd	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.540807+0800	aggregated	Hit the server for a process handle 20d22fc000005bb that resolved to: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:41:54.543585+0800	locationd	{"msg":"#CLIUA AppMonitor notification", "notification":"BackgroundTaskSuspended", "pid":1467, "bundleId":"com.morphvpn.app.WireGuardExtension", "ClientKey":"com.morphvpn.app"}
+默认	23:41:54.543819+0800	locationd	{"msg":"skip erasing #CLIUA for RunningBoard Process State. Does not exists", "bundleId":"com.morphvpn.app.WireGuardExtension"}
+默认	23:41:54.544991+0800	locationd	{"msg":"invoking applicationStateChange handler", "StateChangeData":"{\n    BKSApplicationStateAppIsFrontmost = 0;\n    BKSApplicationStateExtensionKey = 1;\n    BKSApplicationStateHostPIDKey = 804;\n    SBApplicationStateDisplayIDKey = \"com.morphvpn.app.WireGuardExtension\";\n    SBApplicationStateKey = 4;\n    SBApplicationStateProcessIDKey = 1467;\n    SBApplicationStateRunningReasonsKey =     (\n                {\n            SBApplicationStateRunningReasonAssertionIdentifierKey = \"com.apple.extension.session\";\n            SBApplicationStateRunningReasonAssertionReasonKey = 13;\n        }\n    );\n    SBMostElevatedStateForProcessID = 4;\n}"}
+默认	23:41:54.545396+0800	locationd	{"msg":"Post Application State Change Notification", "notification":"BackgroundRunning", "pid":1467, "bundleId":"com.morphvpn.app.WireGuardExtension"}
+默认	23:41:54.553163+0800	locationd	{"msg":"#CLIUA AppMonitor notification", "notification":"BackgroundRunning", "pid":1467, "bundleId":"com.morphvpn.app.WireGuardExtension", "ClientKey":"com.morphvpn.app"}
+默认	23:41:54.562988+0800	locationd	{"msg":"skip erasing #CLIUA for RunningBoard Process State. Does not exists", "bundleId":"com.morphvpn.app.WireGuardExtension"}
+默认	23:41:54.566200+0800	wifid	-[WiFiUserInteractionMonitor setApplicationRunningState:foregroundState:andNetworkingState:forBundleId:]: com.morphvpn.app.WireGuardExtension entered background
+默认	23:41:54.574047+0800	WireGuardExtension	Hello, I'm launching as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	23:41:54.604743+0800	WireGuardExtension	Initializing connection
+默认	23:41:54.604842+0800	WireGuardExtension	Removing all cached process handles
+默认	23:41:54.604980+0800	WireGuardExtension	Sending handshake request attempt #1 to server
+默认	23:41:54.605140+0800	WireGuardExtension	Creating connection to com.apple.runningboard
+默认	23:41:54.606527+0800	runningboardd	Setting client for [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] as ready
+默认	23:41:54.607917+0800	WireGuardExtension	Handshake succeeded
+默认	23:41:54.607989+0800	WireGuardExtension	Identity resolved as xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>
+默认	23:41:54.608135+0800	kernel	memorystatus_set_process_is_freezable: disabling freeze for pid 1467 [WireGuardExtension]
+默认	23:41:54.608599+0800	WireGuardExtension	Bootstrapping; Bootstrap complete. Ready for handshake from host.
+默认	23:41:54.613682+0800	WireGuardExtension	[u 8E86E8D7-C79F-4ABA-A29B-54735BE52C5E] [(null)((null))] Prepare received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	23:41:54.615911+0800	WireGuardExtension	[u 11726EAF-3155-4274-9F74-6B49115507F8] [<private>(<private>)] Set sole personality.
+默认	23:41:54.620532+0800	WireGuardExtension	[u 11726EAF-3155-4274-9F74-6B49115507F8] [<private>(<private>)] Begin using received as euid = 501, uid = 501, personaid = 1000, type = DEFAULT, name = <private>
+默认	23:41:54.622450+0800	runningboardd	Acquiring assertion targeting [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] from originator [osservice<com.apple.neagent-ios>:804:804] with description <RBSAssertionDescriptor| "com.apple.extension.session" ID:33-804-114781 target:1467 attributes:[
 	<RBSLegacyAttribute| requestedReason:ViewService reason:ViewService flags:( AllowIdleSleep PreventTaskSuspend PreventTaskThrottleDown WantsForegroundResourcePriority )>,
 	<RBSAcquisitionCompletionAttribute| policy:AfterValidation>
 	]>
-默认	22:59:56.681283+0800	runningboardd	Assertion 33-804-111829 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]) will be created as active
-默认	22:59:56.682837+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] Set jetsam priority to 100 [0] flag[1]
-默认	22:59:56.683132+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] set Memory Limits to Hard Inactive (50)
-默认	22:59:56.684250+0800	runningboardd	Invalidating assertion 33-804-111828 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]) from originator [osservice<com.apple.neagent-ios>:804:804]
-默认	22:59:56.685767+0800	WireGuardExtension	+[NSExtensionContext _allowedItemPayloadClasses] not implemented. Setting the allowed payload classes to <private>
-默认	22:59:56.688404+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
-默认	22:59:56.690040+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
-默认	22:59:56.691891+0800	locationd	{"msg":"invoking applicationStateChange handler", "StateChangeData":"{\n    BKSApplicationStateAppIsFrontmost = 0;\n    BKSApplicationStateExtensionKey = 1;\n    BKSApplicationStateHostPIDKey = 804;\n    SBApplicationStateDisplayIDKey = \"com.morphvpn.app.WireGuardExtension\";\n    SBApplicationStateKey = 4;\n    SBApplicationStateProcessIDKey = 1426;\n    SBApplicationStateRunningReasonsKey =     (\n                {\n            SBApplicationStateRunningReasonAssertionIdentifierKey = \"com.apple.extension.session\";\n            SBApplicationStateRunningReasonAssertionReasonKey = 13;\n        }\n    );\n    SBMostElevatedStateForProcessID = 4;\n}"}
-默认	22:59:56.692353+0800	WireGuardExtension	nw_path_evaluator_start [188E26BF-8C60-492A-BECA-29C2CB9BD919 <NULL> generic, attribution: developer]
+默认	23:41:54.622729+0800	runningboardd	Assertion 33-804-114781 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]) will be created as active
+默认	23:41:54.624607+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] Set jetsam priority to 100 [0] flag[1]
+默认	23:41:54.624773+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] set Memory Limits to Hard Inactive (50)
+默认	23:41:54.626970+0800	runningboardd	Invalidating assertion 33-804-114780 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]) from originator [osservice<com.apple.neagent-ios>:804:804]
+默认	23:41:54.630500+0800	WireGuardExtension	+[NSExtensionContext _allowedItemPayloadClasses] not implemented. Setting the allowed payload classes to <private>
+默认	23:41:54.633344+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
+默认	23:41:54.633768+0800	WireGuardExtension	networkd_settings_read_from_file initialized networkd settings by reading plist directly
+默认	23:41:54.634918+0800	WireGuardExtension	nw_path_evaluator_start [D9CA0828-64AA-4581-B226-C91FFCC8539F <NULL> generic, attribution: developer]
 	path: satisfied (Path is satisfied), interface: en0[802.11], ipv4, dns
-默认	22:59:56.692470+0800	locationd	{"msg":"Post Application State Change Notification", "notification":"BackgroundRunning", "pid":1426, "bundleId":"com.morphvpn.app.WireGuardExtension"}
-默认	22:59:56.693073+0800	WireGuardExtension	🎯 PacketTunnelProvider: init()
-默认	22:59:56.694803+0800	neagent	Extension request with extension com.morphvpn.app.WireGuardExtension started with identifier B00DE5BC-D786-4790-9399-CA32740C5C10
-默认	22:59:56.702651+0800	WireGuardExtension	Using interface name utun20
-默认	22:59:56.702830+0800	WireGuardExtension	Created a new NEVirtualInterface "utun20" from socket
-默认	22:59:56.707617+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling startTunnelWithOptions with options 0x0
-默认	22:59:56.707681+0800	WireGuardExtension	🚀 PacketTunnelProvider: startTunnel()
-默认	22:59:56.707799+0800	WireGuardExtension	Requesting app group container lookup; personaid = 1000, type = DEFAULT, name = FB6FA59D-2EF0-4D5B-A50F-FEAD8EA36452, origin [pid = 1421, personaid = 1000], proximate [pid = 804, personaid = 199], identifier = <private>, euid = 501, uid = 501, platform = 2
-默认	22:59:56.707990+0800	neagent	[Host com.morphvpn.app.WireGuardExtension]: Starting with options 0x0
-默认	22:59:56.711544+0800	WireGuardExtension	Consuming sandbox extension; path = [<private>], key = 0
-默认	22:59:56.711651+0800	WireGuardExtension	Revoking sandbox extension; key = 0
-默认	22:59:56.711765+0800	WireGuardExtension	container_create_or_lookup_app_group_path_by_app_group_identifier: success
-默认	22:59:56.715545+0800	WireGuardExtension	container_create_or_lookup_app_group_path_by_app_group_identifier: success
-默认	22:59:56.723151+0800	WireGuardExtension	📋 EXT: startTunnel()
-默认	22:59:56.724384+0800	WireGuardExtension	📋 PacketTunnel: providerConfig keys = ["morph_config", "wg_config"]
-默认	22:59:56.724503+0800	WireGuardExtension	📋 PacketTunnel: wg_config length = 314 bytes
-默认	22:59:56.725358+0800	WireGuardExtension	🎭 PacketTunnel: morph_config found (323 bytes), starting with obfuscation
-默认	22:59:56.725547+0800	WireGuardExtension	🎭 MorphProtocol: host=65.20.91.215:5814 layer=3 tpl=1
-默认	22:59:56.725703+0800	WireGuardExtension	📋 EXT: MorphProtocol: host=65.20.91.215:5814
-默认	22:59:56.727051+0800	WireGuardExtension	🔐 MorphEncryptor: init
-默认	22:59:56.727791+0800	WireGuardExtension	✅ MorphEncryptor: ready
-默认	22:59:56.738945+0800	locationd	{"msg":"#CLIUA AppMonitor notification", "notification":"BackgroundRunning", "pid":1426, "bundleId":"com.morphvpn.app.WireGuardExtension", "ClientKey":"com.morphvpn.app"}
-默认	22:59:56.739027+0800	locationd	{"msg":"skip erasing #CLIUA for RunningBoard Process State. Does not exists", "bundleId":"com.morphvpn.app.WireGuardExtension"}
-默认	22:59:56.751025+0800	wifid	-[WiFiUserInteractionMonitor setApplicationRunningState:foregroundState:andNetworkingState:forBundleId:]: com.morphvpn.app.WireGuardExtension entered background
-默认	22:59:56.762850+0800	WireGuardExtension	🎭 MorphObfuscator: key=128 layer=3 pad=8 combos=990
-默认	22:59:56.763014+0800	WireGuardExtension	✅ MorphUDPClient: ready tpl=QUIC key=128
-默认	22:59:56.764712+0800	WireGuardExtension	[L1 udp, definite, server, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317, required interface type: loopback, local address: ::.0] start
-默认	22:59:56.766058+0800	WireGuardExtension	nw_listener_reconcile_inboxes_on_queue [L1] Started inbox socket: 6, endpoint: ::.56571@lo0, interface: lo0 with parameters udp, interface: lo0, local: ::.56571, definite, attribution: developer, server
-默认	22:59:56.766710+0800	WireGuardExtension	nw_listener_set_state_on_queue [L1] reporting state ready ((null))
-默认	22:59:56.766803+0800	WireGuardExtension	✅ MorphUDPClient: proxy on 127.0.0.1:56571
-默认	22:59:56.792274+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] set Memory Limits to Hard Active (50)
-默认	22:59:56.871901+0800	WireGuardExtension	✅ MorphProtocol: local proxy on 127.0.0.1:56571
-默认	22:59:56.872037+0800	WireGuardExtension	📋 EXT: local proxy on 127.0.0.1:56571
-默认	22:59:56.874205+0800	WireGuardExtension	🔌 MorphUDPClient: Connecting to 65.20.91.215:5814
-默认	22:59:56.874767+0800	WireGuardExtension	[C1 F0BE959C-56EE-4743-8B9A-AB3B092900AF IPv4#3430cbdf:5814 udp, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317] start
-默认	22:59:56.874910+0800	WireGuardExtension	[C1 IPv4#3430cbdf:5814 initial parent-flow ((null))] event: path:start @0.000s
-默认	22:59:56.875040+0800	WireGuardExtension	[C1 IPv4#3430cbdf:5814 waiting parent-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: path:satisfied @0.000s, uuid: 31BDAE4A-D3B1-4C8E-AC00-6D771DC32A0C
-默认	22:59:56.875842+0800	WireGuardExtension	[C1 IPv4#3430cbdf:5814 in_progress channel-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_nexus @0.001s
-默认	22:59:56.875909+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state preparing
-默认	22:59:56.876600+0800	WireGuardExtension	[C1 IPv4#3430cbdf:5814 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:receive_nexus @0.002s
-默认	22:59:56.880070+0800	WireGuardExtension	[C1 IPv4#3430cbdf:5814 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_connect @0.004s
-默认	22:59:56.880132+0800	WireGuardExtension	nw_flow_connected [C1 IPv4#3430cbdf:5814 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] Output protocol connected (udp)
-默认	22:59:56.880584+0800	WireGuardExtension	[C1 IPv4#3430cbdf:5814 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:finish_connect @0.005s
-默认	22:59:56.880868+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state ready
-默认	22:59:56.880939+0800	WireGuardExtension	[C1 IPv4#3430cbdf:5814 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:changed_viability @0.005s
-默认	22:59:56.881012+0800	WireGuardExtension	✅ MorphUDPClient: Handshake connection ready, local port=53903
-默认	22:59:56.881944+0800	WireGuardExtension	✅ Handshake sent (2/10)
-默认	23:00:01.980686+0800	WireGuardExtension	✅ Handshake sent (3/10)
-默认	23:00:02.388417+0800	WireGuardExtension	🤝 Handshake response: {"port":33281,"clientID":"xSMHqRJv8cG+xrR6k+xMRQ==","status":"connected"}
-默认	23:00:02.388761+0800	WireGuardExtension	✅ Handshake complete: port=33281 status=connected
-默认	23:00:02.389075+0800	WireGuardExtension	🔗 Closing handshakeConnection to release local port 53903
-默认	23:00:02.389231+0800	WireGuardExtension	[C1 F0BE959C-56EE-4743-8B9A-AB3B092900AF IPv4#3430cbdf:5814 udp, attribution: developer] cancel
-默认	23:00:02.389534+0800	WireGuardExtension	[C1 F0BE959C-56EE-4743-8B9A-AB3B092900AF IPv4#3430cbdf:5814 udp, attribution: developer] cancelled
-	[C1 31BDAE4A-D3B1-4C8E-AC00-6D771DC32A0C 192.168.0.105:53903<->IPv4#3430cbdf:5814]
+默认	23:41:54.635351+0800	WireGuardExtension	🎯 PacketTunnelProvider: init()
+默认	23:41:54.636657+0800	neagent	Extension request with extension com.morphvpn.app.WireGuardExtension started with identifier 06C6B164-E1FF-45CA-BAFC-9D5FE7C6566B
+默认	23:41:54.647480+0800	WireGuardExtension	Using interface name utun20
+默认	23:41:54.647806+0800	WireGuardExtension	Created a new NEVirtualInterface "utun20" from socket
+默认	23:41:54.655015+0800	neagent	[Host com.morphvpn.app.WireGuardExtension]: Starting with options 0x0
+默认	23:41:54.655083+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: Calling startTunnelWithOptions with options 0x0
+默认	23:41:54.665266+0800	WireGuardExtension	🚀 PacketTunnelProvider: startTunnel()
+默认	23:41:54.665474+0800	WireGuardExtension	Requesting app group container lookup; personaid = 1000, type = DEFAULT, name = FB6FA59D-2EF0-4D5B-A50F-FEAD8EA36452, origin [pid = 1462, personaid = 1000], proximate [pid = 804, personaid = 199], identifier = <private>, euid = 501, uid = 501, platform = 2
+默认	23:41:54.668843+0800	WireGuardExtension	Consuming sandbox extension; path = [<private>], key = 0
+默认	23:41:54.668895+0800	WireGuardExtension	Revoking sandbox extension; key = 0
+默认	23:41:54.669007+0800	WireGuardExtension	container_create_or_lookup_app_group_path_by_app_group_identifier: success
+默认	23:41:54.670129+0800	WireGuardExtension	container_create_or_lookup_app_group_path_by_app_group_identifier: success
+默认	23:41:54.684325+0800	WireGuardExtension	📋 PacketTunnel: providerConfig keys = ["morph_config", "wg_config"]
+默认	23:41:54.684381+0800	WireGuardExtension	📋 PacketTunnel: wg_config length = 314 bytes
+默认	23:41:54.684437+0800	WireGuardExtension	🎭 PacketTunnel: morph_config found (322 bytes), starting with obfuscation
+默认	23:41:54.685300+0800	WireGuardExtension	🎭 MorphProtocol: host=65.20.86.216:29203 layer=3 tpl=1
+默认	23:41:54.685353+0800	WireGuardExtension	🔐 MorphEncryptor: init
+默认	23:41:54.685406+0800	WireGuardExtension	✅ MorphEncryptor: ready
+默认	23:41:54.703783+0800	WireGuardExtension	🎭 MorphObfuscator: key=66 layer=3 pad=8 combos=990
+默认	23:41:54.704298+0800	WireGuardExtension	✅ MorphUDPClient: ready tpl=QUIC key=66
+默认	23:41:54.707959+0800	WireGuardExtension	[L1 udp, definite, server, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317, required interface type: loopback, local address: ::.0] start
+默认	23:41:54.708509+0800	WireGuardExtension	nw_listener_reconcile_inboxes_on_queue [L1] Started inbox socket: 6, endpoint: ::.64441@lo0, interface: lo0 with parameters udp, interface: lo0, local: ::.64441, definite, attribution: developer, server
+默认	23:41:54.708856+0800	WireGuardExtension	nw_listener_set_state_on_queue [L1] reporting state ready ((null))
+默认	23:41:54.708961+0800	WireGuardExtension	✅ MorphUDPClient: proxy on 127.0.0.1:64441
+默认	23:41:54.734581+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] set Memory Limits to Hard Active (50)
+默认	23:41:54.807089+0800	WireGuardExtension	✅ MorphProtocol: local proxy on 127.0.0.1:64441
+默认	23:41:54.809408+0800	WireGuardExtension	🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+默认	23:41:54.811336+0800	WireGuardExtension	[C1 F509BFFF-95E9-4649-84E3-7BBF9A2ACD1E IPv4#6cd62029:29203 udp, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317] start
+默认	23:41:54.812129+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 initial parent-flow ((null))] event: path:start @0.000s
+默认	23:41:54.812491+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 waiting parent-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: path:satisfied @0.000s, uuid: 2E7209B9-72C5-442E-B8EA-B5C94BD571C1
+默认	23:41:54.813019+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 in_progress channel-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_nexus @0.001s
+默认	23:41:54.813086+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state preparing
+默认	23:41:54.813998+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:receive_nexus @0.002s
+默认	23:41:54.815139+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_connect @0.003s
+默认	23:41:54.815428+0800	WireGuardExtension	nw_flow_connected [C1 IPv4#6cd62029:29203 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] Output protocol connected (udp)
+默认	23:41:54.815737+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:finish_connect @0.004s
+默认	23:41:54.815975+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state ready
+默认	23:41:54.816034+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:changed_viability @0.004s
+默认	23:41:54.816662+0800	WireGuardExtension	✅ MorphUDPClient: Handshake connection ready, local port=57902
+默认	23:41:54.819611+0800	WireGuardExtension	✅ Handshake sent (2/10)
+默认	23:41:59.025461+0800	WireGuardExtension	[C1 IPv4#6cd62029:29203 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: path:satisfied_change @4.213s, uuid: 2E7209B9-72C5-442E-B8EA-B5C94BD571C1
+默认	23:41:59.892461+0800	WireGuardExtension	✅ Handshake sent (3/10)
+默认	23:42:00.219321+0800	WireGuardExtension	🤝 Handshake response: {"port":42206,"clientID":"DqOKrj/l2QM57GcgEJZvyg==","status":"connected"}
+默认	23:42:00.219923+0800	WireGuardExtension	✅ Handshake complete: port=42206 status=connected
+默认	23:42:00.220415+0800	WireGuardExtension	🔗 Closing handshakeConnection to release local port 57902
+默认	23:42:00.220915+0800	WireGuardExtension	[C1 F509BFFF-95E9-4649-84E3-7BBF9A2ACD1E IPv4#6cd62029:29203 udp, attribution: developer] cancel
+默认	23:42:00.221549+0800	WireGuardExtension	[C1 F509BFFF-95E9-4649-84E3-7BBF9A2ACD1E IPv4#6cd62029:29203 udp, attribution: developer] cancelled
+	[C1 2E7209B9-72C5-442E-B8EA-B5C94BD571C1 192.168.0.105:57902<->IPv4#6cd62029:29203]
 	Connected Path: satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns
 	Privacy Stance: Not Eligible
-	Duration: 5.516s, UDP @0.004s took 0.001s
+	Duration: 5.409s, UDP @0.003s took 0.001s
 	bytes in/out: 108/3120, packets in/out: 1/4, rtt: 0.000s, retransmitted bytes: 0, out-of-order bytes: 0
-默认	23:00:02.389978+0800	WireGuardExtension	nw_flow_disconnected [C1 IPv4#3430cbdf:5814 cancelled channel-flow ((null))] Output protocol disconnected
-默认	23:00:02.390064+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state cancelled
-默认	23:00:02.451365+0800	WireGuardExtension	🔗 DataConnection: binding to local port 53903 (same as handshake)
-默认	23:00:02.453146+0800	WireGuardExtension	📋 EXT: DataConn binding to local port 53903
-默认	23:00:02.458156+0800	WireGuardExtension	💓 Heartbeat started, interval=120.0s
-默认	23:00:02.458487+0800	WireGuardExtension	[C2 796272E8-60D2-465C-B907-7207162F4D4B IPv4#3430cbdf:33281 udp, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317, local address: 0.0.0.0:53903] start
-默认	23:00:02.459232+0800	WireGuardExtension	[C2 IPv4#3430cbdf:33281 initial parent-flow ((null))] event: path:start @0.000s
-默认	23:00:02.459661+0800	WireGuardExtension	[C2 IPv4#3430cbdf:33281 waiting parent-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: path:satisfied @0.001s, uuid: EE9C4E63-0AE3-43C5-A298-A688086CFDF8
-默认	23:00:02.460458+0800	WireGuardExtension	[C2 IPv4#3430cbdf:33281 in_progress channel-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_nexus @0.001s
-默认	23:00:02.460676+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C2] reporting state preparing
-默认	23:00:02.462966+0800	WireGuardExtension	[C2 IPv4#3430cbdf:33281 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:receive_nexus @0.004s
-默认	23:00:02.464576+0800	WireGuardExtension	[C2 IPv4#3430cbdf:33281 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_connect @0.006s
-默认	23:00:02.464781+0800	WireGuardExtension	nw_flow_connected [C2 IPv4#3430cbdf:33281 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] Output protocol connected (udp)
-默认	23:00:02.465373+0800	WireGuardExtension	[C2 IPv4#3430cbdf:33281 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:finish_connect @0.007s
-默认	23:00:02.466510+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C2] reporting state ready
-默认	23:00:02.466727+0800	WireGuardExtension	[C2 IPv4#3430cbdf:33281 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:changed_viability @0.007s
-默认	23:00:02.466897+0800	WireGuardExtension	✅ Data connection ready on port 33281
-默认	23:00:02.467195+0800	WireGuardExtension	✅ MorphProtocol: handshake done, session port=33281
-默认	23:00:02.467315+0800	WireGuardExtension	✅ MorphProtocol: connected, session=33281, local=56571
-默认	23:00:02.468065+0800	WireGuardExtension	📋 EXT: connected session=33281 local=56571
-默认	23:00:02.471509+0800	WireGuardExtension	🔧 Will exclude server IP 65.20.91.215 from AllowedIPs
-默认	23:00:02.472486+0800	WireGuardExtension	🔧 AllowedIPs rewritten (37 entries)
-默认	23:00:02.473529+0800	WireGuardExtension	📋 EXT: AllowedIPs: 37 entries
-默认	23:00:02.476108+0800	WireGuardExtension	✅ WireGuard config rewritten, Endpoint=127.0.0.1:56571, excluded server=65.20.91.215
-默认	23:00:02.476497+0800	WireGuardExtension	📋 WG config: [Interface]
-默认	23:00:02.477607+0800	WireGuardExtension	📋 EXT: WG: [Interface]
-默认	23:00:02.479965+0800	WireGuardExtension	📋 WG config: PrivateKey = ECjFOMIESqHmrV/IWp4mW+1uNE5xhK9huNnbtqp7cU0=
-默认	23:00:02.480792+0800	WireGuardExtension	📋 EXT: WG: PrivateKey = ECjFOMIESqHmrV/IWp4mW+1uNE5xhK9huNnbtqp7cU0=
-默认	23:00:02.482799+0800	WireGuardExtension	📋 WG config: Address = 10.8.0.20/24
-默认	23:00:02.483779+0800	WireGuardExtension	📋 EXT: WG: Address = 10.8.0.20/24
-默认	23:00:02.486730+0800	WireGuardExtension	📋 WG config: DNS = 1.1.1.1
-默认	23:00:02.487732+0800	WireGuardExtension	📋 EXT: WG: DNS = 1.1.1.1
-默认	23:00:02.490226+0800	WireGuardExtension	📋 WG config: [Peer]
-默认	23:00:02.490757+0800	WireGuardExtension	📋 EXT: WG: [Peer]
-默认	23:00:02.492156+0800	WireGuardExtension	📋 WG config: PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-默认	23:00:02.492885+0800	WireGuardExtension	📋 EXT: WG: PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-默认	23:00:02.494406+0800	WireGuardExtension	📋 WG config: PresharedKey = xs3HRW9b9U1WPtNA433kknGCY/Nxh7wFj6P3+IkGtMQ=
-默认	23:00:02.495073+0800	WireGuardExtension	📋 EXT: WG: PresharedKey = xs3HRW9b9U1WPtNA433kknGCY/Nxh7wFj6P3+IkGtMQ=
-默认	23:00:02.496520+0800	WireGuardExtension	📋 WG config: AllowedIPs = 0.0.0.0/2, 64.0.0.0/8, 65.0.0.0/12, 65.16.0.0/14, 65.20.0.0/18, 65.20.64.0/20, 65.20.80.0/21, 65.20.88.0/23, 65.20.90.0/24, 65.20.91.0/25, 65.20.91.128/26, 65.20.91.192/28, 65.20.91.208/30, 65.20.91.212/31, 65.20.91.214/32, 65.20.91.216/29, 65.20.91.224/27, 65.20.92.0/22, 65.20.96.0/19, 65.20.128.0/17, 65.21.0.0/16, 65.22.0.0/15, 65.24.0.0/13, 65.32.0.0/11, 65.64.0.0/10, 65.128.0.0/9, 66.0.0.0/7, 68.0.0.0/6, 72.0.0.0/5, 80.0.0.0/4, 96.0.0.0/4, 112.0.0.0/5, 120.0.0.0/6, 124.0.0.0/7, 126.0.0.0/8, 128.0.0.0/1, ::/0
-默认	23:00:02.497314+0800	WireGuardExtension	📋 EXT: WG: AllowedIPs = 0.0.0.0/2, 64.0.0.0/8, 65.0.0.0/12, 65.16.0.0/14, 65.20.0.0/18, 65.20.64.0/20, 65.20.80.0/21, 65.20.88.0/23, 65.20.90.0/24, 65.20.91.0/25, 65.20.91.128/26, 65.20.91.192/28, 65.20.91.208/30, 65.20.91.212/31, 65.20.91.214/32, 65.20.91.216/29, 65.20.91.224/27, 65.20.92.0/22, 65.20.96.0/19, 65.20.128.0/17, 65.21.0.0/16, 65.22.0.0/15, 65.24.0.0/13, 65.32.0.0/11, 65.64.0.0/10, 65.128.0.0/9, 66.0.0.0/7, 68.0.0.0/6, 72.0.0.0/5, 80.0.0.0/4, 96.0.0.0/4, 112.0.0.0/5, 120.0.0.0/6, 124.0.0.0/7, 126.0.0.0/8, 128.0.0.0/1, ::/0
-默认	23:00:02.498840+0800	WireGuardExtension	📋 WG config: PersistentKeepalive = 0
-默认	23:00:02.499543+0800	WireGuardExtension	📋 EXT: WG: PersistentKeepalive = 0
-默认	23:00:02.501012+0800	WireGuardExtension	📋 WG config: Endpoint = 127.0.0.1:56571
-默认	23:00:02.501722+0800	WireGuardExtension	📋 EXT: WG: Endpoint = 127.0.0.1:56571
-默认	23:00:02.507941+0800	WireGuardExtension	nw_path_evaluator_start [2162AFCD-D1A6-4102-BAEE-ACE53437D583 <NULL> generic, multipath service: 1, attribution: developer]
+默认	23:42:00.222151+0800	WireGuardExtension	nw_flow_disconnected [C1 IPv4#6cd62029:29203 cancelled channel-flow ((null))] Output protocol disconnected
+默认	23:42:00.223848+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state cancelled
+默认	23:42:00.283795+0800	WireGuardExtension	🔗 DataConnection: binding to local port 57902 (same as handshake)
+默认	23:42:00.293342+0800	WireGuardExtension	💓 Heartbeat started, interval=120.0s
+默认	23:42:00.293982+0800	WireGuardExtension	[C3 7D28AA80-9BC1-479D-BE01-2648DBB63B6C IPv4#6cd62029:42206 udp, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317, local address: 0.0.0.0:57902] start
+默认	23:42:00.295296+0800	WireGuardExtension	[C3 IPv4#6cd62029:42206 initial parent-flow ((null))] event: path:start @0.000s
+默认	23:42:00.295698+0800	WireGuardExtension	[C3 IPv4#6cd62029:42206 waiting parent-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: path:satisfied @0.001s, uuid: C38B5DC2-B488-4E86-820A-EB7229F9F5B4
+默认	23:42:00.296438+0800	WireGuardExtension	[C3 IPv4#6cd62029:42206 in_progress channel-flow (satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_nexus @0.002s
+默认	23:42:00.296789+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C3] reporting state preparing
+默认	23:42:00.301481+0800	WireGuardExtension	[C3 IPv4#6cd62029:42206 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:receive_nexus @0.005s
+默认	23:42:00.305690+0800	WireGuardExtension	[C3 IPv4#6cd62029:42206 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:start_connect @0.007s
+默认	23:42:00.305991+0800	WireGuardExtension	nw_flow_connected [C3 IPv4#6cd62029:42206 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] Output protocol connected (udp)
+默认	23:42:00.306514+0800	WireGuardExtension	[C3 IPv4#6cd62029:42206 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:finish_connect @0.008s
+默认	23:42:00.308197+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C3] reporting state ready
+默认	23:42:00.308352+0800	WireGuardExtension	✅ Data connection ready on port 42206
+默认	23:42:00.308763+0800	WireGuardExtension	[C3 IPv4#6cd62029:42206 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0[802.11], scoped, ipv4, dns)] event: flow:changed_viability @0.009s
+默认	23:42:00.309025+0800	WireGuardExtension	✅ MorphProtocol: handshake done, session port=42206
+默认	23:42:00.309266+0800	WireGuardExtension	✅ MorphProtocol: connected, session=42206, local=64441
+默认	23:42:00.314754+0800	WireGuardExtension	🔧 Will exclude server IP 65.20.86.216 from AllowedIPs
+默认	23:42:00.314855+0800	WireGuardExtension	🔧 AllowedIPs rewritten (37 entries)
+默认	23:42:00.316905+0800	WireGuardExtension	✅ WireGuard config rewritten, Endpoint=127.0.0.1:64441, excluded server=65.20.86.216
+默认	23:42:00.317352+0800	WireGuardExtension	📋 WG config: [Interface]
+默认	23:42:00.317775+0800	WireGuardExtension	📋 WG config: PrivateKey = uKKatXI7HHH0qvKnXsel6fy+A3Pp5Um8epFphzn7JEE=
+默认	23:42:00.320128+0800	WireGuardExtension	📋 WG config: Address = 10.8.0.63/24
+默认	23:42:00.322300+0800	WireGuardExtension	📋 WG config: DNS = 1.1.1.1
+默认	23:42:00.324098+0800	WireGuardExtension	📋 WG config: [Peer]
+默认	23:42:00.325951+0800	WireGuardExtension	📋 WG config: PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
+默认	23:42:00.328085+0800	WireGuardExtension	📋 WG config: PresharedKey = 7esxVyXtcrPpWqiXAvpSlcY8zPMCNSRPs/tQHRWZrMA=
+默认	23:42:00.329806+0800	WireGuardExtension	📋 WG config: AllowedIPs = 0.0.0.0/2, 64.0.0.0/8, 65.0.0.0/12, 65.16.0.0/14, 65.20.0.0/18, 65.20.64.0/20, 65.20.80.0/22, 65.20.84.0/23, 65.20.86.0/25, 65.20.86.128/26, 65.20.86.192/28, 65.20.86.208/29, 65.20.86.217/32, 65.20.86.218/31, 65.20.86.220/30, 65.20.86.224/27, 65.20.87.0/24, 65.20.88.0/21, 65.20.96.0/19, 65.20.128.0/17, 65.21.0.0/16, 65.22.0.0/15, 65.24.0.0/13, 65.32.0.0/11, 65.64.0.0/10, 65.128.0.0/9, 66.0.0.0/7, 68.0.0.0/6, 72.0.0.0/5, 80.0.0.0/4, 96.0.0.0/4, 112.0.0.0/5, 120.0.0.0/6, 124.0.0.0/7, 126.0.0.0/8, 128.0.0.0/1, ::/0
+默认	23:42:00.331248+0800	WireGuardExtension	📋 WG config: PersistentKeepalive = 0
+默认	23:42:00.332710+0800	WireGuardExtension	📋 WG config: Endpoint = 127.0.0.1:64441
+默认	23:42:00.342307+0800	WireGuardExtension	nw_path_evaluator_start [2CB232BD-4CCB-4240-BEA8-64431EF4ADE3 <NULL> generic, multipath service: 1, attribution: developer]
 	path: satisfied (Path is satisfied), interface: en0[802.11], scoped, ipv4, dns
-错误	23:00:02.511002+0800	WireGuardExtension	Missing IPv6 address
-默认	23:00:02.513322+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: provider set tunnel configuration to 
+错误	23:42:00.351165+0800	WireGuardExtension	Missing IPv6 address
+默认	23:42:00.353600+0800	WireGuardExtension	[Extension com.morphvpn.app.WireGuardExtension]: provider set tunnel configuration to 
     tunnelRemoteAddress = <9-char-str>
     DNSSettings = {
         protocol = cleartext
@@ -274,15 +259,11 @@
             },
             {
                 destinationAddress = <10-char-str>
-                destinationSubnetMask = 255.255.248.0
+                destinationSubnetMask = 255.255.252.0
             },
             {
                 destinationAddress = <10-char-str>
                 destinationSubnetMask = 255.255.254.0
-            },
-            {
-                destinationAddress = <10-char-str>
-                destinationSubnetMask = 255.255.255.0
             },
             {
                 destinationAddress = <10-char-str>
@@ -298,11 +279,7 @@
             },
             {
                 destinationAddress = <12-char-str>
-                destinationSubnetMask = 255.255.255.252
-            },
-            {
-                destinationAddress = <12-char-str>
-                destinationSubnetMask = 255.255.255.254
+                destinationSubnetMask = 255.255.255.248
             },
             {
                 destinationAddress = <12-char-str>
@@ -310,7 +287,11 @@
             },
             {
                 destinationAddress = <12-char-str>
-                destinationSubnetMask = 255.255.255.248
+                destinationSubnetMask = 255.255.255.254
+            },
+            {
+                destinationAddress = <12-char-str>
+                destinationSubnetMask = 255.255.255.252
             },
             {
                 destinationAddress = <12-char-str>
@@ -318,7 +299,11 @@
             },
             {
                 destinationAddress = <10-char-str>
-                destinationSubnetMask = 255.255.252.0
+                destinationSubnetMask = 255.255.255.0
+            },
+            {
+                destinationAddress = <10-char-str>
+                destinationSubnetMask = 255.255.248.0
             },
             {
                 destinationAddress = <10-char-str>
@@ -407,140 +392,45 @@
         )
     }
     MTU = 1280
-默认	23:00:02.515203+0800	neagent	[Host com.morphvpn.app.WireGuardExtension]: setting tunnel configuration
-默认	23:00:02.787676+0800	WireGuardExtension	WireGuard: [verbose] DNS64: mapped 127.0.0.1 to itself.
-默认	23:00:02.787983+0800	WireGuardExtension	WireGuard: [verbose] Attaching to interface
-默认	23:00:02.788172+0800	WireGuardExtension	WireGuard: [verbose] Routine: encryption worker 2 - started
-默认	23:00:02.788264+0800	WireGuardExtension	WireGuard: [verbose] Routine: encryption worker 1 - started
-默认	23:00:02.788367+0800	WireGuardExtension	WireGuard: [verbose] UAPI: Updating private key
-默认	23:00:02.788429+0800	WireGuardExtension	WireGuard: [verbose] Routine: handshake worker 1 - started
-默认	23:00:02.788532+0800	WireGuardExtension	WireGuard: [verbose] Routine: handshake worker 4 - started
-默认	23:00:02.788827+0800	WireGuardExtension	WireGuard: [verbose] Routine: encryption worker 6 - started
-默认	23:00:02.788891+0800	WireGuardExtension	WireGuard: [verbose] UAPI: Removing all peers
-默认	23:00:02.788949+0800	WireGuardExtension	WireGuard: [verbose] Routine: decryption worker 1 - started
-默认	23:00:02.789005+0800	WireGuardExtension	WireGuard: [verbose] Routine: decryption worker 3 - started
-默认	23:00:02.789096+0800	WireGuardExtension	WireGuard: [verbose] Routine: encryption worker 5 - started
-默认	23:00:02.789237+0800	WireGuardExtension	WireGuard: [verbose] Routine: handshake worker 2 - started
-默认	23:00:02.789433+0800	WireGuardExtension	WireGuard: [verbose] Routine: decryption worker 2 - started
-默认	23:00:02.789511+0800	WireGuardExtension	WireGuard: [verbose] Routine: encryption worker 3 - started
-默认	23:00:02.789589+0800	WireGuardExtension	WireGuard: [verbose] Routine: decryption worker 5 - started
-默认	23:00:02.789647+0800	WireGuardExtension	WireGuard: [verbose] Routine: handshake worker 3 - started
-默认	23:00:02.789717+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Created
-默认	23:00:02.789808+0800	WireGuardExtension	WireGuard: [verbose] Routine: handshake worker 5 - started
-默认	23:00:02.789863+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Updating preshared key
-默认	23:00:02.789932+0800	WireGuardExtension	WireGuard: [verbose] Routine: encryption worker 4 - started
-默认	23:00:02.790004+0800	WireGuardExtension	WireGuard: [verbose] Routine: TUN reader - started
-默认	23:00:02.790092+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Updating endpoint
-默认	23:00:02.790148+0800	WireGuardExtension	WireGuard: [verbose] Routine: handshake worker 6 - started
-默认	23:00:02.790220+0800	WireGuardExtension	WireGuard: [verbose] Routine: decryption worker 6 - started
-默认	23:00:02.790307+0800	WireGuardExtension	WireGuard: [verbose] Routine: decryption worker 4 - started
-默认	23:00:02.790384+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Updating persistent keepalive interval
-默认	23:00:02.790457+0800	WireGuardExtension	WireGuard: [verbose] Routine: event worker - started
-默认	23:00:02.790532+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Removing all allowedips
-默认	23:00:02.790595+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.790651+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.790726+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.790786+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.790842+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.790898+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.790956+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791011+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791064+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791119+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791173+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791263+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791317+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791373+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791425+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791471+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791527+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791580+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791634+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791690+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791743+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791858+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.791914+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792032+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792146+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792259+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792314+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792368+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792423+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792478+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792601+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792788+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792889+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.792946+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.793001+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.793114+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.793382+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Adding allowedip
-默认	23:00:02.794302+0800	WireGuardExtension	WireGuard: [verbose] UDP bind has been updated
-默认	23:00:02.794357+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - Starting
-默认	23:00:02.794409+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v4 - started
-默认	23:00:02.794462+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v6 - started
-默认	23:00:02.794517+0800	WireGuardExtension	WireGuard: [verbose] Interface state was Down, requested Up, now Up
-默认	23:00:02.794573+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - Routine: sequential sender - started
-默认	23:00:02.794625+0800	WireGuardExtension	WireGuard: [verbose] Device started
-默认	23:00:02.794678+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - Routine: sequential receiver - started
-默认	23:00:02.794739+0800	WireGuardExtension	✅ WireGuard tunnel started
-默认	23:00:02.795059+0800	WireGuardExtension	📋 EXT: WireGuard tunnel started
-默认	23:00:02.801620+0800	WireGuardExtension	WireGuard: [verbose] Network change detected with satisfied route and interface order [en0]
-默认	23:00:02.801790+0800	WireGuardExtension	WireGuard: [verbose] DNS64: mapped 127.0.0.1 to itself.
-默认	23:00:02.801978+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Updating endpoint
-默认	23:00:02.802077+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v4 - stopped
-默认	23:00:02.802131+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v6 - stopped
-默认	23:00:02.802206+0800	WireGuardExtension	WireGuard: [verbose] UDP bind has been updated
-默认	23:00:02.802262+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v6 - started
-默认	23:00:02.802364+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v4 - started
-默认	23:00:02.841691+0800	WireGuardExtension	WireGuard: [verbose] Network change detected with satisfied route and interface order [en0, utun20]
-默认	23:00:02.869395+0800	WireGuardExtension	WireGuard: [verbose] DNS64: mapped 127.0.0.1 to itself.
-默认	23:00:02.877233+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - UAPI: Updating endpoint
-默认	23:00:02.877474+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v4 - stopped
-默认	23:00:02.877651+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v6 - stopped
-默认	23:00:02.877764+0800	WireGuardExtension	WireGuard: [verbose] UDP bind has been updated
-默认	23:00:02.877873+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v4 - started
-默认	23:00:02.877989+0800	WireGuardExtension	WireGuard: [verbose] Routine: receive incoming v6 - started
-默认	23:00:02.953325+0800	WireGuardExtension	WireGuard: [verbose] peer(J8FS…4jCI) - Sending handshake initiation
-默认	23:00:02.956996+0800	WireGuardExtension	🔗 MorphUDPClient: newConnectionHandler fired, endpoint=127.0.0.1:54191, state=setup
-默认	23:00:02.958194+0800	WireGuardExtension	📋 EXT: WG connected from 127.0.0.1:54191
-默认	23:00:02.960206+0800	WireGuardExtension	[C3 E97B48A5-6E04-4CBD-A655-FCDF9A27DD62 127.0.0.1:54191 udp, definite, server, prohibit joining, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317, required interface type: loopback, local address: 127.0.0.1:56571, required interface: lo0(1)] start
-默认	23:00:02.960335+0800	WireGuardExtension	[C3 127.0.0.1:54191 initial socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: path:start @0.000s
-默认	23:00:02.960530+0800	WireGuardExtension	[C3 127.0.0.1:54191 waiting socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: path:satisfied @0.000s, uuid: BD087BFE-DDF7-423C-8BFA-D6FF6EB398D9
-默认	23:00:02.961107+0800	WireGuardExtension	[C3 127.0.0.1:54191 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: flow:start_connect @0.000s
-默认	23:00:02.961227+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C3] reporting state preparing
-默认	23:00:02.961287+0800	WireGuardExtension	nw_flow_connected [C3 127.0.0.1:54191 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] Output protocol connected (socket)
-默认	23:00:02.961399+0800	WireGuardExtension	🔗 MorphUDPClient: WG connection state → preparing
-默认	23:00:02.961554+0800	WireGuardExtension	[C3 127.0.0.1:54191 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: flow:finish_connect @0.000s
-默认	23:00:02.961776+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C3] reporting state ready
-默认	23:00:02.961837+0800	WireGuardExtension	[C3 127.0.0.1:54191 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: flow:changed_viability @0.001s
-默认	23:00:02.961895+0800	WireGuardExtension	🔗 MorphUDPClient: WG connection state → ready
-默认	23:00:02.961949+0800	WireGuardExtension	✅ MorphUDPClient: WireGuard connection ready
-默认	23:00:02.962539+0800	WireGuardExtension	📋 EXT: WG connection ready
-默认	23:00:02.963975+0800	WireGuardExtension	🔗 MorphUDPClient: Starting receive loop from stateUpdateHandler
-默认	23:00:02.964174+0800	WireGuardExtension	📦 [WG→Morph] #1 148 bytes
-默认	23:00:02.965467+0800	WireGuardExtension	📋 EXT: [WG→Morph] #1 148b
-默认	23:00:03.115852+0800	WireGuardExtension	📥 [Server→Morph] #1 107 bytes
-默认	23:00:03.116527+0800	WireGuardExtension	📋 EXT: [Server→] #1 107b
-默认	23:00:03.117762+0800	kernel	WireGuardExtension[1426] Corpse allowed 1 of 5
-错误	23:00:03.118457+0800	neagent	Extension com.morphvpn.app.WireGuardExtension died unexpectedly
-默认	23:00:03.119265+0800	runningboardd	Invalidating assertion 33-804-111829 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]) from originator [osservice<com.apple.neagent-ios>:804:804]
-默认	23:00:03.129559+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426] termination reported by launchd (2, 5, 5)
-默认	23:00:03.130518+0800	runningboardd	Removing process: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	23:00:03.131525+0800	runningboardd	Removing assertions for terminated process: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	23:00:03.132194+0800	runningboardd	Removed last relative-start-date-defining assertion for process xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>
-默认	23:00:03.134771+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: none (role: None)
-默认	23:00:03.139010+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: none (role: None)
-默认	23:00:03.139478+0800	runningboardd	XPC connection invalidated: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426]
-默认	23:00:03.185970+0800	locationd	{"msg":"invoking applicationStateChange handler", "StateChangeData":"{\n    BKSApplicationStateAppIsFrontmost = 0;\n    BKSApplicationStateExtensionKey = 1;\n    BKSApplicationStateHostPIDKey = 804;\n    SBApplicationStateDisplayIDKey = \"com.morphvpn.app.WireGuardExtension\";\n    SBApplicationStateKey = 1;\n    SBApplicationStateProcessIDKey = 1426;\n    SBMostElevatedStateForProcessID = 1;\n}"}
-默认	23:00:03.186956+0800	locationd	{"msg":"Post Application State Change Notification", "notification":"Terminated", "pid":1426, "bundleId":"com.morphvpn.app.WireGuardExtension"}
-默认	23:00:03.191447+0800	SpringBoard	[com.morphvpn.app.WireGuardExtension] com.morphvpn.app.WireGuardExtension application state changed to Terminated
-默认	23:00:03.193094+0800	wifid	-[WiFiUserInteractionMonitor setApplicationRunningState:foregroundState:andNetworkingState:forBundleId:]: com.morphvpn.app.WireGuardExtension exited
-默认	23:00:03.195646+0800	locationd	{"msg":"#CLIUA AppMonitor notification", "notification":"Terminated", "pid":1426, "bundleId":"com.morphvpn.app.WireGuardExtension", "ClientKey":"com.morphvpn.app"}
-错误	23:00:03.217303+0800	runningboardd	RBSStateCapture remove item called for untracked item 33-804-111829 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1426])
-默认	23:00:06.098411+0800	ReportCrash	Formulating fatal 309 report for corpse[1426] WireGuardExtension
-默认	23:00:06.108841+0800	ReportCrash	loadStoreInfo [platform 2] com.morphvpn.app.WireGuardExtension from file:///private/var/containers/Bundle/Application/262705A5-0633-41BB-93D5-51235F462092/App.app/
-默认	23:00:06.116027+0800	osanalyticshelper	creating type 309 as /private/var/mobile/Library/Logs/CrashReporter/.WireGuardExtension-2026-02-11-230006.ips
-默认	23:00:06.132364+0800	osanalyticshelper	Saved type '309(<private>)' report (23 of max 25) at /private/var/mobile/Library/Logs/CrashReporter/WireGuardExtension-2026-02-11-230006.ips
-默认	23:00:06.132740+0800	osanalyticshelper	xpc log creation type 309 result success: /private/var/mobile/Library/Logs/CrashReporter/WireGuardExtension-2026-02-11-230006.ips
-默认	23:00:06.133063+0800	ReportCrash	client log create type 309 result success: /private/var/mobile/Library/Logs/CrashReporter/WireGuardExtension-2026-02-11-230006.ips
-默认	23:00:06.134912+0800	ReportCrash	com.morphvpn.app.WireGuardExtension is not a MetricKit client
+默认	23:42:00.356597+0800	neagent	[Host com.morphvpn.app.WireGuardExtension]: setting tunnel configuration
+默认	23:42:00.643443+0800	WireGuardExtension	✅ WireGuard tunnel started
+默认	23:42:00.772671+0800	WireGuardExtension	🔗 MorphUDPClient: newConnectionHandler fired, endpoint=127.0.0.1:63148, state=setup
+默认	23:42:00.773607+0800	WireGuardExtension	[C4 42746636-634B-4FCA-A222-F8931E1D6D44 127.0.0.1:63148 udp, definite, server, prohibit joining, attribution: developer, reuse local address, context: Default Network Context (private), proc: 7446542B-FA06-3F4A-A6C0-6B2FF16E2317, required interface type: loopback, local address: 127.0.0.1:64441, required interface: lo0(1)] start
+默认	23:42:00.773925+0800	WireGuardExtension	[C4 127.0.0.1:63148 initial socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: path:start @0.000s
+默认	23:42:00.774163+0800	WireGuardExtension	[C4 127.0.0.1:63148 waiting socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: path:satisfied @0.000s, uuid: 80011105-D0C5-4A68-A47A-8DB30522BBA5
+默认	23:42:00.774701+0800	WireGuardExtension	[C4 127.0.0.1:63148 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: flow:start_connect @0.000s
+默认	23:42:00.774813+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C4] reporting state preparing
+默认	23:42:00.774928+0800	WireGuardExtension	🔗 MorphUDPClient: WG connection state → preparing
+默认	23:42:00.774985+0800	WireGuardExtension	nw_flow_connected [C4 127.0.0.1:63148 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] Output protocol connected (socket)
+默认	23:42:00.775222+0800	WireGuardExtension	[C4 127.0.0.1:63148 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: flow:finish_connect @0.001s
+默认	23:42:00.775468+0800	WireGuardExtension	nw_connection_report_state_with_handler_on_nw_queue [C4] reporting state ready
+默认	23:42:00.775532+0800	WireGuardExtension	[C4 127.0.0.1:63148 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0, scoped)] event: flow:changed_viability @0.001s
+默认	23:42:00.775600+0800	WireGuardExtension	🔗 MorphUDPClient: WG connection state → ready
+默认	23:42:00.776129+0800	WireGuardExtension	✅ MorphUDPClient: WireGuard connection ready
+默认	23:42:00.777832+0800	WireGuardExtension	🔗 MorphUDPClient: Starting receive loop from stateUpdateHandler
+默认	23:42:00.777887+0800	WireGuardExtension	📦 [WG→Morph] #1 148 bytes
+默认	23:42:05.891238+0800	WireGuardExtension	📦 [WG→Morph] #2 148 bytes
+默认	23:42:06.144687+0800	WireGuardExtension	📥 [Server→Morph] #1 110 bytes
+默认	23:42:06.146032+0800	kernel	WireGuardExtension[1467] Corpse allowed 1 of 5
+错误	23:42:06.146955+0800	neagent	Extension com.morphvpn.app.WireGuardExtension died unexpectedly
+默认	23:42:06.148099+0800	runningboardd	Invalidating assertion 33-804-114781 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]) from originator [osservice<com.apple.neagent-ios>:804:804]
+默认	23:42:06.151236+0800	runningboardd	[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467] termination reported by launchd (2, 5, 5)
+默认	23:42:06.151556+0800	runningboardd	Removing process: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:42:06.151791+0800	runningboardd	Removing assertions for terminated process: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:42:06.151941+0800	runningboardd	Removed last relative-start-date-defining assertion for process xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>
+默认	23:42:06.155458+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: none (role: None)
+默认	23:42:06.156812+0800	runningboardd	Calculated state for xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>: none (role: None)
+默认	23:42:06.157031+0800	runningboardd	XPC connection invalidated: [xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467]
+默认	23:42:06.179305+0800	locationd	{"msg":"invoking applicationStateChange handler", "StateChangeData":"{\n    BKSApplicationStateAppIsFrontmost = 0;\n    BKSApplicationStateExtensionKey = 1;\n    BKSApplicationStateHostPIDKey = 804;\n    SBApplicationStateDisplayIDKey = \"com.morphvpn.app.WireGuardExtension\";\n    SBApplicationStateKey = 1;\n    SBApplicationStateProcessIDKey = 1467;\n    SBMostElevatedStateForProcessID = 1;\n}"}
+默认	23:42:06.180299+0800	locationd	{"msg":"Post Application State Change Notification", "notification":"Terminated", "pid":1467, "bundleId":"com.morphvpn.app.WireGuardExtension"}
+默认	23:42:06.183826+0800	locationd	{"msg":"#CLIUA AppMonitor notification", "notification":"Terminated", "pid":1467, "bundleId":"com.morphvpn.app.WireGuardExtension", "ClientKey":"com.morphvpn.app"}
+默认	23:42:06.194878+0800	SpringBoard	[com.morphvpn.app.WireGuardExtension] com.morphvpn.app.WireGuardExtension application state changed to Terminated
+默认	23:42:06.199139+0800	wifid	-[WiFiUserInteractionMonitor setApplicationRunningState:foregroundState:andNetworkingState:forBundleId:]: com.morphvpn.app.WireGuardExtension exited
+错误	23:42:06.227685+0800	runningboardd	RBSStateCapture remove item called for untracked item 33-804-114781 (target:[xpcservice<com.morphvpn.app.WireGuardExtension([osservice<com.apple.neagent-ios>:804:804])>:1467])
+默认	23:42:09.601583+0800	ReportCrash	Formulating fatal 309 report for corpse[1467] WireGuardExtension
+默认	23:42:09.610781+0800	ReportCrash	loadStoreInfo [platform 2] com.morphvpn.app.WireGuardExtension from file:///private/var/containers/Bundle/Application/F5B5CFC4-C273-44AB-96A4-4646D9FF55A2/App.app/
+默认	23:42:09.631038+0800	osanalyticshelper	creating type 309 as /private/var/mobile/Library/Logs/CrashReporter/.WireGuardExtension-2026-02-11-234209.ips
+默认	23:42:09.656919+0800	osanalyticshelper	Saved type '309(<private>)' report (25 of max 25) at /private/var/mobile/Library/Logs/CrashReporter/WireGuardExtension-2026-02-11-234209.ips
+默认	23:42:09.657501+0800	osanalyticshelper	xpc log creation type 309 result success: /private/var/mobile/Library/Logs/CrashReporter/WireGuardExtension-2026-02-11-234209.ips
+默认	23:42:09.658149+0800	ReportCrash	client log create type 309 result success: /private/var/mobile/Library/Logs/CrashReporter/WireGuardExtension-2026-02-11-234209.ips
+默认	23:42:09.660598+0800	ReportCrash	com.morphvpn.app.WireGuardExtension is not a MetricKit client
