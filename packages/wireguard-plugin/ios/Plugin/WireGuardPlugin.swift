@@ -157,6 +157,32 @@ public class WireGuardPlugin: CAPPlugin {
         }
     }
     
+    /**
+     * 读取 Extension 进程的共享日志
+     */
+    @objc func getExtensionLog(_ call: CAPPluginCall) {
+        let fm = FileManager.default
+        if let containerURL = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.com.morphvpn.app.wireguard") {
+            let url = containerURL.appendingPathComponent("extension_log.txt")
+            let log = (try? String(contentsOf: url, encoding: .utf8)) ?? "(empty)"
+            call.resolve(["log": log])
+        } else {
+            call.resolve(["log": "(no app group container)"])
+        }
+    }
+    
+    /**
+     * 清空 Extension 进程的共享日志
+     */
+    @objc func clearExtensionLog(_ call: CAPPluginCall) {
+        let fm = FileManager.default
+        if let containerURL = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.com.morphvpn.app.wireguard") {
+            let url = containerURL.appendingPathComponent("extension_log.txt")
+            try? "".write(to: url, atomically: true, encoding: .utf8)
+        }
+        call.resolve(["success": true])
+    }
+    
     // MARK: - Private Methods
     
     private func loadVPNManager() {

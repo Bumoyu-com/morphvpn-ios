@@ -16,6 +16,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     override func startTunnel(options: [String : NSObject]?, 
                             completionHandler: @escaping (Error?) -> Void) {
         
+        SharedLog.shared.log("🚀 startTunnel() called")
         NSLog("🚀 PacketTunnelProvider: startTunnel() called")
         logger.info("🚀 Starting WireGuard tunnel...")
         
@@ -67,8 +68,11 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         // 检查是否有 MorphProtocol 配置
         var finalConfigString = configString
         if let morphConfigJSON = providerConfiguration["morph_config"] as? String {
+            SharedLog.shared.log("🎭 morph_config found, len=\(morphConfigJSON.count)")
             NSLog("🎭 MorphProtocol config found, starting local proxy in extension...")
             finalConfigString = startMorphProxy(wgConfig: configString, morphConfigJSON: morphConfigJSON)
+        } else {
+            SharedLog.shared.log("⚠️ No morph_config in providerConfiguration, keys=\(providerConfiguration.keys)")
         }
         
         // 解析 WireGuard 配置
@@ -108,7 +112,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     private func startMorphProxy(wgConfig: String, morphConfigJSON: String) -> String {
         guard let jsonData = morphConfigJSON.data(using: .utf8),
               let config = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
-            NSLog("❌ Failed to parse morph_config JSON")
+            SharedLog.shared.log("❌ Failed to parse morph_config JSON")
             return wgConfig
         }
         
@@ -117,7 +121,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
               let key = config["key"] as? Int,
               let layer = config["layer"] as? Int,
               let padding = config["padding"] as? Int else {
-            NSLog("❌ Missing required morph_config fields")
+            SharedLog.shared.log("❌ Missing morph_config fields, keys=\(config.keys)")
             return wgConfig
         }
         
@@ -125,6 +129,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let clientIDBase64 = config["clientID"] as? String ?? ""
         let clientID = Data(base64Encoded: clientIDBase64) ?? Data(count: 16)
         let fnInitor = config["fnInitor"] as? [String: Any]
+        
+        SharedLog.shared.log("📋 morph_config: host=\(host) session=\(sessionPort) key=\(key) layer=\(layer) tpl=\(templateId) fnInitor=\(fnInitor != nil)")
         
         do {
             let proxy = try MorphExtensionProxy(
@@ -139,17 +145,18 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             )
             
             guard let localPort = proxy.start() else {
-                NSLog("❌ Failed to start MorphProtocol proxy")
+                SharedLog.shared.log("❌ MorphExtensionProxy.start() returned nil")
                 return wgConfig
             }
             
             self.morphProxy = proxy
-            NSLog("✅ MorphProtocol proxy started on 127.0.0.1:\(localPort)")
+            SharedLog.shared.log("✅ Proxy started on 127.0.0.1:\(localPort)")
             
-            // 修改 WireGuard 配置的 Endpoint 为本地代理端口
-            return replaceEndpoint(in: wgConfig, newEndpoint: "127.0.0.1:\(localPort)")
+            let newConfig = replaceEndpoint(in: wgConfig, newEndpoint: "127.0.0.1:\(localPort)")
+            SharedLog.shared.log("✅ WG Endpoint replaced → 127.0.0.1:\(localPort)")
+            return newConfig
         } catch {
-            NSLog("❌ MorphProtocol proxy init error: \(error)")
+            SharedLog.shared.log("❌ Proxy init error: \(error)")
             return wgConfig
         }
     }

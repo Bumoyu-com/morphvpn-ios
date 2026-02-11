@@ -204,6 +204,9 @@
 
     console.log('[morphVpn_ios] 连接 MorphProtocol → ' + morphHost + ':' + morphPort);
 
+    // 0. 清空旧的 Extension 日志
+    await clearExtensionLog();
+
     // 1. 启动 MorphProtocol
     var morphResult = await MorphProtocol.connect({
       host: morphHost,
@@ -288,6 +291,12 @@
 
     wgConnected = true;
     console.log('[morphVpn_ios] VPN 连接成功');
+
+    // 延迟 3 秒后读取 Extension 日志（等待 Extension 启动完成）
+    setTimeout(async function () {
+      var extLog = await getExtensionLog();
+      console.log('[morphVpn_ios] === Extension 日志 ===\n' + extLog);
+    }, 3000);
   }
 
   // ========== disconnect ==========
@@ -330,12 +339,33 @@
     });
   }
 
+  // ========== 读取 Extension 日志 ==========
+
+  async function getExtensionLog() {
+    var WireGuard = getWireGuard();
+    if (!WireGuard) return '(WireGuard plugin unavailable)';
+    try {
+      var result = await WireGuard.getExtensionLog();
+      return result.log || '';
+    } catch (e) {
+      return '(error: ' + e.message + ')';
+    }
+  }
+
+  async function clearExtensionLog() {
+    var WireGuard = getWireGuard();
+    if (!WireGuard) return;
+    try { await WireGuard.clearExtensionLog(); } catch (e) { /* ignore */ }
+  }
+
   // ========== 挂载到 window ==========
 
   window.morphVpn = {
     connect: connect,
     disconnect: disconnect,
-    getStatus: getStatus
+    getStatus: getStatus,
+    getExtensionLog: getExtensionLog,
+    clearExtensionLog: clearExtensionLog
   };
 
   console.log('[morphVpn_ios] window.morphVpn 已初始化');

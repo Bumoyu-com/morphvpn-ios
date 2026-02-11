@@ -7,95 +7,95 @@
 ⚡️  [log] - [morphVpn_ios] window.morphVpn 已初始化
 ⚡️  WebView loaded
 ⚡️  [log] - storage web
-⚡️  To Native ->  SplashScreen hide 93457625
+⚡️  To Native ->  SplashScreen hide 93675707
 ⚡️  TO JS undefined
 ⚡️  [log] - ✅ PingBridge 已加载
-⚡️  [log] - login缓存已加载 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":1538090458593,"vpnChoose":"bom","vpnConnect":false}}
+⚡️  [log] - login缓存已加载 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":1538074175857,"vpnChoose":"bom","vpnConnect":false}}
 ⚡️  [log] - 还未检查GFW,检查中...
 ⚡️  [log] - GFW,检查完成==>> GFW is true
 ⚡️  [log] - baseUrl==>> https://bumoyu-saas-morphvpn-api.zhendong-ge.workers.dev
 ⚡️  [log] - 转发请求结果==>> {"data":{"result":true,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0"},"error":null}
 ⚡️  [log] - login success
 ⚡️  [log] - 开始全局轮询
-⚡️  [log] - 转发请求结果==>> {"data":{"msg":"success","server":{"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770769905,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":2,"updatedAt":"2026-02-11T02:16:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}},"error":null}
-⚡️  [log] - 服务器信息 {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770769905,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":2,"updatedAt":"2026-02-11T02:16:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
+⚡️  [log] - 当前用户数据 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":1538074175857,"vpnChoose":"bom","vpnConnect":false}}
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1538071749412,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T02:56:08.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - user admin==>> true
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-07-18T09:24:28.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T02:04:08.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b7
+⚡️  [log] - [{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-07-18T09:24:28.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T02:04:08.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b763f-110e-4b56-b81c-
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1538071749412,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T02:56:08.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - getTraffic==>> {"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1538071749412,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T02:56:08.000Z","createdAt":"2025-04-09T09:42:53.000Z"}
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1538071749412,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T02:56:08.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - getTraffic loop Traffic is  1538071749412
+⚡️  [log] - 转发请求结果==>> {"data":{"msg":"success","server":{"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770777470,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":3,"updatedAt":"2026-02-11T02:56:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}},"error":null}
+⚡️  [log] - 服务器信息 {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770777470,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":3,"updatedAt":"2026-02-11T02:56:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
 ⚡️  [log] - 创建新配置,当前网络: GFW is true
-⚡️  [log] - 转发请求结果==>> {"data":"82a6f245-9403-457e-b853-6a14bd1c3865","error":null}
-⚡️  [log] - 新配置id 82a6f245-9403-457e-b853-6a14bd1c3865
-⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=\nAddress = 10.8.0.19/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 65.20.86.216:51820","error":null}
+⚡️  [log] - 转发请求结果==>> {"data":"2b796d5b-28f2-4182-9331-b03ece055f1d","error":null}
+⚡️  [log] - 新配置id 2b796d5b-28f2-4182-9331-b03ece055f1d
+⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = mEQMcxAuXUYXmK3l6XZaAX7lLOMDCFc8Whq+H7urw3c=\nAddress = 10.8.0.20/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = CBGuSRfFjX1cbB8K/DRDoptOlFMwnJAzllKpiedAAx8=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 65.20.86.216:51820","error":null}
 ⚡️  [log] - wireguard配置 [Interface]
-PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=
-Address = 10.8.0.19/24
+PrivateKey = mEQMcxAuXUYXmK3l6XZaAX7lLOMDCFc8Whq+H7urw3c=
+Address = 10.8.0.20/24
 DNS = 1.1.1.1
 
 [Peer]
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-PresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=
+PresharedKey = CBGuSRfFjX1cbB8K/DRDoptOlFMwnJAzllKpiedAAx8=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
 Endpoint = 65.20.86.216:51820
 ⚡️  [log] - [morphVpn_ios] 连接 MorphProtocol → 65.20.86.216:29203
-⚡️  To Native ->  MorphProtocol connect 93457626
-2026-02-11 10:16:47.162924+0800 App[870:194176] 🔵 MorphProtocolPlugin: connect() called
-2026-02-11 10:16:47.164234+0800 App[870:194176] 🔵 MorphProtocol: 65.20.86.216:29203 layer=3 tpl=1
-2026-02-11 10:16:47.165673+0800 App[870:194176] 🔐 MorphEncryptor: init
-2026-02-11 10:16:47.166185+0800 App[870:194176] ✅ MorphEncryptor: ready
-2026-02-11 10:16:47.200205+0800 App[870:194176] 🎭 MorphObfuscator: key=27 layer=3 pad=8 combos=990
-2026-02-11 10:16:47.200830+0800 App[870:194176] ✅ MorphUDPClient: ready tpl=QUIC key=27
-2026-02-11 10:16:47.431271+0800 App[870:194177] 📡 LocalProxy: listener state → ready
-2026-02-11 10:16:47.431598+0800 App[870:194177] ✅ MorphUDPClient: proxy on 127.0.0.1:53479
-2026-02-11 10:16:47.471189+0800 App[870:194176] 📡 LocalProxy: listener started, port=53479, state=Optional(Network.NWListener.State.ready)
-2026-02-11 10:16:47.471778+0800 App[870:194176] ✅ MorphProtocol: proxy on port 53479
-2026-02-11 10:16:47.472223+0800 App[870:194176] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
-⚡️  TO JS {"localPort":53479,"success":true,"message":"Connecting to 65.20.86.216:29203"}
-⚡️  To Native ->  ⚡️  [log] - [morphVpn_ios] MorphProtocol 本地端口: 53479
-MorphProtocol addListener 93457627
-⚡️  To Native ->  MorphProtocol addListener 93457628
-⚡️  TO JS {"sessionPort":0,"status":"connecting","localPort":53479}
-2026-02-11 10:16:47.563283+0800 App[870:194176] ✅ MorphUDPClient: Handshake connection ready
-2026-02-11 10:16:47.567576+0800 App[870:194180] ✅ Handshake sent (2/10)
-2026-02-11 10:16:48.052191+0800 App[870:194177] 🤝 Handshake response: {"port":36342,"clientID":"eG2KfP5vBuOiLa656H4JkQ==","status":"connected"}
-2026-02-11 10:16:48.053275+0800 App[870:194177] ✅ Handshake complete: port=36342 status=connected
-2026-02-11 10:16:48.053987+0800 App[870:194177] 💓 Heartbeat started, interval=120.0s
-2026-02-11 10:16:48.054823+0800 App[870:194177] ✅ MorphProtocol: handshake done, session=36342
-⚡️  TO JS {"sessionPort":36342}
-⚡️  TO JS {"sessionPort":36342,"status":"connected","localPort":53479}
-2026-02-11 10:16:48.061029+0800 App[870:194180] ✅ Data connection ready on port 36342
-⚡️  [debug] - Removing listener MorphProtocol handshakeComplete
-⚡️  To Native ->  MorphProtocol removeListener 93457629
-⚡️  To Native ->  MorphProtocol removeListener 93457630
+⚡️  To Native ->  MorphProtocol connect 93675708
+2026-02-11 11:04:08.013771+0800 App[918:207501] 🔵 MorphProtocolPlugin: connect() called
+2026-02-11 11:04:08.014957+0800 App[918:207501] 🔵 MorphProtocol: 65.20.86.216:29203 layer=3 tpl=1
+2026-02-11 11:04:08.017147+0800 App[918:207501] 🔐 MorphEncryptor: init
+2026-02-11 11:04:08.017619+0800 App[918:207501] ✅ MorphEncryptor: ready
+2026-02-11 11:04:08.047256+0800 App[918:207501] 🎭 MorphObfuscator: key=50 layer=3 pad=8 combos=990
+2026-02-11 11:04:08.047478+0800 App[918:207501] ✅ MorphUDPClient: ready tpl=QUIC key=50
+2026-02-11 11:04:08.379672+0800 App[918:207498] 📡 LocalProxy: listener state → ready
+2026-02-11 11:04:08.380026+0800 App[918:207498] ✅ MorphUDPClient: proxy on 127.0.0.1:61895
+2026-02-11 11:04:08.380639+0800 App[918:207501] 📡 LocalProxy: listener started, port=61895, state=Optional(Network.NWListener.State.ready)
+2026-02-11 11:04:08.380873+0800 App[918:207501] ✅ MorphProtocol: proxy on port 61895
+2026-02-11 11:04:08.381254+0800 App[918:207501] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+⚡️  TO JS {"localPort":61895,"success":true,"message":"Connecting to 65.20.86.216:29203"}
+⚡️  To Native ->  MorphProtocol addListener 93675709
+⚡️  [log] - [morphVpn_ios] MorphProtocol 本地端口: 61895
+⚡️  To Native ->  MorphProtocol addListener 93675710
+⚡️  TO JS {"sessionPort":0,"status":"connecting","localPort":61895}
+2026-02-11 11:04:08.478370+0800 App[918:207501] ✅ MorphUDPClient: Handshake connection ready
+2026-02-11 11:04:08.482213+0800 App[918:207501] ✅ Handshake sent (2/10)
+2026-02-11 11:04:09.031071+0800 App[918:207498] 🤝 Handshake response: {"port":54485,"clientID":"Qa4odylfmZjXLn+OlfvEWg==","status":"connected"}
+2026-02-11 11:04:09.031270+0800 App[918:207498] ✅ Handshake complete: port=54485 status=connected
+2026-02-11 11:04:09.031432+0800 App[918:207498] 💓 Heartbeat started, interval=120.0s
+2026-02-11 11:04:09.034209+0800 App[918:207498] ✅ MorphProtocol: handshake done, session=54485
+⚡️  TO JS {"templateId":1,"randomValue":175,"clientID":"Qa4odylfmZjXLn+OlfvEWg==","sessionPort":54485,"substitutionTable":[185,203,244,105,112,141,103,128,196,218,161,64,231,83,20,78,11,164,41,110,66,31,10,129,49,154,152,189,239,53,18,167,253,116,250,29,118,16,89,10
+⚡️  TO JS {"localPort":61895,"status":"connected","sessionPort":54485}
+2026-02-11 11:04:09.035945+0800 App[918:207498] ✅ Data connection ready on port 54485
+⚡️  To Native ->  MorphProtocol removeListener ⚡️  [debug] - Removing listener MorphProtocol handshakeComplete
+93675711
+⚡️  To Native ->  MorphProtocol removeListener 93675712
 ⚡️  [debug] - Removing listener MorphProtocol statusChanged
-⚡️  [log] - [morphVpn_ios] 握手完成，会话端口: 36342
+⚡️  [log] - [morphVpn_ios] 握手完成，会话端口: 54485, key: 50, templateId: 1, clientID: Qa4odylf...
 ⚡️  [log] - [morphVpn_ios] AllowedIPs: 128.0.0.0/1, 0.0.0.0/2, 96.0.0.0/3, 80.0.0.0/4, 72.0.0.0/5, 68.0.0.0/6, 66.0.0.0/7, 64.0.0.0/8, 65.128.0.0/9, 65.64.0.0/10, 65.32.0.0/11, 65.0.0.0/12, 65.24.0.0/13, 65.16.0.0/14, 65.22.0.0/15, 65.21.0.0/16, 65.20.128.0/17, 65.20.0.0/18, 65.20.96.0/19, 65.20.64.0/20, 65.20.88.0/21, 65.20.80.0/22, 65.20.84.0/23, 65.20.87.0/24, 65.20.86.0/25, 65.20.86.128/26, 65.20.86.224/27, 65.20.86.192/28, 65.20.86.208/29, 65.20.86.220/30, 65.20.86.218/31, 65.20.86.217/32
 ⚡️  [log] - [morphVpn_ios] Excluded server IP: 65.20.86.216
-⚡️  To Native ->  WireGuard connect 93457631
+⚡️  To Native ->  WireGuard connect 93675713
 ⚡️  [log] - [morphVpn_ios] Final WG config:
 [Interface]
-Address = 10.8.0.19/24
+Address = 10.8.0.20/24
 DNS = 1.1.1.1
-PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=
+PrivateKey = mEQMcxAuXUYXmK3l6XZaAX7lLOMDCFc8Whq+H7urw3c=
 ListenPort = 51820
 
 [Peer]
 AllowedIPs = 128.0.0.0/1,0.0.0.0/2,96.0.0.0/3,80.0.0.0/4,72.0.0.0/5,68.0.0.0/6,66.0.0.0/7,64.0.0.0/8,65.128.0.0/9,65.64.0.0/10,65.32.0.0/11,65.0.0.0/12,65.24.0.0/13,65.16.0.0/14,65.22.0.0/15,65.21.0.0/16,65.20.128.0/17,65.20.0.0/18,65.20.96.0/19,65.20.64.0/20,65.20.88.0/21,65.20.80.0/22,65.20.84.0/23,65.20.87.0/24,65.20.86.0/25,65.20.86.128/26,65.20.86.224/27,65.20.86.192/28,65.20.86.208/29,65.20.86.220/30,65.20.86.218/31,65.20.86.217/32
-Endpoint = 127.0.0.1:53479
-PresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=
+Endpoint = 127.0.0.1:29203
+PresharedKey = CBGuSRfFjX1cbB8K/DRDoptOlFMwnJAzllKpiedAAx8=
 PersistentKeepalive = 0
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-⚡️  [log] - [morphVpn_ios] WireGuard 配置已改写
+⚡️  [log] - [morphVpn_ios] morphConfig for extension: {"host":"65.20.86.216","sessionPort":54485,"key":50,"layer":3,"padding":8,"templateId":1,"clientID":"Qa4odylfmZjXLn+OlfvEWg==","fnInitor":{"substitutionTable":[185,203,244,105,112,141,103,128,196,218,161,64,231,83,20,78,11,164,41,110,66,31,10,129,49,154,152,189,239,53,18,167,253,116,250,29,118,16,89,100,85,212,86,252,197,120,182,123,39,124,58,63,121,73,45,151,193,190,22,171,55,174,233,23,136,149,4,111,88,168,134,200,209,202,223,52,92,205,192,2,219,176,170,40,9,54,35,180,68,232,215,99,214,222,166,95,191,102,238,27,183,50,247,139,249,248,146,33,6,101,216,177,71,93,96,243,160,132,162,133,108,107,72,178,155,13,97,188,109,187,17,169,114,82,227,106,65,220,156,47,0,255,142,207,113,84,217,98,198,42,30,125,56,163,61,172,147,60,81,241,24,62,240,7,229,184,75,144,19,153,15,76,245,94,77,158,224,150,143,175,119,179,211,195,225,234,79,228,230,74,210,226,1,237,159,137,131,51,34,236,8,44,251,36,145,90,213,206,67,117,140,87,32,122,115,70,80,246,57,138,91,14,127,21,126,148,26,194,48,221,165,173,130,201,204,254,69,235,5,12,3,46,28,59,186,104,37,208,135,38,157,242,181,25,43,199],"randomValue":175}}
 🔵 WireGuardPlugin: connect() called
-🔵 WireGuardPlugin: Call options: Optional([AnyHashable("tunnelName"): "MorphVPN", AnyHashable("config"): "[Interface]\nAddress = 10.8.0.19/24\nDNS = 1.1.1.1\nPrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=\nListenPort = 51820\n\n[Peer]\nAllowedIPs = 128.0.0.0/1,0.0.0.0/2,96.0.0.0/3,80.0.0.0/4,72.0.0.0/5,68.0.0.0/6,66.0.0.0/7,64.0.0.0/8,65.128.0.0/9,65.64.0.0/10,65.32.0.0/11,65.0.0.0/12,65.24.0.0/13,65.16.0.0/14,65.22.0.0/15,65.21.0.0/16,65.20.128.0/17,65.20.0.0/18,65.20.96.0/19,65.20.64.0/20,65.20.88.0/21,65.20.80.0/22,65.20.84.0/23,65.20.87.0/24,65.20.86.0/25,65.20.86.128/26,65.20.86.224/27,65.20.86.192/28,65.20.86.208/29,65.20.86.220/30,65.20.86.218/31,65.20.86.217/32\nEndpoint = 127.0.0.1:53479\nPresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=\nPersistentKeepalive = 0\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI="])
-🔵 WireGuardPlugin: Config received
-🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Config length: 743 bytes
-🔵 WireGuardPlugin: Config preview: [Interface]
-Address = 10.8.0.19/24
-DNS = 1.1.1.1
-PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEb...
-🔵 WireGuardPlugin: saveConfiguration called
-🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
-🔵 WireGuardPlugin: Provider configuration set with wg_config key
+🔵 WireGuardPlugin: Call options: Optional([AnyHashable("tunnelName"): "MorphVPN", AnyHashable("config"): "[Interface]\nAddress = 10.8.0.20/24\nDNS = 1.1.1.1\nPrivateKey = mEQMcxAuXUYXmK3l6XZaAX7lLOMDCFc8Whq+H7urw3c=\nListenPort = 51820\n\n[Peer]\nAllowedIPs = 128.0.0.0/1,0.0.0.0/2,96.0.0.0/3,80.0.0.0/4,72.0.0.0/5,68.0.0.0/6,66.0.0.0/7,64.0.0.0/8,65.128.0.0/9,65.64.0.0/10,65.32.0.0/11,65.0.0.0/12,65.24.0.0/13,65.16.0.0/14,65.22.0.0/15,65.21.0.0/16,65.20.128.0/17,65.20.0.0/18,65.20.96.0/19,65.20.64.0/20,65.20.88.0/21,65.20.80.0/22,65.20.84.0/23,65.20.87.0/24,65.20.86.0/25,65.20.86.128/26,65.20.86.224/27,65.20.86.192/28,65.20.86.208/29,65.20.86.220/30,65.20.86.218/31,65.20.86.217/32\nEndpoint = 127.0.0.1:29203\nPresharedKey = CBGuSRfFjX1cbB8K/DRDoptOlFMwnJAzllKpiedAAx8=\nPersistentKeepalive = 0\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=", AnyHashable("morphConfig"): "{\"host\":\"65.20.86.216\",\"sessionPort\":54485,\"key\":50,\"layer\":3,\"padding\":8,\"templateId\":1,\"clientID\":\"Qa4odylfmZjXLn+OlfvEWg==\",\"fnInitor\":{\"substitutionTable\":[185,203,244,105,112,141,103,128,196,218,161,64,231,83,20,78,11,164,41,110,66,31,10,129,49,154,152,189,239,53,18,167,253,116,250,29,118,16,89,100,85,212,86,252,197,120,182,123,39,124,58,63,121,73,45,151,193,190,22,171,55,174,233,23,136,149,4,111,88,168,134,200,209,202,223,52,92,205,192,2,219,176,170,40,9,54,35,180,68,232,215,99,214,222,166,95,191,102,238,27,183,50,247,139,249,248,146,33,6,101,216,177,71,93,96,243,160,132,162,133,108,107,72,178,155,13,97,188,109,187,17,169,114,82,227,106,65,220,156,47,0,255,142,207,113,84,217,98,198,42,30,125,56,163,61,172,147,60,81,241,24,62,240,7,229,184,75,144,19,153,15,76,245,94,77,158,224,150,143,175,119,179,211,195,225,234,79,228,230,74,210,226,1,237,159,137,131,51,34,236,8,44,251,36,145,90,213,206,67,117,140,87,32,122,115,70,80,246,57,138,91,14,127,21,126,148,26,194,48,221,165,173,130,201,204,254,69,235,5,12,3,46,28,59,186,104,37,208,135,38,157,242,181,25,43,199],\"randomValue\":175}}"])
+🔵 WireGuardPlugin: Config length: 743 bytes, morphConfig: true
+🔵 WireGuardPlugin: morphConfig passed to extension
 📡 WireGuardPlugin: VPN status changed to: disconnected
 🔍 WireGuardPlugin: Checking for connection errors...
 🔵 WireGuardPlugin: Saving VPN configuration to preferences...
@@ -107,7 +107,7 @@ PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEb...
 🔵 WireGuardPlugin: VPN manager enabled: true
 🔵 WireGuardPlugin: Protocol configuration: 
     type = plugin
-    identifier = 69311245-B773-49F8-8C2E-594FFB9DD7B3
+    identifier = 4605F1D7-3070-4740-B941-0BC16283E8D9
     serverAddress = WireGuard
     identityDataImported = NO
     disconnectOnSleep = NO
@@ -125,17 +125,18 @@ PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEb...
     reassertTimeout = 0
     providerConfiguration = {
         wg_config = [Interface]
-Address = 10.8.0.19/24
+Address = 10.8.0.20/24
 DNS = 1.1.1.1
-PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=
+PrivateKey = mEQMcxAuXUYXmK3l6XZaAX7lLOMDCFc8Whq+H7urw3c=
 ListenPort = 51820
 
 [Peer]
 AllowedIPs = 128.0.0.0/1,0.0.0.0/2,96.0.0.0/3,80.0.0.0/4,72.0.0.0/5,68.0.0.0/6,66.0.0.0/7,64.0.0.0/8,65.128.0.0/9,65.64.0.0/10,65.32.0.0/11,65.0.0.0/12,65.24.0.0/13,65.16.0.0/14,65.22.0.0/15,65.21.0.0/16,65.20.128.0/17,65.20.0.0/18,65.20.96.0/19,65.20.64.0/20,65.20.88.0/21,65.20.80.0/22,65.20.84.0/23,65.20.87.0/24,65.20.86.0/25,65.20.86.128/26,65.20.86.224/27,65.20.86.192/28,65.20.86.208/29,65.20.86.220/30,65.20.86.218/31,65.20.86.217/32
-Endpoint = 127.0.0.1:53479
-PresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=
+Endpoint = 127.0.0.1:29203
+PresharedKey = CBGuSRfFjX1cbB8K/DRDoptOlFMwnJAzllKpiedAAx8=
 PersistentKeepalive = 0
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
+        morph_config = {"host":"65.20.86.216","sessionPort":54485,"key":50,"layer":3,"padding":8,"templateId":1,"clientID":"Qa4odylfmZjXLn+OlfvEWg==","fnInitor":{"substitutionTable":[185,203,244,105,112,141,103,128,196,218,161,64,231,83,20,78,11,164,41,110,66,31,10,129,49,154,152,189,239,53,18,167,253,116,250,29,118,16,89,100,85,212,86,252,197,120,182,123,39,124,58,63,121,73,45,151,193,190,22,171,55,174,233,23,136,149,4,111,88,168,134,200,209,202,223,52,92,205,192,2,219,176,170,40,9,54,35,180,68,232,215,99,214,222,166,95,191,102,238,27,183,50,247,139,249,248,146,33,6,101,216,177,71,93,96,243,160,132,162,133,108,107,72,178,155,13,97,188,109,187,17,169,114,82,227,106,65,220,156,47,0,255,142,207,113,84,217,98,198,42,30,125,56,163,61,172,147,60,81,241,24,62,240,7,229,184,75,144,19,153,15,76,245,94,77,158,224,150,143,175,119,179,211,195,225,234,79,228,230,74,210,226,1,237,159,137,131,51,34,236,8,44,251,36,145,90,213,206,67,117,140,87,32,122,115,70,80,246,57,138,91,14,127,21,126,148,26,194,48,221,165,173,130,201,204,254,69,235,5,12,3,46,28,59,186,104,37,208,135,38,157,242,181,25,43,199],"randomValue":175}},
     }
     providerBundleIdentifier = com.morphvpn.app.WireGuardExtension
 🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
@@ -145,7 +146,7 @@ PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
 ✅ WireGuardPlugin: Connection successful
 ⚡️  TO JS {"success":true}
 ⚡️  [log] - [morphVpn_ios] VPN 连接成功
-⚡️  [log] - vpn已打开,检测IP {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770769905,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":2,"updatedAt":"2026-02-11T02:16:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
+⚡️  [log] - vpn已打开,检测IP {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770777470,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":3,"updatedAt":"2026-02-11T02:56:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connected
@@ -167,43 +168,29 @@ PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
 ⚡️  [log] - 7
 ⚡️  [log] - failtimes 8
 ⚡️  [log] - 8
-2026-02-11 10:18:18.242614+0800 App[870:194702] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
-2026-02-11 10:18:18.243261+0800 App[870:194702] ⚠️ Inactivity detected (90s), reconnecting...
-2026-02-11 10:18:18.290072+0800 App[870:194702] 🎭 MorphObfuscator: key=241 layer=3 pad=8 combos=990
-2026-02-11 10:18:18.290965+0800 App[870:194702] 🔄 Reconnecting: tpl=KCP key=241
-2026-02-11 10:18:18.291036+0800 App[870:194702] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
-2026-02-11 10:18:18.292737+0800 App[870:194702] ✅ MorphUDPClient: Handshake connection ready
-2026-02-11 10:18:18.293641+0800 App[870:194702] ✅ Handshake sent (2/10)
-2026-02-11 10:18:18.675611+0800 App[870:194745] 🤝 Handshake response: {"port":38859,"clientID":"pO0e1FouE0nrd31GqphOHg==","status":"connected"}
-2026-02-11 10:18:18.676294+0800 App[870:194745] ✅ Handshake complete: port=38859 status=connected
-2026-02-11 10:18:18.677231+0800 App[870:194745] 💓 Heartbeat started, interval=120.0s
-2026-02-11 10:18:18.677993+0800 App[870:194745] ✅ MorphProtocol: handshake done, session=38859
-2026-02-11 10:18:18.684444+0800 App[870:194745] ✅ Data connection ready on port 38859
-2026-02-11 10:19:49.634403+0800 App[870:194772] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
-2026-02-11 10:19:49.634854+0800 App[870:194772] ⚠️ Inactivity detected (90s), reconnecting...
-2026-02-11 10:19:49.683963+0800 App[870:194772] 🎭 MorphObfuscator: key=31 layer=3 pad=8 combos=990
-2026-02-11 10:19:49.684883+0800 App[870:194772] 🔄 Reconnecting: tpl=QUIC key=31
-2026-02-11 10:19:49.684950+0800 App[870:194772] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
-2026-02-11 10:19:49.687292+0800 App[870:194772] ❌ Handshake receive error: POSIXErrorCode(rawValue: 89): Operation canceled
-2026-02-11 10:19:49.688115+0800 App[870:194772] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 89): Operation canceled
-2026-02-11 10:19:49.695707+0800 App[870:194772] ✅ MorphUDPClient: Handshake connection ready
-2026-02-11 10:19:49.696473+0800 App[870:194772] ✅ Handshake sent (2/10)
-2026-02-11 10:19:50.121766+0800 App[870:194773] 🤝 Handshake response: {"port":59394,"clientID":"8qQHnfNhCgc0NuLbdAkVjw==","status":"connected"}
-2026-02-11 10:19:50.122538+0800 App[870:194773] ✅ Handshake complete: port=59394 status=connected
-2026-02-11 10:19:50.123361+0800 App[870:194773] 💓 Heartbeat started, interval=120.0s
-2026-02-11 10:19:50.124124+0800 App[870:194773] ✅ MorphProtocol: handshake done, session=59394
-2026-02-11 10:19:50.130511+0800 App[870:194773] ✅ Data connection ready on port 59394
-2026-02-11 10:21:21.108434+0800 App[870:194773] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
-2026-02-11 10:21:21.108899+0800 App[870:194773] ⚠️ Inactivity detected (90s), reconnecting...
-2026-02-11 10:21:21.156232+0800 App[870:194773] 🎭 MorphObfuscator: key=74 layer=3 pad=8 combos=990
-2026-02-11 10:21:21.157048+0800 App[870:194773] 🔄 Reconnecting: tpl=QUIC key=74
-2026-02-11 10:21:21.157113+0800 App[870:194773] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
-2026-02-11 10:21:21.157657+0800 App[870:194773] ❌ Handshake receive error: POSIXErrorCode(rawValue: 89): Operation canceled
-2026-02-11 10:21:21.157823+0800 App[870:194773] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 89): Operation canceled
-2026-02-11 10:21:21.158859+0800 App[870:195245] ✅ MorphUDPClient: Handshake connection ready
-2026-02-11 10:21:21.159604+0800 App[870:195367] ✅ Handshake sent (2/10)
-2026-02-11 10:21:21.609899+0800 App[870:195245] 🤝 Handshake response: {"port":49153,"clientID":"BOtJoTElUvKIGFk6ANAkpg==","status":"connected"}
-2026-02-11 10:21:21.610540+0800 App[870:195245] ✅ Handshake complete: port=49153 status=connected
-2026-02-11 10:21:21.611366+0800 App[870:195245] 💓 Heartbeat started, interval=120.0s
-2026-02-11 10:21:21.611994+0800 App[870:195245] ✅ MorphProtocol: handshake done, session=49153
-2026-02-11 10:21:21.618914+0800 App[870:195245] ✅ Data connection ready on port 49153
+2026-02-11 11:05:39.190646+0800 App[918:208021] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
+2026-02-11 11:05:39.191174+0800 App[918:208021] ⚠️ Inactivity detected (90s), reconnecting...
+2026-02-11 11:05:39.239112+0800 App[918:208021] 🎭 MorphObfuscator: key=44 layer=3 pad=8 combos=990
+2026-02-11 11:05:39.240007+0800 App[918:208021] 🔄 Reconnecting: tpl=KCP key=44
+2026-02-11 11:05:39.240078+0800 App[918:208021] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+2026-02-11 11:05:39.241785+0800 App[918:208021] ✅ MorphUDPClient: Handshake connection ready
+2026-02-11 11:05:39.242528+0800 App[918:208062] ✅ Handshake sent (2/10)
+2026-02-11 11:05:39.656821+0800 App[918:208062] 🤝 Handshake response: {"port":48568,"clientID":"dzI27ENG3cmO5XfVS3snOQ==","status":"connected"}
+2026-02-11 11:05:39.657476+0800 App[918:208062] ✅ Handshake complete: port=48568 status=connected
+2026-02-11 11:05:39.658300+0800 App[918:208062] 💓 Heartbeat started, interval=120.0s
+2026-02-11 11:05:39.659099+0800 App[918:208062] ✅ MorphProtocol: handshake done, session=48568
+2026-02-11 11:05:39.665569+0800 App[918:208062] ✅ Data connection ready on port 48568
+2026-02-11 11:07:10.585220+0800 App[918:208021] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
+2026-02-11 11:07:10.585731+0800 App[918:208021] ⚠️ Inactivity detected (90s), reconnecting...
+2026-02-11 11:07:10.634231+0800 App[918:208021] 🎭 MorphObfuscator: key=232 layer=3 pad=8 combos=990
+2026-02-11 11:07:10.635198+0800 App[918:208021] 🔄 Reconnecting: tpl=GenericGaming key=232
+2026-02-11 11:07:10.635277+0800 App[918:208021] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+2026-02-11 11:07:10.641015+0800 App[918:208021] ❌ Handshake receive error: POSIXErrorCode(rawValue: 89): Operation canceled
+2026-02-11 11:07:10.643013+0800 App[918:208021] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 89): Operation canceled
+2026-02-11 11:07:10.656910+0800 App[918:208021] ✅ MorphUDPClient: Handshake connection ready
+2026-02-11 11:07:10.657588+0800 App[918:208021] ✅ Handshake sent (2/10)
+2026-02-11 11:07:10.992956+0800 App[918:208021] 🤝 Handshake response: {"port":37000,"clientID":"Fhj5Jq15JZ7o1ycDadrj6A==","status":"connected"}
+2026-02-11 11:07:10.993584+0800 App[918:208021] ✅ Handshake complete: port=37000 status=connected
+2026-02-11 11:07:10.994407+0800 App[918:208021] 💓 Heartbeat started, interval=120.0s
+2026-02-11 11:07:10.995227+0800 App[918:208021] ✅ MorphProtocol: handshake done, session=37000
+2026-02-11 11:07:11.001483+0800 App[918:208021] ✅ Data connection ready on port 37000

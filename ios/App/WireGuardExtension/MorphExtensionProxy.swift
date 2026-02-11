@@ -82,14 +82,14 @@ class MorphExtensionProxy {
         let semaphore = DispatchSemaphore(value: 0)
         
         listener?.stateUpdateHandler = { state in
-            NSLog("📡 MorphExtensionProxy: listener state → \(state)")
+            SharedLog.shared.log("📡 Proxy listener state → \(state)")
             if case .ready = state {
                 semaphore.signal()
             }
         }
         
         listener?.newConnectionHandler = { [weak self] connection in
-            NSLog("📡 MorphExtensionProxy: WireGuard connected")
+            SharedLog.shared.log("📡 WireGuard connected to proxy")
             self?.handleWireGuardConnection(connection)
         }
         
@@ -133,9 +133,16 @@ class MorphExtensionProxy {
         connection.start(queue: queue)
     }
     
+    private var wgToServerCount = 0
+    private var serverToWgCount = 0
+    
     private func receiveFromWireGuard(_ connection: NWConnection) {
         connection.receiveMessage { [weak self] data, _, _, error in
             guard let self = self else { return }
+            if let error = error {
+                SharedLog.shared.log("❌ WG recv error: \(error)")
+                return
+            }
             if let data = data, !data.isEmpty {
                 self.forwardToServer(data)
             }
@@ -144,6 +151,11 @@ class MorphExtensionProxy {
     }
     
     private func forwardToServer(_ data: Data) {
+        wgToServerCount += 1
+        if wgToServerCount <= 3 || wgToServerCount % 100 == 0 {
+            SharedLog.shared.log("📤 WG→Server #\(wgToServerCount) len=\(data.count)")
+        }
+        
         // 混淆 + 协议封装
         let obfuscated = obfuscator.obfuscate(data)
         let packet: Data
@@ -155,7 +167,7 @@ class MorphExtensionProxy {
         
         serverConnection?.send(content: packet, completion: .contentProcessed { error in
             if let error = error {
-                NSLog("❌ MorphExtensionProxy [WG→Server] send error: \(error)")
+                SharedLog.shared.log("❌ WG→Server send error: \(error)")
             }
         })
     }
@@ -170,10 +182,12 @@ class MorphExtensionProxy {
         let params = NWParameters.udp
         params.allowLocalEndpointReuse = true
         
+        SharedLog.shared.log("🔌 Connecting to server \(remoteHost):\(remotePort)")
+        
         serverConnection = NWConnection(to: endpoint, using: params)
         serverConnection?.stateUpdateHandler = { [weak self] state in
+            SharedLog.shared.log("📡 Server conn state → \(state)")
             if case .ready = state {
-                NSLog("✅ MorphExtensionProxy: Server connection ready on port \(self?.remotePort ?? 0)")
                 self?.receiveFromServer()
             }
         }
@@ -183,6 +197,10 @@ class MorphExtensionProxy {
     private func receiveFromServer() {
         serverConnection?.receiveMessage { [weak self] data, _, _, error in
             guard let self = self else { return }
+            if let error = error {
+                SharedLog.shared.log("❌ Server recv error: \(error)")
+                return
+            }
             if let data = data, !data.isEmpty {
                 self.forwardToWireGuard(data)
             }
@@ -191,10 +209,18 @@ class MorphExtensionProxy {
     }
     
     private func forwardToWireGuard(_ data: Data) {
+        serverToWgCount += 1
+        if serverToWgCount <= 3 || serverToWgCount % 100 == 0 {
+            SharedLog.shared.log("📥 Server→WG #\(serverToWgCount) len=\(data.count)")
+        }
+        
         // 协议解封装 + 解混淆
         let obfuscated: Data
         if let template = self.template {
-            guard let extracted = template.decapsulate(data) else { return }
+            guard let extracted = template.decapsulate(data) else {
+                SharedLog.shared.log("❌ Server→WG decapsulate failed, len=\(data.count)")
+                return
+            }
             obfuscated = extracted
         } else {
             obfuscated = data
@@ -204,7 +230,7 @@ class MorphExtensionProxy {
         
         wgConnection?.send(content: deobfuscated, completion: .contentProcessed { error in
             if let error = error {
-                NSLog("❌ MorphExtensionProxy [Server→WG] send error: \(error)")
+                SharedLog.shared.log("❌ Server→WG send error: \(error)")
             }
         })
     }
