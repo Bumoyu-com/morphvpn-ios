@@ -108,6 +108,20 @@ public class WireGuardPlugin: CAPPlugin {
         
         call.resolve(result)
     }
+
+    /**
+     * 读取 Extension 进程的共享日志
+     */
+    @objc func readExtensionLog(_ call: CAPPluginCall) {
+        let fm = FileManager.default
+        if let containerURL = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.com.morphvpn.app.wireguard") {
+            let url = containerURL.appendingPathComponent("extension_log.txt")
+            let log = (try? String(contentsOf: url, encoding: .utf8)) ?? ""
+            call.resolve(["log": log])
+        } else {
+            call.resolve(["log": "App Group container not available"])
+        }
+    }
     
     /**
      * 保存WireGuard配置

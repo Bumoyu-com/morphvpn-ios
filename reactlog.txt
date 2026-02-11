@@ -1,76 +1,93 @@
+2026-02-11 19:15:19.051424+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking up debug dylib relative path
+2026-02-11 19:15:19.051828+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Found debug dylib relative path string `App.debug.dylib`
+2026-02-11 19:15:19.051840+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking up debug dylib entry point name
+2026-02-11 19:15:19.051845+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] No debug dylib entry point name defined.
+2026-02-11 19:15:19.051850+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking up debug dylib install name
+2026-02-11 19:15:19.051856+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Found debug dylib install name string `@rpath/App.debug.dylib`
+2026-02-11 19:15:19.051862+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking for Previews JIT link entry point.
+2026-02-11 19:15:19.053081+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] No Previews JIT entry point found.
+2026-02-11 19:15:19.053094+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Gave PreviewsInjection a chance to run and it returned, continuing with debug dylib.
+2026-02-11 19:15:19.053100+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Looking for main entry point.
+2026-02-11 19:15:19.053107+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Opening debug dylib with '@rpath/App.debug.dylib'
+2026-02-11 19:15:19.053125+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Debug dylib handle: 0xf65819f0
+2026-02-11 19:15:19.053263+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] No entry point found. Checking for alias.
+2026-02-11 19:15:19.053273+0800 App[1118:320182] [PreviewsAgentExecutorLibrary] Calling provided entry point.
+2026-02-11 19:15:19.094231+0800 App[1118:320182] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///private/var/mobile/Containers/Data/Application/239C1547-123B-4140-8B02-0646BA0F5FD6/Library/Cookies/Cookies.binarycookies
+✅ WireGuardPlugin: Plugin loaded successfully
+✅ WireGuardPlugin: Initialization complete
+⚡️  Loading app at capacitor://localhost...
+⚡️  [log] - ✅ PingBridge loaded and ready
+⚡️  WebView loaded
+⚡️  [log] - [morphVpn_ios] window.morphVpn 已初始化 (Extension 内置架构)
+⚡️  [log] - storage web
+⚡️  To Native ->  SplashScreen hide 81366848
+⚡️  TO JS undefined
+⚡️  [log] - ✅ PingBridge 已加载
+⚡️  [log] - 缓存加载失败
+    ️  [log] - 还未检查GFW,检查中...
+⚡️  [log] - GFW,检查完成==>> GFW is true
+⚡️  [log] - baseUrl==>> https://bumoyu-saas-morphvpn-api.zhendong-ge.workers.dev
+⚡️  [log] - 转发请求结果==>> {"data":{"result":true,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0"},"error":null}
+⚡️  [log] - login success
+⚡️  [log] - 开始全局轮询
+⚡️  [log] - 当前用户数据 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":0,"vpnConnect":false}}
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614240786,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T10:35:26.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - user admin==>> true
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T06:22:15.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T02:04:08.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b7
+⚡️  [log] - [{"id":"315e2512-e152-4048-b877-53295f8382f0","cityName":"sgp","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T06:53:04.000Z","createdAt":"2024-12-12T13:25:29.000Z"},{"id":"addea410-f5f9-494b-9ca1-8205f1428530","cityName":"nrt","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-10T02:29:22.000Z","createdAt":"2024-12-12T13:25:45.000Z"},{"id":"34387c9d-8517-4353-9c29-33fd26462193","cityName":"icn","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T06:22:15.000Z","createdAt":"2024-12-12T13:26:03.000Z"},{"id":"2064bda3-1485-4365-ac2e-9d17e3b78fb9","cityName":"lhr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-05-14T11:37:07.000Z","createdAt":"2024-12-12T13:30:00.000Z"},{"id":"cee41526-faf9-4c86-93a9-35ebeca55b0f","cityName":"man","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:30:10.000Z","createdAt":"2024-12-12T13:30:10.000Z"},{"id":"fcef4348-ff40-4d6d-ba92-c36ccc36d387","cityName":"ewr","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-29T03:35:31.000Z","createdAt":"2024-12-12T13:30:20.000Z"},{"id":"0b957a5a-b6eb-4635-a53b-c3675366340c","cityName":"lax","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-02-10T09:33:00.000Z","createdAt":"2024-12-12T13:30:33.000Z"},{"id":"82785664-7299-44d4-8595-7d8bdc6b8728","cityName":"sjc","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-01-16T15:08:06.000Z","createdAt":"2024-12-12T13:30:49.000Z"},{"id":"62ebf784-e499-445a-a87e-8104e2a8505f","cityName":"jnb","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:00.000Z","createdAt":"2024-12-12T13:31:00.000Z"},{"id":"3248aeb6-05c1-41ba-877a-1fe62fb645e4","cityName":"ams","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:11.000Z","createdAt":"2024-12-12T13:31:11.000Z"},{"id":"80938b9f-9c37-4f7c-a26b-2812acadc17b","cityName":"cdg","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:21.000Z","createdAt":"2024-12-12T13:31:21.000Z"},{"id":"ef1c3cbd-4fe0-49ab-8273-69d3b5fba5b5","cityName":"atl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-11-17T01:41:04.000Z","createdAt":"2024-12-12T13:31:31.000Z"},{"id":"79f81c53-9324-47c2-b822-5dbaab264dcf","cityName":"mex","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:31:42.000Z","createdAt":"2024-12-12T13:31:42.000Z"},{"id":"7af4ee90-675b-4878-8bbd-339ac63dcba4","cityName":"yto","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-10-16T13:27:35.000Z","createdAt":"2024-12-12T13:31:50.000Z"},{"id":"177098cd-afaa-4d79-9704-5515da921de6","cityName":"syd","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-01T06:57:34.000Z","createdAt":"2024-12-12T13:32:01.000Z"},{"id":"738de75d-3bc8-419b-9125-809b16ed2d00","cityName":"scl","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:11.000Z","createdAt":"2024-12-12T13:32:11.000Z"},{"id":"c1dc0a00-c2e6-4ab7-80d8-708273a3fe58","cityName":"mad","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:20.000Z","createdAt":"2024-12-12T13:32:20.000Z"},{"id":"c2d5f875-0cc0-4fd9-b542-2f13d8c6e359","cityName":"waw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-12-30T13:09:49.000Z","createdAt":"2024-12-12T13:32:30.000Z"},{"id":"9b064f97-b6a6-4c99-bc1b-8227e820c19e","cityName":"dfw","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:32:40.000Z","createdAt":"2024-12-12T13:32:40.000Z"},{"id":"604748a4-9c3c-4226-9f59-bd3957e44036","cityName":"sea","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-01-02T08:27:25.000Z","createdAt":"2024-12-12T13:32:50.000Z"},{"id":"6dc5c8ab-b0dc-4c3e-aacc-dbe32b35384c","cityName":"mel","creating":0,"types":"vhp-1c-1gb","updatedAt":"2024-12-12T13:33:02.000Z","createdAt":"2024-12-12T13:33:02.000Z"},{"id":"32dc1847-27b4-46f0-abf2-eed22fd560bd","cityName":"bom","creating":0,"types":"vhp-1c-1gb","updatedAt":"2026-02-11T02:04:08.000Z","createdAt":"2024-12-12T13:33:11.000Z"},{"id":"7d1fd690-47e1-47a3-bcb6-085569cc103d","cityName":"tlv","creating":0,"types":"vhp-1c-1gb","updatedAt":"2025-06-14T08:55:11.000Z","createdAt":"2024-12-12T13:33:24.000Z"},{"id":"229b763f-110e-4b56-b81c-
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614240786,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T10:35:26.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - getTraffic==>> {"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614240786,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T10:35:26.000Z","createdAt":"2025-04-09T09:42:53.000Z"}
+⚡️  [log] - {"code":"bom","city":"Mumbai","country":"India"}
+⚡️  [log] - 转发请求结果==>> {"data":[{"id":"01de206b-6dd4-4820-bedd-ca048b96c5a0","traffic":1537614028372,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","status":"admin","bill":null,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2025-04-09T09:42:53.000Z"}],"error":null}
+⚡️  [log] - getTraffic loop Traffic is  1537614028372
+⚡️  [log] - 转发请求结果==>> {"data":{"msg":"success","server":{"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770808581,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":0,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2026-02-11T00:31:45.000Z"}},"error":null}
+⚡️  [log] - 服务器信息 {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770808581,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":0,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
 ⚡️  [log] - 创建新配置,当前网络: GFW is true
-⚡️  [log] - 转发请求结果==>> {"data":"79a2526f-769c-46f4-a5da-5aa2293f201c","error":null}
-⚡️  [log] - 新配置id 79a2526f-769c-46f4-a5da-5aa2293f201c
-⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=\nAddress = 10.8.0.46/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 64.176.39.111:51820","error":null}
+⚡️  [log] - 转发请求结果==>> {"data":"22124bf3-bea1-4ead-9190-8761382a2de5","error":null}
+⚡️  [log] - 新配置id 22124bf3-bea1-4ead-9190-8761382a2de5
+⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = 6NGkaQjXpOvPz3Nr6nDBdqqCOHa++sXBchDMeZuvG3M=\nAddress = 10.8.0.33/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = iYlEwhiHMUOyIXnDbwxTzFGOKDBHWvj/21McXuCcBmk=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 65.20.86.216:51820","error":null}
 ⚡️  [log] - wireguard配置 [Interface]
-PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=
-Address = 10.8.0.46/24
+PrivateKey = 6NGkaQjXpOvPz3Nr6nDBdqqCOHa++sXBchDMeZuvG3M=
+Address = 10.8.0.33/24
 DNS = 1.1.1.1
 
 [Peer]
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-PresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=
+PresharedKey = iYlEwhiHMUOyIXnDbwxTzFGOKDBHWvj/21McXuCcBmk=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
-Endpoint = 64.176.39.111:51820
-⚡️  [log] - [morphVpn_ios] 连接 MorphProtocol → 64.176.39.111:16783
-⚡️  To Native ->  MorphProtocol connect 90959296
-2026-02-10 15:40:26.382067+0800 App[82168:20741348] 🔵 MorphProtocolPlugin: connect() called
-2026-02-10 15:40:26.383137+0800 App[82168:20741348] 🔵 MorphProtocol: 64.176.39.111:16783 layer=3 tpl=1
-2026-02-10 15:40:26.385635+0800 App[82168:20741348] 🔐 MorphEncryptor: init
-2026-02-10 15:40:26.386791+0800 App[82168:20741348] ✅ MorphEncryptor: ready
-2026-02-10 15:40:26.420415+0800 App[82168:20741348] 🎭 MorphObfuscator: key=129 layer=3 pad=8 combos=990
-2026-02-10 15:40:26.420626+0800 App[82168:20741348] ✅ MorphUDPClient: ready tpl=QUIC key=129
-2026-02-10 15:40:26.664351+0800 App[82168:20741368] ✅ MorphUDPClient: proxy on 127.0.0.1:50147
-2026-02-10 15:40:26.697597+0800 App[82168:20741348] ✅ MorphProtocol: proxy on port 50147
-2026-02-10 15:40:26.698460+0800 App[82168:20741348] 🔌 MorphUDPClient: Connecting to 64.176.39.111:16783
-⚡️  TO JS {"localPort":50147,"success":true,"message":"Connecting to 64.176.39.111:16783"}
-⚡️  [log] - [morphVpn_ios] MorphProtocol 本地端口: 50147
-⚡️  To Native ->  MorphProtocol addListener 90959297
-⚡️  To Native ->  MorphProtocol addListener 90959298
-⚡️  TO JS {"sessionPort":0,"localPort":50147,"status":"connecting"}
-2026-02-10 15:40:26.773824+0800 App[82168:20741348] ✅ MorphUDPClient: Handshake connection ready
-2026-02-10 15:40:26.777826+0800 App[82168:20741347] ✅ Handshake sent (2/10)
-2026-02-10 15:40:27.001592+0800 App[82168:20741347] 🤝 Handshake response: {"port":53384,"clientID":"Oh//WSN8+Otp/7b/WqGdYg==","status":"connected"}
-2026-02-10 15:40:27.002397+0800 App[82168:20741347] ✅ Handshake complete: port=53384 status=connected
-2026-02-10 15:40:27.003257+0800 App[82168:20741347] 💓 Heartbeat started, interval=120.0s
-2026-02-10 15:40:27.009325+0800 App[82168:20741347] ✅ MorphProtocol: handshake done, session=53384
-⚡️  TO JS {"sessionPort":53384}
-⚡️  TO JS {"status":"connected","localPort":50147,"sessionPort":53384}
-2026-02-10 15:40:27.010553+0800 App[82168:20741347] ✅ Data connection ready on port 53384
-⚡️  [debug] - Removing listener MorphProtocol handshakeComplete
-⚡️  To Native ->  MorphProtocol removeListener 90959299
-⚡️  [debug] - Removing listener MorphProtocol statusChanged
-⚡️  To Native ->  MorphProtocol removeListener 90959300
-⚡️  [log] - [morphVpn_ios] 握手完成，会话端口: 53384
-⚡️  [log] - [morphVpn_ios] AllowedIPs: 0.0.0.0/0
-⚡️  To Native ->  WireGuard connect 90959301
-⚡️  [log] - [morphVpn_ios] WireGuard 配置已改写
+Endpoint = 65.20.86.216:51820
+⚡️  [log] - [morphVpn_ios] 连接开始 → 65.20.86.216:29203 userId=01de806b-6dd8-4820-bedd-ca048b96c5a0
+⚡️  To Native ->  MorphProtocol connect 81366849
+⚡️  [log] - [morphVpn_ios] 步骤1: 构建 MorphProtocol 配置...
+2026-02-11 19:16:36.462408+0800 App[1118:320606] 🔵 MorphProtocolPlugin: connect() called (config-only mode)
+2026-02-11 19:16:36.463784+0800 App[1118:320606] 🔵 MorphProtocol: config ready for 65.20.86.216:29203
+⚡️  TO JS {"success":true,"morphConfig":"{\"port\":29203,\"inactivityTimeout\":30000,\"maxRetries\":10,\"handshakeInterval\":5000,\"templateType\":1,\"host\":\"65.20.86.216\",\"heartbeatInterval\":120000,\"userId\":\"01de806b-6dd8-4820-bedd-ca048b96c5a0\",\"obfuscat
+⚡️  [log] - [morphVpn_ios] 步骤1 完成: morphConfig 已生成, message=MorphProtocol config ready (will run in Extension)
+⚡️  [log] - [morphVpn_ios]   morphConfig: host=65.20.86.216:29203 layer=3 tpl=1 userId=01de806b...
+⚡️  [log] - [morphVpn_ios] 步骤2: 启动 WireGuard (含 MorphProtocol)...
+⚡️  To Native ->  ⚡️  [log] - [morphVpn_ios]   wgConfig 长度: 314 bytes
+WireGuard connect 81366850
+⚡️  [log] - [morphVpn_ios]   morphConfig 长度: 322 bytes
 🔵 WireGuardPlugin: connect() called
-🔵 WireGuardPlugin: Call options: Optional([AnyHashable("config"): "[Interface]\nAddress = 10.8.0.46/24\nDNS = 1.1.1.1\nPrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=\nListenPort = 51820\n\n[Peer]\nAllowedIPs = 0.0.0.0/0\nEndpoint = 127.0.0.1:50147\nPresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=\nPersistentKeepalive = 0\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=", AnyHashable("tunnelName"): "MorphVPN"])
-🔵 WireGuardPlugin: Config received
+🔵 WireGuardPlugin: MorphProtocol config provided, will run in Extension
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Config length: 324 bytes
-🔵 WireGuardPlugin: Config preview: [Interface]
-Address = 10.8.0.46/24
-DNS = 1.1.1.1
-PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr9...
+🔵 WireGuardPlugin: Config length: 314 bytes
 🔵 WireGuardPlugin: saveConfiguration called
-🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
-🔵 WireGuardPlugin: Provider configuration set with wg_config key
-📡 WireGuardPlugin: VPN status changed to: disconnected
-🔍 WireGuardPlugin: Checking for connection errors...
+🔵 WireGuardPlugin: morph_config added to providerConfiguration
 🔵 WireGuardPlugin: Saving VPN configuration to preferences...
+2026-02-11 19:16:39.669288+0800 App[1118:320182] [Snapshotting] Snapshotting a view (0x105875c00, UIKeyboardImpl) that is not in a visible window requires afterScreenUpdates:YES.
 ✅ WireGuardPlugin: Configuration saved successfully
 🔵 WireGuardPlugin: Reloading configuration...
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...
 ✅ WireGuardPlugin: Configuration reloaded successfully
 🔵 WireGuardPlugin: startVPN called
 🔵 WireGuardPlugin: VPN manager status: disconnected
 🔵 WireGuardPlugin: VPN manager enabled: true
 🔵 WireGuardPlugin: Protocol configuration: 
     type = plugin
-    identifier = A350B0C8-CA2E-44DE-9E08-48CB3FCD404F
+    identifier = 5936B707-A2CA-4675-AB81-CFC6B2864008
     serverAddress = WireGuard
     identityDataImported = NO
     disconnectOnSleep = NO
@@ -88,17 +105,17 @@ PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr9...
     reassertTimeout = 0
     providerConfiguration = {
         wg_config = [Interface]
-Address = 10.8.0.46/24
+PrivateKey = 6NGkaQjXpOvPz3Nr6nDBdqqCOHa++sXBchDMeZuvG3M=
+Address = 10.8.0.33/24
 DNS = 1.1.1.1
-PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=
-ListenPort = 51820
 
 [Peer]
-AllowedIPs = 0.0.0.0/0
-Endpoint = 127.0.0.1:50147
-PresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=
+PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
+PresharedKey = iYlEwhiHMUOyIXnDbwxTzFGOKDBHWvj/21McXuCcBmk=
+AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
-PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
+Endpoint = 65.20.86.216:51820,
+        morph_config = {"port":29203,"inactivityTimeout":30000,"maxRetries":10,"handshakeInterval":5000,"templateType":1,"host":"65.20.86.216","heartbeatInterval":120000,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0","obfuscationLayer":3,"paddingLength":8,"encryptionKey":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w=="},
     }
     providerBundleIdentifier = com.morphvpn.app.WireGuardExtension
 🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
@@ -107,88 +124,29 @@ PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
 ✅ WireGuardPlugin: startVPNTunnel() called successfully
 ✅ WireGuardPlugin: Connection successful
 ⚡️  TO JS {"success":true}
-⚡️  [log] - [morphVpn_ios] VPN 连接成功
-⚡️  [log] - vpn已打开,检测IP {"id":"f1a8167f-5fb7-460d-b0d0-977335915188","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"64.176.39.111","name":"0df54fe9-4b07-485a-8b85-d4ffcaef774c","udpPort":"16783","tcpPort":null,"lastInvoke":1770684171,"type":"vhp-1c-1gb","info":"MOC0FtO5iy5YpQENcGFe3qSgXNxLGVNw4b+q5EJtsrc=:3OdlPlt9uwfInTwZs/260A==","instanceId":"e5106ed3-26f4-46fb-bc77-4fa37bffb9b8","cityName":"itm","status":"running","clientNum":1,"updatedAt":"2026-02-10T07:38:09.000Z","createdAt":"2026-02-09T22:22:17.000Z"}
-📡 WireGuardPlugin: VPN status changed to: connecting
+⚡️  [log] - [morphVpn_ios] 步骤2 完成: VPN 连接成功
+⚡️  [log] - vpn已打开,检测IP {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770808581,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":0,"updatedAt":"2026-02-11T11:16:31.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connected
-📡 WireGuardPlugin: VPN status changed to: connected
-2026-02-10 15:40:27.392744+0800 App[82168:20741347] ✅ MorphUDPClient: WireGuard connection ready
 📊 WireGuardPlugin: Status after 2s: connected
 ⚡️  [log] - failtimes 1
-⚡️  [log] - 1
 ⚡️  [log] - failtimes 2
-⚡️  [log] - 2
 ⚡️  [log] - failtimes 3
-⚡️  [log] - 3
 ⚡️  [log] - failtimes 4
-⚡️  [log] - 4
 ⚡️  [log] - failtimes 5
-⚡️  [log] - 5
 ⚡️  [log] - failtimes 6
-⚡️  [log] - 6
 ⚡️  [log] - failtimes 7
-⚡️  [log] - 7
 ⚡️  [log] - failtimes 8
-⚡️  [log] - 8
-2026-02-10 15:41:57.997717+0800 App[82168:20741460] ⚠️ Inactivity detected (90s), reconnecting...
-2026-02-10 15:41:58.042545+0800 App[82168:20741460] 🎭 MorphObfuscator: key=13 layer=3 pad=8 combos=990
-2026-02-10 15:41:58.044160+0800 App[82168:20741460] 🔄 Reconnecting: tpl=KCP key=13
-2026-02-10 15:41:58.045167+0800 App[82168:20741460] ✅ Handshake sent (2/10)
-2026-02-10 15:41:58.355765+0800 App[82168:20741782] 🤝 Handshake response: {"port":54433,"clientID":"LCKMd0PgivnzZmYzgzx0sg==","status":"connected"}
-2026-02-10 15:41:58.356401+0800 App[82168:20741782] ✅ Handshake complete: port=54433 status=connected
-2026-02-10 15:41:58.357477+0800 App[82168:20741782] 💓 Heartbeat started, interval=120.0s
-2026-02-10 15:41:58.358157+0800 App[82168:20741782] ✅ MorphProtocol: handshake done, session=54433
-2026-02-10 15:41:58.365490+0800 App[82168:20741782] ✅ Data connection ready on port 54433
-2026-02-10 15:43:32.184003+0800 App[82168:20742918] ⚠️ Inactivity detected (93s), reconnecting...
-2026-02-10 15:43:32.193797+0800 App[82168:20741782] [connection] nw_read_request_report [C6] Receive failed with error "Socket is not connected"
-2026-02-10 15:43:32.195487+0800 App[82168:20741782] [connection] nw_read_request_report [C1] Receive failed with error "Socket is not connected"
-2026-02-10 15:43:32.223632+0800 App[82168:20742918] 🎭 MorphObfuscator: key=39 layer=3 pad=8 combos=990
-2026-02-10 15:43:32.225226+0800 App[82168:20742918] 🔄 Reconnecting: tpl=QUIC key=39
-2026-02-10 15:43:32.272514+0800 App[82168:20742918] ❌ Data receive error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.273050+0800 App[82168:20742918] ❌ Handshake receive error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.277205+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.303194+0800 App[82168:20742918] ❌ MorphUDPClient: Handshake connection failed: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.303317+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.305626+0800 App[82168:20741460] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), viable, interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:32.305701+0800 App[82168:20741460] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:32.306269+0800 App[82168:20742918] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.306324+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:37.324193+0800 App[82168:20741782] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:37.324657+0800 App[82168:20741782] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:37.325221+0800 App[82168:20741460] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:37.325674+0800 App[82168:20741460] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:42.316533+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:42.316986+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:42.317560+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:42.317999+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:47.250242+0800 App[82168:20741348] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:47.250697+0800 App[82168:20741348] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:47.251354+0800 App[82168:20742918] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:47.251801+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:52.267489+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:52.267965+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:52.268549+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:52.268999+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:57.267640+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:57.268081+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:57.268653+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:57.269088+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:02.318130+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:02.318647+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:02.319223+0800 App[82168:20742918] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:02.319619+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:07.318143+0800 App[82168:20741782] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:07.318614+0800 App[82168:20741782] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:07.319202+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:07.319607+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:12.318674+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:12.319127+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:12.319722+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:12.320165+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:17.266800+0800 App[82168:20742918] ❌ MorphUDPClient: Max handshake retries (10) reached
-2026-02-10 15:44:17.276496+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: connectionFailed
-2026-02-10 15:44:17.288497+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:17.288735+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:17.289094+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:17.289348+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
+⚡️  To Native ->  WireGuard disconnect 81366851
+⚡️  [log] - [morphVpn_ios] 断开连接...
+⚡️  TO JS {"success":true}
+📡 WireGuardPlugin: VPN status changed to: disconnecting
+🔍 WireGuardPlugin: Checking for connection errors...
+⚡️  To Native ->  MorphProtocol disconnect 81366852
+⚡️  [log] - [morphVpn_ios] WireGuard 已断开
+2026-02-11 19:18:02.860936+0800 App[1118:321450] 🔵 MorphProtocolPlugin: disconnect()
+⚡️  TO JS {"success":true,"message":"Disconnected"}
+⚡️  [log] - [morphVpn_ios] 已断开
+⚡️  [log] - vpn已关闭
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...

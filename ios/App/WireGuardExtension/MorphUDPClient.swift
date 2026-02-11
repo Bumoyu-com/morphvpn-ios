@@ -106,6 +106,8 @@ class MorphUDPClient {
     func startLocalProxy(preferredPort: UInt16 = 0) -> UInt16? {
         let parameters = NWParameters.udp
         parameters.allowLocalEndpointReuse = true
+        // 强制绑定到 loopback 接口，确保 wireguard-go 发往 127.0.0.1 的包能到达
+        parameters.requiredInterfaceType = .loopback
         
         do {
             if preferredPort > 0 {

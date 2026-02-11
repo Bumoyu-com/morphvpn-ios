@@ -6,12 +6,11 @@ import i18n from './i18n';
 
 import App from './App';
 import store from './store';
-import { initMorphVpn } from './utils/vpnConnector';
 
 import './css/index.css';
 
-// 初始化 VPN 连接器
-initMorphVpn();
+// VPN 连接器由 HTML 层的 morphVpn_ios.js 初始化（<script> 标签加载）
+// 不再在 React 中调用 initMorphVpn()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>

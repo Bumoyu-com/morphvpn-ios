@@ -19,26 +19,35 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     override func startTunnel(options: [String: NSObject]?,
                               completionHandler: @escaping (Error?) -> Void) {
         NSLog("🚀 PacketTunnelProvider: startTunnel()")
+        SharedLog.clear()
+        SharedLog.shared.log("startTunnel()")
 
         guard let protocolConfiguration = self.protocolConfiguration as? NETunnelProviderProtocol,
               let providerConfig = protocolConfiguration.providerConfiguration else {
+            NSLog("❌ PacketTunnel: Invalid protocol configuration")
             completionHandler(makeError(code: 1, message: "Invalid protocol configuration"))
             return
         }
 
+        // 打印 providerConfiguration 的所有 key，帮助调试
+        NSLog("📋 PacketTunnel: providerConfig keys = \(Array(providerConfig.keys))")
+
         guard let wgConfigString = providerConfig["wg_config"] as? String else {
+            NSLog("❌ PacketTunnel: wg_config not found in providerConfig")
             completionHandler(makeError(code: 2, message: "WireGuard config not found"))
             return
         }
 
+        NSLog("📋 PacketTunnel: wg_config length = \(wgConfigString.count) bytes")
+
         // 检查是否有 MorphProtocol 配置
         if let morphConfigJSON = providerConfig["morph_config"] as? String {
-            NSLog("🎭 MorphProtocol config found, starting with obfuscation")
+            NSLog("🎭 PacketTunnel: morph_config found (\(morphConfigJSON.count) bytes), starting with obfuscation")
             startWithMorphProtocol(wgConfig: wgConfigString,
                                    morphConfigJSON: morphConfigJSON,
                                    completionHandler: completionHandler)
         } else {
-            NSLog("📡 No MorphProtocol config, starting plain WireGuard")
+            NSLog("📡 PacketTunnel: No morph_config, starting plain WireGuard")
             startPlainWireGuard(wgConfig: wgConfigString,
                                 completionHandler: completionHandler)
         }
@@ -92,6 +101,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 
         NSLog("🎭 MorphProtocol: host=\(morphConfig.host):\(morphConfig.port) layer=\(morphConfig.obfuscationLayer) tpl=\(morphConfig.templateType)")
+        SharedLog.shared.log("MorphProtocol: host=\(morphConfig.host):\(morphConfig.port)")
 
         do {
             let templateType: TemplateType? = morphConfig.templateType > 0
@@ -120,6 +130,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 return
             }
             NSLog("✅ MorphProtocol: local proxy on 127.0.0.1:\(localPort)")
+            SharedLog.shared.log("local proxy on 127.0.0.1:\(localPort)")
 
             // 连接远程服务器并等待握手
             let handshakeSemaphore = DispatchSemaphore(value: 0)
@@ -144,20 +155,31 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             let waitResult = handshakeSemaphore.wait(timeout: .now() + 30)
 
             if waitResult == .timedOut {
+                SharedLog.shared.log("ERROR: handshake timeout")
                 completionHandler(makeError(code: 12, message: "MorphProtocol handshake timeout"))
                 return
             }
 
             if let error = handshakeError {
+                SharedLog.shared.log("ERROR: handshake failed: \(error)")
                 completionHandler(makeError(code: 13, message: "MorphProtocol handshake failed: \(error)"))
                 return
             }
 
             NSLog("✅ MorphProtocol: connected, session=\(sessionPort), local=\(localPort)")
+            SharedLog.shared.log("connected session=\(sessionPort) local=\(localPort)")
 
             // 改写 WireGuard 配置：Endpoint → 127.0.0.1:localPort，AllowedIPs 排除 127.0.0.0/8
             let modifiedConfig = rewriteWireGuardConfig(wgConfig, localPort: localPort)
             NSLog("✅ WireGuard config rewritten, Endpoint=127.0.0.1:\(localPort)")
+
+            // 打印改写后的配置关键行（调试用）
+            for line in modifiedConfig.split(separator: "\n") {
+                let trimmed = line.trimmingCharacters(in: .whitespaces).lowercased()
+                if trimmed.hasPrefix("endpoint") || trimmed.hasPrefix("allowedips") {
+                    NSLog("📋 WG config: \(line)")
+                }
+            }
 
             startWireGuard(config: modifiedConfig, completionHandler: completionHandler)
 
@@ -189,6 +211,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 completionHandler(error)
             } else {
                 NSLog("✅ WireGuard tunnel started")
+                SharedLog.shared.log("WireGuard tunnel started")
                 completionHandler(nil)
             }
         }
