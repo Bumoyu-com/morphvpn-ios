@@ -1,60 +1,97 @@
+✅ WireGuardPlugin: Plugin loaded successfully
+✅ WireGuardPlugin: Initialization complete
+⚡️  Loading app at capacitor://localhost...
+📡 WireGuardPlugin: VPN status changed to: disconnected
+🔍 WireGuardPlugin: Checking for connection errors...
+⚡️  [log] - ✅ PingBridge loaded and ready
+⚡️  [log] - [morphVpn_ios] window.morphVpn 已初始化
+⚡️  WebView loaded
+⚡️  [log] - storage web
+⚡️  To Native ->  SplashScreen hide 93457625
+⚡️  TO JS undefined
+⚡️  [log] - ✅ PingBridge 已加载
+⚡️  [log] - login缓存已加载 {"locale":"zh","vpn":{"useWhiteList":false,"useLan":false,"useExempt":false,"exemptList":""},"userInfo":{"id":"01de806b-6dd8-4820-bedd-ca048b96c5a0","email":"123666@qq.com","password":"123456","emailVerified":false,"balance":1538090458593,"vpnChoose":"bom","vpnConnect":false}}
+⚡️  [log] - 还未检查GFW,检查中...
+⚡️  [log] - GFW,检查完成==>> GFW is true
+⚡️  [log] - baseUrl==>> https://bumoyu-saas-morphvpn-api.zhendong-ge.workers.dev
+⚡️  [log] - 转发请求结果==>> {"data":{"result":true,"userId":"01de806b-6dd8-4820-bedd-ca048b96c5a0"},"error":null}
+⚡️  [log] - login success
+⚡️  [log] - 开始全局轮询
+⚡️  [log] - 转发请求结果==>> {"data":{"msg":"success","server":{"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770769905,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":2,"updatedAt":"2026-02-11T02:16:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}},"error":null}
+⚡️  [log] - 服务器信息 {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770769905,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":2,"updatedAt":"2026-02-11T02:16:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
 ⚡️  [log] - 创建新配置,当前网络: GFW is true
-⚡️  [log] - 转发请求结果==>> {"data":"79a2526f-769c-46f4-a5da-5aa2293f201c","error":null}
-⚡️  [log] - 新配置id 79a2526f-769c-46f4-a5da-5aa2293f201c
-⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=\nAddress = 10.8.0.46/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 64.176.39.111:51820","error":null}
+⚡️  [log] - 转发请求结果==>> {"data":"82a6f245-9403-457e-b853-6a14bd1c3865","error":null}
+⚡️  [log] - 新配置id 82a6f245-9403-457e-b853-6a14bd1c3865
+⚡️  [log] - 转发请求结果==>> {"data":"[Interface]\nPrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=\nAddress = 10.8.0.19/24\nDNS = 1.1.1.1\n\n[Peer]\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=\nPresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=\nAllowedIPs = 0.0.0.0/0, ::/0\nPersistentKeepalive = 0\nEndpoint = 65.20.86.216:51820","error":null}
 ⚡️  [log] - wireguard配置 [Interface]
-PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=
-Address = 10.8.0.46/24
+PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=
+Address = 10.8.0.19/24
 DNS = 1.1.1.1
 
 [Peer]
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
-PresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=
+PresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 0
-Endpoint = 64.176.39.111:51820
-⚡️  [log] - [morphVpn_ios] 连接 MorphProtocol → 64.176.39.111:16783
-⚡️  To Native ->  MorphProtocol connect 90959296
-2026-02-10 15:40:26.382067+0800 App[82168:20741348] 🔵 MorphProtocolPlugin: connect() called
-2026-02-10 15:40:26.383137+0800 App[82168:20741348] 🔵 MorphProtocol: 64.176.39.111:16783 layer=3 tpl=1
-2026-02-10 15:40:26.385635+0800 App[82168:20741348] 🔐 MorphEncryptor: init
-2026-02-10 15:40:26.386791+0800 App[82168:20741348] ✅ MorphEncryptor: ready
-2026-02-10 15:40:26.420415+0800 App[82168:20741348] 🎭 MorphObfuscator: key=129 layer=3 pad=8 combos=990
-2026-02-10 15:40:26.420626+0800 App[82168:20741348] ✅ MorphUDPClient: ready tpl=QUIC key=129
-2026-02-10 15:40:26.664351+0800 App[82168:20741368] ✅ MorphUDPClient: proxy on 127.0.0.1:50147
-2026-02-10 15:40:26.697597+0800 App[82168:20741348] ✅ MorphProtocol: proxy on port 50147
-2026-02-10 15:40:26.698460+0800 App[82168:20741348] 🔌 MorphUDPClient: Connecting to 64.176.39.111:16783
-⚡️  TO JS {"localPort":50147,"success":true,"message":"Connecting to 64.176.39.111:16783"}
-⚡️  [log] - [morphVpn_ios] MorphProtocol 本地端口: 50147
-⚡️  To Native ->  MorphProtocol addListener 90959297
-⚡️  To Native ->  MorphProtocol addListener 90959298
-⚡️  TO JS {"sessionPort":0,"localPort":50147,"status":"connecting"}
-2026-02-10 15:40:26.773824+0800 App[82168:20741348] ✅ MorphUDPClient: Handshake connection ready
-2026-02-10 15:40:26.777826+0800 App[82168:20741347] ✅ Handshake sent (2/10)
-2026-02-10 15:40:27.001592+0800 App[82168:20741347] 🤝 Handshake response: {"port":53384,"clientID":"Oh//WSN8+Otp/7b/WqGdYg==","status":"connected"}
-2026-02-10 15:40:27.002397+0800 App[82168:20741347] ✅ Handshake complete: port=53384 status=connected
-2026-02-10 15:40:27.003257+0800 App[82168:20741347] 💓 Heartbeat started, interval=120.0s
-2026-02-10 15:40:27.009325+0800 App[82168:20741347] ✅ MorphProtocol: handshake done, session=53384
-⚡️  TO JS {"sessionPort":53384}
-⚡️  TO JS {"status":"connected","localPort":50147,"sessionPort":53384}
-2026-02-10 15:40:27.010553+0800 App[82168:20741347] ✅ Data connection ready on port 53384
+Endpoint = 65.20.86.216:51820
+⚡️  [log] - [morphVpn_ios] 连接 MorphProtocol → 65.20.86.216:29203
+⚡️  To Native ->  MorphProtocol connect 93457626
+2026-02-11 10:16:47.162924+0800 App[870:194176] 🔵 MorphProtocolPlugin: connect() called
+2026-02-11 10:16:47.164234+0800 App[870:194176] 🔵 MorphProtocol: 65.20.86.216:29203 layer=3 tpl=1
+2026-02-11 10:16:47.165673+0800 App[870:194176] 🔐 MorphEncryptor: init
+2026-02-11 10:16:47.166185+0800 App[870:194176] ✅ MorphEncryptor: ready
+2026-02-11 10:16:47.200205+0800 App[870:194176] 🎭 MorphObfuscator: key=27 layer=3 pad=8 combos=990
+2026-02-11 10:16:47.200830+0800 App[870:194176] ✅ MorphUDPClient: ready tpl=QUIC key=27
+2026-02-11 10:16:47.431271+0800 App[870:194177] 📡 LocalProxy: listener state → ready
+2026-02-11 10:16:47.431598+0800 App[870:194177] ✅ MorphUDPClient: proxy on 127.0.0.1:53479
+2026-02-11 10:16:47.471189+0800 App[870:194176] 📡 LocalProxy: listener started, port=53479, state=Optional(Network.NWListener.State.ready)
+2026-02-11 10:16:47.471778+0800 App[870:194176] ✅ MorphProtocol: proxy on port 53479
+2026-02-11 10:16:47.472223+0800 App[870:194176] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+⚡️  TO JS {"localPort":53479,"success":true,"message":"Connecting to 65.20.86.216:29203"}
+⚡️  To Native ->  ⚡️  [log] - [morphVpn_ios] MorphProtocol 本地端口: 53479
+MorphProtocol addListener 93457627
+⚡️  To Native ->  MorphProtocol addListener 93457628
+⚡️  TO JS {"sessionPort":0,"status":"connecting","localPort":53479}
+2026-02-11 10:16:47.563283+0800 App[870:194176] ✅ MorphUDPClient: Handshake connection ready
+2026-02-11 10:16:47.567576+0800 App[870:194180] ✅ Handshake sent (2/10)
+2026-02-11 10:16:48.052191+0800 App[870:194177] 🤝 Handshake response: {"port":36342,"clientID":"eG2KfP5vBuOiLa656H4JkQ==","status":"connected"}
+2026-02-11 10:16:48.053275+0800 App[870:194177] ✅ Handshake complete: port=36342 status=connected
+2026-02-11 10:16:48.053987+0800 App[870:194177] 💓 Heartbeat started, interval=120.0s
+2026-02-11 10:16:48.054823+0800 App[870:194177] ✅ MorphProtocol: handshake done, session=36342
+⚡️  TO JS {"sessionPort":36342}
+⚡️  TO JS {"sessionPort":36342,"status":"connected","localPort":53479}
+2026-02-11 10:16:48.061029+0800 App[870:194180] ✅ Data connection ready on port 36342
 ⚡️  [debug] - Removing listener MorphProtocol handshakeComplete
-⚡️  To Native ->  MorphProtocol removeListener 90959299
+⚡️  To Native ->  MorphProtocol removeListener 93457629
+⚡️  To Native ->  MorphProtocol removeListener 93457630
 ⚡️  [debug] - Removing listener MorphProtocol statusChanged
-⚡️  To Native ->  MorphProtocol removeListener 90959300
-⚡️  [log] - [morphVpn_ios] 握手完成，会话端口: 53384
-⚡️  [log] - [morphVpn_ios] AllowedIPs: 0.0.0.0/0
-⚡️  To Native ->  WireGuard connect 90959301
+⚡️  [log] - [morphVpn_ios] 握手完成，会话端口: 36342
+⚡️  [log] - [morphVpn_ios] AllowedIPs: 128.0.0.0/1, 0.0.0.0/2, 96.0.0.0/3, 80.0.0.0/4, 72.0.0.0/5, 68.0.0.0/6, 66.0.0.0/7, 64.0.0.0/8, 65.128.0.0/9, 65.64.0.0/10, 65.32.0.0/11, 65.0.0.0/12, 65.24.0.0/13, 65.16.0.0/14, 65.22.0.0/15, 65.21.0.0/16, 65.20.128.0/17, 65.20.0.0/18, 65.20.96.0/19, 65.20.64.0/20, 65.20.88.0/21, 65.20.80.0/22, 65.20.84.0/23, 65.20.87.0/24, 65.20.86.0/25, 65.20.86.128/26, 65.20.86.224/27, 65.20.86.192/28, 65.20.86.208/29, 65.20.86.220/30, 65.20.86.218/31, 65.20.86.217/32
+⚡️  [log] - [morphVpn_ios] Excluded server IP: 65.20.86.216
+⚡️  To Native ->  WireGuard connect 93457631
+⚡️  [log] - [morphVpn_ios] Final WG config:
+[Interface]
+Address = 10.8.0.19/24
+DNS = 1.1.1.1
+PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=
+ListenPort = 51820
+
+[Peer]
+AllowedIPs = 128.0.0.0/1,0.0.0.0/2,96.0.0.0/3,80.0.0.0/4,72.0.0.0/5,68.0.0.0/6,66.0.0.0/7,64.0.0.0/8,65.128.0.0/9,65.64.0.0/10,65.32.0.0/11,65.0.0.0/12,65.24.0.0/13,65.16.0.0/14,65.22.0.0/15,65.21.0.0/16,65.20.128.0/17,65.20.0.0/18,65.20.96.0/19,65.20.64.0/20,65.20.88.0/21,65.20.80.0/22,65.20.84.0/23,65.20.87.0/24,65.20.86.0/25,65.20.86.128/26,65.20.86.224/27,65.20.86.192/28,65.20.86.208/29,65.20.86.220/30,65.20.86.218/31,65.20.86.217/32
+Endpoint = 127.0.0.1:53479
+PresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=
+PersistentKeepalive = 0
+PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=
 ⚡️  [log] - [morphVpn_ios] WireGuard 配置已改写
 🔵 WireGuardPlugin: connect() called
-🔵 WireGuardPlugin: Call options: Optional([AnyHashable("config"): "[Interface]\nAddress = 10.8.0.46/24\nDNS = 1.1.1.1\nPrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=\nListenPort = 51820\n\n[Peer]\nAllowedIPs = 0.0.0.0/0\nEndpoint = 127.0.0.1:50147\nPresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=\nPersistentKeepalive = 0\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=", AnyHashable("tunnelName"): "MorphVPN"])
+🔵 WireGuardPlugin: Call options: Optional([AnyHashable("tunnelName"): "MorphVPN", AnyHashable("config"): "[Interface]\nAddress = 10.8.0.19/24\nDNS = 1.1.1.1\nPrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=\nListenPort = 51820\n\n[Peer]\nAllowedIPs = 128.0.0.0/1,0.0.0.0/2,96.0.0.0/3,80.0.0.0/4,72.0.0.0/5,68.0.0.0/6,66.0.0.0/7,64.0.0.0/8,65.128.0.0/9,65.64.0.0/10,65.32.0.0/11,65.0.0.0/12,65.24.0.0/13,65.16.0.0/14,65.22.0.0/15,65.21.0.0/16,65.20.128.0/17,65.20.0.0/18,65.20.96.0/19,65.20.64.0/20,65.20.88.0/21,65.20.80.0/22,65.20.84.0/23,65.20.87.0/24,65.20.86.0/25,65.20.86.128/26,65.20.86.224/27,65.20.86.192/28,65.20.86.208/29,65.20.86.220/30,65.20.86.218/31,65.20.86.217/32\nEndpoint = 127.0.0.1:53479\nPresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=\nPersistentKeepalive = 0\nPublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI="])
 🔵 WireGuardPlugin: Config received
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
-🔵 WireGuardPlugin: Config length: 324 bytes
+🔵 WireGuardPlugin: Config length: 743 bytes
 🔵 WireGuardPlugin: Config preview: [Interface]
-Address = 10.8.0.46/24
+Address = 10.8.0.19/24
 DNS = 1.1.1.1
-PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr9...
+PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEb...
 🔵 WireGuardPlugin: saveConfiguration called
 🔵 WireGuardPlugin: Tunnel name: MorphVPN
 🔵 WireGuardPlugin: Provider bundle ID: com.morphvpn.app.WireGuardExtension
@@ -70,7 +107,7 @@ PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr9...
 🔵 WireGuardPlugin: VPN manager enabled: true
 🔵 WireGuardPlugin: Protocol configuration: 
     type = plugin
-    identifier = A350B0C8-CA2E-44DE-9E08-48CB3FCD404F
+    identifier = 69311245-B773-49F8-8C2E-594FFB9DD7B3
     serverAddress = WireGuard
     identityDataImported = NO
     disconnectOnSleep = NO
@@ -88,15 +125,15 @@ PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr9...
     reassertTimeout = 0
     providerConfiguration = {
         wg_config = [Interface]
-Address = 10.8.0.46/24
+Address = 10.8.0.19/24
 DNS = 1.1.1.1
-PrivateKey = cOqDx3z/ufjrsYLT5/S1WwvVR01qypOp2jzxr94TTUs=
+PrivateKey = mCUBn/mxRfqV5rZBtlqv5mV8fVW/MBr7ottPEbx3K1g=
 ListenPort = 51820
 
 [Peer]
-AllowedIPs = 0.0.0.0/0
-Endpoint = 127.0.0.1:50147
-PresharedKey = QQjAyAofmPhuVQaxUsiWnz1QIML2c8aOmxsYMc6Qi2A=
+AllowedIPs = 128.0.0.0/1,0.0.0.0/2,96.0.0.0/3,80.0.0.0/4,72.0.0.0/5,68.0.0.0/6,66.0.0.0/7,64.0.0.0/8,65.128.0.0/9,65.64.0.0/10,65.32.0.0/11,65.0.0.0/12,65.24.0.0/13,65.16.0.0/14,65.22.0.0/15,65.21.0.0/16,65.20.128.0/17,65.20.0.0/18,65.20.96.0/19,65.20.64.0/20,65.20.88.0/21,65.20.80.0/22,65.20.84.0/23,65.20.87.0/24,65.20.86.0/25,65.20.86.128/26,65.20.86.224/27,65.20.86.192/28,65.20.86.208/29,65.20.86.220/30,65.20.86.218/31,65.20.86.217/32
+Endpoint = 127.0.0.1:53479
+PresharedKey = ITi/aC+B35sL7zaZJ6QWSnrAfVSI51KOlqSpbhnff6c=
 PersistentKeepalive = 0
 PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
     }
@@ -108,12 +145,11 @@ PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
 ✅ WireGuardPlugin: Connection successful
 ⚡️  TO JS {"success":true}
 ⚡️  [log] - [morphVpn_ios] VPN 连接成功
-⚡️  [log] - vpn已打开,检测IP {"id":"f1a8167f-5fb7-460d-b0d0-977335915188","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"64.176.39.111","name":"0df54fe9-4b07-485a-8b85-d4ffcaef774c","udpPort":"16783","tcpPort":null,"lastInvoke":1770684171,"type":"vhp-1c-1gb","info":"MOC0FtO5iy5YpQENcGFe3qSgXNxLGVNw4b+q5EJtsrc=:3OdlPlt9uwfInTwZs/260A==","instanceId":"e5106ed3-26f4-46fb-bc77-4fa37bffb9b8","cityName":"itm","status":"running","clientNum":1,"updatedAt":"2026-02-10T07:38:09.000Z","createdAt":"2026-02-09T22:22:17.000Z"}
+⚡️  [log] - vpn已打开,检测IP {"id":"3f962a47-6dc0-44ec-8cce-aced337d1c91","accountId":"6039e067-e017-4955-a53d-54a33fb1be8a","ip":"65.20.86.216","name":"90d37069-c3f9-4512-a2b8-203311182c61","udpPort":"29203","tcpPort":null,"lastInvoke":1770769905,"type":"vhp-1c-1gb","info":"Yr25wd35ZwPZhhZblEJRTvST0AfAK5b1O1lKglH7K8Q=:JyawJSdPFRUJOwXE3va4+w==","instanceId":"ffbbc958-4a14-480a-a854-4d8d1c7cd635","cityName":"bom","status":"running","clientNum":2,"updatedAt":"2026-02-11T02:16:08.000Z","createdAt":"2026-02-11T00:31:45.000Z"}
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connecting
 📡 WireGuardPlugin: VPN status changed to: connected
 📡 WireGuardPlugin: VPN status changed to: connected
-2026-02-10 15:40:27.392744+0800 App[82168:20741347] ✅ MorphUDPClient: WireGuard connection ready
 📊 WireGuardPlugin: Status after 2s: connected
 ⚡️  [log] - failtimes 1
 ⚡️  [log] - 1
@@ -131,64 +167,43 @@ PublicKey = J8FSA147ELsZfH2mvqYiIPe8epdAUk+hrv/BD/14jCI=,
 ⚡️  [log] - 7
 ⚡️  [log] - failtimes 8
 ⚡️  [log] - 8
-2026-02-10 15:41:57.997717+0800 App[82168:20741460] ⚠️ Inactivity detected (90s), reconnecting...
-2026-02-10 15:41:58.042545+0800 App[82168:20741460] 🎭 MorphObfuscator: key=13 layer=3 pad=8 combos=990
-2026-02-10 15:41:58.044160+0800 App[82168:20741460] 🔄 Reconnecting: tpl=KCP key=13
-2026-02-10 15:41:58.045167+0800 App[82168:20741460] ✅ Handshake sent (2/10)
-2026-02-10 15:41:58.355765+0800 App[82168:20741782] 🤝 Handshake response: {"port":54433,"clientID":"LCKMd0PgivnzZmYzgzx0sg==","status":"connected"}
-2026-02-10 15:41:58.356401+0800 App[82168:20741782] ✅ Handshake complete: port=54433 status=connected
-2026-02-10 15:41:58.357477+0800 App[82168:20741782] 💓 Heartbeat started, interval=120.0s
-2026-02-10 15:41:58.358157+0800 App[82168:20741782] ✅ MorphProtocol: handshake done, session=54433
-2026-02-10 15:41:58.365490+0800 App[82168:20741782] ✅ Data connection ready on port 54433
-2026-02-10 15:43:32.184003+0800 App[82168:20742918] ⚠️ Inactivity detected (93s), reconnecting...
-2026-02-10 15:43:32.193797+0800 App[82168:20741782] [connection] nw_read_request_report [C6] Receive failed with error "Socket is not connected"
-2026-02-10 15:43:32.195487+0800 App[82168:20741782] [connection] nw_read_request_report [C1] Receive failed with error "Socket is not connected"
-2026-02-10 15:43:32.223632+0800 App[82168:20742918] 🎭 MorphObfuscator: key=39 layer=3 pad=8 combos=990
-2026-02-10 15:43:32.225226+0800 App[82168:20742918] 🔄 Reconnecting: tpl=QUIC key=39
-2026-02-10 15:43:32.272514+0800 App[82168:20742918] ❌ Data receive error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.273050+0800 App[82168:20742918] ❌ Handshake receive error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.277205+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.303194+0800 App[82168:20742918] ❌ MorphUDPClient: Handshake connection failed: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.303317+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.305626+0800 App[82168:20741460] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), viable, interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:32.305701+0800 App[82168:20741460] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:32.306269+0800 App[82168:20742918] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:32.306324+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:37.324193+0800 App[82168:20741782] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:37.324657+0800 App[82168:20741782] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:37.325221+0800 App[82168:20741460] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:37.325674+0800 App[82168:20741460] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:42.316533+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:42.316986+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:42.317560+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:42.317999+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:47.250242+0800 App[82168:20741348] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:47.250697+0800 App[82168:20741348] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:47.251354+0800 App[82168:20742918] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:47.251801+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:52.267489+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:52.267965+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:52.268549+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:52.268999+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:57.267640+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:43:57.268081+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:43:57.268653+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:43:57.269088+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:02.318130+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:02.318647+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:02.319223+0800 App[82168:20742918] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:02.319619+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:07.318143+0800 App[82168:20741782] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:07.318614+0800 App[82168:20741782] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:07.319202+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:07.319607+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:12.318674+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:12.319127+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:12.319722+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:12.320165+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:17.266800+0800 App[82168:20742918] ❌ MorphUDPClient: Max handshake retries (10) reached
-2026-02-10 15:44:17.276496+0800 App[82168:20742918] ❌ MorphProtocolPlugin: Error: connectionFailed
-2026-02-10 15:44:17.288497+0800 App[82168:20742918] [connection] nw_flow_add_write_request [C1 64.176.39.111:16783 failed channel-flow (satisfied (Path is satisfied), interface: utun10, ipv4, dns)] cannot accept write requests
-2026-02-10 15:44:17.288735+0800 App[82168:20742918] [connection] nw_write_request_report [C1] Send failed with error "Socket is not connected"
-2026-02-10 15:44:17.289094+0800 App[82168:20741782] ❌ Handshake send error: POSIXErrorCode(rawValue: 57): Socket is not connected
-2026-02-10 15:44:17.289348+0800 App[82168:20741782] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 57): Socket is not connected
+2026-02-11 10:18:18.242614+0800 App[870:194702] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
+2026-02-11 10:18:18.243261+0800 App[870:194702] ⚠️ Inactivity detected (90s), reconnecting...
+2026-02-11 10:18:18.290072+0800 App[870:194702] 🎭 MorphObfuscator: key=241 layer=3 pad=8 combos=990
+2026-02-11 10:18:18.290965+0800 App[870:194702] 🔄 Reconnecting: tpl=KCP key=241
+2026-02-11 10:18:18.291036+0800 App[870:194702] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+2026-02-11 10:18:18.292737+0800 App[870:194702] ✅ MorphUDPClient: Handshake connection ready
+2026-02-11 10:18:18.293641+0800 App[870:194702] ✅ Handshake sent (2/10)
+2026-02-11 10:18:18.675611+0800 App[870:194745] 🤝 Handshake response: {"port":38859,"clientID":"pO0e1FouE0nrd31GqphOHg==","status":"connected"}
+2026-02-11 10:18:18.676294+0800 App[870:194745] ✅ Handshake complete: port=38859 status=connected
+2026-02-11 10:18:18.677231+0800 App[870:194745] 💓 Heartbeat started, interval=120.0s
+2026-02-11 10:18:18.677993+0800 App[870:194745] ✅ MorphProtocol: handshake done, session=38859
+2026-02-11 10:18:18.684444+0800 App[870:194745] ✅ Data connection ready on port 38859
+2026-02-11 10:19:49.634403+0800 App[870:194772] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
+2026-02-11 10:19:49.634854+0800 App[870:194772] ⚠️ Inactivity detected (90s), reconnecting...
+2026-02-11 10:19:49.683963+0800 App[870:194772] 🎭 MorphObfuscator: key=31 layer=3 pad=8 combos=990
+2026-02-11 10:19:49.684883+0800 App[870:194772] 🔄 Reconnecting: tpl=QUIC key=31
+2026-02-11 10:19:49.684950+0800 App[870:194772] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+2026-02-11 10:19:49.687292+0800 App[870:194772] ❌ Handshake receive error: POSIXErrorCode(rawValue: 89): Operation canceled
+2026-02-11 10:19:49.688115+0800 App[870:194772] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 89): Operation canceled
+2026-02-11 10:19:49.695707+0800 App[870:194772] ✅ MorphUDPClient: Handshake connection ready
+2026-02-11 10:19:49.696473+0800 App[870:194772] ✅ Handshake sent (2/10)
+2026-02-11 10:19:50.121766+0800 App[870:194773] 🤝 Handshake response: {"port":59394,"clientID":"8qQHnfNhCgc0NuLbdAkVjw==","status":"connected"}
+2026-02-11 10:19:50.122538+0800 App[870:194773] ✅ Handshake complete: port=59394 status=connected
+2026-02-11 10:19:50.123361+0800 App[870:194773] 💓 Heartbeat started, interval=120.0s
+2026-02-11 10:19:50.124124+0800 App[870:194773] ✅ MorphProtocol: handshake done, session=59394
+2026-02-11 10:19:50.130511+0800 App[870:194773] ✅ Data connection ready on port 59394
+2026-02-11 10:21:21.108434+0800 App[870:194773] 📡 Inactivity check: 90s since last recv, wgConn=false, wgPkts=0, srvPkts=0
+2026-02-11 10:21:21.108899+0800 App[870:194773] ⚠️ Inactivity detected (90s), reconnecting...
+2026-02-11 10:21:21.156232+0800 App[870:194773] 🎭 MorphObfuscator: key=74 layer=3 pad=8 combos=990
+2026-02-11 10:21:21.157048+0800 App[870:194773] 🔄 Reconnecting: tpl=QUIC key=74
+2026-02-11 10:21:21.157113+0800 App[870:194773] 🔌 MorphUDPClient: Connecting to 65.20.86.216:29203
+2026-02-11 10:21:21.157657+0800 App[870:194773] ❌ Handshake receive error: POSIXErrorCode(rawValue: 89): Operation canceled
+2026-02-11 10:21:21.157823+0800 App[870:194773] ❌ MorphProtocolPlugin: Error: POSIXErrorCode(rawValue: 89): Operation canceled
+2026-02-11 10:21:21.158859+0800 App[870:195245] ✅ MorphUDPClient: Handshake connection ready
+2026-02-11 10:21:21.159604+0800 App[870:195367] ✅ Handshake sent (2/10)
+2026-02-11 10:21:21.609899+0800 App[870:195245] 🤝 Handshake response: {"port":49153,"clientID":"BOtJoTElUvKIGFk6ANAkpg==","status":"connected"}
+2026-02-11 10:21:21.610540+0800 App[870:195245] ✅ Handshake complete: port=49153 status=connected
+2026-02-11 10:21:21.611366+0800 App[870:195245] 💓 Heartbeat started, interval=120.0s
+2026-02-11 10:21:21.611994+0800 App[870:195245] ✅ MorphProtocol: handshake done, session=49153
+2026-02-11 10:21:21.618914+0800 App[870:195245] ✅ Data connection ready on port 49153

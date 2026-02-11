@@ -63,15 +63,17 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         
         NSLog("✅ Got WireGuard config, length: \(configString.count) bytes")
-        logger.info("✅ Got WireGuard config, length: \(configString.count) bytes")
+        
+        // 检查是否有 MorphProtocol 配置
+        var finalConfigString = configString
+        if let morphConfigJSON = providerConfiguration["morph_config"] as? String {
+            NSLog("🎭 MorphProtocol config found, starting local proxy in extension...")
+            finalConfigString = startMorphProxy(wgConfig: configString, morphConfigJSON: morphConfigJSON)
+        }
         
         // 解析 WireGuard 配置
-        NSLog("🔧 Parsing WireGuard configuration...")
-        logger.info("🔧 Parsing WireGuard configuration...")
-        
-        guard let tunnelConfiguration = try? TunnelConfiguration(fromWgQuickConfig: configString) else {
+        guard let tunnelConfiguration = try? TunnelConfiguration(fromWgQuickConfig: finalConfigString) else {
             NSLog("❌ Failed to parse WireGuard configuration")
-            logger.error("❌ Failed to parse WireGuard configuration")
             let error = NSError(domain: "WireGuard", code: 4, userInfo: [
                 NSLocalizedDescriptionKey: "Invalid WireGuard configuration format"
             ])
@@ -79,13 +81,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
             return
         }
         
-        NSLog("✅ Successfully parsed WireGuard configuration")
-        logger.info("✅ Successfully parsed WireGuard configuration")
+        NSLog("✅ Parsed WireGuard config")
         
         // 启动 WireGuard adapter
-        NSLog("🚀 Starting WireGuard adapter...")
-        logger.info("🚀 Starting WireGuard adapter...")
-        
         adapter = WireGuardAdapter(with: self) { logLevel, message in
             NSLog("WireGuard: [\(logLevel)] \(message)")
         }
@@ -93,20 +91,89 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         adapter?.start(tunnelConfiguration: tunnelConfiguration) { [weak self] error in
             if let error = error {
                 NSLog("❌ WireGuard adapter failed to start: \(error)")
-                self?.logger.error("❌ WireGuard adapter failed to start: \(error.localizedDescription)")
                 completionHandler(error)
             } else {
-                NSLog("✅ WireGuard tunnel started successfully!")
-                self?.logger.info("✅ WireGuard tunnel started successfully!")
+                NSLog("✅ WireGuard tunnel started!")
                 completionHandler(nil)
             }
         }
+    }
+    
+    // MARK: - MorphProtocol 本地代理（运行在 Extension 进程内）
+    
+    private var morphProxy: MorphExtensionProxy?
+    
+    /// 在 Extension 进程中启动 MorphProtocol 本地 UDP 代理
+    /// 返回修改后的 WireGuard 配置（Endpoint 指向本地代理端口）
+    private func startMorphProxy(wgConfig: String, morphConfigJSON: String) -> String {
+        guard let jsonData = morphConfigJSON.data(using: .utf8),
+              let config = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
+            NSLog("❌ Failed to parse morph_config JSON")
+            return wgConfig
+        }
+        
+        guard let host = config["host"] as? String,
+              let sessionPort = config["sessionPort"] as? Int,
+              let key = config["key"] as? Int,
+              let layer = config["layer"] as? Int,
+              let padding = config["padding"] as? Int else {
+            NSLog("❌ Missing required morph_config fields")
+            return wgConfig
+        }
+        
+        let templateId = config["templateId"] as? Int ?? 1
+        let clientIDBase64 = config["clientID"] as? String ?? ""
+        let clientID = Data(base64Encoded: clientIDBase64) ?? Data(count: 16)
+        let fnInitor = config["fnInitor"] as? [String: Any]
+        
+        do {
+            let proxy = try MorphExtensionProxy(
+                host: host,
+                sessionPort: UInt16(sessionPort),
+                key: key,
+                layer: layer,
+                padding: padding,
+                templateId: templateId,
+                clientID: clientID,
+                fnInitor: fnInitor
+            )
+            
+            guard let localPort = proxy.start() else {
+                NSLog("❌ Failed to start MorphProtocol proxy")
+                return wgConfig
+            }
+            
+            self.morphProxy = proxy
+            NSLog("✅ MorphProtocol proxy started on 127.0.0.1:\(localPort)")
+            
+            // 修改 WireGuard 配置的 Endpoint 为本地代理端口
+            return replaceEndpoint(in: wgConfig, newEndpoint: "127.0.0.1:\(localPort)")
+        } catch {
+            NSLog("❌ MorphProtocol proxy init error: \(error)")
+            return wgConfig
+        }
+    }
+    
+    private func replaceEndpoint(in config: String, newEndpoint: String) -> String {
+        var lines = config.components(separatedBy: "\n")
+        for i in 0..<lines.count {
+            let trimmed = lines[i].trimmingCharacters(in: .whitespaces)
+            if trimmed.hasPrefix("Endpoint") && trimmed.contains("=") {
+                lines[i] = "Endpoint = \(newEndpoint)"
+                NSLog("🔧 Replaced Endpoint → \(newEndpoint)")
+                break
+            }
+        }
+        return lines.joined(separator: "\n")
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, 
                            completionHandler: @escaping () -> Void) {
         NSLog("🛑 PacketTunnelProvider: stopTunnel() called, reason: \(reason)")
         logger.info("🛑 Stopping WireGuard tunnel, reason: \(reason.rawValue)")
+        
+        morphProxy?.stop()
+        morphProxy = nil
         
         adapter?.stop { error in
             if let error = error {

@@ -102,9 +102,18 @@ public class MorphProtocolPlugin: CAPPlugin {
                 NSLog("✅ MorphProtocol: handshake done, session=\(sessionPort)")
                 self?.sessionPort = sessionPort
                 self?.connectionStatus = "connected"
-                self?.notifyListeners("handshakeComplete", data: [
-                    "sessionPort": Int(sessionPort)
-                ])
+                
+                // 返回混淆参数，供 JS 层传给 Network Extension
+                let morphParams: [String: Any] = [
+                    "sessionPort": Int(sessionPort),
+                    "obfuscationKey": self?.morphClient?.obfuscatorKey ?? 0,
+                    "templateId": Int(self?.morphClient?.templateId ?? 0),
+                    "clientID": self?.morphClient?.clientIDBase64 ?? "",
+                    "substitutionTable": self?.morphClient?.substitutionTable ?? [],
+                    "randomValue": self?.morphClient?.randomValue ?? 0
+                ]
+                
+                self?.notifyListeners("handshakeComplete", data: morphParams)
                 self?.notifyListeners("statusChanged", data: [
                     "status": "connected",
                     "localPort": Int(self?.localPort ?? 0),

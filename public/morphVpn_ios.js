@@ -121,6 +121,7 @@
 
   // ========== 等待握手 ==========
 
+  // 返回 Promise<handshakeData>，包含 sessionPort、obfuscationKey、templateId、clientID
   function waitForHandshake() {
     var MorphProtocol = getMorphProtocol();
     return new Promise(function (resolve, reject) {
@@ -141,12 +142,11 @@
         }
       }
 
-      // Capacitor 原生事件监听
       if (MorphProtocol && typeof MorphProtocol.addListener === 'function') {
         var hPromise = MorphProtocol.addListener('handshakeComplete', function (data) {
           sessionPort = data.sessionPort;
           cleanup();
-          resolve();
+          resolve(data);  // 返回完整握手数据
         });
         // addListener 可能返回 Promise<PluginListenerHandle> 或直接返回 handle
         if (hPromise && typeof hPromise.then === 'function') {
@@ -222,10 +222,13 @@
     localPort = morphResult.localPort || null;
     console.log('[morphVpn_ios] MorphProtocol 本地端口: ' + localPort);
 
-    // 2. 等待握手完成
-    await waitForHandshake();
+    // 2. 等待握手完成，获取会话参数
+    var handshakeData = await waitForHandshake();
     morphConnected = true;
-    console.log('[morphVpn_ios] 握手完成，会话端口: ' + sessionPort);
+    console.log('[morphVpn_ios] 握手完成，会话端口: ' + sessionPort +
+      ', key: ' + handshakeData.obfuscationKey +
+      ', templateId: ' + handshakeData.templateId +
+      ', clientID: ' + (handshakeData.clientID || '').substring(0, 8) + '...');
 
     // 3. 改写 WireGuard 配置（与 Android 对齐）
     var config = wgConfigToObj(wgConfigText);
@@ -247,14 +250,33 @@
       config['Peer']['AllowedIPs'] = excludeIPFromAllRoutes(morphHost);
     }
     console.log('[morphVpn_ios] AllowedIPs: ' + config['Peer']['AllowedIPs'].join(', '));
+    console.log('[morphVpn_ios] Excluded server IP: ' + morphHost);
 
-    var finalConfig = objToWgConfig(config, localPort);
-    console.log('[morphVpn_ios] WireGuard 配置已改写');
+    // Endpoint 设为远程服务器（Extension 中会替换为本地代理端口）
+    var finalConfig = objToWgConfig(config, morphPort);
+    console.log('[morphVpn_ios] Final WG config:\n' + finalConfig);
 
-    // 4. 启动 WireGuard
+    // 4. 构建 MorphProtocol 配置传给 Network Extension（含 fnInitor 同步混淆参数）
+    var morphConfigForExt = JSON.stringify({
+      host: morphHost,
+      sessionPort: sessionPort,
+      key: handshakeData.obfuscationKey || 0,
+      layer: obfuscationLayer,
+      padding: paddingLength,
+      templateId: handshakeData.templateId || templateType,
+      clientID: handshakeData.clientID || '',
+      fnInitor: {
+        substitutionTable: handshakeData.substitutionTable || [],
+        randomValue: handshakeData.randomValue || 0
+      }
+    });
+    console.log('[morphVpn_ios] morphConfig for extension: ' + morphConfigForExt);
+
+    // 5. 启动 WireGuard（带 MorphProtocol 配置）
     var wgResult = await WireGuard.connect({
       config: finalConfig,
-      tunnelName: 'MorphVPN'
+      tunnelName: 'MorphVPN',
+      morphConfig: morphConfigForExt
     });
 
     if (!wgResult.success) {

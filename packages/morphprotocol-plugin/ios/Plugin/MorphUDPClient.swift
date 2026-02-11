@@ -106,6 +106,11 @@ class MorphUDPClient {
     func startLocalProxy(preferredPort: UInt16 = 0) -> UInt16? {
         let parameters = NWParameters.udp
         parameters.allowLocalEndpointReuse = true
+        // 绑定到 localhost（与 WireGuard Endpoint 127.0.0.1 对应）
+        parameters.requiredLocalEndpoint = NWEndpoint.hostPort(
+            host: NWEndpoint.Host("127.0.0.1"),
+            port: preferredPort > 0 ? NWEndpoint.Port(rawValue: preferredPort)! : .any
+        )
         
         do {
             if preferredPort > 0 {
@@ -116,6 +121,7 @@ class MorphUDPClient {
             
             localListener?.stateUpdateHandler = { [weak self] state in
                 guard let self = self else { return }
+                NSLog("📡 LocalProxy: listener state → \(state)")
                 switch state {
                 case .ready:
                     if let port = self.localListener?.port?.rawValue {
@@ -126,17 +132,23 @@ class MorphUDPClient {
                 case .failed(let error):
                     NSLog("❌ MorphUDPClient: listener failed: \(error)")
                     self.onError?(error)
+                case .cancelled:
+                    NSLog("📡 LocalProxy: listener cancelled")
                 default: break
                 }
             }
             
             localListener?.newConnectionHandler = { [weak self] connection in
+                NSLog("📡 LocalProxy: newConnectionHandler triggered from \(connection.endpoint)")
                 self?.handleNewLocalConnection(connection)
             }
             
             localListener?.start(queue: queue)
             Thread.sleep(forTimeInterval: 0.1)
-            return localListener?.port?.rawValue
+            
+            let assignedPort = localListener?.port?.rawValue
+            NSLog("📡 LocalProxy: listener started, port=\(assignedPort ?? 0), state=\(String(describing: localListener?.state))")
+            return assignedPort
             
         } catch {
             NSLog("❌ MorphUDPClient: Failed to create listener: \(error)")
@@ -146,8 +158,10 @@ class MorphUDPClient {
     }
     
     private func handleNewLocalConnection(_ connection: NWConnection) {
+        NSLog("📡 LocalProxy: handling new connection, current WG conn=\(wireGuardConnection != nil)")
         wireGuardConnection = connection
         connection.stateUpdateHandler = { [weak self] state in
+            NSLog("📡 LocalProxy: WG connection state → \(state)")
             switch state {
             case .ready:
                 NSLog("✅ MorphUDPClient: WireGuard connection ready")
@@ -160,6 +174,8 @@ class MorphUDPClient {
         connection.start(queue: queue)
     }
     
+    private var wgPacketCount: Int = 0
+    
     private func receiveFromWireGuard(_ connection: NWConnection) {
         connection.receiveMessage { [weak self] data, context, isComplete, error in
             guard let self = self else { return }
@@ -168,6 +184,11 @@ class MorphUDPClient {
                 return
             }
             if let data = data, !data.isEmpty {
+                self.wgPacketCount += 1
+                // 前 5 个包打印详细日志，之后每 50 个包打印一次
+                if self.wgPacketCount <= 5 || self.wgPacketCount % 50 == 0 {
+                    NSLog("📦 [WG→Server] #\(self.wgPacketCount) \(data.count) bytes, session=\(self.sessionPort != nil)")
+                }
                 self.forwardToRemoteServer(data)
             }
             self.receiveFromWireGuard(connection)
@@ -328,6 +349,7 @@ class MorphUDPClient {
         guard let lastTime = lastReceivedTime else { return }
         
         let elapsed = Date().timeIntervalSince(lastTime)
+        NSLog("📡 Inactivity check: \(Int(elapsed))s since last recv, wgConn=\(wireGuardConnection != nil), wgPkts=\(wgPacketCount), srvPkts=\(serverPacketCount)")
         if elapsed > config.inactivityTimeout {
             NSLog("⚠️ Inactivity detected (\(Int(elapsed))s), reconnecting...")
             reconnectWithNewParams()
@@ -540,6 +562,8 @@ class MorphUDPClient {
         dataConnection?.start(queue: queue)
     }
     
+    private var serverPacketCount: Int = 0
+    
     private func startReceivingData() {
         dataConnection?.receiveMessage { [weak self] data, context, isComplete, error in
             guard let self = self else { return }
@@ -551,6 +575,10 @@ class MorphUDPClient {
             
             if let data = data, !data.isEmpty {
                 self.lastReceivedTime = Date()
+                self.serverPacketCount += 1
+                if self.serverPacketCount <= 5 || self.serverPacketCount % 50 == 0 {
+                    NSLog("📦 [Server→WG] #\(self.serverPacketCount) \(data.count) bytes")
+                }
                 self.processServerResponse(data)
             }
             
@@ -561,7 +589,10 @@ class MorphUDPClient {
     private func processServerResponse(_ data: Data) {
         let obfuscated: Data
         if let template = self.template {
-            guard let extracted = template.decapsulate(data) else { return }
+            guard let extracted = template.decapsulate(data) else {
+                NSLog("⚠️ [Server→WG] decapsulate failed, raw=\(data.count) bytes")
+                return
+            }
             obfuscated = extracted
         } else {
             obfuscated = data
@@ -572,6 +603,14 @@ class MorphUDPClient {
         forwardToWireGuard(deobfuscated)
         onReceive?(deobfuscated)
     }
+    
+    // MARK: - 公共属性（供 Plugin 层读取传给 Extension）
+    
+    var obfuscatorKey: Int { return obfuscator.key }
+    var templateId: UInt8 { return template?.id ?? 0 }
+    var clientIDBase64: String { return clientID.base64EncodedString() }
+    var substitutionTable: [Int] { return obfuscator.getSubstitutionTable() }
+    var randomValue: Int { return obfuscator.getRandomValue() }
     
     // MARK: - 公共方法
     

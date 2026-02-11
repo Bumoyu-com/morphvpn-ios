@@ -11,6 +11,12 @@ export interface WireGuardConnectOptions {
    * 隧道名称
    */
   tunnelName: string;
+
+  /**
+   * MorphProtocol 配置（JSON 字符串），传给 Network Extension 进程
+   * 包含 host、sessionPort、key、layer、padding、templateId、clientID、fnInitor 等
+   */
+  morphConfig?: string;
 }
 
 export interface WireGuardPlugin {
