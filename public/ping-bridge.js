@@ -72,7 +72,7 @@
     async pingConcurrent(addresses) {
       const promises = addresses.map(async (address) => {
         const latency = await this.ping(address);
-        return { address, latency };
+        return { ip:address, avgRtt:latency };
       });
       
       return Promise.all(promises);

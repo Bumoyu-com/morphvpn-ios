@@ -8,7 +8,7 @@ public class PingPlugin: CAPPlugin {
     
     @objc func ping(_ call: CAPPluginCall) {
         guard let address = call.getString("address") else {
-            NSLog("🏓 PingPlugin: Missing address parameter")
+            // NSLog("🏓 PingPlugin: Missing address parameter")
             call.reject("Missing address parameter")
             return
         }
@@ -38,12 +38,12 @@ public class PingPlugin: CAPPlugin {
             // 创建 pinger
             let pinger = try SwiftyPing(host: host, configuration: configuration, queue: DispatchQueue.global())
             
-            NSLog("🏓 PingPlugin: SwiftyPing created for \(host)")
+            // NSLog("🏓 PingPlugin: SwiftyPing created for \(host)")
             
             // 设置观察者
             pinger.observer = { response in
                 let duration = response.duration * 1000.0 // 转换为毫秒
-                NSLog("🏓 PingPlugin: Received response, duration: \(String(format: "%.2f", duration)) ms")
+                // NSLog("🏓 PingPlugin: Received response, duration: \(String(format: "%.2f", duration)) ms")
                 latencies.append(duration)
                 pingCount += 1
                 
@@ -55,7 +55,7 @@ public class PingPlugin: CAPPlugin {
             
             // 设置完成回调
             pinger.finished = { result in
-                NSLog("🏓 PingPlugin: Ping finished with result")
+                // NSLog("🏓 PingPlugin: Ping finished with result")
                 if pingCount < targetCount {
                     semaphore.signal()
                 }
@@ -65,7 +65,7 @@ public class PingPlugin: CAPPlugin {
             pinger.targetCount = targetCount
             
             // 开始 ping
-            NSLog("🏓 PingPlugin: Starting ping to \(host)")
+            // NSLog("🏓 PingPlugin: Starting ping to \(host)")
             try pinger.startPinging()
             
             // 等待完成（最多 10 秒）
@@ -92,7 +92,7 @@ public class PingPlugin: CAPPlugin {
             } else {
                 let average = latencies.reduce(0, +) / Double(latencies.count)
                 let avgInt = Int(round(average))
-                NSLog("🏓 PingPlugin: Average latency: \(avgInt) ms (from \(latencies.count) responses)")
+                // NSLog("🏓 PingPlugin: Average latency: \(avgInt) ms (from \(latencies.count) responses)")
                 result = ["latency": avgInt]
             }
             call.resolve(result)
