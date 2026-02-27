@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useStore } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
+import { Button, message } from 'antd';
+import { WifiOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 import { useGlobalStore } from '../store/module';
@@ -14,7 +15,6 @@ import VpnDrawer from '../components/settingGroup/main';
 import { getData, setData, showMessageBox, showNotification } from '../components/MyStorage';
 import { getTraffic } from '../components/BaseRequest';
 
-
 interface LoginPageProps { }
 interface StoreState {
     global: any;
@@ -26,6 +26,9 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
     const [creating, setCreating] = useState(false);
     const [connecting, setConnecting] = useState(false);
     const [creatingTime, setCreatingTime] = useState<number>(0);
+    const [stopped, setStopped] = useState<boolean>(false);
+    const [testAllPingFn, setTestAllPingFn] = useState<(() => void) | null>(null);
+    const [testAllSpeedFn, setTestAllSpeedFn] = useState<(() => void) | null>(null);
     const { i18n } = useTranslation();
 
     const navigate = useNavigate();
@@ -33,6 +36,8 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
     //点击连接触发请求
     const onVpnConnect = async () => {
         //按钮转圈显示连接中
+        setStopped(false);
+        window.stopped = false;
         setConnecting(true)
         if (userInfo.vpnConnect) {
             vpnConnector(false);
@@ -48,7 +53,16 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
                 if (userInfo.id) {
                     setCreating(true);
                     let serverInfo = await createServer();
+                    if (serverInfo === null) {
+                        console.error('创建服务器停止');
+                        setCreating(false);
+                        setConnecting(false);
+                        return
+                    }
                     console.log('服务器信息', serverInfo);
+                    updateInvoke(serverInfo.name);
+                    console.log('已更新Invoke', serverInfo.name);
+
                     setCreatingTime(0);
                     if (!serverInfo) {
                         console.error('创建服务器失败');
@@ -80,28 +94,34 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
         let serverInfo = null;
         let flag = false, count = 0, percent = 0;
 
-        while (!flag && count < 99) {
-            let res = await serverCheck(userInfo.vpnChoose);
-            if (res.data?.msg === 'success') {
-                serverInfo = res.data;
-                flag = true;
+        while (!flag && count < 999) {
+            if (window.stopped) {
+                console.log('轮询booting stopped');
                 break;
             }
-            else {
-                if (res.error) {
-                    console.log('启动请求报错==>>', res.error);
+            if (count % 10 === 0) {
+                let res = await serverCheck(userInfo.vpnChoose);
+                if (res.data?.msg === 'success') {
+                    serverInfo = res.data;
+                    flag = true;
+                    break;
                 }
                 else {
-                    console.log('轮询booting==>>', count, res.data?.msg, res.data);
-                    if (res.data?.msg === 'server in creating') {
-                        let random = (Math.floor(Math.random() * 10)) % 4 + 6;
-                        if (percent + random > 99) percent = 99
-                        else percent += random;
-                        setCreatingTime(percent);
+                    if (res.error) {
+                        console.log('启动请求报错==>>', res.error);
+                    }
+                    else {
+                        console.log('轮询booting==>>', count / 10, res.data?.msg, res.data);
+                        if (res.data?.msg === 'server in creating') {
+                            let random = (Math.floor(Math.random() * 10)) % 4 + 6;
+                            if (percent + random > 99) percent = 99
+                            else percent += random;
+                            setCreatingTime(percent);
+                        }
                     }
                 }
             }
-            await new Promise(resolve => setTimeout(resolve, 10000));
+            await new Promise(resolve => setTimeout(resolve, 1000));
             count++;
         }
         return serverInfo ? serverInfo.server : null
@@ -197,10 +217,8 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
             }
             setConnecting(false);
         }
-        catch (err: any) {
-            console.error('开启vpn失败', err?.message || err);
-            message.error(err?.message || '开启vpn失败');
-            setConnecting(false);
+        catch (err) {
+            console.log('开启vpn失败', err);
         }
 
     }
@@ -245,6 +263,11 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
         }
         else return 'normal';
     };
+
+    const stopCreating = () => {
+        setStopped(true)
+        window.stopped = true
+    }
 
     //登录检测
     useEffect(() => {
@@ -324,18 +347,46 @@ const VpnPage: React.FC<LoginPageProps> = ({ }) => {
         }
     }, [vpnFullName, userInfo.vpnConnect]);
 
+    const btnstyles = "btn group w-full bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_theme(colors.white/.16)] hover:from-indigo-700 hover:to-indigo-400"
+
+
     return (
-        <div className="flex items-center justify-center h-screen w-screen p-3">
-            <div id='vpnOuter' className="rounded-lg h-full w-full max-w-md dark:bg-gray-900 p-2">
+        <div className="flex items-center justify-center min-h-screen w-screen p-3 sm:p-4">
+            <div id='vpnOuter' className="rounded-lg w-full max-w-md dark:bg-gray-900 p-2 sm:p-4">
 
                 {userInfo.email ?
-                    <div className="w-full h-full sm:px-6 sm:pt-1 p-2 pt-6 mx-auto max-w-md select-none">
+                    <div className="w-full h-full px-2 sm:px-4 pt-4 sm:pt-6 mx-auto max-w-md select-none">
 
-                        <div className='mb-4 grid grid-cols-2'>
-                            <VpnModal />
-                            <VpnDrawer />
+                        <div className='mb-4 sm:mb-6 flex justify-between items-center gap-2'>
+                            <div className="flex gap-2">
+                                <button
+                                    className="px-3 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 border border-gray-700 text-slate-200 text-sm transition-all disabled:opacity-50"
+                                    onClick={() => testAllPingFn && testAllPingFn()}
+                                    disabled={!testAllPingFn}
+                                >
+                                    ⚡ {i18n.t('vpn.test-all') || 'Test All'}
+                                </button>
+                                <button
+                                    className="px-3 py-2 rounded-lg bg-gray-900 hover:bg-gray-800 border border-gray-700 text-slate-200 text-sm transition-all disabled:opacity-50"
+                                    onClick={() => testAllSpeedFn && testAllSpeedFn()}
+                                    disabled={!testAllSpeedFn}
+                                >
+                                    📊 {i18n.t('vpn.test-all-speed') || 'Test Speed'}
+                                </button>
+                            </div>
+                            <div className="flex gap-2">
+                                <VpnDrawer />
+                            </div>
                         </div>
-                        <Vpngroup onSubmit={onVpnConnect} connecting={connecting} creating={creating} creatingTime={creatingTime} />
+                        <Vpngroup
+                            onSubmit={onVpnConnect}
+                            connecting={connecting}
+                            creating={creating}
+                            creatingTime={creatingTime}
+                            onTestAllReady={(fn) => setTestAllPingFn(() => fn)}
+                            onTestAllSpeedReady={(fn) => setTestAllSpeedFn(() => fn)}
+                            stopCreating={stopCreating}
+                        />
                     </div>
                     : <></>}
 
