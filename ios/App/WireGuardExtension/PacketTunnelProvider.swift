@@ -7,6 +7,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
     private var adapter: WireGuardAdapter?
     private var morphClient: MorphUDPClient?
+    private var terminationCheckTimer: DispatchSourceTimer?
     private lazy var logger = Logger(subsystem: "com.morphvpn.app.WireGuardExtension", category: "PacketTunnel")
 
     // MARK: - Lifecycle
@@ -43,22 +44,38 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
         NSLog("📋 PacketTunnel: wg_config length = \(wgConfigString.count) bytes")
 
+        // 清除上次的终止标记
+        clearTerminatedFlag()
+
         // 检查是否有 MorphProtocol 配置
         if let morphConfigJSON = providerConfig["morph_config"] as? String {
             NSLog("🎭 PacketTunnel: morph_config found (\(morphConfigJSON.count) bytes), starting with obfuscation")
             startWithMorphProtocol(wgConfig: wgConfigString,
                                    morphConfigJSON: morphConfigJSON,
-                                   completionHandler: completionHandler)
+                                   completionHandler: { [weak self] error in
+                completionHandler(error)
+                if error == nil {
+                    self?.startTerminationCheck()
+                }
+            })
         } else {
             NSLog("📡 PacketTunnel: No morph_config, starting plain WireGuard")
             startPlainWireGuard(wgConfig: wgConfigString,
-                                completionHandler: completionHandler)
+                                completionHandler: { [weak self] error in
+                completionHandler(error)
+                if error == nil {
+                    self?.startTerminationCheck()
+                }
+            })
         }
     }
 
     override func stopTunnel(with reason: NEProviderStopReason,
                              completionHandler: @escaping () -> Void) {
         NSLog("🛑 PacketTunnelProvider: stopTunnel(), reason: \(reason.rawValue)")
+
+        stopTerminationCheck()
+        clearTerminatedFlag()
 
         morphClient?.disconnect()
         morphClient = nil
@@ -430,6 +447,45 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 
         return status
+    }
+
+    // MARK: - App Termination Detection
+
+    /// 每 3 秒检查 App Group 中的 app_terminated 标记。
+    /// 主应用在 applicationWillTerminate 中写入此标记，Extension 检测到后自行停止隧道。
+    private func startTerminationCheck() {
+        stopTerminationCheck()
+
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .utility))
+        timer.schedule(deadline: .now() + 3, repeating: 3)
+        timer.setEventHandler { [weak self] in
+            guard let self = self else { return }
+
+            let defaults = UserDefaults(suiteName: "group.com.morphvpn.app.wireguard")
+            defaults?.synchronize()
+            let terminated = defaults?.bool(forKey: "app_terminated") ?? false
+
+            if terminated {
+                NSLog("🛑 PacketTunnelProvider: app_terminated flag detected, stopping tunnel")
+                self.clearTerminatedFlag()
+                self.stopTerminationCheck()
+                self.cancelTunnelWithError(nil)
+            }
+        }
+        timer.resume()
+        terminationCheckTimer = timer
+        NSLog("📡 PacketTunnelProvider: Termination check started")
+    }
+
+    private func stopTerminationCheck() {
+        terminationCheckTimer?.cancel()
+        terminationCheckTimer = nil
+    }
+
+    private func clearTerminatedFlag() {
+        let defaults = UserDefaults(suiteName: "group.com.morphvpn.app.wireguard")
+        defaults?.removeObject(forKey: "app_terminated")
+        defaults?.synchronize()
     }
 
     // MARK: - Helpers

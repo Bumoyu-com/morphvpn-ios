@@ -1,48 +1,113 @@
 import UIKit
 import Capacitor
+import NetworkExtension
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
+    private var vpnManager: NETunnelProviderManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // 预加载 VPN manager，后续 terminate 时可直接使用，不需要异步加载
+        loadVPNManager()
+        // 启动时如果 VPN 还连着就断开（兜底：覆盖挂起后被杀的场景）
+        stopVPNTunnel()
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        // 申请后台执行时间（约30秒），延长应用存活窗口。
+        // 在此窗口内用户杀掉应用时 applicationWillTerminate 能被触发。
+        beginBackgroundKeepAlive(application)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        endBackgroundKeepAlive()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // 路径1：用已缓存的 manager 直接同步停止（无需异步加载，最快）
+        if let manager = vpnManager {
+            let status = manager.connection.status
+            if status == .connected || status == .connecting || status == .reasserting {
+                manager.connection.stopVPNTunnel()
+                NSLog("AppDelegate: [terminate] Stopped VPN via cached manager")
+            }
+        }
+
+        // 路径2：写标记到 App Group，Extension 定时检测到后自行停止（双保险）
+        let defaults = UserDefaults(suiteName: "group.com.morphvpn.app.wireguard")
+        defaults?.set(true, forKey: "app_terminated")
+        defaults?.synchronize()
+        NSLog("AppDelegate: [terminate] Set app_terminated flag")
     }
 
+    // MARK: - Background Task
+
+    private func beginBackgroundKeepAlive(_ application: UIApplication) {
+        endBackgroundKeepAlive()
+        backgroundTaskID = application.beginBackgroundTask(withName: "VPNKeepAlive") { [weak self] in
+            self?.endBackgroundKeepAlive()
+        }
+    }
+
+    private func endBackgroundKeepAlive() {
+        if backgroundTaskID != .invalid {
+            UIApplication.shared.endBackgroundTask(backgroundTaskID)
+            backgroundTaskID = .invalid
+        }
+    }
+
+    // MARK: - VPN Manager
+
+    /// 预加载并缓存 VPN manager，这样 applicationWillTerminate 中可以同步使用
+    private func loadVPNManager() {
+        NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in
+            self?.vpnManager = managers?.first
+            if self?.vpnManager != nil {
+                NSLog("AppDelegate: VPN manager cached")
+            }
+        }
+    }
+
+    // MARK: - VPN Cleanup
+
+    /// 异步加载 manager 并停止 VPN，用于 didFinishLaunching 等有充足时间的场景
+    private func stopVPNTunnel() {
+        NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in
+            guard let managers = managers else { return }
+            for manager in managers {
+                let status = manager.connection.status
+                if status == .connected || status == .connecting || status == .reasserting {
+                    manager.connection.stopVPNTunnel()
+                    NSLog("AppDelegate: [launch] Stopped VPN tunnel")
+                }
+                // 顺便更新缓存
+                self?.vpnManager = manager
+            }
+
+            // 启动时清除终止标记（如果有的话）
+            let defaults = UserDefaults(suiteName: "group.com.morphvpn.app.wireguard")
+            defaults?.removeObject(forKey: "app_terminated")
+            defaults?.synchronize()
+        }
+    }
+
+    // MARK: - URL / Universal Links
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        // Called when the app was launched with a url. Feel free to add additional processing here,
-        // but if you want the App API to support tracking app url opens, make sure to keep this call
         return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
     }
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        // Called when the app was launched with an activity, including Universal Links.
-        // Feel free to add additional processing here, but if you want the App API to support
-        // tracking app url opens, make sure to keep this call
         return ApplicationDelegateProxy.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
 
