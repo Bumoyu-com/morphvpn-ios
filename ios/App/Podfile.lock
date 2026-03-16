@@ -6,6 +6,8 @@ PODS:
   - CapacitorCamera (7.0.2):
     - Capacitor
   - CapacitorCordova (7.4.4)
+  - CapacitorNetwork (7.0.0):
+    - Capacitor
   - CapacitorSplashScreen (7.0.3):
     - Capacitor
   - MorphvpnCapacitorMorphprotocol (1.0.0):
@@ -20,6 +22,7 @@ DEPENDENCIES:
   - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
   - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - MorphvpnCapacitorMorphprotocol (from `../../packages/morphprotocol-plugin`)
   - MorphvpnCapacitorPing (from `../../packages/ping-plugin`)
@@ -34,6 +37,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/camera"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  CapacitorNetwork:
+    :path: "../../node_modules/@capacitor/network"
   CapacitorSplashScreen:
     :path: "../../node_modules/@capacitor/splash-screen"
   MorphvpnCapacitorMorphprotocol:
@@ -48,11 +53,12 @@ SPEC CHECKSUMS:
   CapacitorBrowser: 55c21db47416dcc8fc3b623e18fd7d09acb26081
   CapacitorCamera: f9e54db0a18bb218a8dc360907d63aaefe9209ff
   CapacitorCordova: bf648a636f3c153f652d312ae145fb508b6ffced
+  CapacitorNetwork: 30c2e78a0ed32530656cb426c8ee6c2caec10dbf
   CapacitorSplashScreen: e388b8e0ed0e982a9d3a40417f478e7a018a8763
   MorphvpnCapacitorMorphprotocol: 7d69b1af1f2bfcf7bcc12d372d5b3d84053eb427
   MorphvpnCapacitorPing: 216f9a6602f0f43aa35939b288efadabc7d86d3e
   MorphvpnCapacitorWireguard: 5479c74a178f7f9ed43baccb79c3cd760acb312c
 
-PODFILE CHECKSUM: 0c4d198a4227ae8f7f93722d5c7067a2822b1cd1
+PODFILE CHECKSUM: a876aab217f24e224d3acc7934b51faf5bdade15
 
 COCOAPODS: 1.16.2
