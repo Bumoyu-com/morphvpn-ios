@@ -11,6 +11,8 @@ public class WireGuardPlugin: CAPPlugin {
     
     private var vpnManager: NETunnelProviderManager?
     private var statusObserver: NSObjectProtocol?
+    /// 取消标志：disconnect() 调用后置 true，connect 流程各回调检查此标志提前退出
+    private var disconnectRequested: Bool = false
     
     override public func load() {
         print("✅ WireGuardPlugin: Plugin loaded successfully")
@@ -40,6 +42,9 @@ public class WireGuardPlugin: CAPPlugin {
     @objc func connect(_ call: CAPPluginCall) {
         print("🔵 WireGuardPlugin: connect() called")
         
+        // 每次新的 connect 调用重置取消标志
+        disconnectRequested = false
+        
         guard let config = call.getString("config"),
               let tunnelName = call.getString("tunnelName") else {
             print("❌ WireGuardPlugin: Missing parameters")
@@ -57,7 +62,13 @@ public class WireGuardPlugin: CAPPlugin {
         print("🔵 WireGuardPlugin: Config length: \(config.count) bytes")
         
         // 保存配置并连接
-        saveAndConnect(config: config, tunnelName: tunnelName, morphConfig: morphConfig) { success, error in
+        saveAndConnect(config: config, tunnelName: tunnelName, morphConfig: morphConfig) { [weak self] success, error in
+            // 如果在异步等待期间 disconnect() 被调用，丢弃结果
+            if self?.disconnectRequested == true {
+                print("⚠️ WireGuardPlugin: connect() aborted by disconnect()")
+                call.reject("Cancelled")
+                return
+            }
             if success {
                 print("✅ WireGuardPlugin: Connection successful")
                 call.resolve(["success": true])
@@ -70,14 +81,24 @@ public class WireGuardPlugin: CAPPlugin {
     
     /**
      * 断开WireGuard VPN连接
+     * 可在任意时点调用：vpnManager 为 nil（连接尚未建立或已清理）时直接 resolve，不报错。
+     * 同时设置 disconnectRequested 标志，打断正在进行的 connect 异步流程。
      */
     @objc func disconnect(_ call: CAPPluginCall) {
+        print("🔵 WireGuardPlugin: disconnect() called")
+        
+        // 设置取消标志，打断 connect 流程中的异步回调链
+        disconnectRequested = true
+        
         guard let manager = vpnManager else {
-            call.reject("VPN manager not initialized")
+            // vpnManager 尚未初始化（connect 还在异步配置阶段，或本就未连接）
+            print("⚠️ WireGuardPlugin: disconnect() called but vpnManager is nil, resolving as no-op")
+            call.resolve(["success": true])
             return
         }
         
         manager.connection.stopVPNTunnel()
+        print("✅ WireGuardPlugin: stopVPNTunnel() called")
         call.resolve(["success": true])
     }
     
@@ -240,6 +261,12 @@ public class WireGuardPlugin: CAPPlugin {
     
     private func saveAndConnect(config: String, tunnelName: String, morphConfig: String? = nil, completion: @escaping (Bool, String?) -> Void) {
         saveConfiguration(config: config, tunnelName: tunnelName, morphConfig: morphConfig) { [weak self] success, error in
+            // saveConfiguration 完成后检查是否已被取消
+            if self?.disconnectRequested == true {
+                print("⚠️ WireGuardPlugin: saveAndConnect aborted after saveConfiguration")
+                completion(false, "Cancelled")
+                return
+            }
             guard success else {
                 completion(false, error)
                 return
@@ -269,6 +296,7 @@ public class WireGuardPlugin: CAPPlugin {
         providerProtocol.providerConfiguration = providerConfiguration
         
         // 加载或创建VPN Manager
+        // NETunnelProviderManager 的回调在主线程执行，与 disconnectRequested 的读写线程一致
         NETunnelProviderManager.loadAllFromPreferences { [weak self] managers, error in
             let manager: NETunnelProviderManager
             
@@ -284,7 +312,13 @@ public class WireGuardPlugin: CAPPlugin {
             
             // 保存配置
             print("🔵 WireGuardPlugin: Saving VPN configuration to preferences...")
-            manager.saveToPreferences { error in
+            manager.saveToPreferences { [weak self] error in
+                // saveToPreferences 完成后检查是否已被取消
+                if self?.disconnectRequested == true {
+                    print("⚠️ WireGuardPlugin: saveConfiguration aborted after saveToPreferences")
+                    completion(false, "Cancelled")
+                    return
+                }
                 if let error = error {
                     print("❌ WireGuardPlugin: Failed to save: \(error.localizedDescription)")
                     completion(false, "Failed to save VPN configuration: \(error.localizedDescription)")
@@ -295,7 +329,13 @@ public class WireGuardPlugin: CAPPlugin {
                 
                 // 重新加载以确保配置生效
                 print("🔵 WireGuardPlugin: Reloading configuration...")
-                manager.loadFromPreferences { error in
+                manager.loadFromPreferences { [weak self] error in
+                    // loadFromPreferences 完成后检查是否已被取消
+                    if self?.disconnectRequested == true {
+                        print("⚠️ WireGuardPlugin: saveConfiguration aborted after loadFromPreferences")
+                        completion(false, "Cancelled")
+                        return
+                    }
                     if let error = error {
                         print("❌ WireGuardPlugin: Failed to reload: \(error.localizedDescription)")
                         completion(false, "Failed to reload VPN configuration: \(error.localizedDescription)")
@@ -308,10 +348,19 @@ public class WireGuardPlugin: CAPPlugin {
                 }
             }
         }
+        // 注意：NETunnelProviderManager 的所有回调均在主线程执行（Apple 文档保证），
+        // 因此 disconnectRequested 的读写天然在同一线程，无需额外同步。
     }
     
     private func startVPN(completion: @escaping (Bool, String?) -> Void) {
         print("🔵 WireGuardPlugin: startVPN called")
+        
+        // 进入 startVPN 前最后一次检查取消标志
+        if disconnectRequested {
+            print("⚠️ WireGuardPlugin: startVPN aborted by disconnect()")
+            completion(false, "Cancelled")
+            return
+        }
         
         guard let manager = vpnManager else {
             print("❌ WireGuardPlugin: VPN manager is nil")

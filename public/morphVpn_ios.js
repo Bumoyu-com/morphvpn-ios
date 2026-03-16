@@ -23,6 +23,8 @@
   // ========== 状态 ==========
 
   var connected = false;
+  // disconnect() 调用后置 true，connect() 在每个 await 后检查此标志提前退出
+  var _disconnectRequested = false;
 
   // ========== 获取 Capacitor 插件 ==========
 
@@ -51,6 +53,9 @@
     if (!WireGuard) {
       throw new Error('WireGuard 插件不可用');
     }
+
+    // 每次新的 connect 调用重置取消标志
+    _disconnectRequested = false;
 
     // 解析 remoteAddress: "ip:port:userId"
     var parts = remoteAddress.split(':');
@@ -85,6 +90,12 @@
       templateType: 1
     });
 
+    // await 返回后检查是否已被 disconnect() 取消
+    if (_disconnectRequested) {
+      console.log(TAG, '步骤1 后检测到 disconnect，中止连接');
+      throw new Error('Cancelled');
+    }
+
     if (!morphResult.success || !morphResult.morphConfig) {
       throw new Error('MorphProtocol 配置失败: ' + (morphResult.message || ''));
     }
@@ -115,6 +126,15 @@
       morphConfig: morphConfigJSON
     });
 
+    // await 返回后检查是否已被 disconnect() 取消
+    if (_disconnectRequested) {
+      console.log(TAG, '步骤2 后检测到 disconnect，中止连接');
+      // WireGuard.connect 可能已经启动隧道，确保清理
+      try { await WireGuard.disconnect(); } catch (e) { /* ignore */ }
+      try { await MorphProtocol.disconnect(); } catch (e) { /* ignore */ }
+      throw new Error('Cancelled');
+    }
+
     if (!wgResult.success) {
       // 清理
       try { await MorphProtocol.disconnect(); } catch (e) { /* ignore */ }
@@ -129,16 +149,24 @@
 
   async function disconnect() {
     console.log(TAG, '断开连接...');
+
+    // 立即设置取消标志，打断正在进行的 connect() 异步流程
+    _disconnectRequested = true;
+
     var WireGuard = getWireGuard();
     var MorphProtocol = getMorphProtocol();
 
     // 断开 WireGuard（Extension 的 stopTunnel 会自动清理 MorphProtocol）
+    // Swift 层已保证 vpnManager 为 nil 时也会 resolve，不会抛异常
     if (WireGuard) {
       try {
         await WireGuard.disconnect();
         console.log(TAG, 'WireGuard 已断开');
       } catch (e) {
-        console.warn(TAG, 'WireGuard 断开失败:', e);
+        // 仅在非取消场景下警告
+        if (e && e.message !== 'Cancelled') {
+          console.warn(TAG, 'WireGuard 断开失败:', e);
+        }
       }
     }
 
