@@ -218,23 +218,4 @@
   };
 
   console.log(TAG, 'window.morphVpn 已初始化 (Extension 内置架构)');
-  setTimeout(async() => {
-    console.log('已点击');
-     // 替换为你的 App Store 信息
-    const APP_STORE_ID = '123456789'; // 你的 AppID（纯数字）
-    const APP_STORE_URL = `itms-apps://itunes.apple.com/app/id${APP_STORE_ID}`;
-    // 降级链接（如果直接跳转失败，用网页版）
-    const APP_STORE_WEB_URL = `https://apps.apple.com/cn/app/你的应用名/id${APP_STORE_ID}`;
-        try {
-          // 方式1：优先用直接跳转链接（唤起 App Store 应用，体验最好）
-          await window.Capacitor.Plugins.Browser.open({
-            url: APP_STORE_URL,
-            presentationStyle: 'fullscreen' // iOS 全屏展示
-          });
-        } catch (error) {
-          console.error('直接跳转 App Store 失败，降级到网页版：', error);
-          // 方式2：降级到 App Store 网页版
-          window.open(`https://www.baidu.com`,'_system');
-        }
-  }, 10000);
 })();
